@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMC+Lucas — Media Production Company</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Inter:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page" id="page">
+      <header class="site-header" aria-label="Primary">
+        <a href="#" class="site-header__logo site-header__logo--vertical js-go-home" aria-label="KMC × LUCAS — Home">
+          <img
+            src="assets/logo-vertical.png"
+            alt="KMC × LUCAS"
+            width="50"
+            height="273"
+            class="site-header__logo-img"
+          />
+        </a>
+        <nav class="site-header__nav" aria-label="Section links">
+          <a href="work.html">WORK</a>
+          <a href="#">SSV</a>
+          <a href="#">CONTACT</a>
+          <button type="button" class="site-header__menu js-menu-toggle" aria-expanded="false" aria-controls="menu-drawer">
+            <span class="site-header__menu-icon" aria-hidden="true">
+              <img src="assets/menu-icon.svg" alt="" width="49" height="50" />
+            </span>
+            <span class="site-header__menu-label">MENU</span>
+          </button>
+        </nav>
+      </header>
+
+      <main class="main">
+        <div class="hero-brand" id="hero-brand">
+          <div class="hero-brand__scan" aria-hidden="true"></div>
+          <p class="hero-brand__line hero-brand__line--kmc">
+            <span class="hero-brand__word">KMC+</span>
+          </p>
+          <p class="hero-brand__line hero-brand__line--lucas">
+            <span class="hero-brand__word">LUCAS</span>
+          </p>
+          <p class="hero-brand__tagline">Media Production Company</p>
+        </div>
+      </main>
+
+      <div
+        class="menu-drawer"
+        id="menu-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        aria-hidden="true"
+      >
+        <div class="menu-drawer__panel">
+          <div class="menu-drawer__bar">
+            <a href="#" class="menu-drawer__logo menu-drawer__logo--horizontal js-go-home" aria-label="KMC × LUCAS — Home">
+              <img
+                class="menu-drawer__logo-img"
+                src="assets/logo-menu-bar.png"
+                alt="KMC × LUCAS"
+                width="273"
+                height="50"
+              />
+            </a>
+            <button type="button" class="menu-drawer__toggle js-menu-toggle" aria-expanded="true">
+              <span class="menu-drawer__toggle-icon" aria-hidden="true">
+                <img src="assets/icon-x.svg" alt="" width="48" height="48" />
+              </span>
+              <span class="menu-drawer__toggle-label">MENU</span>
+            </button>
+          </div>
+          <nav class="menu-drawer__nav" aria-label="Main menu">
+            <a href="#" class="menu-drawer__link menu-drawer__link--accent js-go-home">HOME</a>
+            <a href="work.html" class="menu-drawer__link">The Work</a>
+            <a href="#" class="menu-drawer__link">Narrative System</a>
+            <a href="#" class="menu-drawer__link">SSV Reality Show</a>
+            <a href="#" class="menu-drawer__link">About</a>
+            <a href="#" class="menu-drawer__link">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
