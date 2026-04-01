@@ -50,8 +50,8 @@
     }
   });
 
-  /* Home hero intro only (not WORK page) */
-  if (!HTML.classList.contains("work-page")) {
+  /* Home hero intro only (not WORK / All Work pages) */
+  if (!HTML.classList.contains("work-page") && !HTML.classList.contains("all-work-page")) {
     HTML.classList.add("intro-pending");
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {

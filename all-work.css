@@ -1,0 +1,623 @@
+/* All Work work_1_1, work_1_3–work_1_6 — 1440×1024 画板 */
+
+:root {
+  --aw-bg: #f4f3ef;
+  --aw-text: #111111;
+  --aw-red: #c21f1f;
+  --aw-dark: #111111;
+  --aw-ink: #f4f3ef;
+  --aw-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.page-all-work {
+  background: var(--aw-bg);
+  color: var(--aw-text);
+}
+
+.all-work {
+  position: relative;
+}
+
+.aw-page {
+  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.aw-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1440px;
+  height: 1024px;
+  transform: translate(-50%, -50%) scale(var(--aw-scale, 1));
+  transform-origin: center center;
+}
+
+.aw-page--1,
+.aw-page--3 {
+  background: var(--aw-bg);
+}
+
+#work_1_1,
+#work_1_3,
+#work_1_4,
+#work_1_5,
+#work_1_6 {
+  scroll-margin-top: min(12vh, 120px);
+}
+
+.aw-page-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  display: block;
+  line-height: 0;
+}
+
+.aw-page-logo__img {
+  width: 50px;
+  height: auto;
+  max-height: min(272px, 30vh);
+  object-fit: contain;
+  object-position: left top;
+  display: block;
+}
+
+/* work_1_1: same viewport slot as index .site-header__logo--vertical (inside 1440px-centered band + padding) */
+#work_1_1 .aw-page-logo--index-match {
+  position: absolute;
+  left: calc((100vw - min(1440px, 100vw)) / 2 + clamp(1rem, 4vw, 48px) + clamp(-6px, -0.4vw, 0px));
+  top: calc(clamp(0.5rem, 1.2vw, 12px) + 0.15rem);
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  line-height: 0;
+}
+
+#work_1_1 .aw-page-logo--index-match .aw-page-logo__img {
+  width: auto;
+  height: clamp(120px, 22vh, 248px);
+  max-width: clamp(36px, 5vw, 56px);
+  max-height: none;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* work_1_1: same menu control + slot as index .site-header (nav right, header padding + nav padding-top) */
+#work_1_1 .site-header__menu--work-1-1-match {
+  position: absolute;
+  right: calc((100vw - min(1440px, 100vw)) / 2 + clamp(1rem, 4vw, 48px));
+  top: calc(clamp(0.5rem, 1.2vw, 12px) + 0.35rem);
+  z-index: 5;
+}
+
+/* WORK title: directly under index-style menu, right-aligned, larger type */
+#work_1_1 .aw-work-title--below-menu {
+  --aw-menu-top: calc(clamp(0.5rem, 1.2vw, 12px) + 0.35rem);
+  --aw-menu-btn-pad: 0.25rem;
+  --aw-menu-icon-h: clamp(32px, 3.2vw, 44px);
+  --aw-work-under-menu-gap: 1.2rem;
+  position: absolute;
+  left: auto;
+  right: calc((100vw - min(1440px, 100vw)) / 2 + clamp(1rem, 4vw, 48px));
+  top: calc(
+    var(--aw-menu-top) + var(--aw-menu-btn-pad) + var(--aw-menu-icon-h) + var(--aw-menu-btn-pad) + var(--aw-work-under-menu-gap)
+  );
+  z-index: 5;
+  width: auto;
+  max-width: min(92vw, 720px);
+  margin: 0;
+  text-align: right;
+  font-size: clamp(3.2rem, 10vw, 110px);
+  line-height: 0.92;
+  transform-origin: 100% 0;
+}
+
+.aw-page--4,
+.aw-page--5,
+.aw-page--6 {
+  background: var(--aw-dark);
+  color: var(--aw-ink);
+}
+
+/* Legacy rotated strip (unused on WORK overview; kept if needed elsewhere) */
+.aw-logo-rot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 272px;
+  height: auto;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+  translate: -220px 272px;
+}
+
+.aw-menu {
+  position: absolute;
+  left: 1317px;
+  top: 37px;
+  width: 49px;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.aw-work-title {
+  position: absolute;
+  left: 882px;
+  top: 130px;
+  width: 647px;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 800;
+  font-size: 120px;
+  color: var(--aw-red);
+  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.aw-body {
+  position: absolute;
+  left: 186px;
+  top: 350px;
+  width: 1230px;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 50px;
+  color: rgba(207, 18, 18, 0.43);
+}
+
+#work_1_1 .aw-body {
+  color: #9a9292;
+}
+
+.aw-body p {
+  margin: 0 0 0.5em;
+}
+
+.aw-down {
+  position: absolute;
+  left: 690px;
+  top: 950px;
+  width: 62px;
+  height: 62px;
+  color: var(--aw-text);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.aw-down__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.aw-reveal {
+  opacity: 0;
+  transform: translateY(56px);
+  transition: opacity 700ms var(--aw-ease), transform 900ms var(--aw-ease);
+}
+
+.aw-reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aw-reveal--title.is-in {
+  transition-delay: 0s;
+}
+
+.aw-reveal--body.is-in {
+  transition-delay: 0.14s;
+}
+
+/* work_1_3 — Figma 94:37: cutout type + bridge lines (columns align with work_1_4 frame) */
+.aw-w3-stack {
+  /* Title Y: lower = more of first line sits in the black box → “We do not” ~half black / half cream at box top 251px */
+  --aw-w3-text-top: 182px;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(52px);
+  transition: opacity 0.75s var(--aw-ease), transform 0.95s var(--aw-ease);
+}
+
+.aw-w3-stack.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aw-w3-box {
+  position: absolute;
+  left: 121px;
+  top: 251px;
+  width: 1142px;
+  height: 546px;
+  background: #111;
+  z-index: 2;
+  opacity: var(--aw-w3-morph, 1);
+  transform: translateY(calc(14px * (1 - var(--aw-w3-morph, 1))))
+    scale(calc(0.98 + 0.02 * var(--aw-w3-morph, 1)));
+  transition: none;
+}
+
+.aw-w3-text {
+  position: absolute;
+  left: 177px;
+  top: var(--aw-w3-text-top, 135px);
+  width: 1086px;
+  margin: 0;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 900;
+  font-size: 140px;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  transition: none;
+}
+
+.aw-w3-text--black {
+  color: #000;
+  z-index: 1;
+  transform: translate(
+      calc(-50px * (1 - var(--aw-w3-morph, 1))),
+      calc(95px * (1 - var(--aw-w3-morph, 1)))
+    )
+    scale(calc(0.65 + 0.35 * var(--aw-w3-morph, 1)));
+  transform-origin: 0 0;
+}
+
+.aw-w3-clip {
+  position: absolute;
+  left: 121px;
+  top: 251px;
+  width: 1142px;
+  height: 546px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.aw-w3-text--cream {
+  color: var(--aw-bg);
+  left: 56px;
+  /* Keep pixel-locked to .aw-w3-clip top (251px) + black copy (.aw-w3-text top) */
+  top: calc(var(--aw-w3-text-top, 135px) - 251px);
+  width: 1103px;
+  transform: translate(
+      calc(-50px * (1 - var(--aw-w3-morph, 1))),
+      calc(95px * (1 - var(--aw-w3-morph, 1)))
+    )
+    scale(calc(0.65 + 0.35 * var(--aw-w3-morph, 1)));
+  transform-origin: 0 0;
+}
+
+.aw-w3-bridge {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.aw-w3-bridge__h1,
+.aw-w3-bridge__h2,
+.aw-w3-bridge__v1,
+.aw-w3-bridge__v2 {
+  position: absolute;
+  background: #111;
+  display: block;
+}
+
+/* Bridge lines — column geometry aligns with work_1_4 frame (147 / 1223) */
+.aw-w3-bridge__h1 {
+  left: 0;
+  top: 795px;
+  width: 147px;
+  height: 1px;
+}
+
+.aw-w3-bridge__v1 {
+  left: 147px;
+  top: 795px;
+  width: 1px;
+  height: 229px;
+}
+
+.aw-w3-bridge__h2 {
+  left: 1198px;
+  top: 795px;
+  width: 242px;
+  height: 1px;
+}
+
+.aw-w3-bridge__v2 {
+  left: 1197px;
+  top: 782px;
+  width: 1px;
+  height: 242px;
+}
+
+.aw-page--3 {
+  overflow: visible;
+  --aw-w3-morph: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aw-w3-text--black,
+  .aw-w3-text--cream {
+    transform: none;
+  }
+
+  .aw-w3-box {
+    opacity: 1;
+    transform: none;
+  }
+
+  #work_1_3 {
+    --aw-w3-morph: 1;
+  }
+
+  .aw-w3-stack {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.aw-dark {
+  color: var(--aw-ink);
+}
+
+.aw-frame__line {
+  position: absolute;
+  display: block;
+  opacity: 0.9;
+}
+
+/* Cream/light strokes on dark — same span as work_1_3 bridge (147px / 1223px columns) */
+.aw-frame__line--css {
+  background: rgba(244, 243, 239, 0.88);
+}
+
+.aw-frame__left {
+  left: 0;
+  top: 229px;
+  width: 147px;
+  height: 1px;
+}
+
+.aw-frame__left-vert {
+  left: 147px;
+  top: 0;
+  width: 1px;
+  height: 229px;
+}
+
+.aw-frame__right-vert {
+  left: 1223px;
+  top: 0;
+  width: 1px;
+  height: 242px;
+}
+
+.aw-frame__right {
+  left: 1223px;
+  top: 242px;
+  width: 217px;
+  height: 1px;
+}
+
+/* work_1_4 — Figma 65:78 */
+.aw-4a {
+  position: absolute;
+  left: 158px;
+  top: 242px;
+  width: 540px;
+  min-height: 420px;
+  display: block;
+  color: var(--aw-ink);
+  text-decoration: none;
+}
+
+.aw-4a__media {
+  width: 519px;
+  height: 292px;
+  overflow: hidden;
+}
+
+.aw-4a__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.aw-4a__title {
+  position: absolute;
+  left: 0;
+  top: 324px;
+  width: 499px;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.aw-4a__body {
+  position: absolute;
+  left: 0;
+  top: 374px;
+  width: 540px;
+  font-family: "Inria Serif", ui-serif, Georgia, serif;
+  font-size: 24px;
+  line-height: 35px;
+  opacity: 0.92;
+}
+
+.aw-4b {
+  position: absolute;
+  left: 720px;
+  top: 601px;
+  width: 666px;
+  height: 375px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+
+.aw-4b img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.aw-rise {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 600ms var(--aw-ease), transform 900ms var(--aw-ease);
+}
+
+.aw-rise.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* work_1_5 — Figma 68:98 */
+.aw-w5-aloe {
+  position: absolute;
+  left: 736px;
+  top: 37px;
+  width: 690px;
+  color: var(--aw-ink);
+  text-decoration: none;
+}
+
+.aw-w5-aloe__title {
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.aw-w5-aloe__body {
+  position: absolute;
+  left: 0;
+  top: 58px;
+  width: 676px;
+  font-family: "Inria Serif", ui-serif, Georgia, serif;
+  font-size: 24px;
+  line-height: 35px;
+  opacity: 0.92;
+}
+
+.aw-w5-aloe__body p {
+  margin: 0 0 0.15em;
+}
+
+.aw-w5-stanford {
+  position: absolute;
+  left: 406px;
+  top: 380px;
+  width: 690px;
+  color: var(--aw-ink);
+  text-decoration: none;
+}
+
+.aw-w5-stanford__media {
+  width: 628px;
+  height: 381px;
+  background: #d9d9d9;
+}
+
+.aw-w5-stanford__title {
+  position: absolute;
+  left: 0;
+  top: 399px;
+  width: 690px;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.aw-w5-stanford__body {
+  position: absolute;
+  left: 0;
+  top: 465px;
+  width: 676px;
+  font-family: "Inria Serif", ui-serif, Georgia, serif;
+  font-size: 24px;
+  line-height: 35px;
+  opacity: 0.92;
+}
+
+.aw-w5-stanford__body p {
+  margin: 0 0 0.15em;
+}
+
+/* work_1_6 — Figma 69:113 */
+.aw-w6-left {
+  position: absolute;
+  left: 116px;
+  top: 149px;
+  width: 690px;
+  min-height: 520px;
+  display: block;
+  color: var(--aw-ink);
+  text-decoration: none;
+}
+
+.aw-w6-left__media {
+  width: 407px;
+  height: 363px;
+  overflow: hidden;
+}
+
+.aw-w6-left__media img {
+  width: 171.54%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transform: translateX(-32.45%);
+  display: block;
+}
+
+.aw-w6-left__title {
+  position: absolute;
+  left: 0;
+  top: 397px;
+  width: 690px;
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.aw-w6-left__body {
+  position: absolute;
+  left: 0;
+  top: 455px;
+  width: 578px;
+  font-family: "Inria Serif", ui-serif, Georgia, serif;
+  font-size: 24px;
+  line-height: 35px;
+  opacity: 0.92;
+  margin: 0;
+}
+
+.aw-w6-right {
+  position: absolute;
+  left: 806px;
+  top: 149px;
+  width: 533px;
+  height: 296px;
+  background: #d9d9d9;
+  display: block;
+}

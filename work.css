@@ -30,10 +30,6 @@ body.page-work {
   color: var(--work-text);
 }
 
-.page-work .site-header__menu-label {
-  color: var(--work-text);
-}
-
 .page-work .site-header__menu-icon img {
   filter: brightness(0) invert(0.96);
 }
