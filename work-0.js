@@ -9,7 +9,8 @@
   var section = document.getElementById("work_0");
   if (!section) return;
 
-  var YT_ID = "diQOQJfK-bM";
+  var YT_ID = "ZA08V_XEicM";
+  var YT_WATCH = "https://www.youtube.com/watch?v=" + YT_ID;
   var LOOP_END = 4;
 
   var player = null;
@@ -197,6 +198,16 @@
   }
 
   refreshVideoHitLabel();
+
+  var openYtFull = section.querySelector(".js-work-0-open-yt");
+  if (openYtFull) {
+    openYtFull.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (getState() !== "video") return;
+      window.open(YT_WATCH, "_blank", "noopener,noreferrer");
+    });
+  }
 
   section.addEventListener("keydown", function (e) {
     if (e.key !== "Enter" && e.key !== " ") return;
