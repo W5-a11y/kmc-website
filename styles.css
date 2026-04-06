@@ -62,6 +62,7 @@ img {
 
 /* ——— Home01 header ——— */
 .site-header {
+  --header-nav-fs: clamp(0.88rem, 1.65vw, 1.55rem);
   position: relative;
   z-index: 5;
   display: flex;
@@ -91,11 +92,15 @@ body.menu-open .site-header {
   overflow: visible;
 }
 
+/* Vertical mark: slightly larger than WORK (tuned under previous “big” pass) */
 .site-header__logo-img {
   display: block;
   width: auto;
-  height: clamp(120px, 22vh, 248px);
-  max-width: clamp(36px, 5vw, 56px);
+  height: clamp(150px, 26vh, 276px);
+  max-width: max(
+    clamp(46px, 6.5vw, 74px),
+    calc(var(--header-nav-fs) * 2)
+  );
   object-fit: contain;
   object-position: left top;
 }
@@ -123,7 +128,7 @@ body.menu-open .site-header {
 
 .site-header__nav a {
   font-weight: 600;
-  font-size: clamp(0.88rem, 1.65vw, 1.55rem);
+  font-size: var(--header-nav-fs);
   line-height: 1.2;
   letter-spacing: 0.02em;
   position: relative;
