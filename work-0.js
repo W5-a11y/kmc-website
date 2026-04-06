@@ -153,17 +153,16 @@
     onApiReady();
   }
 
-  /* ——— Scroll: enter animation ——— */
-  var entered = false;
+  /* ——— Scroll into view: simple reveal (stagger reserved for non-scroll entry if needed) ——— */
+  var scrollRevealDone = false;
   var io = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting && en.intersectionRatio >= 0.28) {
-          if (!entered) {
-            entered = true;
-            section.classList.add("work-0--entered");
-          }
-        }
+        if (!en.isIntersecting || en.intersectionRatio < 0.28) return;
+        if (section.classList.contains("work-0--entered")) return;
+        if (scrollRevealDone) return;
+        scrollRevealDone = true;
+        section.classList.add("work-0--entered", "work-0--entered-by-scroll");
       });
     },
     { threshold: [0, 0.28, 0.5] }

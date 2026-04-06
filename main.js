@@ -67,5 +67,19 @@
       HTML.classList.remove("intro-active");
       HTML.classList.add("intro-done");
     }, 2400);
+
+    /* First small scroll: subtle tagline motion only */
+    var heroScrollSoftApplied = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (heroScrollSoftApplied || !HTML.classList.contains("intro-done")) return;
+        if ((window.scrollY || document.documentElement.scrollTop) > 10) {
+          heroScrollSoftApplied = true;
+          HTML.classList.add("hero-scroll-soft");
+        }
+      },
+      { passive: true }
+    );
   }
 })();
