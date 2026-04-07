@@ -185,7 +185,7 @@ body.menu-open .site-header {
   padding: 0;
   text-align: right;
   --hero-inline-pad: clamp(12px, 3vw, 48px);
-  /* Bleed applies only to title lines via .hero-brand__line — tagline stays fully inside viewport */
+  /* Bleed for headline lines + tagline (right-aligned block) */
   --hero-bleed-x: clamp(24px, 4.5vw, 72px);
   transform: scale(1);
   transform-origin: bottom right;
@@ -258,21 +258,48 @@ body.menu-open .hero-brand {
 }
 
 .hero-brand__tagline {
-  margin: clamp(1.5rem, 4vw, 3rem) 0 0;
+  margin: clamp(0.35rem, 1vw, 0.65rem) 0 0;
   margin-left: auto;
   margin-right: 0;
-  white-space: nowrap;
   max-width: min(100%, calc(100vw - 2 * var(--hero-inline-pad, 24px)));
-  font-weight: 600;
-  font-size: clamp(0.95rem, 4vw, 5rem);
-  line-height: 1.05;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 7.5vw, 8.5rem);
+  line-height: 0.9;
   letter-spacing: -0.02em;
-  color: var(--color-text);
+  white-space: nowrap;
+  color: var(--color-primary);
+  text-align: right;
+  transform: translateX(calc(-1 * var(--hero-bleed-x)));
+  transition: transform 0.9s var(--ease-out-expo);
+  opacity: 0;
+  translate: 0 8px;
 }
 
-/* Intro: creative “broadcast signal” reveal */
-html.intro-pending .hero-brand__word,
-html.intro-pending .hero-brand__tagline {
+html.hero-scroll-soft .hero-brand__tagline {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    translate 0.8s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+
+/* Merged Lottie → page rise + brand signal: type stays “off-air” until intro-active (no second fade flash) */
+html.has-opening.opening-finished:not(.intro-active):not(.intro-done) .hero-brand__word {
+  opacity: 0;
+  filter: none;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+  animation: none;
+}
+
+html.has-opening.opening-finished:not(.intro-active):not(.intro-done) .hero-brand__scan {
+  opacity: 0;
+  animation: none;
+}
+
+/* Intro: creative “broadcast signal” reveal (also used on rare pages without has-opening) */
+html.intro-pending .hero-brand__word {
   animation: none;
   opacity: 0;
 }
@@ -285,9 +312,7 @@ html.intro-active .hero-brand__line--lucas .hero-brand__word {
   animation: glitchReveal 1.15s var(--ease-out-expo) 0.22s both;
 }
 
-html.intro-active .hero-brand__tagline {
-  animation: taglineReveal 1s var(--ease-out-expo) 0.5s both;
-}
+/* tagline now revealed on scroll (hero-scroll-soft), not during intro */
 
 html.intro-active .hero-brand__scan {
   animation: scanSweep 1.8s ease-out 0.15s both;
@@ -357,9 +382,13 @@ html.intro-active .hero-brand__scan {
     animation: none !important;
   }
 
-  html.intro-active .hero-brand__word,
-  html.intro-active .hero-brand__tagline {
+  html.intro-active .hero-brand__word {
     animation: fadeInSoft 0.4s ease both !important;
+  }
+
+  .hero-brand__tagline {
+    opacity: 1 !important;
+    translate: none !important;
   }
 
   @keyframes fadeInSoft {
@@ -521,4 +550,82 @@ html.intro-active .hero-brand__scan {
 .menu-drawer__link:hover::after,
 .menu-drawer__link:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* ——— Lottie opening (home only; assets/v2.json) + hero slide-in after ——— */
+html.opening-active {
+  overflow: hidden;
+}
+
+.opening-lottie-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo),
+    visibility 0.75s;
+  touch-action: none;
+}
+
+.opening-lottie-view {
+  width: min(96vw, calc(96vh * 1920 / 1080));
+  max-height: 96vh;
+}
+
+.opening-lottie-view svg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Hero + header wait under Lottie: soft lift + blur */
+html.has-opening:not(.opening-finished) .site-header,
+html.has-opening:not(.opening-finished) .main {
+  opacity: 0;
+  transform: translate3d(0, clamp(1.25rem, 4vh, 2.75rem), 0);
+  filter: blur(10px);
+  pointer-events: none;
+  transition: none;
+}
+
+/* After opening: show chrome immediately — creative beat is the hero “signal” intro (JS intro-active), not a second page fade */
+html.has-opening.opening-finished .site-header,
+html.has-opening.opening-finished .main {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: none;
+  pointer-events: auto;
+  transition: none;
+}
+
+html.opening-finished .opening-lottie-root {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, -2.5vh, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-lottie-root {
+    display: none !important;
+  }
+
+  html.has-opening:not(.opening-finished) .site-header,
+  html.has-opening:not(.opening-finished) .main {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    pointer-events: auto;
+  }
+
+  html.has-opening.opening-finished .site-header,
+  html.has-opening.opening-finished .main {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
 }

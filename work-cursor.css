@@ -1,0 +1,63 @@
+/* All Work page: custom dot cursor (same size as hero; black) */
+
+.work-cursor-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+}
+
+.work-cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.35s var(--ease-eco);
+}
+
+html.work-cursor-ready:not(.menu-open) .work-cursor-dot {
+  opacity: 1;
+}
+
+body.menu-open .work-cursor-root {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.work-cursor-dot__inner {
+  display: block;
+  width: clamp(45px, 5vw, 50px);
+  height: clamp(45px, 5vw, 50px);
+  margin: 0;
+  border-radius: 50%;
+  background: var(--color-text);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: background-color 0.18s var(--ease-eco), transform 0.18s var(--ease-eco);
+}
+
+/* Dark bg or dark type: invert to cream so the dot stays visible */
+.work-cursor-dot.is-over-dark .work-cursor-dot__inner {
+  background-color: var(--color-bg);
+}
+
+html.work-cursor-armed body.page-all-work,
+html.work-cursor-armed body.page-all-work .page {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  .work-cursor-root {
+    display: none !important;
+  }
+
+  html.work-cursor-armed body.page-all-work,
+  html.work-cursor-armed body.page-all-work .page {
+    cursor: auto;
+  }
+}

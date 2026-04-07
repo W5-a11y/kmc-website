@@ -12,9 +12,16 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="all-work.css" />
+    <link rel="stylesheet" href="work-cursor.css" />
   </head>
   <body class="page-all-work">
+    <div id="work-cursor-root" class="work-cursor-root" aria-hidden="true">
+      <div id="work-cursor-dot" class="work-cursor-dot">
+        <span class="work-cursor-dot__inner"></span>
+      </div>
+    </div>
     <div class="page" id="page">
+      <div id="aw-page-transition" class="aw-page-transition" aria-hidden="true" hidden></div>
       <main class="all-work">
         <section id="work_1_1" class="aw-page aw-page--1" aria-label="Work">
           <a href="index.html" class="aw-page-logo aw-page-logo--index-match js-go-home" aria-label="KMC × LUCAS — Home">
@@ -49,12 +56,12 @@
               <p>&nbsp;</p>
               <p>Every piece we create tells a story about the quality of future living.</p>
             </div>
-            <div class="aw-down" aria-hidden="true">
-              <svg class="aw-down__svg" width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button type="button" class="aw-down js-aw-down-next" aria-label="Continue to next section">
+              <svg class="aw-down__svg" width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-opacity="0.45" />
                 <path d="M31 22v18m0 0 6-6m-6 6-6-6" stroke="currentColor" stroke-opacity="0.55" stroke-width="1.5" stroke-linecap="round" />
               </svg>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -82,8 +89,8 @@
             <span class="aw-frame__line aw-frame__line--css aw-frame__left-vert" aria-hidden="true"></span>
             <span class="aw-frame__line aw-frame__line--css aw-frame__right-vert" aria-hidden="true"></span>
             <span class="aw-frame__line aw-frame__line--css aw-frame__right" aria-hidden="true"></span>
-            <a class="aw-4a aw-rise" data-aw-rise href="case-study.html?project=surviving-silicon-valley">
-              <div class="aw-4a__media">
+            <a class="aw-4a aw-rise-group" data-aw-rise-group href="case-study.html?project=surviving-silicon-valley">
+              <div class="aw-4a__media aw-rise-piece">
                 <img
                   src="https://www.figma.com/api/mcp/asset/b7c3bf23-b4b5-4d14-a4c2-9f66ede6a106"
                   alt=""
@@ -91,18 +98,19 @@
                   height="292"
                 />
               </div>
-              <div class="aw-4a__title">Surviving Silicon Valley</div>
-              <div class="aw-4a__body">
+              <div class="aw-4a__title aw-rise-piece">Surviving Silicon Valley</div>
+              <div class="aw-4a__body aw-rise-piece">
                 This is a reality show that authentically captures the raw, high-stakes world of life, love, startups,
                 and home-buying — right in the cosmic center of it all: Silicon Valley.
               </div>
             </a>
-            <a class="aw-4b aw-rise" data-aw-rise href="case-study.html?project=what-makes-a-home">
+            <a class="aw-4b aw-rise-group" data-aw-rise-group href="case-study.html?project=what-makes-a-home">
               <img
+                class="aw-rise-piece"
                 src="https://www.figma.com/api/mcp/asset/cd178ae4-81b4-4c3c-aa4f-2b9d2e7b5513"
                 alt=""
-                width="666"
-                height="375"
+                width="612"
+                height="344"
               />
             </a>
           </div>
@@ -110,24 +118,33 @@
 
         <section id="work_1_5" class="aw-page aw-page--5" aria-label="Selected work">
           <div class="aw-stage">
-            <a class="aw-w5-aloe aw-rise" data-aw-rise href="case-study.html?project=aloe-blacc">
-              <div class="aw-w5-aloe__title">What makes a house a home? — Aloe Blacc</div>
+            <a class="aw-w5-aloe aw-rise-group" data-aw-rise-group href="case-study.html?project=aloe-blacc">
+              <div class="aw-w5-aloe__title aw-rise-piece">What makes a house a home? — Aloe Blacc</div>
               <div class="aw-w5-aloe__body">
-                <p>A documentary collaboration with Aloe Blacc.</p>
-                <p>“What makes a house a home?”</p>
-                <p>
+                <p class="aw-rise-piece">A documentary collaboration with Aloe Blacc.</p>
+                <p class="aw-rise-piece">“What makes a house a home?”</p>
+                <p class="aw-rise-piece">
                   After the wildfires that transformed his hometown, the film follows Aloe Blacc’s personal journey to
                   rediscover the meaning of home—beyond structure, into identity and belonging.
                 </p>
               </div>
             </a>
-            <a class="aw-w5-stanford aw-rise" data-aw-rise href="case-study.html?project=stanford-lab">
-              <div class="aw-w5-stanford__media" aria-hidden="true"></div>
-              <div class="aw-w5-stanford__title">Stanford Professor Interview Campaign</div>
+            <a class="aw-w5-stanford aw-rise-group" data-aw-rise-group href="case-study.html?project=stanford-lab">
+              <div class="aw-w5-stanford__media aw-rise-piece" aria-hidden="true">
+                <img
+                  src="assets/stanford-professor-interview.png"
+                  alt=""
+                  width="628"
+                  height="381"
+                  loading="lazy"
+                />
+              </div>
+              <div class="aw-w5-stanford__title aw-rise-piece">Stanford Professor Interview Campaign</div>
               <div class="aw-w5-stanford__body">
-                <p>The campaign with the professor in the Stanford lab</p>
-                <p>The campaign with the professor in the Stanford lab</p>
-                <p>The campaign with the professor in the Stanford lab</p>
+                <p class="aw-rise-piece">
+                  In conversation with Lucas, Dr. Cong of Stanford introduces LabOS—an XR-based human-AI system that
+                  brings real-time, data-driven intelligence directly into experimental work.
+                </p>
               </div>
             </a>
           </div>
@@ -135,8 +152,8 @@
 
         <section id="work_1_6" class="aw-page aw-page--6" aria-label="Selected work">
           <div class="aw-stage">
-            <a class="aw-w6-left aw-rise" data-aw-rise href="case-study.html?project=real-estate-videos">
-              <div class="aw-w6-left__media">
+            <a class="aw-w6-left aw-rise-group" data-aw-rise-group href="case-study.html?project=real-estate-videos">
+              <div class="aw-w6-left__media aw-rise-piece">
                 <img
                   src="https://www.figma.com/api/mcp/asset/7a7b5791-5a0f-42e0-9733-2ed7e0604de6"
                   alt=""
@@ -144,13 +161,33 @@
                   height="363"
                 />
               </div>
-              <div class="aw-w6-left__title">Real Estate Videos</div>
-              <div class="aw-w6-left__body">
+              <div class="aw-w6-left__title aw-rise-piece">Real Estate Videos</div>
+              <div class="aw-w6-left__body aw-rise-piece">
                 Property showcases, neighborhood and city narratives, and lifestyle content—produced in show format to
                 boost watch-through rates and conversion.
               </div>
             </a>
-            <a class="aw-w6-right aw-rise" data-aw-rise href="case-study.html?project=private-club" aria-label="Project"></a>
+            <a
+              class="aw-w6-right aw-rise-group"
+              data-aw-rise-group
+              href="case-study.html?project=q3d-sensing"
+              aria-label="Built for the Real World — Q3D Sensing"
+            >
+              <div class="aw-w6-right__media aw-rise-piece" aria-hidden="true">
+                <img
+                  src="assets/q3d-sensing-commercial.png"
+                  alt=""
+                  width="1920"
+                  height="1080"
+                  loading="lazy"
+                />
+              </div>
+              <div class="aw-w6-right__title aw-rise-piece">Built for the Real World - Q3D Sensing</div>
+              <div class="aw-w6-right__body aw-rise-piece">
+                AuraGo by Q3D Sensing is a portable LiDAR scanner that brings professional-grade 3D capture to smartphones
+                and tablets, making precise spatial scanning accessible to everyday workflows.
+              </div>
+            </a>
           </div>
         </section>
       </main>
@@ -195,6 +232,7 @@
     </div>
     <script src="work-content.js"></script>
     <script src="main.js"></script>
+    <script src="work-cursor.js"></script>
     <script src="work-list.js"></script>
   </body>
 </html>

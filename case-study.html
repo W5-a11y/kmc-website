@@ -43,7 +43,7 @@
           <div class="work-hero__inner">
             <img
               class="work-hero__img"
-              src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=2000&q=80"
+              src="assets/what-makes-home-hero.png"
               alt=""
               width="2000"
               height="1333"
@@ -55,22 +55,27 @@
         </section>
 
         <section class="work-intro">
-          <p class="work-intro__label">Narrative — sample project</p>
-          <h1 class="work-intro__title">Why We Tell Stories on Screen</h1>
+          <p class="work-intro__label">Narrative - Real Estate Advertising</p>
+          <h1 class="work-intro__title">What makes a house a home? — Aloe Blacc</h1>
           <hr class="work-intro__rule" />
           <p class="work-intro__body">
-            A short-form piece about rhythm, light, and the small gestures that read across a frame. This layout follows the
-            KMC+Lucas language: black field, warm paper-white type, and room for the work to breathe. Replace title, copy,
-            and imagery with your real project.
+            In collaboration with Aloe Blacc, this documentary-style film explores the meaning of home in the aftermath of
+            devastating wildfires that reshaped his hometown. Through intimate reflection, the story moves beyond the idea
+            of a physical house, revealing home as a place of identity, memory, and return—a space that carries generational
+            strength and extends safety through community.
+          </p>
+          <p class="work-intro__body">
+            Produced by KMC+LUCAS, the film transforms real experience into a quiet yet powerful narrative about resilience,
+            belonging, and the deeper essence of home.
           </p>
           <p class="work-intro__meta">2025 · Director · DP · Editor</p>
         </section>
 
         <section class="work-video-wrap" aria-label="Project film">
-          <div class="work-video" data-youtube-id="aqz-KE-bpKQ">
+          <div class="work-video" data-youtube-id="diQOQJfK-bM">
             <img
               class="work-video__poster"
-              src="https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg"
+              src="https://img.youtube.com/vi/diQOQJfK-bM/maxresdefault.jpg"
               alt=""
               width="1280"
               height="720"
@@ -105,7 +110,10 @@
               <img src="https://images.unsplash.com/photo-1505848563519-4ee9a6c5edb3?auto=format&fit=crop&w=900&q=80" alt="" width="900" height="675" loading="lazy" />
             </div>
             <div class="work-gallery__cell">
-              <img src="https://images.unsplash.com/photo-1536440136628-849c177e76e1?auto=format&fit=crop&w=900&q=80" alt="" width="900" height="675" loading="lazy" />
+              <img src="assets/aloe-blacc-bts-1.png" alt="" width="900" height="675" loading="lazy" />
+            </div>
+            <div class="work-gallery__cell">
+              <img src="assets/aloe-blacc-bts-2.png" alt="" width="900" height="675" loading="lazy" />
             </div>
           </div>
         </section>
@@ -151,5 +159,32 @@
     </div>
     <script src="main.js"></script>
     <script src="work.js"></script>
+    <script>
+    (function () {
+      var header = document.querySelector(".site-header");
+      if (!header) return;
+      var lastY = window.scrollY;
+      var hideThreshold = 80;
+      var ticking = false;
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var y = window.scrollY;
+          var delta = y - lastY;
+          if (delta > 8 && y > hideThreshold) {
+            header.classList.add("is-header-hidden");
+          } else if (delta < -4) {
+            header.classList.remove("is-header-hidden");
+          }
+          lastY = y;
+          ticking = false;
+        });
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+    </script>
   </body>
 </html>

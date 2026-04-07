@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-opening">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="hero-capture.css" />
   </head>
   <body>
+    <div
+      id="opening-lottie-root"
+      class="opening-lottie-root"
+      aria-hidden="true"
+    >
+      <div id="opening-lottie-view" class="opening-lottie-view"></div>
+    </div>
     <div class="page" id="page">
       <header class="site-header" aria-label="Primary">
         <a href="#" class="site-header__logo site-header__logo--vertical js-go-home" aria-label="KMC × LUCAS — Home">
@@ -48,7 +55,9 @@
           <p class="hero-brand__line hero-brand__line--lucas">
             <span class="hero-brand__word">LUCAS</span>
           </p>
-          <p class="hero-brand__tagline">Media Production Company</p>
+          <p class="hero-brand__tagline">
+            <span class="hero-brand__tagline-text">Media Production Company</span>
+          </p>
         </div>
       </main>
 
@@ -117,13 +126,11 @@
           <div class="work-0__intro-rule" aria-hidden="true"></div>
 
           <div class="work-0__detail-footer">
-            <p class="work-0__copy">
-              What sets us apart is documentary-style advertising.<br />
-              We do not create disposable advertising.<br />
-              Every piece we create tells a story about the quality of future living.
-            </p>
-            <div class="work-0__rule" aria-hidden="true"></div>
-            <a href="work.html" class="work-0__all-work">All Work</a>
+            <div class="work-0__work-tray">
+              <div class="work-0__rule-hit" aria-hidden="true"></div>
+              <div class="work-0__rule" aria-hidden="true"></div>
+              <a href="work.html" class="work-0__all-work">Work</a>
+            </div>
           </div>
 
           <button type="button" class="work-0__close-video js-work-0-close-video" aria-label="Close video">
@@ -170,6 +177,8 @@
         </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" crossorigin="anonymous"></script>
+    <script src="opening-lottie.js"></script>
     <script src="main.js"></script>
     <script src="hero-capture.js"></script>
     <script defer src="https://www.youtube.com/iframe_api"></script>

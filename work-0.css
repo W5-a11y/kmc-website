@@ -163,8 +163,9 @@
 }
 
 .work-0[data-work-state="video"] .work-0__line {
-  opacity: 0.22;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
 /* ——— Video frame + YouTube host ——— */
@@ -205,12 +206,13 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* Full bleed player (33:192): 1213×762 @ 113,131 */
+/* Full player: 16:9 so embed matches YouTube (no pillarboxing). Narrower + centered vs Figma 33:192 1213×762 */
 .work-0[data-work-state="video"] .work-0__video-shell {
-  left: calc(113 / var(--w0-artboard-w) * 100%);
-  top: calc(131 / var(--w0-artboard-h) * 100%);
-  width: calc(1213 / var(--w0-artboard-w) * 100%);
-  height: calc(762 / var(--w0-artboard-h) * 100%);
+  left: calc(220 / var(--w0-artboard-w) * 100%);
+  top: calc(231 / var(--w0-artboard-h) * 100%);
+  width: calc(1000 / var(--w0-artboard-w) * 100%);
+  height: auto;
+  aspect-ratio: 16 / 9;
   z-index: 12;
   cursor: default;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
@@ -329,11 +331,18 @@
   transform-origin: center center;
 }
 
+/* Cover-scale 16:9 inside non-16:9 shells so the picture fills width (no side bars) */
 .work-0[data-work-state="detail"] #work-0-yt-host,
 .work-0[data-work-state="video"] #work-0-yt-host {
-  width: 100%;
-  height: 100%;
-  transform: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
 }
 
 #work-0-yt-host iframe {
@@ -440,22 +449,25 @@
   transition: opacity 0.6s ease 0.35s;
 }
 
-.work-0[data-work-state="detail"] .work-0__copy,
-.work-0[data-work-state="detail"] .work-0__all-work {
+.work-0__work-tray {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.work-0[data-work-state="detail"] .work-0__rule-hit {
   pointer-events: auto;
 }
 
-.work-0__copy {
+/* Invisible band: line + path toward pill — hover reveals Work (fine pointer only) */
+.work-0__rule-hit {
   position: absolute;
-  left: calc(63 / var(--w0-artboard-w) * 100%);
-  top: calc(848 / var(--w0-artboard-h) * 100%);
-  width: calc(369 / var(--w0-artboard-w) * 100%);
-  margin: 0;
-  font-family: var(--font-inter);
-  font-weight: 500;
-  font-size: min(17px, calc(17 / var(--w0-artboard-w) * 100vw));
-  line-height: normal;
-  color: var(--w0-cream);
+  left: calc(468 / var(--w0-artboard-w) * 100%);
+  top: calc(805 / var(--w0-artboard-h) * 100%);
+  width: calc(948 / var(--w0-artboard-w) * 100%);
+  height: calc(168 / var(--w0-artboard-h) * 100%);
+  z-index: 6;
+  background: transparent;
   cursor: default;
 }
 
@@ -468,12 +480,14 @@
   background: var(--w0-cream);
   opacity: 0.95;
   pointer-events: none;
+  z-index: 5;
 }
 
 .work-0__all-work {
   position: absolute;
   left: calc(1105 / var(--w0-artboard-w) * 100%);
-  top: calc(878 / var(--w0-artboard-h) * 100%);
+  /* Sits above the rule (915) with a small gap; was 878 */
+  top: calc(826 / var(--w0-artboard-h) * 100%);
   width: calc(277 / var(--w0-artboard-w) * 100%);
   height: calc(74 / var(--w0-artboard-h) * 100%);
   display: flex;
@@ -488,13 +502,56 @@
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.14s var(--ease-eco), opacity 0.14s;
+  z-index: 7;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 0.28s var(--ease-out-expo),
+    transform 0.38s var(--ease-out-expo);
 }
 
-.work-0__all-work:hover,
-.work-0__all-work:focus-visible {
-  opacity: 0.92;
-  transform: scale(1.02);
+@media (hover: hover) and (pointer: fine) {
+  .work-0[data-work-state="detail"]
+    .work-0__detail-footer:has(.work-0__rule-hit:hover)
+    .work-0__all-work,
+  .work-0[data-work-state="detail"]
+    .work-0__detail-footer:has(.work-0__all-work:hover)
+    .work-0__all-work {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .work-0[data-work-state="detail"] .work-0__all-work:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .work-0[data-work-state="detail"] .work-0__all-work:hover {
+    opacity: 0.92;
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .work-0[data-work-state="detail"] .work-0__all-work {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    transition: transform 0.14s var(--ease-eco), opacity 0.14s;
+  }
+
+  .work-0__rule-hit {
+    display: none;
+  }
+
+  .work-0__all-work:hover,
+  .work-0__all-work:focus-visible {
+    opacity: 0.92;
+    transform: scale(1.02);
+  }
 }
 
 /* ——— Full video UI (33:192) ——— */

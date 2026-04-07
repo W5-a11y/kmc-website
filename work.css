@@ -25,7 +25,26 @@ body.page-work {
   min-height: 100dvh;
 }
 
-/* Header on dark */
+/* Header on dark — sticky + scroll-collapse */
+.page-work .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition:
+    opacity 0.5s var(--work-ease),
+    transform 0.5s var(--work-ease),
+    filter 0.45s ease,
+    visibility 0.5s;
+}
+
+.page-work .site-header.is-header-hidden {
+  opacity: 0;
+  transform: translateY(-40%) scale(0.97);
+  filter: blur(6px);
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .page-work .site-header__nav a {
   color: var(--work-text);
 }
@@ -42,6 +61,12 @@ body.page-work {
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-work .site-header {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ① Full-viewport hero + creative reveal */

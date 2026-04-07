@@ -53,8 +53,28 @@
     }
   });
 
-  /* Home hero intro only (not WORK / All Work pages) */
-  if (!HTML.classList.contains("work-page") && !HTML.classList.contains("all-work-page")) {
+  /* Home hero intro only (not WORK / All Work pages); runs after Lottie opening if present */
+  var homeIntroStarted = false;
+
+  function attachHeroScrollSoft() {
+    var heroScrollSoftApplied = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (heroScrollSoftApplied || !HTML.classList.contains("intro-done")) return;
+        if ((window.scrollY || document.documentElement.scrollTop) > 10) {
+          heroScrollSoftApplied = true;
+          HTML.classList.add("hero-scroll-soft");
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  /** Legacy path: home without has-opening (intro-pending flash OK). */
+  function startHomeIntro() {
+    if (homeIntroStarted) return;
+    homeIntroStarted = true;
     HTML.classList.add("intro-pending");
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
@@ -68,18 +88,60 @@
       HTML.classList.add("intro-done");
     }, 2400);
 
-    /* First small scroll: subtle tagline motion only */
-    var heroScrollSoftApplied = false;
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (heroScrollSoftApplied || !HTML.classList.contains("intro-done")) return;
-        if ((window.scrollY || document.documentElement.scrollTop) > 10) {
-          heroScrollSoftApplied = true;
-          HTML.classList.add("hero-scroll-soft");
-        }
-      },
-      { passive: true }
-    );
+    attachHeroScrollSoft();
+  }
+
+  /**
+   * Page/header snap in when Lottie ends (no long blur/lift). Brand stays off-air until intro-active,
+   * then glitch / tagline / scan — the single creative entrance.
+   */
+  function startHomeIntroMerged() {
+    if (homeIntroStarted) return;
+    homeIntroStarted = true;
+    var mergeDelayMs = 160;
+    var brandHoldMs = 2600;
+
+    window.setTimeout(function () {
+      HTML.classList.add("intro-active");
+    }, mergeDelayMs);
+
+    window.setTimeout(function () {
+      HTML.classList.remove("intro-active");
+      HTML.classList.add("intro-done");
+    }, mergeDelayMs + brandHoldMs);
+
+    attachHeroScrollSoft();
+  }
+
+  function finishHomeIntroReduced() {
+    if (homeIntroStarted) return;
+    homeIntroStarted = true;
+    HTML.classList.add("intro-done");
+    attachHeroScrollSoft();
+  }
+
+  function scheduleHomeIntro() {
+    var reduceMotion =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      window.setTimeout(finishHomeIntroReduced, 0);
+      return;
+    }
+    if (HTML.classList.contains("has-opening")) {
+      window.setTimeout(startHomeIntroMerged, 0);
+    } else {
+      window.setTimeout(startHomeIntro, 0);
+    }
+  }
+
+  if (!HTML.classList.contains("work-page") && !HTML.classList.contains("all-work-page")) {
+    if (HTML.classList.contains("opening-finished")) {
+      scheduleHomeIntro();
+    } else {
+      window.addEventListener("kmc-opening-done", scheduleHomeIntro, { once: true });
+      window.setTimeout(function () {
+        if (!homeIntroStarted) scheduleHomeIntro();
+      }, 10000);
+    }
   }
 })();
