@@ -1,0 +1,286 @@
+/* ══════════════════════════════════════════════════
+   About Page — KMC+LUCAS
+   ══════════════════════════════════════════════════ */
+
+:root {
+  --ab-cream:  #EEECE6;
+  --ab-dark:   #111111;
+  --ab-red:    #C21F1F;
+  --ab-ease:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ab-dur:    0.6s;
+}
+
+/* ─── Base ─────────────────────────────────────── */
+.page-about {
+  background: var(--ab-cream);
+  color: var(--ab-dark);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Nav ──────────────────────────────────────── */
+.ab-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(24px, 4vw, 64px);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.ab-nav__logo,
+.ab-nav__menu {
+  pointer-events: auto;
+}
+
+.ab-nav__logo img {
+  display: block;
+  height: 32px;
+  width: auto;
+  filter: invert(1);
+  opacity: 0.85;
+}
+
+.ab-nav__menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+}
+
+.ab-nav__menu img { display: block; filter: invert(1); opacity: 0.6; }
+
+/* ─── Hero ──────────────────────────────────────── */
+.ab-hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(24px, 6vw, 96px) clamp(40px, 6vh, 80px);
+}
+
+.ab-hero__title {
+  margin: 0;
+  font-size: clamp(5rem, 12vw, 15rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ab-dark);
+}
+
+.ab-hero__word { display: block; }
+
+.ab-hero__sub {
+  margin: clamp(24px, 3vw, 48px) 0 0;
+  max-width: 520px;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(17, 17, 17, 0.55);
+}
+
+/* ─── Rule ──────────────────────────────────────── */
+.ab-rule {
+  height: 1px;
+  background: rgba(17, 17, 17, 0.12);
+  margin: 0 clamp(24px, 6vw, 96px);
+}
+
+/* ─── Team section ──────────────────────────────── */
+.ab-team {
+  position: relative;
+  padding: clamp(60px, 8vh, 120px) clamp(24px, 6vw, 96px) clamp(80px, 12vh, 160px);
+}
+
+.ab-team__intro {
+  max-width: 640px;
+  margin-bottom: clamp(48px, 7vw, 96px);
+}
+
+.ab-team__heading {
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ab-red);
+  margin: 0 0 20px;
+}
+
+.ab-team__body {
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(17, 17, 17, 0.7);
+  margin: 0;
+}
+
+/* ─── Team grid ─────────────────────────────────── */
+.ab-team__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+  align-items: start;
+}
+
+/* ─── Member card ───────────────────────────────── */
+.ab-member {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ab-member--offset {
+  margin-top: clamp(40px, 5vw, 80px);
+}
+
+.ab-member__img-wrap {
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 3 / 4;
+  max-height: 550px;
+}
+
+.ab-member__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: saturate(0.5);
+  transform: scale(1);
+  transition:
+    filter var(--ab-dur) var(--ab-ease),
+    transform var(--ab-dur) var(--ab-ease);
+}
+
+.ab-member:hover .ab-member__img {
+  filter: saturate(1);
+  transform: scale(1.03);
+}
+
+/* Isabella Sun — 照片本身色彩偏浅，提高初始饱和 */
+.ab-member:nth-child(1) .ab-member__img {
+  filter: saturate(0.82);
+}
+
+.ab-member__info { padding: 0 4px; }
+
+.ab-member__name {
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+  color: var(--ab-dark);
+}
+
+.ab-member__cn {
+  font-weight: 400;
+  opacity: 0.55;
+  margin-left: 4px;
+}
+
+.ab-member__role {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ab-red);
+  margin: 0 0 10px;
+}
+
+.ab-member__desc {
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(17, 17, 17, 0.6);
+  margin: 0;
+}
+
+/* ─── Bottom CTA ─────────────────────────────────── */
+.ab-cta {
+  position: absolute;
+  right: clamp(24px, 6vw, 96px);
+  bottom: clamp(40px, 6vh, 72px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ab-dark);
+}
+
+.ab-cta__label {
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.ab-cta__arrow {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 48px;
+}
+
+.ab-cta__svg {
+  display: block;
+  transform: translateX(0);
+  transition: transform 0.5s var(--ab-ease);
+}
+
+.ab-cta:hover .ab-cta__svg {
+  animation: ab-shuttle 0.55s var(--ab-ease) forwards;
+}
+
+@keyframes ab-shuttle {
+  0%   { transform: translateX(0); }
+  45%  { transform: translateX(14px); }
+  55%  { transform: translateX(14px); }
+  100% { transform: translateX(0); }
+}
+
+/* ─── Scroll reveal ──────────────────────────────── */
+[data-ab-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.72s var(--ab-ease),
+    transform 0.72s var(--ab-ease);
+}
+
+[data-ab-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* staggered delay for team members */
+.ab-member:nth-child(1)[data-ab-reveal] { transition-delay: 0s; }
+.ab-member:nth-child(2)[data-ab-reveal] { transition-delay: 0.1s; }
+.ab-member:nth-child(3)[data-ab-reveal] { transition-delay: 0.2s; }
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 960px) {
+  .ab-team__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ab-member:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin-top: 0;
+  }
+  .ab-member--offset { margin-top: clamp(24px, 4vw, 48px); }
+}
+
+@media (max-width: 600px) {
+  .ab-hero__title { letter-spacing: -0.03em; }
+  .ab-team__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .ab-member--offset  { margin-top: 0; }
+  .ab-member:nth-child(3) { max-width: 100%; }
+  .ab-cta { position: static; margin-top: 48px; }
+}

@@ -42,9 +42,7 @@ body.page-all-work {
 
 #work_1_1,
 #work_1_3,
-#work_1_4,
-#work_1_5,
-#work_1_6 {
+#work_2 {
   scroll-margin-top: min(12vh, 120px);
 }
 
@@ -120,12 +118,15 @@ body.page-all-work {
   transform-origin: 100% 0;
 }
 
-.aw-page--4,
-.aw-page--5,
-.aw-page--6 {
+.aw-page--2 {
   background: var(--aw-dark);
   color: var(--aw-ink);
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+  position: relative;
 }
+
 
 /* Legacy rotated strip (unused on WORK overview; kept if needed elsewhere) */
 .aw-logo-rot {
@@ -501,71 +502,7 @@ body.page-all-work {
   height: 1px;
 }
 
-/* work_1_4 — Figma 65:78 */
-.aw-4a {
-  position: absolute;
-  left: 158px;
-  top: 242px;
-  width: 540px;
-  min-height: 420px;
-  display: block;
-  color: var(--aw-ink);
-  text-decoration: none;
-}
-
-.aw-4a__media {
-  width: 519px;
-  height: 292px;
-  overflow: hidden;
-}
-
-.aw-4a__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.aw-4a__title {
-  position: absolute;
-  left: 0;
-  top: 324px;
-  width: 499px;
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 1.2;
-}
-
-.aw-4a__body {
-  position: absolute;
-  left: 0;
-  top: 374px;
-  width: 540px;
-  font-family: "Inria Serif", ui-serif, Georgia, serif;
-  font-size: 24px;
-  line-height: 35px;
-  opacity: 0.92;
-}
-
-.aw-4b {
-  position: absolute;
-  left: 752px;
-  top: 632px;
-  width: 612px;
-  height: 344px;
-  overflow: hidden;
-  display: block;
-  text-decoration: none;
-}
-
-.aw-4b img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
+/* ── Scroll-reveal base ── */
 .aw-rise {
   opacity: 0;
   transform: translateY(36px);
@@ -577,7 +514,6 @@ body.page-all-work {
   transform: translateY(0);
 }
 
-/* work_1_4–6: staggered slide-up per block (data-aw-rise-group + .aw-rise-piece) */
 .aw-rise-group {
   opacity: 1;
   transform: none;
@@ -586,84 +522,16 @@ body.page-all-work {
 .aw-rise-group .aw-rise-piece {
   --aw-rise-step: 0;
   opacity: 0;
-  transform: translate3d(0, 32px, 0);
+  transform: translate3d(0, 40px, 0);
   transition:
     opacity 0.62s var(--aw-ease),
     transform 0.88s var(--aw-ease);
-  transition-delay: calc(var(--aw-rise-step) * 0.11s);
+  transition-delay: calc(var(--aw-rise-step) * 0.12s);
 }
 
 .aw-rise-group.is-in .aw-rise-piece {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-}
-
-#work_1_4 .aw-4a.aw-rise-group .aw-4a__media.aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_4 .aw-4a.aw-rise-group .aw-4a__title.aw-rise-piece {
-  --aw-rise-step: 1;
-}
-
-#work_1_4 .aw-4a.aw-rise-group .aw-4a__body.aw-rise-piece {
-  --aw-rise-step: 2;
-}
-
-#work_1_4 .aw-4b.aw-rise-group .aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_5 .aw-w5-aloe.aw-rise-group .aw-w5-aloe__title.aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_5 .aw-w5-aloe.aw-rise-group .aw-w5-aloe__body p.aw-rise-piece:nth-of-type(1) {
-  --aw-rise-step: 1;
-}
-
-#work_1_5 .aw-w5-aloe.aw-rise-group .aw-w5-aloe__body p.aw-rise-piece:nth-of-type(2) {
-  --aw-rise-step: 2;
-}
-
-#work_1_5 .aw-w5-aloe.aw-rise-group .aw-w5-aloe__body p.aw-rise-piece:nth-of-type(3) {
-  --aw-rise-step: 3;
-}
-
-#work_1_5 .aw-w5-stanford.aw-rise-group .aw-w5-stanford__media.aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_5 .aw-w5-stanford.aw-rise-group .aw-w5-stanford__title.aw-rise-piece {
-  --aw-rise-step: 1;
-}
-
-#work_1_5 .aw-w5-stanford.aw-rise-group .aw-w5-stanford__body p.aw-rise-piece {
-  --aw-rise-step: 2;
-}
-
-#work_1_6 .aw-w6-left.aw-rise-group .aw-w6-left__media.aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_6 .aw-w6-left.aw-rise-group .aw-w6-left__title.aw-rise-piece {
-  --aw-rise-step: 1;
-}
-
-#work_1_6 .aw-w6-left.aw-rise-group .aw-w6-left__body.aw-rise-piece {
-  --aw-rise-step: 2;
-}
-
-#work_1_6 .aw-w6-right.aw-rise-group .aw-w6-right__media.aw-rise-piece {
-  --aw-rise-step: 0;
-}
-
-#work_1_6 .aw-w6-right.aw-rise-group .aw-w6-right__title.aw-rise-piece {
-  --aw-rise-step: 1;
-}
-
-#work_1_6 .aw-w6-right.aw-rise-group .aw-w6-right__body.aw-rise-piece {
-  --aw-rise-step: 2;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -674,192 +542,152 @@ body.page-all-work {
   }
 }
 
-/* work_1_5 — Figma 68:98 */
-.aw-w5-aloe {
+/* ── Frame decoration at top of work_2 (connects to work_1_3 bridge lines) ── */
+.aw-frame-deco {
   position: absolute;
-  left: 736px;
-  top: 37px;
-  width: 690px;
-  color: var(--aw-ink);
-  text-decoration: none;
+  top: 0;
+  left: 50%;
+  width: 1440px;
+  height: 260px;
+  transform: translateX(-50%) scale(var(--aw-scale, 1));
+  transform-origin: center top;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.aw-w5-aloe__title {
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 1.2;
-  /* Match aw-4a: gap from media bottom to title top = 324 − 292 = 32px */
-  margin: 0 0 32px;
-}
-
-.aw-w5-aloe__body {
+/* ── work_2: editorial grid ── */
+.aw-work-grid {
   position: relative;
-  left: 0;
-  top: auto;
-  width: 676px;
-  font-family: "Inria Serif", ui-serif, Georgia, serif;
-  font-size: 24px;
-  line-height: 35px;
-  opacity: 0.92;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 160px 40px 140px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 28px;
 }
 
-.aw-w5-aloe__body p {
-  margin: 0 0 0.15em;
-}
-
-.aw-w5-stanford {
-  position: absolute;
-  left: 406px;
-  top: 380px;
-  width: 690px;
+.aw-card {
+  display: block;
   color: var(--aw-ink);
   text-decoration: none;
 }
 
-.aw-w5-stanford__media {
-  width: 628px;
-  height: 381px;
+.aw-card__media {
   overflow: hidden;
-  background: #111;
+  border-radius: 3px;
 }
 
-.aw-w5-stanford__media img {
-  display: block;
+.aw-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  display: block;
+  transition: transform 0.6s var(--aw-ease);
 }
 
-.aw-w5-stanford__title {
-  position: absolute;
-  left: 0;
-  top: 399px;
-  width: 690px;
+.aw-card:hover .aw-card__media img {
+  transform: scale(1.035);
+}
+
+.aw-card__title {
   font-family: var(--font-inter, "Inter", sans-serif);
   font-weight: 600;
-  font-size: 32px;
-  line-height: 1.2;
-  margin: 0;
+  font-size: 28px;
+  line-height: 1.22;
+  margin: 22px 0 0;
 }
 
-.aw-w5-stanford__body {
-  position: absolute;
-  left: 0;
-  top: 465px;
-  width: 676px;
+.aw-card__body {
   font-family: "Inria Serif", ui-serif, Georgia, serif;
-  font-size: 24px;
-  line-height: 35px;
-  opacity: 0.92;
+  font-size: 20px;
+  line-height: 31px;
+  opacity: 0.85;
+  margin: 8px 0 0;
 }
 
-.aw-w5-stanford__body p {
-  margin: 0 0 0.15em;
+/* Rise steps for each card */
+#work_2 .aw-card .aw-card__media.aw-rise-piece { --aw-rise-step: 0; }
+#work_2 .aw-card .aw-card__title.aw-rise-piece { --aw-rise-step: 1; }
+#work_2 .aw-card .aw-card__body.aw-rise-piece  { --aw-rise-step: 2; }
+
+/* ── Card grid placements — editorial zigzag ── */
+
+/* Row 1: SSV (large, left) + Aloe (right, staggered down) */
+.aw-card--1 {
+  grid-column: 1 / 7;
+  margin-bottom: 80px;
+}
+.aw-card--1 .aw-card__media { aspect-ratio: 16 / 9; }
+
+.aw-card--2 {
+  grid-column: 8 / 13;
+  margin-top: 140px;
+  margin-bottom: 60px;
+}
+.aw-card--2 .aw-card__media { aspect-ratio: 16 / 9; }
+
+/* Row 2: Stanford (same width as SSV, offset right for zigzag) */
+.aw-card--3 {
+  grid-column: 2 / 8;
+  margin-bottom: 90px;
+}
+.aw-card--3 .aw-card__media { aspect-ratio: 16 / 9; }
+
+/* Row 3: Real Estate (left) + Q3D (right, staggered down) */
+.aw-card--4 {
+  grid-column: 1 / 6;
+  margin-bottom: 60px;
+}
+.aw-card--4 .aw-card__media { aspect-ratio: 16 / 9; }
+
+.aw-card--5 {
+  grid-column: 7 / 12;
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+.aw-card--5 .aw-card__media { aspect-ratio: 16 / 9; }
+
+/* Row 4: Winery (centered) */
+.aw-card--6 {
+  grid-column: 3 / 11;
+  margin-bottom: 40px;
+}
+.aw-card--6 .aw-card__media { aspect-ratio: 16 / 9; }
+
+/* ── Responsive adjustments ── */
+@media (max-width: 900px) {
+  .aw-work-grid {
+    padding: 100px 24px 80px;
+    column-gap: 20px;
+  }
+  .aw-card--1,
+  .aw-card--3,
+  .aw-card--6 { grid-column: 1 / -1; }
+  .aw-card--2 { grid-column: 3 / -1; margin-top: 0; }
+  .aw-card--4 { grid-column: 1 / 7; }
+  .aw-card--5 { grid-column: 7 / -1; margin-top: 60px; }
+  .aw-card__title { font-size: 24px; }
+  .aw-card__body { font-size: 18px; line-height: 28px; }
 }
 
-/* work_1_6 — Figma 69:113 */
-.aw-w6-left {
-  position: absolute;
-  left: 116px;
-  top: 149px;
-  width: 690px;
-  min-height: 520px;
-  display: block;
-  color: var(--aw-ink);
-  text-decoration: none;
+@media (max-width: 600px) {
+  .aw-work-grid {
+    padding: 80px 20px 60px;
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+  .aw-card--1,
+  .aw-card--2,
+  .aw-card--3,
+  .aw-card--4,
+  .aw-card--5,
+  .aw-card--6 {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .aw-card__title { font-size: 22px; }
+  .aw-card__body { font-size: 16px; line-height: 26px; }
 }
 
-.aw-w6-left__media {
-  width: 407px;
-  height: 363px;
-  overflow: hidden;
-}
-
-.aw-w6-left__media img {
-  width: 171.54%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  transform: translateX(-32.45%);
-  display: block;
-}
-
-.aw-w6-left__title {
-  position: absolute;
-  left: 0;
-  top: 397px;
-  width: 690px;
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.aw-w6-left__body {
-  position: absolute;
-  left: 0;
-  top: 455px;
-  width: 578px;
-  font-family: "Inria Serif", ui-serif, Georgia, serif;
-  font-size: 24px;
-  line-height: 35px;
-  opacity: 0.92;
-  margin: 0;
-}
-
-.aw-w6-right {
-  position: absolute;
-  left: 806px;
-  top: 149px;
-  width: 533px;
-  min-height: 520px;
-  display: block;
-  color: var(--aw-ink);
-  text-decoration: none;
-}
-
-.aw-w6-right__media {
-  width: 533px;
-  height: 296px;
-  overflow: hidden;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.aw-w6-right__media img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.aw-w6-right__title {
-  position: absolute;
-  left: 0;
-  top: 330px;
-  width: 533px;
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.aw-w6-right__body {
-  position: absolute;
-  left: 0;
-  top: 418px;
-  width: 511px;
-  font-family: "Inria Serif", ui-serif, Georgia, serif;
-  font-size: 24px;
-  line-height: 35px;
-  opacity: 0.92;
-  margin: 0;
-}

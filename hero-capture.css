@@ -45,8 +45,19 @@ body.menu-open .hero-cursor-root {
   background-color: var(--color-bg);
 }
 
+/* White cursor on dark-background sections */
+.hero-cursor-dot.is-dark-zone .hero-cursor-dot__inner {
+  background-color: #ffffff;
+}
+
+/* Hide native cursor across all page sections */
 html.hero-cursor-armed .main,
-html.hero-cursor-armed .site-header {
+html.hero-cursor-armed .site-header,
+html.hero-cursor-armed .work-0,
+html.hero-cursor-armed .svc,
+html.hero-cursor-armed .abt,
+html.hero-cursor-armed .mrq,
+html.hero-cursor-armed .ctc {
   cursor: none;
 }
 

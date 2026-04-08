@@ -1,0 +1,55 @@
+/* ══════════════════════════════════════════════════
+   Shared page cursor — SSV (red) + About (black)
+   ══════════════════════════════════════════════════ */
+
+.pc {
+  position: fixed;
+  left: 0; top: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.35s ease;
+}
+
+.pc.is-ready { opacity: 1; }
+
+body.menu-open .pc {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.pc__dot {
+  display: block;
+  width: clamp(45px, 5vw, 50px);
+  height: clamp(45px, 5vw, 50px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+
+  /* SSV — red */
+  background: #C21F1F;
+}
+
+/* About — black */
+.about-page .pc__dot {
+  background: #111111;
+}
+
+/* Hide native cursor */
+html.pc-armed .ssv-stage,
+html.pc-armed .ssv-nav,
+html.pc-armed .ab-hero,
+html.pc-armed .ab-team,
+html.pc-armed .ab-nav,
+html.pc-armed .menu-drawer {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  .pc { display: none !important; }
+  html.pc-armed * { cursor: auto !important; }
+}

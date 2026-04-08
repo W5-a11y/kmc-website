@@ -93,7 +93,7 @@
   }
 
   function scrollToHash() {
-    var map = { "#work_1_1": "work_1_1", "#work_1_3": "work_1_3" };
+    var map = { "#work_1_1": "work_1_1", "#work_1_3": "work_1_3", "#work_2": "work_2" };
     var id = map[window.location.hash];
     if (!id) return;
     var el = document.getElementById(id);
@@ -105,7 +105,7 @@
   }
 
   var hash = window.location.hash || "";
-  var deepWork = /^#work_1_[3-6]/.test(hash);
+  var deepWork = /^#work_1_3|^#work_2/.test(hash);
   scrollToHash();
 
   var s1 = document.getElementById("work_1_1");

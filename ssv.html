@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="page-cursor.css" />
     <link rel="stylesheet" href="ssv.css" />
   </head>
   <body class="page-ssv">
@@ -192,15 +193,15 @@
               <div class="ssv-screening__img">
                 <img src="assets/ssv/screening-amc.jpg" alt="AMC EP2 Premiere Poster" loading="lazy" />
               </div>
-              <div class="ssv-screening__meta">
+              <div class="ssv-screening__center">
                 <time class="ssv-screening__date" datetime="2026-02-06">02/06/2026</time>
-                <h3 class="ssv-screening__title">AMC Private<br>Screening</h3>
+                <div class="ssv-screening__body">
+                  <p>Surviving Silicon Valley × AMC Year of the Horse EP2 Screening Draws a Full House. Following the momentum of its debut episode, Surviving Silicon Valley returned with a new chapter—this time on the big screen at AMC.</p>
+                  <p>The EP2 preview screening brought audiences together for a closer look at one of the show's central themes: the tension between parental love and control, and the complicated space in between.</p>
+                  <p>What began as a first-time screening for EP1 has quickly grown into something more. The latest event felt as much like a reunion as it did a premiere, welcoming back familiar supporters while opening the door to a wider community.</p>
+                </div>
               </div>
-              <div class="ssv-screening__body">
-                <p>Surviving Silicon Valley × AMC Year of the Horse EP2 Screening Draws a Full House. Following the momentum of its debut episode, Surviving Silicon Valley returned with a new chapter—this time on the big screen at AMC.</p>
-                <p>The EP2 preview screening brought audiences together for a closer look at one of the show's central themes: the tension between parental love and control, and the complicated space in between.</p>
-                <p>What began as a first-time screening for EP1 has quickly grown into something more. The latest event felt as much like a reunion as it did a premiere, welcoming back familiar supporters while opening the door to a wider community.</p>
-              </div>
+              <h3 class="ssv-screening__title">AMC Private<br>Screening</h3>
             </article>
 
             <hr class="ssv-screening__divider" />
@@ -209,15 +210,15 @@
               <div class="ssv-screening__img">
                 <img src="assets/ssv/screening-premiere.jpg" alt="Surviving Silicon Valley Premiere" loading="lazy" />
               </div>
-              <div class="ssv-screening__meta">
+              <div class="ssv-screening__center">
                 <time class="ssv-screening__date" datetime="2025-12-01">12/01/2025</time>
-                <h3 class="ssv-screening__title">Surviving Silicon Valley<br>Premiere &amp; Screening</h3>
+                <div class="ssv-screening__body">
+                  <p>Under the lights of Plug and Play, Surviving Silicon Valley made its debut—surrounded by a crowd of people all navigating their own versions of life in Silicon Valley. It wasn't just a screening; it felt like a shared moment of recognition.</p>
+                  <p>Positioned as the Valley's first real estate reality series, the show doesn't hold back. It puts everything on the table—personal truths, life choices, family dynamics, identity, and the quiet struggles behind ambition.</p>
+                  <p>The premiere may be over—but the story is only just beginning.</p>
+                </div>
               </div>
-              <div class="ssv-screening__body">
-                <p>Under the lights of Plug and Play, Surviving Silicon Valley made its debut—surrounded by a crowd of people all navigating their own versions of life in Silicon Valley. It wasn't just a screening; it felt like a shared moment of recognition.</p>
-                <p>Positioned as the Valley's first real estate reality series, the show doesn't hold back. It puts everything on the table—personal truths, life choices, family dynamics, identity, and the quiet struggles behind ambition.</p>
-                <p>The premiere may be over—but the story is only just beginning.</p>
-              </div>
+              <h3 class="ssv-screening__title">Surviving Silicon Valley<br>Premiere &amp; Screening</h3>
             </article>
 
           </div>
@@ -239,7 +240,7 @@
               <a href="work.html#work_1_1" class="menu-drawer__link">The Work</a>
               <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
               <a href="ssv.html" class="menu-drawer__link menu-drawer__link--accent">SSV</a>
-              <a href="#" class="menu-drawer__link">About Us</a>
+              <a href="index.html#about" class="menu-drawer__link">About Us</a>
               <a href="#" class="menu-drawer__link">Contact</a>
             </nav>
           </div>
@@ -252,7 +253,9 @@
       </div>
     </div>
 
+    <div class="pc" id="page-cursor" aria-hidden="true"><span class="pc__dot"></span></div>
     <script src="main.js"></script>
     <script src="ssv.js"></script>
+    <script src="page-cursor.js"></script>
   </body>
 </html>

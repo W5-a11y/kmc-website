@@ -34,7 +34,7 @@ body.menu-open .work-cursor-root {
   height: clamp(45px, 5vw, 50px);
   margin: 0;
   border-radius: 50%;
-  background: var(--color-text);
+  background: #C21F1F;
   transform: translate(-50%, -50%);
   pointer-events: none;
   box-sizing: border-box;

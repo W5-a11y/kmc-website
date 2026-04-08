@@ -173,16 +173,26 @@ body.menu-open .site-header {
   min-height: calc(100dvh - 80px);
 }
 
+/* Home: header uses a tall vertical logo — 80px reserve was too small; main was taller than first screen and KMC+/LUCAS sat below the fold */
+.main:has(#hero-brand) {
+  min-height: calc(100svh - clamp(168px, 28vh, 320px));
+  min-height: calc(100dvh - clamp(168px, 28vh, 320px));
+}
+
 .hero-brand {
   position: absolute;
   left: auto;
   top: auto;
   right: var(--hero-inline-pad);
-  bottom: var(--hero-inline-pad);
+  bottom: max(
+    var(--hero-inline-pad),
+    calc(var(--hero-inline-pad) + env(safe-area-inset-bottom, 0px))
+  );
   width: fit-content;
   max-width: min(92vw, 1440px);
   margin: 0;
-  padding: 0;
+  /* Compensates for tagline removed from flow (was ~36px at desktop) */
+  padding: 0 0 clamp(22px, 3.5vw, 42px) 0;
   text-align: right;
   --hero-inline-pad: clamp(12px, 3vw, 48px);
   /* Bleed for headline lines + tagline (right-aligned block) */
@@ -258,30 +268,42 @@ body.menu-open .hero-brand {
 }
 
 .hero-brand__tagline {
-  margin: clamp(0.35rem, 1vw, 0.65rem) 0 0;
-  margin-left: auto;
-  margin-right: 0;
-  max-width: min(100%, calc(100vw - 2 * var(--hero-inline-pad, 24px)));
-  font-weight: 900;
-  font-size: clamp(2.2rem, 7.5vw, 8.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  color: var(--color-primary);
-  text-align: right;
-  transform: translateX(calc(-1 * var(--hero-bleed-x)));
-  transition: transform 0.9s var(--ease-out-expo);
+  /* Vertical side label — left of KMC+/LUCAS block */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin: 0;
+  max-width: none;
+  text-align: left;
+  /* Pull outside the left edge of hero-brand, center vertically */
+  transform: translateX(calc(-100% - 28px)) translateY(-50%);
   opacity: 0;
-  translate: 0 8px;
+  transition: opacity 0.9s var(--ease-out-expo) 0.2s;
 }
 
 html.hero-scroll-soft .hero-brand__tagline {
   opacity: 1;
-  translate: 0 0;
-  transition:
-    opacity 0.7s var(--ease-out-expo),
-    translate 0.8s var(--ease-out-expo),
-    transform 0.9s var(--ease-out-expo);
+  transform: translateX(calc(-100% - 28px)) translateY(-50%);
+  transition: opacity 0.7s var(--ease-out-expo);
+}
+
+/* Vertical text — reads bottom → top */
+.hero-brand__tagline-text {
+  display: block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-inter, "Inter", sans-serif);
+  font-weight: 500;
+  font-size: clamp(0.6rem, 0.8vw, 0.85rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.38);
+  opacity: 1;
+  transition: none;
+}
+
+html.hero-scroll-soft .hero-brand__tagline-text {
+  opacity: 1;
 }
 
 /* Merged Lottie → page rise + brand signal: type stays “off-air” until intro-active (no second fade flash) */
@@ -388,7 +410,13 @@ html.intro-active .hero-brand__scan {
 
   .hero-brand__tagline {
     opacity: 1 !important;
-    translate: none !important;
+    transform: translateX(calc(-100% - 28px)) translateY(-50%) !important;
+  }
+
+  .hero-brand__tagline-text {
+    opacity: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 
   @keyframes fadeInSoft {
@@ -560,7 +588,7 @@ html.opening-active {
 .opening-lottie-root {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;

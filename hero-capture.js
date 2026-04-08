@@ -41,6 +41,25 @@
   var curY = mouseY;
   var rafId = 0;
   var lastOverlap = false;
+  var lastDark = false;
+
+  /* Dark-background sections — cursor turns white here */
+  var darkZoneEls = (function () {
+    var out = [];
+    ['.work-0', '.svc', '.ctc'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (el) out.push(el);
+    });
+    return out;
+  }());
+
+  function isInDarkZone(x, y) {
+    for (var i = 0; i < darkZoneEls.length; i++) {
+      var r = darkZoneEls[i].getBoundingClientRect();
+      if (y >= r.top && y <= r.bottom) return true;
+    }
+    return false;
+  }
 
   function getHeroWordRects() {
     var kmc = heroBrand.querySelector(".hero-brand__line--kmc .hero-brand__word");
@@ -53,6 +72,15 @@
 
   function updateOverlap() {
     readDotRadius();
+
+    /* Dark zone check */
+    var dark = isInDarkZone(curX, curY);
+    if (dark !== lastDark) {
+      lastDark = dark;
+      cursorDot.classList.toggle('is-dark-zone', dark);
+    }
+
+    /* Hero text overlap (only relevant in light zone) */
     var rects = getHeroWordRects();
     var hit = false;
     var i;

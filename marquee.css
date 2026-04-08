@@ -1,0 +1,71 @@
+/* ══════════════════════════════════════════════════
+   Logo Marquee — Swiss Grid Style
+   ══════════════════════════════════════════════════ */
+
+.mrq {
+  background: #EEECE6;
+  border-top:    1px solid rgba(17, 17, 17, 0.12);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+  overflow: hidden;
+  position: relative;
+  /* fade edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ─── Track ─────────────────────────────────────── */
+.mrq__track {
+  display: flex;
+  width: max-content;
+  animation: mrq-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.mrq:hover .mrq__track {
+  animation-play-state: paused;
+}
+
+@keyframes mrq-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─── Each cell ─────────────────────────────────── */
+.mrq__cell {
+  width: 250px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(17, 17, 17, 0.1);
+  flex-shrink: 0;
+}
+
+/* ─── Logo image ─────────────────────────────────── */
+.mrq__logo {
+  max-width: 160px;
+  max-height: 72px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(100%) opacity(0.55);
+  mix-blend-mode: multiply;        /* hides white JPEG backgrounds on cream */
+  transition: filter 0.35s ease;
+}
+
+.mrq__cell:hover .mrq__logo {
+  filter: grayscale(0%) opacity(1);
+}
