@@ -1,0 +1,777 @@
+/* ═══════════════════════════════════════════════
+   SSV — Surviving Silicon Valley
+   Red: #FF1200  Cream: #F4F3EF  Dark: #111
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --ssv-red:    #C21F1F;
+  --ssv-cream:  #EEECE6;
+  --ssv-dark:   #111111;
+  --ssv-ease:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ssv-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Page shell ───────────────────────────── */
+.page-ssv { background: #000; overflow: hidden; }
+
+.ssv-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ─── Sections — stacked absolutely ────────── */
+.ssv-section {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* z-index layer order */
+.ssv-section--landing   { z-index: 60; }
+.ssv-section--about     { z-index: 50; }
+.ssv-section--episodes  { z-index: 40; }
+.ssv-section--other     { z-index: 30; }
+.ssv-section--offline   { z-index: 20; }
+.ssv-section--screening { z-index: 10; overflow-y: auto; }
+
+/* Sheets (s3–s6): start below, slide up like paper */
+.ssv-sheet {
+  transform: translateY(100%);
+  border-radius: 20px 20px 0 0;
+  transition: transform 0.85s var(--ssv-ease), border-radius 0.85s var(--ssv-ease);
+}
+
+.ssv-sheet.is-visible {
+  transform: translateY(0);
+  border-radius: 0;
+}
+
+/* ─── Fixed Nav ─────────────────────────────── */
+.ssv-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  pointer-events: none;
+}
+
+.ssv-nav > * { pointer-events: auto; }
+
+.ssv-nav__logo img {
+  height: 40px;
+  width: auto;
+  mix-blend-mode: plus-lighter;
+  display: block;
+}
+
+.ssv-nav__center {
+  margin: 0 auto;
+  position: relative;
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.ssv-nav__ssv-white,
+.ssv-nav__ssv-color {
+  height: 28px;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.4s ease;
+}
+
+/* Dark sections: white logo */
+.ssv-nav__ssv-white { opacity: 1; }
+.ssv-nav__ssv-color { opacity: 0; }
+
+/* Light sections: color logo */
+.ssv-nav--light .ssv-nav__ssv-white { opacity: 0; }
+.ssv-nav--light .ssv-nav__ssv-color { opacity: 1; }
+
+/* Landing: nav logo hidden (the SSV fills the whole page) */
+.ssv-nav--landing .ssv-nav__center {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.ssv-nav--landing .ssv-nav__logo img { opacity: 0; transition: opacity 0.3s ease; }
+
+.ssv-nav__menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ssv-nav__menu-icon { display: block; width: 44px; height: 44px; }
+.ssv-nav--light .ssv-nav__menu-icon { filter: invert(1); }
+
+/* ─── S1: LANDING ───────────────────────────── */
+.ssv-section--landing {
+  background: #000;
+  cursor: pointer;
+}
+
+/* ─ Entry: video fades + scales in ─ */
+.ssv-landing__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(1.06);
+  animation: ssvVideoIn 1.6s 0.1s var(--ssv-ease) forwards;
+}
+
+@keyframes ssvVideoIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ─ Entry: SSV mask blurs + sharpens in ─ */
+.ssv-landing__mask-wrap {
+  position: absolute;
+  inset: 0;
+  /* Shrink toward the right side (where about_ssv.svg will appear) */
+  transform-origin: 72% 50%;
+  will-change: transform, opacity, filter;
+  opacity: 0;
+  animation: ssvMaskIn 1.5s 0.55s var(--ssv-ease) forwards;
+}
+
+@keyframes ssvMaskIn {
+  0%   { opacity: 0; transform: scale(1.1);  filter: blur(28px); }
+  45%  { opacity: 1; filter: blur(10px); }
+  100% { opacity: 1; transform: scale(1);    filter: blur(0); }
+}
+
+.ssv-landing__mask-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─ Scroll hint ─ */
+.ssv-landing__hint {
+  position: absolute;
+  bottom: 44px;
+  left: 52px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+  opacity: 0;
+  animation: ssvHintIn 0.5s 2.5s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes ssvHintIn { to { opacity: 0.55; } }
+
+.ssv-landing__hint-text {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #fff;
+}
+
+.ssv-landing__hint-bar {
+  width: 44px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+.ssv-landing__hint-fill {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: ssvBarScan 1.6s 2.7s ease-in-out infinite;
+}
+
+@keyframes ssvBarScan {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ─ Morph out ─
+   Step 1: video snaps out (0.3s) so only the red mask is seen collapsing.
+   Step 2: mask shrinks toward transform-origin 75% 50% (right-of-centre)
+           which is roughly where about_ssv.svg lives.
+   The mask ends at scale(0.1) ≈ the opening size of about_ssv.svg (scale 0.12),
+   creating a visual hand-off between the two SVGs.
+*/
+.ssv-section--landing.is-morphing .ssv-landing__video {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ssv-section--landing.is-morphing .ssv-landing__mask-wrap {
+  transform: scale(0.1);
+  opacity: 0.45;
+  filter: blur(0);
+  transition:
+    transform 0.95s var(--ssv-ease),
+    opacity   0.8s 0.12s ease;
+}
+
+.ssv-section--landing.is-morphing .ssv-landing__hint {
+  opacity: 0 !important;
+  transition: opacity 0.15s ease;
+}
+
+.ssv-section--landing.is-gone {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* ─── S2: ABOUT ─────────────────────────────── */
+.ssv-section--about { background: var(--ssv-red); }
+
+/* Large SSV decoration (right side) — morph target from landing mask */
+.ssv-about__sv {
+  position: absolute;
+  right: -3%;
+  top: -5%;
+  width: 56%;
+  height: 110%;
+  z-index: 1;
+  pointer-events: none;
+  /*
+   * Starts at the same visual scale as the collapsed landing mask
+   * (mask ends at scale 0.1 with transform-origin 75% 50%).
+   * about_ssv expands from that same small size on the right,
+   * creating the illusion the SSV window "becomes" solid red text.
+   */
+  transform-origin: 88% 50%;
+  transform: scale(0.12);
+  opacity: 0;
+  /* No transition until is-active fires */
+}
+
+.ssv-section--about.is-active .ssv-about__sv {
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    transform 1.1s 0.0s var(--ssv-ease),
+    opacity   0.5s 0.0s ease;
+}
+
+.ssv-about__sv-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  display: block;
+}
+
+/* Content block */
+.ssv-about__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 80px 0 160px calc(20px + 5%);
+  max-width: 400px;
+  color: var(--ssv-cream);
+}
+
+/*
+ * Content enters AFTER about_ssv.svg has already started expanding.
+ * about_ssv fires at delay 0s → content starts at 0.4s+ so SVG leads.
+ */
+
+/* Title: slides in from left */
+.ssv-about__title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.1;
+  margin: 0 0 20px;
+  transform: translateX(-56px);
+  opacity: 0;
+  transition:
+    transform 0.85s 0.42s var(--ssv-ease),
+    opacity   0.7s  0.42s ease;
+}
+
+.ssv-section--about.is-active .ssv-about__title {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Body: blurs up from below */
+.ssv-about__body {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.65;
+  transform: translateY(22px);
+  opacity: 0;
+  filter: blur(5px);
+  transition:
+    transform 0.75s 0.68s var(--ssv-ease),
+    opacity   0.6s  0.68s ease,
+    filter    0.6s  0.68s ease;
+}
+
+.ssv-section--about.is-active .ssv-about__body {
+  transform: translateY(0);
+  opacity: 0.9;
+  filter: blur(0);
+}
+
+.ssv-about__body p { margin: 0 0 10px; }
+
+/* Actions */
+.ssv-about__actions {
+  position: absolute;
+  bottom: 52px;
+  left: 0; right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0 8%;
+}
+
+/* Each action: spring-pops in with stagger */
+.ssv-about__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--ssv-cream);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 16px);
+  text-decoration: none;
+  text-align: center;
+  transform: translateY(32px) scale(0.72);
+  opacity: 0;
+}
+
+.ssv-about__action:nth-child(1) {
+  transition: transform 0.7s 0.88s var(--ssv-spring), opacity 0.5s 0.88s ease;
+}
+.ssv-about__action:nth-child(2) {
+  transition: transform 0.7s 1.03s var(--ssv-spring), opacity 0.5s 1.03s ease;
+}
+.ssv-about__action:nth-child(3) {
+  transition: transform 0.7s 1.18s var(--ssv-spring), opacity 0.5s 1.18s ease;
+}
+
+.ssv-section--about.is-active .ssv-about__action {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.ssv-about__action:hover { opacity: 0.7; }
+.ssv-about__action svg { width: 44px; height: 44px; flex-shrink: 0; }
+
+/* ─── S3: EPISODES ──────────────────────────── */
+.ssv-section--episodes { background: var(--ssv-dark); }
+
+.ssv-episodes__grid {
+  position: absolute;
+  top: 72px;
+  left: 48px; right: 36px;
+  bottom: 160px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+.ssv-episodes__main {
+  grid-row: 1 / -1;
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+
+.ssv-episodes__main img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+.ssv-episodes__main::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  border-radius: 28px;
+}
+
+.ssv-episodes__label {
+  position: absolute;
+  bottom: 28px; left: 28px;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.ssv-episodes__label-text {
+  font-family: var(--font-inter);
+  font-weight: 800;
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--ssv-red);
+}
+
+.ssv-episodes__label-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 36px;
+  background: var(--ssv-red);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+}
+
+.ssv-episodes__thumb {
+  border-radius: 28px;
+  overflow: hidden;
+  display: block;
+}
+
+.ssv-episodes__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* Shared "cue" button / nav indicator */
+.ssv-cue {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ssv-cream);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 5;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.ssv-cue:hover { opacity: 0.7; }
+
+/* ─── S4: OTHER CONTENT ─────────────────────── */
+.ssv-section--other { background: var(--ssv-dark); }
+
+.ssv-other__top {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--ssv-cream);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 15px;
+  z-index: 5;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.ssv-other__top:hover { opacity: 0.7; }
+
+.ssv-other__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  font-family: var(--font-inter);
+  font-weight: 800;
+  font-size: clamp(56px, 7.5vw, 104px);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--ssv-cream);
+  text-align: center;
+  margin: 0;
+  pointer-events: none;
+}
+
+.ssv-other__scroll {
+  position: absolute;
+  bottom: 80px;
+  left: 0; right: 0;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 40px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+}
+
+.ssv-other__scroll:active { cursor: grabbing; }
+.ssv-other__scroll::-webkit-scrollbar { display: none; }
+
+.ssv-other__card {
+  flex: 0 0 auto;
+  width: clamp(240px, 28vw, 400px);
+  height: 225px;
+  border-radius: 36px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.ssv-other__card:hover { transform: scale(1.025); }
+
+.ssv-other__card img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* ─── S5: OFFLINE ───────────────────────────── */
+.ssv-section--offline { background: var(--ssv-cream); }
+
+.ssv-vert-logo {
+  position: absolute;
+  left: 0; top: 0;
+  width: 52px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.ssv-vert-logo img {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  width: 220px;
+  height: auto;
+  opacity: 0.2;
+  filter: invert(1);
+  display: block;
+}
+
+.ssv-offline__cats {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 3;
+}
+
+.ssv-offline__cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--ssv-red);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.ssv-offline__cat:hover { opacity: 0.6; }
+.ssv-offline__cat svg { width: 52px; height: 52px; }
+
+.ssv-offline__photo {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  overflow: hidden;
+}
+
+.ssv-offline__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* ─── S6: SCREENING ─────────────────────────── */
+.ssv-section--screening { background: var(--ssv-cream); }
+
+.ssv-screening__inner {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding-left: 56px;
+}
+
+.ssv-screening__headline {
+  margin: 0;
+  padding: 40px 48px 16px;
+  font-family: var(--font-inter);
+  font-weight: 800;
+  font-size: clamp(64px, 9.5vw, 136px);
+  line-height: 0.72;
+  letter-spacing: -0.05em;
+  color: var(--ssv-red);
+  text-align: right;
+}
+
+.ssv-screening__headline span { display: block; }
+
+.ssv-screening__articles { padding: 32px 48px 80px; }
+
+.ssv-screening__article {
+  display: grid;
+  grid-template-columns: 44% 20% 1fr;
+  grid-template-rows: auto 1fr;
+  column-gap: 24px;
+  padding: 20px 0 32px;
+  align-items: start;
+}
+
+.ssv-screening__img {
+  grid-row: 1 / -1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ssv-screening__img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+.ssv-screening__meta { grid-column: 2; grid-row: 1; }
+
+.ssv-screening__date {
+  display: block;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1;
+  color: var(--ssv-red);
+  margin-bottom: 6px;
+}
+
+.ssv-screening__title {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.1;
+  color: var(--ssv-red);
+  margin: 0;
+}
+
+.ssv-screening__body {
+  grid-column: 3;
+  grid-row: 1 / -1;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ssv-red);
+}
+
+.ssv-screening__body p { margin: 0 0 10px; }
+
+.ssv-screening__divider {
+  border: none;
+  border-top: 1px solid var(--ssv-red);
+  margin: 0;
+}
+
+/* ─── Responsive ────────────────────────────── */
+@media (max-width: 960px) {
+  .ssv-episodes__grid { left: 20px; right: 20px; bottom: 140px; }
+  .ssv-about__sv { width: 52%; opacity: 0.7; }
+
+  .ssv-screening__article {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .ssv-screening__img    { grid-row: auto; height: 200px; }
+  .ssv-screening__body   { grid-column: 1 / -1; grid-row: auto; margin-top: 12px; }
+  .ssv-screening__headline { padding: 32px 24px 12px; }
+  .ssv-screening__articles { padding: 24px 24px 60px; }
+  .ssv-screening__inner  { padding-left: 48px; }
+}
+
+@media (max-width: 640px) {
+  .ssv-about__actions { flex-direction: column; align-items: center; gap: 16px; }
+  .ssv-about__content { max-width: 100%; padding-right: 20px; }
+  .ssv-about__sv      { opacity: 0.2; width: 100%; right: 0; }
+  .ssv-other__card    { width: 240px; height: 135px; border-radius: 20px; }
+  .ssv-screening__article { grid-template-columns: 1fr; }
+  .ssv-screening__img { height: 180px; }
+  .ssv-screening__body { grid-column: 1; }
+  .ssv-landing__hint  { left: 20px; bottom: 24px; }
+}
+
+/* ─── Reduced motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ssv-landing__video,
+  .ssv-landing__mask-wrap,
+  .ssv-landing__hint,
+  .ssv-landing__hint-fill {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .ssv-about__sv,
+  .ssv-about__title,
+  .ssv-about__body,
+  .ssv-about__action,
+  .ssv-sheet {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .ssv-section--landing.is-morphing .ssv-landing__mask-wrap,
+  .ssv-section--landing.is-morphing .ssv-landing__video {
+    transition-duration: 0.01ms !important;
+  }
+}

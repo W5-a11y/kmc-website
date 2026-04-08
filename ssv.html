@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" class="ssv-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSV — Surviving Silicon Valley — KMC+Lucas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="ssv.css" />
+  </head>
+  <body class="page-ssv">
+
+    <!-- ═══ FIXED NAV ═══ -->
+    <header class="ssv-nav" id="ssv-nav">
+      <a href="index.html" class="ssv-nav__logo js-go-home" aria-label="KMC × LUCAS — Home">
+        <img src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="272" height="48" />
+      </a>
+      <div class="ssv-nav__center">
+        <img class="ssv-nav__ssv-white" src="assets/ssv/ssv-logo-small.png" alt="SSV" width="88" height="31" />
+        <img class="ssv-nav__ssv-color" src="assets/ssv/ssv-logo-color.png"  alt="SSV" width="88" height="31" />
+      </div>
+      <button type="button" class="ssv-nav__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
+        <img class="ssv-nav__menu-icon" src="assets/menu-icon.svg" alt="" width="49" height="50" />
+      </button>
+    </header>
+
+    <div class="ssv-stage" id="ssv-stage">
+
+      <!-- ═══ S1: LANDING ═══ -->
+      <section id="ssv-s1" class="ssv-section ssv-section--landing" data-theme="dark" aria-label="SSV Landing">
+        <!-- SSV opening loop video — plays through letterform cutouts -->
+        <video
+          class="ssv-landing__video"
+          autoplay muted loop playsinline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="assets/ssv/ssv-open.webm" type="video/webm">
+          <source src="assets/ssv/ssv-open.mp4" type="video/mp4">
+        </video>
+        <!-- Red overlay: SSV letters are transparent cutouts revealing the video -->
+        <div class="ssv-landing__mask-wrap" aria-hidden="true">
+          <img class="ssv-landing__mask-img" src="assets/ssv/landing.svg" alt="" />
+        </div>
+        <!-- Scroll hint -->
+        <div class="ssv-landing__hint" aria-hidden="true">
+          <span class="ssv-landing__hint-text">SCROLL</span>
+          <div class="ssv-landing__hint-bar"><div class="ssv-landing__hint-fill"></div></div>
+        </div>
+      </section>
+
+      <!-- ═══ S2: ABOUT ═══ -->
+      <section id="ssv-s2" class="ssv-section ssv-section--about" data-theme="dark" aria-label="About SSV">
+        <!-- Large SSV letters (right side) — target of landing morph -->
+        <div class="ssv-about__sv" aria-hidden="true">
+          <img class="ssv-about__sv-img" src="assets/ssv/about_ssv.svg" alt="" />
+        </div>
+        <!-- Content (left) -->
+        <div class="ssv-about__content">
+          <h1 class="ssv-about__title">What's happening<br>in Silicon Valley?</h1>
+          <div class="ssv-about__body">
+            <p>Surviving Silicon Valley is the first reality series in the United States to use real estate as its central narrative, blending human exploration with real individuals telling their own authentic life stories.</p>
+            <p>Each episode uses a home as the medium to reveal the emotional crossroads and turning points in a person's life—uncovering the tension between human nature, money, family, and self-identity.</p>
+          </div>
+        </div>
+        <!-- Action buttons (bottom) -->
+        <nav class="ssv-about__actions" aria-label="SSV sections">
+          <a href="#ssv-s5" class="ssv-about__action js-ssv-go" data-target="4">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M22 14v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Offline Experiences</span>
+          </a>
+          <a href="#ssv-s3" class="ssv-about__action js-ssv-go" data-target="2">
+            <svg width="36" height="44" viewBox="0 0 36 44" fill="none" aria-hidden="true">
+              <path d="M34 22 2 41V3l32 19z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Watch Episodes</span>
+          </a>
+          <a href="#ssv-s6" class="ssv-about__action js-ssv-go" data-target="5">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M22 14v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Join Us</span>
+          </a>
+        </nav>
+      </section>
+
+      <!-- ═══ S3: WATCH EPISODES ═══ -->
+      <section id="ssv-s3" class="ssv-section ssv-section--episodes ssv-sheet" data-theme="dark" aria-label="Watch Episodes">
+        <div class="ssv-episodes__grid">
+          <a href="https://www.youtube.com/watch?v=ZA08V_XEicM" target="_blank" rel="noopener" class="ssv-episodes__main">
+            <img src="assets/ssv/ep3-cover.png" alt="Latest Episode — EP3" />
+            <div class="ssv-episodes__label">
+              <span class="ssv-episodes__label-text">Latest<br>Episode</span>
+              <span class="ssv-episodes__label-play" aria-hidden="true">&#9654;</span>
+            </div>
+          </a>
+          <a href="#" class="ssv-episodes__thumb">
+            <img src="assets/ssv/ep2-cover.png" alt="Episode 2" />
+          </a>
+          <a href="#" class="ssv-episodes__thumb">
+            <img src="assets/ssv/ep1-cover.png" alt="Episode 1" />
+          </a>
+        </div>
+        <button type="button" class="ssv-cue js-ssv-next" aria-label="Next: Other Content">
+          <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
+            <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Past Episodes on Youtube</span>
+        </button>
+      </section>
+
+      <!-- ═══ S4: OTHER CONTENT ═══ -->
+      <section id="ssv-s4" class="ssv-section ssv-section--other ssv-sheet" data-theme="dark" aria-label="Other Content">
+        <!-- Up arrow: goes back to Episodes -->
+        <button type="button" class="ssv-other__top js-ssv-prev" aria-label="Back to Episodes">
+          <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
+            <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M31 40V22m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Past Episodes on Youtube</span>
+        </button>
+        <h2 class="ssv-other__title">Other<br>Content</h2>
+        <div class="ssv-other__scroll" role="list">
+          <a href="#" class="ssv-other__card" role="listitem">
+            <img src="assets/ssv/content-1.png" alt="LUCAS到你家" loading="lazy" />
+          </a>
+          <a href="#" class="ssv-other__card" role="listitem">
+            <img src="assets/ssv/content-2.png" alt="创始人生存法则" loading="lazy" />
+          </a>
+          <a href="#" class="ssv-other__card" role="listitem">
+            <img src="assets/ssv/content-3.png" alt="What Makes Home" loading="lazy" />
+          </a>
+          <a href="#" class="ssv-other__card" role="listitem">
+            <img src="assets/ssv/content-4.png" alt="片头" loading="lazy" />
+          </a>
+        </div>
+      </section>
+
+      <!-- ═══ S5: OFFLINE EXPERIENCES ═══ -->
+      <section id="ssv-s5" class="ssv-section ssv-section--offline ssv-sheet" data-theme="light" aria-label="Offline Experiences">
+        <div class="ssv-vert-logo" aria-hidden="true">
+          <img src="assets/logo-menu-bar-white.png" alt="" />
+        </div>
+        <nav class="ssv-offline__cats" aria-label="Offline experience types">
+          <a href="#ssv-s6" class="ssv-offline__cat js-ssv-go" data-target="5">
+            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
+              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Exclusive Screening</span>
+          </a>
+          <a href="#" class="ssv-offline__cat">
+            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
+              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Lectures + Cocktails</span>
+          </a>
+          <a href="#" class="ssv-offline__cat">
+            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
+              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Workshops</span>
+          </a>
+        </nav>
+        <div class="ssv-offline__photo">
+          <img src="assets/ssv/offline-cinema.jpg" alt="Exclusive screening audience" loading="lazy" />
+        </div>
+      </section>
+
+      <!-- ═══ S6: EXCLUSIVE SCREENING ═══ -->
+      <section id="ssv-s6" class="ssv-section ssv-section--screening ssv-sheet" data-theme="light" aria-label="Exclusive Screening">
+        <div class="ssv-vert-logo" aria-hidden="true">
+          <img src="assets/logo-menu-bar-white.png" alt="" />
+        </div>
+        <div class="ssv-screening__inner">
+          <h2 class="ssv-screening__headline">
+            <span>Exclusive</span>
+            <span>Screening</span>
+          </h2>
+          <div class="ssv-screening__articles">
+
+            <article class="ssv-screening__article">
+              <div class="ssv-screening__img">
+                <img src="assets/ssv/screening-amc.jpg" alt="AMC EP2 Premiere Poster" loading="lazy" />
+              </div>
+              <div class="ssv-screening__meta">
+                <time class="ssv-screening__date" datetime="2026-02-06">02/06/2026</time>
+                <h3 class="ssv-screening__title">AMC Private<br>Screening</h3>
+              </div>
+              <div class="ssv-screening__body">
+                <p>Surviving Silicon Valley × AMC Year of the Horse EP2 Screening Draws a Full House. Following the momentum of its debut episode, Surviving Silicon Valley returned with a new chapter—this time on the big screen at AMC.</p>
+                <p>The EP2 preview screening brought audiences together for a closer look at one of the show's central themes: the tension between parental love and control, and the complicated space in between.</p>
+                <p>What began as a first-time screening for EP1 has quickly grown into something more. The latest event felt as much like a reunion as it did a premiere, welcoming back familiar supporters while opening the door to a wider community.</p>
+              </div>
+            </article>
+
+            <hr class="ssv-screening__divider" />
+
+            <article class="ssv-screening__article">
+              <div class="ssv-screening__img">
+                <img src="assets/ssv/screening-premiere.jpg" alt="Surviving Silicon Valley Premiere" loading="lazy" />
+              </div>
+              <div class="ssv-screening__meta">
+                <time class="ssv-screening__date" datetime="2025-12-01">12/01/2025</time>
+                <h3 class="ssv-screening__title">Surviving Silicon Valley<br>Premiere &amp; Screening</h3>
+              </div>
+              <div class="ssv-screening__body">
+                <p>Under the lights of Plug and Play, Surviving Silicon Valley made its debut—surrounded by a crowd of people all navigating their own versions of life in Silicon Valley. It wasn't just a screening; it felt like a shared moment of recognition.</p>
+                <p>Positioned as the Valley's first real estate reality series, the show doesn't hold back. It puts everything on the table—personal truths, life choices, family dynamics, identity, and the quiet struggles behind ambition.</p>
+                <p>The premiere may be over—but the story is only just beginning.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /ssv-stage -->
+
+    <!-- ═══ MENU DRAWER ═══ -->
+    <div class="menu-drawer" id="menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+      <div class="menu-drawer__panel">
+        <div class="menu-drawer__bar">
+          <div class="menu-drawer__brand">
+            <a href="index.html" class="menu-drawer__logo menu-drawer__logo--horizontal js-go-home" aria-label="KMC × LUCAS — Home">
+              <img class="menu-drawer__logo-img" src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="440" height="74" />
+            </a>
+            <nav class="menu-drawer__nav" aria-label="Main menu">
+              <a href="index.html" class="menu-drawer__link js-go-home">Home</a>
+              <a href="work.html#work_1_1" class="menu-drawer__link">The Work</a>
+              <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
+              <a href="ssv.html" class="menu-drawer__link menu-drawer__link--accent">SSV</a>
+              <a href="#" class="menu-drawer__link">About Us</a>
+              <a href="#" class="menu-drawer__link">Contact</a>
+            </nav>
+          </div>
+          <button type="button" class="menu-drawer__toggle js-menu-toggle" aria-label="Close menu" aria-expanded="true">
+            <span class="menu-drawer__toggle-icon" aria-hidden="true">
+              <img src="assets/icon-x.svg" alt="" width="48" height="48" />
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="ssv.js"></script>
+  </body>
+</html>
