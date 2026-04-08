@@ -1,0 +1,84 @@
+/* ═══════════════════════════════════════════════════════
+   Cinema-Stack Scroll
+   4 full-viewport panels stack on top of each other as
+   the user scrolls. Activates after html.intro-done and
+   only on screens ≥ 768 px.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Default (mobile / pre-intro): panels flow normally ── */
+.stack-wrap {
+  position: relative;
+}
+
+.stack-panel {
+  position: relative;
+}
+
+/* ── Desktop + post-intro: cinema stack ── */
+@media (min-width: 768px) {
+  html.intro-done .stack-wrap {
+    height: auto;
+    min-height: 520vh; /* base stack track + extra for About + marquee below fold */
+  }
+
+  html.intro-done .stack-panel {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    transform-origin: center top;
+    /* JS drives transform/filter — no CSS transition so it follows scroll 1:1 */
+  }
+
+  /* Panel stacking order */
+  html.intro-done .stack-panel--1 {
+    z-index: 10;
+    background: #f4f3ef; /* cream — matches hero */
+  }
+  html.intro-done .stack-panel--2 {
+    z-index: 20;
+    background: #c21f1f; /* red — matches work-0 */
+  }
+  html.intro-done .stack-panel--3 {
+    z-index: 30;
+    background: #000000; /* black — matches svc */
+  }
+  /* About + marquee: tall panel, no clip; flex stacks section then .mrq */
+  html.intro-done .stack-panel--4 {
+    z-index: 40;
+    background: #f4f3ef; /* cream — matches abt */
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Inner sections fill the 100 vh panel (panels 1–3) */
+  html.intro-done .stack-panel > section {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  html.intro-done .stack-panel--4 > section.abt {
+    height: auto;
+    min-height: 100vh;
+    flex: 0 0 auto;
+    overflow: visible; /* override about.css .abt overflow:hidden so copy + marquee aren’t clipped */
+  }
+
+  html.intro-done .stack-panel--4 > .mrq {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 100%;
+  }
+}
+
+/* Reduce motion: no scale/filter */
+@media (prefers-reduced-motion: reduce) {
+  html.intro-done .stack-panel {
+    transform: none !important;
+    filter: none !important;
+  }
+}

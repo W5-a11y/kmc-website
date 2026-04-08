@@ -153,19 +153,27 @@
     onApiReady();
   }
 
-  /* ——— Scroll into view: simple reveal (stagger reserved for non-scroll entry if needed) ——— */
+  /* ——— Scroll into view: stagger reveal → auto-transition to detail ——— */
   var scrollRevealDone = false;
+  var autoDetailTimer = null;
+
   var io = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (en) {
-        if (!en.isIntersecting || en.intersectionRatio < 0.28) return;
+        /* Fire when panel is ≥ 55% visible — well into the cinema-stack slide-in */
+        if (!en.isIntersecting || en.intersectionRatio < 0.55) return;
         if (section.classList.contains("work-0--entered")) return;
         if (scrollRevealDone) return;
         scrollRevealDone = true;
-        section.classList.add("work-0--entered", "work-0--entered-by-scroll");
+        /* Use stagger delays (no entered-by-scroll) so intro words animate in */
+        section.classList.add("work-0--entered");
+        /* After stagger + reveal completes (~1.15s), auto-transition to detail */
+        autoDetailTimer = window.setTimeout(function () {
+          if (getState() === "intro") setState("detail");
+        }, 1600);
       });
     },
-    { threshold: [0, 0.28, 0.5] }
+    { threshold: [0, 0.28, 0.55, 0.8, 1.0] }
   );
   io.observe(section);
 
@@ -177,6 +185,8 @@
       if (s === "intro") {
         if (e.target.closest(".work-0__header, .work-0__header a, .work-0__menu, a[href], button")) return;
         e.preventDefault();
+        /* Cancel auto-detail timer if user clicks first */
+        if (autoDetailTimer) { window.clearTimeout(autoDetailTimer); autoDetailTimer = null; }
         setState("detail");
         return;
       }

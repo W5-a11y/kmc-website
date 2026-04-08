@@ -437,7 +437,7 @@ html.intro-active .hero-brand__scan {
   left: 0;
   right: 0;
   height: var(--menu-bar-height);
-  z-index: 10;
+  z-index: 200; /* above all stack panels (max z-index: 40) and cursor (80) */
   pointer-events: none;
   transform: translateY(-100%);
   transition: transform 0.85s var(--ease-out-expo);

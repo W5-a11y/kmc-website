@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="stack-scroll.css" />
     <link rel="stylesheet" href="work-0.css" />
     <link rel="stylesheet" href="services.css" />
     <link rel="stylesheet" href="about.css" />
@@ -27,56 +28,59 @@
       <div id="opening-lottie-view" class="opening-lottie-view"></div>
     </div>
     <div class="page" id="page">
-      <header class="site-header" aria-label="Primary">
-        <a href="#" class="site-header__logo site-header__logo--vertical js-go-home" aria-label="KMC × LUCAS — Home">
-          <img
-            src="assets/logo-vertical.png"
-            alt="KMC × LUCAS"
-            width="56"
-            height="300"
-            class="site-header__logo-img"
-          />
-        </a>
-        <nav class="site-header__nav" aria-label="Section links">
-          <a href="#work_0">WORK</a>
-          <a href="ssv.html">SSV</a>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <button type="button" class="site-header__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
-            <span class="site-header__menu-icon" aria-hidden="true">
-              <img src="assets/menu-icon.svg" alt="" width="49" height="50" />
-            </span>
-          </button>
-        </nav>
-      </header>
 
-      <main class="main">
-        <div class="hero-brand" id="hero-brand">
-          <div class="hero-brand__scan" aria-hidden="true"></div>
-          <p class="hero-brand__line hero-brand__line--kmc">
-            <span class="hero-brand__word">KMC+</span>
-          </p>
-          <p class="hero-brand__line hero-brand__line--lucas">
-            <span class="hero-brand__word">LUCAS</span>
-          </p>
-          <p class="hero-brand__tagline">
-            <span class="hero-brand__tagline-text">Media Production Company</span>
-          </p>
-        </div>
-      </main>
+      <!-- ═══ CINEMA STACK: 4 sticky panels ═══ -->
+      <div class="stack-wrap" id="stack-wrap">
 
-      <div id="hero-cursor-root" class="hero-cursor-root" aria-hidden="true">
-        <div id="hero-cursor-dot" class="hero-cursor-dot">
-          <span class="hero-cursor-dot__inner"></span>
-        </div>
-      </div>
+        <!-- Panel 1 — Hero (cream) -->
+        <div class="stack-panel stack-panel--1" id="stack-p1">
+          <header class="site-header" aria-label="Primary">
+            <a href="#" class="site-header__logo site-header__logo--vertical js-go-home" aria-label="KMC × LUCAS — Home">
+              <img
+                src="assets/logo-vertical.png"
+                alt="KMC × LUCAS"
+                width="56"
+                height="300"
+                class="site-header__logo-img"
+              />
+            </a>
+            <nav class="site-header__nav" aria-label="Section links">
+              <a href="#work_0">WORK</a>
+              <a href="ssv.html">SSV</a>
+              <a href="#about">About</a>
+              <a href="#services">Services</a>
+              <button type="button" class="site-header__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
+                <span class="site-header__menu-icon" aria-hidden="true">
+                  <img src="assets/menu-icon.svg" alt="" width="49" height="50" />
+                </span>
+              </button>
+            </nav>
+          </header>
 
-      <section
-        id="work_0"
-        class="work-0"
-        aria-label="Work"
-        data-work-state="intro"
-      >
+          <main class="main">
+            <div class="hero-brand" id="hero-brand">
+              <div class="hero-brand__scan" aria-hidden="true"></div>
+              <p class="hero-brand__line hero-brand__line--kmc">
+                <span class="hero-brand__word">KMC+</span>
+              </p>
+              <p class="hero-brand__line hero-brand__line--lucas">
+                <span class="hero-brand__word">LUCAS</span>
+              </p>
+              <p class="hero-brand__tagline">
+                <span class="hero-brand__tagline-text">Media Production Company</span>
+              </p>
+            </div>
+          </main>
+        </div><!-- /stack-panel--1 -->
+
+        <!-- Panel 2 — Work (red) -->
+        <div class="stack-panel stack-panel--2" id="stack-p2">
+          <section
+            id="work_0"
+            class="work-0"
+            aria-label="Work"
+            data-work-state="intro"
+          >
         <div class="work-0__canvas">
           <header class="work-0__header">
             <a href="#" class="work-0__logo js-go-home" aria-label="KMC × LUCAS — Home">
@@ -104,6 +108,7 @@
           <p class="work-0__line work-0__ads">ADS</p>
           <p class="work-0__line work-0__but">BUT</p>
           <p class="work-0__line work-0__stories">STORIES</p>
+          <p class="work-0__keywords" aria-hidden="true">Founder Narrative&nbsp;&nbsp;•&nbsp;&nbsp;Reality Show Integration&nbsp;&nbsp;•&nbsp;&nbsp;Future Living</p>
 
           <div class="work-0__video-shell" aria-hidden="true">
             <div class="work-0__yt-inner">
@@ -133,7 +138,12 @@
             <div class="work-0__work-tray">
               <div class="work-0__rule-hit" aria-hidden="true"></div>
               <div class="work-0__rule" aria-hidden="true"></div>
-              <a href="work.html" class="work-0__all-work">Work</a>
+              <a href="work.html" class="work-0__all-work">
+                <svg class="work-0__all-work-arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                  <path d="M6 16h20m0 0-7-7m7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="work-0__all-work-text">Work</span>
+              </a>
             </div>
           </div>
 
@@ -141,9 +151,12 @@
             <img src="assets/icon-x.svg" alt="" width="24" height="24" />
           </button>
         </div>
-      </section>
+          </section>
+        </div><!-- /stack-panel--2 -->
 
-      <section id="services" class="svc" aria-label="Services & Products">
+        <!-- Panel 3 — Services (dark) -->
+        <div class="stack-panel stack-panel--3" id="stack-p3">
+          <section id="services" class="svc" aria-label="Services & Products">
         <header class="svc__header">
           <a href="#" class="svc__logo js-go-home" aria-label="KMC × LUCAS — Home">
             <img src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="272" height="48" />
@@ -204,9 +217,12 @@
         </div>
 
         <p class="svc__label" aria-hidden="true">Services & Products</p>
-      </section>
+          </section>
+        </div><!-- /stack-panel--3 -->
 
-      <section id="about" class="abt" aria-label="About">
+        <!-- Panel 4 — About (cream) -->
+        <div class="stack-panel stack-panel--4" id="stack-p4">
+          <section id="about" class="abt" aria-label="About">
         <header class="abt__header">
           <a href="#" class="abt__logo js-go-home" aria-label="KMC × LUCAS — Home">
             <img src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="272" height="48" />
@@ -291,33 +307,34 @@
           </div>
         </div>
 
-        <a class="abt__action" href="#about" aria-label="About Us">
+        <a class="abt__action" href="about.html" aria-label="About Us">
           <svg class="abt__action-arrow" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M6 16h20m0 0-7-7m7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="abt__action-text">About Us</span>
         </a>
-      </section>
+          </section>
 
-      <!-- ═══ LOGO MARQUEE ═══ -->
-      <div class="mrq" aria-label="Partners and collaborators" role="marquee">
-        <div class="mrq__track">
-          <!-- Original set × 2 (ensures full viewport coverage) -->
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
-          <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
-          <!-- Clone set (seamless loop target) -->
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="" /></div>
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="" /></div>
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="" /></div>
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="" /></div>
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="" /></div>
-          <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="" /></div>
+        <!-- Logo marquee — directly under About, same stack panel (avoids overlap with sticky panel 4) -->
+        <div class="mrq" aria-label="Partners and collaborators" role="marquee">
+          <div class="mrq__track">
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
+            <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="" /></div>
+            <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="" /></div>
+          </div>
         </div>
-      </div>
+        </div><!-- /stack-panel--4 -->
+
+      </div><!-- /stack-wrap -->
 
       <!-- ═══ CONTACT ═══ -->
       <section id="contact" class="ctc" aria-label="Contact">
@@ -393,6 +410,13 @@
         </div>
       </section>
 
+      <!-- Cursor overlay: outside stack panels to avoid will-change/transform interference -->
+      <div id="hero-cursor-root" class="hero-cursor-root" aria-hidden="true">
+        <div id="hero-cursor-dot" class="hero-cursor-dot">
+          <span class="hero-cursor-dot__inner"></span>
+        </div>
+      </div>
+
       <div
         class="menu-drawer"
         id="menu-drawer"
@@ -439,5 +463,6 @@
     <script defer src="work-0.js"></script>
     <script defer src="services.js"></script>
     <script defer src="about.js"></script>
+    <script src="stack-scroll.js"></script>
   </body>
 </html>
