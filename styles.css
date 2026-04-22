@@ -9,6 +9,10 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --font-inter: "Inter", system-ui, sans-serif;
   --font-ibm: "IBM Plex Sans", system-ui, sans-serif;
+  /* ── Layout ── */
+  /* 单侧留白: 24px(手机) → 64px(1280px) → 80px(封顶) */
+  --page-gutter: clamp(24px, 5vw, 80px);
+  --page-max-width: 1440px;
 }
 
 *,
@@ -70,7 +74,7 @@ img {
   gap: clamp(1rem, 4vw, 3rem);
   max-width: 1440px;
   margin: 0 auto;
-  padding: clamp(0.5rem, 1.2vw, 12px) clamp(1rem, 4vw, 48px) 0;
+  padding: clamp(0.5rem, 1.2vw, 12px) var(--page-gutter) 0;
   transition: opacity 0.45s var(--ease-eco), visibility 0.45s;
 }
 

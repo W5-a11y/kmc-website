@@ -7,7 +7,7 @@
   color: #EEECE6;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding: clamp(80px, 10vh, 140px) clamp(24px, 6vw, 96px) clamp(60px, 8vh, 100px);
+  padding: clamp(80px, 10vh, 140px) var(--page-gutter) clamp(60px, 8vh, 100px);
   position: relative;
   overflow: hidden;
 }
