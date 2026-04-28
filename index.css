@@ -1,0 +1,615 @@
+/* ─────────────────────────────────────────────
+   index.css — Homepage Page-Specific Styles
+   Design: Figma node 699:325
+   ───────────────────────────────────────────── */
+
+/* ─── HERO CONTAINER ───────────────────────── */
+
+.hero-container {
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* ─── HERO COVER PHOTO ─────────────────────── */
+
+.hero-cover {
+  position: absolute;
+  top: 656px;
+  left: 138px;
+  width: calc(100% - 210px);
+  max-width: 1193px;
+  height: 598px;
+  overflow: hidden;
+  z-index: var(--z-cover);
+}
+
+.hero-cover__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  display: block;
+}
+
+/* ─── HERO "LET'S TALK" CTA ─────────────────── */
+
+.hero-lets-talk {
+  position: absolute;
+  top: 600px;
+  right: calc(var(--gutter) - 10px);
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.hero-lets-talk__text {
+  font-family: var(--font-fustat);
+  font-weight: 300;
+  font-size: var(--fs-label);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--cream);
+  text-transform: capitalize;
+}
+
+.hero-lets-talk__line {
+  display: block;
+  width: 2px;
+  height: 60px;
+  background: var(--cream);
+  margin-left: 4px;
+}
+
+/* ─── NO ADS / BUT STORIES — FULLSCREEN POSTER ─── */
+
+.stories-section {
+  position: relative;
+  background: var(--red);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(4px, 1vh, 16px);
+  padding: 0 clamp(16px, 2vw, 32px);
+  overflow: hidden;
+}
+
+/* ── Shared typography base ── */
+.stories-row-1,
+.stories-row-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--font-fustat);
+  font-weight: 200;
+  font-size: clamp(72px, 13.2vw, 170px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: 0;
+}
+
+/* ── Row 1: NO [capsule] ADS ── */
+.stories-row-1 {
+  justify-content: flex-start;
+  gap: clamp(16px, 2vw, 32px);
+  overflow: visible;
+  align-items: flex-end;
+}
+
+.stories-no,
+.stories-ads,
+.stories-but {
+  margin: 0;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+.stories-no {
+  margin-left: -0.07em;
+}
+
+.stories-ads {
+  margin-left: -0.03em;
+}
+
+/* Vertical capsule window between NO and ADS */
+.stories-capsule {
+  border: 0;
+  background: none;
+  padding: 0;
+  display: inline-block;
+  width: clamp(14px, 1.2vw, 18px);
+  height: clamp(150px, 15vw, 200px);
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  align-self: flex-end;
+  transform: translateY(0);
+}
+
+.stories-capsule img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 56% center;
+  display: block;
+  transition: opacity 0.35s var(--ease-std);
+}
+
+.stories-capsule__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-std);
+}
+
+.stories-capsule.is-open img {
+  opacity: 0;
+}
+
+.stories-capsule.is-open .stories-capsule__video {
+  opacity: 1;
+}
+
+/* ── Row 2: BUT ←→ STORIES ── */
+.stories-row-2 {
+  align-items: flex-start;
+}
+
+.stories-but {
+  margin-left: -0.07em;
+}
+
+/* ── Right-side info block (SVG: L-arrow + See The Works + tag) ── */
+.stories-info {
+  position: absolute;
+  right: clamp(16px, 2.5vw, 40px);
+  bottom: 10vh;
+  width: clamp(140px, 22vw, 320px);
+  will-change: transform;
+}
+
+.stories-info a {
+  display: block;
+  text-decoration: none;
+}
+
+.stories-info img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── SERVICES SECTION ──────────────────────── */
+
+.services-section {
+  position: relative;
+  background: var(--dark);
+  padding: 80px var(--gutter) 120px;
+  min-height: 600px;
+}
+
+.services-section__label {
+  position: absolute;
+  top: 80px;
+  right: var(--gutter);
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--sand);
+  margin: 0;
+}
+
+.services-photos {
+  position: relative;
+  width: 340px;
+  height: 404px;
+  margin-top: 80px;
+}
+
+.svc-photo {
+  position: absolute;
+  left: 0;
+  object-fit: cover;
+  display: block;
+}
+
+.svc-photo--venue      { top: 0; width: 530px; height: 357px; }
+.svc-photo--realestate { top: 0; width: 642px; height: 303px; }
+.svc-photo--ads        { top: 0; width: 564px; height: 312px; }
+.svc-photo--events     { top: 0; width: 338px; height: 404px; }
+
+.services-list {
+  position: absolute;
+  right: var(--gutter);
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.services-item {
+  display: block;
+  font-family: var(--font-fustat);
+  font-weight: 300;
+  font-size: var(--fs-service);
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--cream);
+  opacity: 0.5;
+  text-align: right;
+  text-decoration: none;
+  transition: opacity 0.25s var(--ease-std);
+  white-space: nowrap;
+}
+
+.services-item:hover { opacity: 1; }
+
+/* ─── ABOUT SECTION ─────────────────────────── */
+
+.about-section {
+  position: relative;
+  background: var(--dark);
+  padding: 0 0 120px;
+}
+
+.about-card {
+  position: relative;
+  background: var(--cream);
+  margin-left: calc(20% + 273px);
+  width: 880px;
+  min-height: 843px;
+  display: flex;
+  flex-direction: row;
+}
+
+.about-photo {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  width: 559px;
+}
+
+.about-photo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.about-content {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.about-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about-nav-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid rgba(100, 93, 69, 0.15);
+}
+
+.about-nav-item:last-of-type {
+  border-bottom: 1px solid rgba(100, 93, 69, 0.15);
+}
+
+.about-nav-item__label {
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  line-height: 1.36;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--sand);
+}
+
+.about-nav-item__num {
+  font-family: var(--font-gruppo);
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--red-hot);
+}
+
+.about-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--fs-label);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--sand);
+  text-decoration: none;
+  transition: opacity 0.25s var(--ease-std);
+}
+
+.about-more-link:hover { opacity: 0.7; }
+
+.about-more-link__arrow {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.about-founder {
+  margin-top: 48px;
+  position: relative;
+  padding-left: 52px;
+}
+
+.about-founder__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--red-hot);
+}
+
+.about-founder__name {
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(32px, 3.1vw, 45px);
+  line-height: 1.13;
+  letter-spacing: -0.05em;
+  color: var(--sand);
+  margin: 0 0 4px;
+}
+
+.about-founder__role {
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--sand);
+  margin: 0 0 24px;
+}
+
+.about-founder__quote {
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(18px, 1.9vw, 28px);
+  line-height: 1.36;
+  letter-spacing: -0.04em;
+  color: var(--sand);
+  margin: 0;
+  border: 0;
+  padding: 0;
+  max-width: 700px;
+}
+
+/* ─── LOGO MARQUEE ──────────────────────────── */
+
+.mrq {
+  background: var(--cream);
+  border-top: 1px solid rgba(100, 93, 69, 0.12);
+  border-bottom: 1px solid rgba(100, 93, 69, 0.12);
+}
+
+/* ─── CONTACT / LET'S TALK ──────────────────── */
+
+.contact-section {
+  background: var(--dark);
+  padding: 80px var(--gutter) 0;
+}
+
+.contact-section__heading {
+  font-family: var(--font-fustat);
+  font-weight: 200;
+  font-size: var(--fs-display);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: 0 0 80px;
+  text-align: right;
+}
+
+.contact-section__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding-bottom: 80px;
+  border-top: 1px solid rgba(244, 243, 239, 0.15);
+  padding-top: 48px;
+}
+
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--cream);
+  font-family: var(--font-fustat);
+  font-size: 16px;
+  font-weight: 300;
+  transition: opacity 0.25s var(--ease-std);
+}
+
+.contact-social:hover { opacity: 0.7; }
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form__field label {
+  font-family: var(--font-fustat);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 243, 239, 0.5);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  background: rgba(244, 243, 239, 0.08);
+  border: 1px solid rgba(244, 243, 239, 0.2);
+  border-radius: 4px;
+  padding: 12px 16px;
+  color: var(--cream);
+  font-family: var(--font-fustat);
+  font-size: 16px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s var(--ease-std);
+}
+
+.contact-form__field textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.contact-form__field input:focus,
+.contact-form__field textarea:focus {
+  border-color: rgba(244, 243, 239, 0.5);
+}
+
+.contact-form__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  align-self: flex-end;
+  padding: 14px 32px;
+  background: var(--red-hot);
+  color: var(--cream);
+  font-family: var(--font-fustat);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s var(--ease-std);
+}
+
+.contact-form__submit:hover { opacity: 0.85; }
+.contact-form__submit svg { width: 18px; height: 18px; }
+
+.contact-section__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-top: 1px solid rgba(244, 243, 239, 0.1);
+  font-family: var(--font-fustat);
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(244, 243, 239, 0.4);
+}
+
+/* ─── RESPONSIVE (< 1024px: simplified single-column) ── */
+
+@media (max-width: 1023px) {
+
+  .hero-cover {
+    top: clamp(200px, 38vw, 450px);
+    left: var(--gutter);
+    width: calc(100% - calc(var(--gutter) * 2));
+    height: clamp(200px, 45vw, 400px);
+  }
+
+  .hero-lets-talk {
+    display: none;
+  }
+
+  /* stories: vw units self-scale; hide info block on small screens */
+  .stories-info {
+    display: none;
+  }
+
+  .services-photos {
+    display: none;
+  }
+
+  .services-list {
+    position: static;
+    align-items: flex-start;
+    margin-top: 80px;
+  }
+
+  .services-item {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .about-card {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .about-photo {
+    position: static;
+    width: 100%;
+    height: clamp(240px, 60vw, 420px);
+  }
+
+  .about-content {
+    padding: 40px var(--gutter);
+  }
+
+  .contact-section__body {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contact-section__heading {
+    text-align: left;
+  }
+}

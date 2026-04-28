@@ -1,0 +1,168 @@
+/* ─────────────────────────────────────────
+   brand-mark.css — Sticky SVG Brand Mark
+   KMC+LUCAS · 1297 × 766 reference frame
+   ───────────────────────────────────────── */
+
+/*
+  Z-index stacking:
+  z-1  brand-mark  (sticky, behind cover photo)
+  z-2  cover photo (overlaps brand mark → depth)
+  z-3  text content (above both)
+*/
+
+/* ── Wrapper: tall enough to keep brand sticky during cover-photo scroll ── */
+.brand-wrap {
+  position: relative;
+  z-index: var(--z-brand);
+  left: var(--gutter);
+  /* Width tracks gutter so mark starts at left edge */
+  width: calc(100% - var(--gutter));
+  max-width: 1297px;
+  /* Height = brand height + cover photo overlap zone */
+  height: calc(59.06vw + 360px);
+  max-height: calc(766px + 360px);
+  pointer-events: none;
+}
+
+/* ── The sticky brand mark itself ── */
+.brand-mark {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  /* Maintain 1297:766 aspect ratio */
+  aspect-ratio: 1297 / 766;
+  max-height: 766px;
+  overflow: visible;
+  pointer-events: auto;
+
+  /* Entry: start invisible, GSAP animates in after 0.8s */
+  opacity: 0;
+}
+
+.brand-mark.is-visible {
+  opacity: 1;
+}
+
+/* ── Cream strip at top (above the letterforms) ── */
+.bm-cream-strip {
+  position: absolute;
+  inset: 0 0 79.37% 0; /* top 20.63% of the mark */
+  background: var(--cream);
+  z-index: 1;
+}
+
+/* ── All letter slots ── */
+.bm-slot {
+  position: absolute;
+  /* SVGs use CSS variable for color — inherits from :root */
+}
+
+.bm-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/*
+  Positions from Figma node 699:83 (1297 × 766px)
+  Format: inset: top% right% bottom% left%
+*/
+
+/* KMC+ */
+.bm-m    { inset: 21.41% 85.58% 44.78%  0.62%; }
+.bm-k    { inset: 21.41% 64.07% 44.78% 16.11%; }
+.bm-c    { inset: 58.70% 20.43% 22.63% 73.86%; }
+.bm-c2   { inset: 58.88% 63.99%  0.00% 23.28%; }
+.bm-plus { inset: 46.36% 45.88% 27.40% 38.63%; }
+
+/* LUCAS */
+.bm-l    { inset: 59.09% 27.76% 22.63% 63.53%; }
+.bm-u    { inset: 59.09% 36.93% 22.89% 56.90%; }
+.bm-a    { inset: 59.09%  8.94% 23.02% 81.42%; }
+.bm-s    { inset: 58.70%  0.31% 22.63% 91.52%; }
+
+/* Media Production Company subtitle */
+.bm-subtitle { inset: 80.16% 15.11% 17.62% 56.36%; }
+
+/* ── BETA cluster — Moses Split component ── */
+
+.beta-container {
+  position: absolute;
+  left:   69.54%; /* 902 / 1297 */
+  top:    39.69%; /* 304 / 766  */
+  width:  29.92%; /* 388 / 1297 */
+  height: 15.14%; /* 116 / 766  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: visible;
+}
+
+/* "BETA" text rendered as Kyiv Type Sans, split into BE + TA */
+.beta-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.part-left,
+.part-right {
+  font-family: var(--font-kyiv);
+  font-weight: 400;
+  font-size: clamp(44px, 10.5vw, 150px); /* match LUCAS letter visual height */
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--sand);
+  will-change: transform;
+  display: block;
+  width: 50%;
+  user-select: none;
+}
+
+.part-left { text-align: right; }
+.part-right { text-align: left; }
+
+/* Bear graphic: centered, initially hidden — GSAP controls opacity + scale */
+.bear-graphic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 34%; /* keep the bear around one-third of the BETA letter height */
+  object-fit: contain;
+  object-position: center;
+  z-index: 1;
+  opacity: 0;   /* GSAP also sets this; CSS is the no-JS fallback */
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* ── Mobile (< 1024px): static logo instead of SVG mark ── */
+@media (max-width: 1023px) {
+  .brand-wrap {
+    display: none;
+  }
+
+  /* Mobile pages show a static logo in the hero instead */
+  .brand-mobile {
+    display: block;
+    padding: 100px var(--gutter) 40px;
+  }
+
+  .brand-mobile img {
+    height: clamp(40px, 12vw, 80px);
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand-mobile { display: none; }
+}

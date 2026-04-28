@@ -1,0 +1,117 @@
+/* ─────────────────────────────────────────
+   nav.css — Fixed Top Navigation
+   ───────────────────────────────────────── */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  padding: 40px var(--gutter) 0;
+  pointer-events: none; /* re-enabled on children */
+
+  /* Default blend: exclusion works on cream + dark */
+  mix-blend-mode: exclusion;
+  transition: mix-blend-mode 0s;
+}
+
+/* ── Per-section blend overrides (set by IntersectionObserver in site.js) ── */
+
+/* On cream bg: exclusion → links appear dark/olive */
+.site-nav.nav--on-cream {
+  mix-blend-mode: exclusion;
+}
+
+/* On dark bg: exclusion → links appear light */
+.site-nav.nav--on-dark {
+  mix-blend-mode: exclusion;
+}
+
+/* On red bg: disable blend, force white */
+.site-nav.nav--on-red {
+  mix-blend-mode: normal;
+}
+
+.site-nav.nav--on-red .site-nav__links a,
+.site-nav.nav--on-red .site-nav__logo img,
+.site-nav.nav--on-red .site-nav__hamburger img {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* ── Logo ── */
+.site-nav__logo {
+  pointer-events: auto;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.site-nav__logo img {
+  height: 17px;
+  width: auto;
+  filter: invert(1); /* exclusion mode makes this work on both light/dark */
+  transition: opacity 0.25s var(--ease-std);
+}
+
+.site-nav__logo:hover img { opacity: 0.75; }
+
+/* ── Links ── */
+.site-nav__links {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.3vw, 48px);
+  margin-left: auto;
+}
+
+.site-nav__links a {
+  font-family: var(--font-fustat);
+  font-weight: 800;
+  font-size: var(--fs-nav);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--nav-blue);
+  white-space: nowrap;
+  transition: opacity 0.2s var(--ease-std);
+}
+
+.site-nav__links a:hover { opacity: 0.65; }
+
+/* ── Hamburger ── */
+.site-nav__hamburger {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  margin-left: clamp(16px, 2vw, 32px);
+  transition: opacity 0.2s var(--ease-std);
+}
+
+.site-nav__hamburger:hover { opacity: 0.7; }
+
+.site-nav__hamburger img {
+  display: block;
+  width: 16px;
+  height: auto;
+  filter: none;
+}
+
+/* ── Mobile (< 1024px): simplify nav ── */
+@media (max-width: 1023px) {
+  .site-nav {
+    padding-top: 24px;
+  }
+
+  .site-nav__links {
+    display: none; /* hidden on mobile, use menu drawer instead */
+  }
+
+  .site-nav__hamburger {
+    margin-left: auto;
+  }
+}
