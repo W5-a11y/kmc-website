@@ -104,11 +104,10 @@
         />
       </div>
 
-      <!-- "Let's talk" CTA top-right -->
-      <div class="hero-lets-talk" aria-hidden="true">
-        <span class="hero-lets-talk__text">Let's talk</span>
-        <span class="hero-lets-talk__line"></span>
-      </div>
+      <!-- Floating "Let's talk" button -->
+      <a class="hero-lets-talk" href="#contact" aria-label="Jump to contact section">
+        <img src="assets/lets-talk.svg" alt="" aria-hidden="true" />
+      </a>
 
     </div><!-- /hero-container -->
 
@@ -147,21 +146,37 @@
 
       <p class="services-section__label">Our Service</p>
 
-      <!-- Service photos: left side -->
-      <div class="services-photos" aria-hidden="true">
-        <img class="svc-photo svc-photo--venue" src="assets/services-venue.jpg" alt="" />
-        <img class="svc-photo svc-photo--realestate" src="assets/services-realestate.jpg" alt="" />
-        <img class="svc-photo svc-photo--ads" src="assets/services-advertising.jpg" alt="" />
-        <img class="svc-photo svc-photo--events" src="assets/services-events.jpg" alt="" />
+      <!-- Preview area: left column, layers cross-fade on hover -->
+      <div class="services-preview" aria-hidden="true">
+        <div class="svc-layer is-active" data-svc="01">
+          <img class="svc-layer__img" src="assets/FounderNarrative.png" alt="" />
+          <p class="svc-layer__desc">We talk with founders.</p>
+        </div>
+        <div class="svc-layer" data-svc="02">
+          <img class="svc-layer__img" src="assets/ssv-reality-new.png" alt="" />
+          <p class="svc-layer__desc">A reality show in Silicon Valley.</p>
+        </div>
+        <div class="svc-layer" data-svc="03">
+          <img class="svc-layer__img" src="assets/advertising.png" alt="" />
+          <p class="svc-layer__desc">We're here to help with branding…</p>
+        </div>
+        <div class="svc-layer" data-svc="04">
+          <img class="svc-layer__img" src="assets/real.png" alt="" />
+          <p class="svc-layer__desc">We're here to help with real estate…</p>
+        </div>
+        <div class="svc-layer" data-svc="05">
+          <img class="svc-layer__img" src="assets/PrivateEvent.png" alt="" />
+          <p class="svc-layer__desc">We're here for private events…</p>
+        </div>
       </div>
 
       <!-- Service list: right side -->
       <nav class="services-list" aria-label="Services">
-        <a href="#" class="services-item">Founder Narrative</a>
-        <a href="#" class="services-item">SSV Reality show</a>
-        <a href="#" class="services-item">advertising/Branding</a>
-        <a href="#" class="services-item">Real estate service</a>
-        <a href="#" class="services-item">Private Events</a>
+        <a href="#" class="services-item" data-svc="01">Founder Narrative</a>
+        <a href="#" class="services-item" data-svc="02">SSV Reality show</a>
+        <a href="#" class="services-item" data-svc="03">advertising/Branding</a>
+        <a href="#" class="services-item" data-svc="04">Real estate service</a>
+        <a href="#" class="services-item" data-svc="05">Private Events</a>
       </nav>
 
     </section>
@@ -174,7 +189,7 @@
 
         <!-- Lucas photo -->
         <div class="about-photo">
-          <img src="assets/lucas-portrait-new.jpg" alt="Lucas Chang, Founder & Creative Director" class="about-photo__img" />
+          <img src="assets/lucas-index.png" alt="Lucas Chang, Founder & Creative Director" class="about-photo__img" />
         </div>
 
         <!-- Right content -->
@@ -196,17 +211,17 @@
             </div>
             <a class="about-more-link reveal-item" href="about.html">
               More About Us
-              <svg class="about-more-link__arrow" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path d="M6 16h20m0 0-7-7m7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <img class="about-more-link__arrow" src="assets/about-more-arrow.png" alt="" aria-hidden="true" />
             </a>
           </div>
 
           <!-- Founder info -->
           <div class="about-founder reveal-item">
-            <div class="about-founder__accent" aria-hidden="true"></div>
-            <p class="about-founder__name">Lucas Chang</p>
-            <p class="about-founder__role">Founder + Creative Director</p>
+            <div class="about-founder__header">
+              <div class="about-founder__accent" aria-hidden="true"></div>
+              <p class="about-founder__name">Lucas Chang</p>
+              <p class="about-founder__role">Founder + Creative Director</p>
+            </div>
             <blockquote class="about-founder__quote">
               We don't chase trends. We build stories that last — because the best content is the kind people choose to watch again.
             </blockquote>
@@ -221,13 +236,17 @@
     <div class="mrq" aria-label="Partners and collaborators" role="marquee" data-nav-theme="cream">
       <div class="mrq__track">
         <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
-        <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
+        <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valk.svg" alt="Valkyrie Fund" /></div>
         <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
         <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/tsvc.png"     alt="TSVC" /></div>
-        <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="Valkyrie Fund" /></div>
+        <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/valk.svg" alt="Valkyrie Fund" /></div>
+        <div class="mrq__cell mrq__cell--beta">
+          <img class="mrq__logo mrq__logo--beta-bw" src="assets/logos/beta-bw.svg" alt="KMC Beta" />
+          <img class="mrq__logo mrq__logo--beta-color" src="assets/logos/beta-color.svg" alt="" aria-hidden="true" />
+        </div>
         <div class="mrq__cell"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="UC Berkeley" /></div>
         <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/tsvc.png" alt="" /></div>
-        <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valkyrie.jpg" alt="" /></div>
+        <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/valk.svg" alt="" /></div>
         <div class="mrq__cell" aria-hidden="true"><img class="mrq__logo" src="assets/logos/berkeley.png" alt="" /></div>
       </div>
     </div>
@@ -245,6 +264,14 @@
               <path d="M14.5 18.25V13.75L18.5 16l-4 2.25z" fill="#FF0000"/>
             </svg>
             <span>@KMCLUCASSiliconValleyStudio</span>
+          </a>
+          <a class="contact-social" href="https://www.youtube.com/@SurvivingSiliconValley" target="_blank" rel="noopener noreferrer">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <rect width="32" height="32" rx="7" fill="#FF0000"/>
+              <path d="M22.8 12.6a2 2 0 0 0-1.4-1.4C20.1 11 16 11 16 11s-4.1 0-5.4.2a2 2 0 0 0-1.4 1.4C9 13.9 9 16 9 16s0 2.1.2 3.4a2 2 0 0 0 1.4 1.4C11.9 21 16 21 16 21s4.1 0 5.4-.2a2 2 0 0 0 1.4-1.4C23 18.1 23 16 23 16s0-2.1-.2-3.4z" fill="white"/>
+              <path d="M14.5 18.25V13.75L18.5 16l-4 2.25z" fill="#FF0000"/>
+            </svg>
+            <span>@SurvivingSiliconValley</span>
           </a>
           <a class="contact-social" href="https://xhslink.com/m/6ggkoeJuzYY" target="_blank" rel="noopener noreferrer">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">

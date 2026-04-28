@@ -24,6 +24,12 @@
       { opacity: 0 },
       { opacity: 1, duration: 0.9, ease: 'power2.out', clearProps: 'opacity' }
     );
+    /* bfcache 恢复（浏览器后退）时重置 opacity，防止页面停在透明 */
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) {
+        gsap.set(PAGE_WRAP, { opacity: 1, clearProps: 'opacity' });
+      }
+    });
   }
 
   /* Intercept internal link clicks → dissolve out → navigate */
@@ -322,6 +328,8 @@
      bleeds through as cover photo scrolls away.
   ══════════════════════════════════════ */
 
+  gsap.set('body', { backgroundColor: '#f4f3ef' });
+
   gsap.timeline({
     scrollTrigger: {
       trigger: document.documentElement,
@@ -406,27 +414,78 @@
   }
 
   /* ══════════════════════════════════════
-     11. SERVICES — staggered slide-in from right
-     Items enter with x:60 → 0, opacity:0 → 0.5.
-     clearProps lets CSS :hover { opacity:1 } work after animation.
+     11. SERVICES — linked hover preview
+     Hover a list item → cross-fade + scale preview image.
   ══════════════════════════════════════ */
 
   var servicesList = document.querySelector('.services-list');
-  if (servicesList) {
+  var servicesPreview = document.querySelector('.services-preview');
+
+  if (servicesList && servicesPreview) {
     var svcItems = Array.from(servicesList.querySelectorAll('.services-item'));
-    gsap.set(svcItems, { opacity: 0, x: 60 });
-    gsap.to(svcItems, {
-      opacity: 0.5,
-      x: 0,
-      duration: 0.9,
-      ease: 'power3.out',
-      stagger: 0.1,
-      clearProps: 'opacity,transform',
-      scrollTrigger: {
-        trigger: servicesList,
-        start: 'top 80%',
-        toggleActions: 'play none none none'
+    var svcLayers = Array.from(servicesPreview.querySelectorAll('.svc-layer'));
+    var currentSvc = '01';
+
+    /* Scroll entrance: subtle rise + blur clear for editorial feel. */
+    gsap.fromTo(svcItems,
+      { opacity: 0, y: 14, filter: 'blur(6px)' },
+      {
+        opacity: 0.4,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.08,
+        onComplete: function () {
+          gsap.set(svcItems, { clearProps: 'transform,filter' });
+          /* First item starts as active */
+          gsap.set(svcItems[0], { opacity: 1 });
+          svcItems[0].classList.add('is-current');
+        },
+        scrollTrigger: {
+          trigger: servicesList,
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
       }
+    );
+
+    function switchService(id) {
+      if (id === currentSvc) return;
+      var prevLayer = servicesPreview.querySelector('.svc-layer[data-svc="' + currentSvc + '"]');
+      var nextLayer = servicesPreview.querySelector('.svc-layer[data-svc="' + id + '"]');
+      currentSvc = id;
+
+      if (prevLayer) {
+        prevLayer.classList.remove('is-active');
+        gsap.to(prevLayer, { opacity: 0, scale: 1.05, duration: 0.3, ease: 'power2.out', overwrite: true });
+      }
+      if (nextLayer) {
+        nextLayer.classList.add('is-active');
+        gsap.fromTo(nextLayer,
+          { opacity: 0, scale: 0.95 },
+          { opacity: 1, scale: 1, duration: 0.5, delay: 0.1, ease: 'expo.out', overwrite: true }
+        );
+      }
+
+      svcItems.forEach(function (el) {
+        el.classList.toggle('is-current', el.getAttribute('data-svc') === id);
+      });
+    }
+
+    svcItems.forEach(function (item) {
+      item.addEventListener('mouseenter', function () {
+        var id = item.getAttribute('data-svc');
+        switchService(id);
+        gsap.to(svcItems, { opacity: 0.4, duration: 0.2, overwrite: true });
+        gsap.to(item, { opacity: 1, duration: 0.2, overwrite: true });
+      });
+    });
+
+    servicesList.addEventListener('mouseleave', function () {
+      var activeItem = servicesList.querySelector('[data-svc="' + currentSvc + '"]');
+      gsap.to(svcItems, { opacity: 0.4, duration: 0.3, overwrite: true });
+      if (activeItem) gsap.to(activeItem, { opacity: 1, duration: 0.3, overwrite: true });
     });
   }
 
@@ -456,10 +515,10 @@
       storiesCapsule.setAttribute('aria-expanded', 'true');
 
       var adsFontSize = parseFloat(window.getComputedStyle(storiesAds).fontSize) || 120;
-      var expandedW = adsFontSize * (5.0 * 2 / 3);
-      expandedW = Math.max(baseW * 3.6, Math.min(expandedW, storiesRow.offsetWidth * 0.5));
-      var expandedH = 227;
-      var expandedRadius = 78;
+      var expandedW = adsFontSize * 2.5;
+      expandedW = Math.max(baseW * 2.7, Math.min(expandedW, storiesRow.offsetWidth * 0.5));
+      var expandedH = 170;
+      var expandedRadius = 58;
 
       /* justify-content:center handles NO/ADS reflow automatically */
       gsap.to(storiesNo, { x: 0, duration: 0.65, ease: 'power3.out', overwrite: true });

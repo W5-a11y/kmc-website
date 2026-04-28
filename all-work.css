@@ -308,14 +308,22 @@ body.page-all-work {
   transition-delay: 0.14s;
 }
 
-/* work_1_3 — Figma 94:37: cutout type + bridge lines (columns align with work_1_4 frame) */
+/* work_1_3 — Figma design: headline + work_block.svg frame */
+.aw-page--3 {
+  overflow: visible;
+  --aw-w3-morph: 0;
+}
+
 .aw-w3-stack {
-  /* Title Y: lower = more of first line sits in the black box → “We do not” ~half black / half cream at box top 251px */
-  --aw-w3-text-top: 182px;
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
   opacity: 0;
-  transform: translateY(52px);
+  transform: translateY(40px);
   transition: opacity 0.75s var(--aw-ease), transform 0.95s var(--aw-ease);
 }
 
@@ -324,126 +332,44 @@ body.page-all-work {
   transform: translateY(0);
 }
 
-.aw-w3-box {
-  position: absolute;
-  left: 121px;
-  top: 251px;
-  width: 1142px;
-  height: 546px;
-  background: #111;
-  z-index: 2;
-  opacity: var(--aw-w3-morph, 1);
-  transform: translateY(calc(14px * (1 - var(--aw-w3-morph, 1))))
-    scale(calc(0.98 + 0.02 * var(--aw-w3-morph, 1)));
-  transition: none;
-}
-
-.aw-w3-text {
-  position: absolute;
-  left: 177px;
-  top: var(--aw-w3-text-top, 135px);
-  width: 1086px;
+/* Headline: “We Do Not Create Disposable Advertising” */
+.aw-w3-headline {
   margin: 0;
-  font-family: var(--font-inter, "Inter", sans-serif);
-  font-weight: 900;
-  font-size: 140px;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: clamp(48px, 6.5vw, 96px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: var(--aw-olive, #645d45);
+  z-index: 2;
+  opacity: calc(0.3 + 0.7 * var(--aw-w3-morph, 0));
+  transform: translateY(calc(30px * (1 - var(--aw-w3-morph, 0))));
   transition: none;
 }
 
-.aw-w3-text--black {
-  color: #000;
+/* Frame SVG container */
+.aw-w3-frame {
+  width: clamp(600px, 90vw, 1298px);
+  position: relative;
   z-index: 1;
-  transform: translate(
-      calc(-50px * (1 - var(--aw-w3-morph, 1))),
-      calc(95px * (1 - var(--aw-w3-morph, 1)))
-    )
-    scale(calc(0.65 + 0.35 * var(--aw-w3-morph, 1)));
-  transform-origin: 0 0;
+  opacity: var(--aw-w3-morph, 0);
+  transform:
+    translateY(calc(40px * (1 - var(--aw-w3-morph, 0))))
+    scale(calc(0.94 + 0.06 * var(--aw-w3-morph, 0)));
+  transform-origin: 50% 50%;
+  transition: none;
 }
 
-.aw-w3-clip {
-  position: absolute;
-  left: 121px;
-  top: 251px;
-  width: 1142px;
-  height: 546px;
-  overflow: hidden;
-  z-index: 3;
-}
-
-.aw-w3-text--cream {
-  color: var(--aw-bg);
-  left: 56px;
-  /* Keep pixel-locked to .aw-w3-clip top (251px) + black copy (.aw-w3-text top) */
-  top: calc(var(--aw-w3-text-top, 135px) - 251px);
-  width: 1103px;
-  transform: translate(
-      calc(-50px * (1 - var(--aw-w3-morph, 1))),
-      calc(95px * (1 - var(--aw-w3-morph, 1)))
-    )
-    scale(calc(0.65 + 0.35 * var(--aw-w3-morph, 1)));
-  transform-origin: 0 0;
-}
-
-.aw-w3-bridge {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.aw-w3-bridge__h1,
-.aw-w3-bridge__h2,
-.aw-w3-bridge__v1,
-.aw-w3-bridge__v2 {
-  position: absolute;
-  background: #111;
+.aw-w3-frame__img {
   display: block;
-}
-
-/* Bridge lines — column geometry aligns with work_1_4 frame (147 / 1223) */
-.aw-w3-bridge__h1 {
-  left: 0;
-  top: 795px;
-  width: 147px;
-  height: 1px;
-}
-
-.aw-w3-bridge__v1 {
-  left: 147px;
-  top: 795px;
-  width: 1px;
-  height: 229px;
-}
-
-.aw-w3-bridge__h2 {
-  left: 1198px;
-  top: 795px;
-  width: 242px;
-  height: 1px;
-}
-
-.aw-w3-bridge__v2 {
-  left: 1197px;
-  top: 782px;
-  width: 1px;
-  height: 242px;
-}
-
-.aw-page--3 {
-  overflow: visible;
-  --aw-w3-morph: 0;
+  width: 100%;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aw-w3-text--black,
-  .aw-w3-text--cream {
-    transform: none;
-  }
-
-  .aw-w3-box {
+  .aw-w3-headline,
+  .aw-w3-frame {
     opacity: 1;
     transform: none;
   }

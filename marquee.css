@@ -8,21 +8,6 @@
   border-bottom: 1px solid rgba(17, 17, 17, 0.12);
   overflow: hidden;
   position: relative;
-  /* fade edges */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
 }
 
 /* ─── Track ─────────────────────────────────────── */
@@ -68,4 +53,30 @@
 
 .mrq__cell:hover .mrq__logo {
   filter: grayscale(0%) opacity(1);
+}
+
+/* Beta logo: keep B/W default, fade to color on hover */
+.mrq__cell--beta {
+  position: relative;
+}
+
+.mrq__logo--beta-bw,
+.mrq__logo--beta-color {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.32s ease, filter 0.32s ease;
+}
+
+.mrq__logo--beta-color {
+  opacity: 0;
+}
+
+.mrq__cell--beta:hover .mrq__logo--beta-bw {
+  opacity: 0;
+}
+
+.mrq__cell--beta:hover .mrq__logo--beta-color {
+  opacity: 1;
 }

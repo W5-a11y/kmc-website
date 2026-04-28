@@ -65,7 +65,7 @@
       renderer: "svg",
       loop: false,
       autoplay: true,
-      path: "assets/v2.json",
+      path: "assets/opening-new.json",
     });
     anim.addEventListener("complete", clearAndFinish);
     anim.addEventListener("data_failed", clearAndFinish);

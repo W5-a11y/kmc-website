@@ -6,7 +6,7 @@
     <title>About — KMC+Lucas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="page-cursor.css" />
     <link rel="stylesheet" href="about-page.css" />
@@ -16,10 +16,16 @@
     <!-- ═══ NAV ═══ -->
     <header class="ab-nav" id="ab-nav">
       <a href="index.html" class="ab-nav__logo js-go-home" aria-label="KMC × LUCAS — Home">
-        <img src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="272" height="48" />
+        <img src="assets/kmc_logo_grey.svg" alt="KMC × LUCAS" height="17" />
       </a>
+      <nav class="ab-nav__links" aria-label="Main navigation">
+        <a href="work.html" class="ab-nav__link">Works</a>
+        <a href="ssv.html" class="ab-nav__link">SSV</a>
+        <a href="about.html" class="ab-nav__link">About</a>
+        <a href="#contact" class="ab-nav__link">Contact</a>
+      </nav>
       <button type="button" class="ab-nav__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
-        <img src="assets/menu-icon.svg" alt="" width="49" height="50" />
+        <img src="assets/menu-icon-new.svg" alt="" width="16" height="13" />
       </button>
     </header>
 
@@ -27,15 +33,15 @@
     <section class="ab-hero" aria-label="About us">
       <h1 class="ab-hero__title" data-ab-reveal>
         <span class="ab-hero__word">About</span>
-        <span class="ab-hero__word">us.</span>
+        <span class="ab-hero__word">us</span>
       </h1>
       <p class="ab-hero__sub" data-ab-reveal>
         KMC+LUCAS is a media production company that turns people, space, and emotion into visual language.
       </p>
+      <a class="ab-hero__talk" href="index.html#contact" aria-label="Let's talk">
+        <img src="assets/lets-talk.svg" alt="Let's Talk" />
+      </a>
     </section>
-
-    <!-- ═══ DIVIDER ═══ -->
-    <div class="ab-rule" aria-hidden="true"></div>
 
     <!-- ═══ TEAM ═══ -->
     <section class="ab-team" aria-label="Founding Team">
@@ -49,53 +55,50 @@
 
       <div class="ab-team__grid">
 
-        <!-- Member 1: Isabella Sun -->
+        <!-- Isabella Sun -->
         <article class="ab-member" data-ab-reveal>
           <div class="ab-member__img-wrap">
             <img class="ab-member__img" src="assets/about/sun.jpg" alt="Isabella Sun" loading="lazy" />
           </div>
           <div class="ab-member__info">
+            <p class="ab-member__role">Co-Founder + Strategy</p>
             <h3 class="ab-member__name">Isabella Sun</h3>
-            <p class="ab-member__role">Co-Founder · Strategy</p>
-            <p class="ab-member__desc">Focuses on co-branded real estate strategy, product architecture, and business narrative.</p>
+            <p class="ab-member__desc">focuses on co-branded real estate strategy, product architecture, and business narrative.</p>
           </div>
         </article>
 
-        <!-- Member 2: Lucas Chang (offset) -->
+        <!-- Lucas Chang (offset) -->
         <article class="ab-member ab-member--offset" data-ab-reveal>
           <div class="ab-member__img-wrap">
             <img class="ab-member__img" src="assets/about/lucas.jpg" alt="Lucas Chang" loading="lazy" />
           </div>
           <div class="ab-member__info">
+            <p class="ab-member__role">Founder + Creative Direction</p>
             <h3 class="ab-member__name">Lucas Chang</h3>
-            <p class="ab-member__role">Co-Founder · Creative Direction</p>
-            <p class="ab-member__desc">Leads brand narrative and creative direction, turning people and emotion into visual language.</p>
+            <p class="ab-member__desc">leads brand narrative and creative direction, turning people and emotion into visual language.</p>
           </div>
         </article>
 
-        <!-- Member 3: Lin Shao-ci -->
-        <article class="ab-member" data-ab-reveal>
+        <!-- Lin Shao-ci -->
+        <article class="ab-member ab-member--up" data-ab-reveal>
           <div class="ab-member__img-wrap">
-            <img class="ab-member__img" src="assets/about/lin.jpg" alt="Lin (劭慈)" loading="lazy" />
+            <img class="ab-member__img" src="assets/about/lin.jpg" alt="Lin 劭慈" loading="lazy" />
           </div>
           <div class="ab-member__info">
+            <p class="ab-member__role">Co-Founder + Operations</p>
             <h3 class="ab-member__name">Lin <span class="ab-member__cn">劭慈</span></h3>
-            <p class="ab-member__role">Co-Founder · Operations</p>
-            <p class="ab-member__desc">Leads project coordination and resource integration to ensure steady delivery.</p>
+            <p class="ab-member__desc">leads project coordination and resource integration to ensure steady delivery.</p>
           </div>
         </article>
 
       </div>
 
-      <!-- Bottom-right CTA -->
-      <a class="ab-cta" href="index.html#services" aria-label="View services">
-        <span class="ab-cta__label">Let's talk</span>
-        <span class="ab-cta__arrow" aria-hidden="true">
-          <svg class="ab-cta__svg" width="48" height="16" viewBox="0 0 48 16" fill="none">
-            <path d="M0 8h44m0 0-7-7m7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </a>
+      <!-- Bottom CTA -->
+      <div class="ab-cta-wrap">
+        <a class="ab-cta" href="index.html#contact" aria-label="Let's Talk">
+          <img src="assets/about/talk.svg" alt="Let's Talk" class="ab-cta__svg" />
+        </a>
+      </div>
     </section>
 
     <!-- ═══ MENU DRAWER ═══ -->
