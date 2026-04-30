@@ -56,12 +56,21 @@
       const io = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) el.classList.add("is-in");
+            if (e.isIntersecting) {
+              el.classList.add("is-in");
+              io.disconnect();
+            }
           });
         },
-        { root: null, rootMargin: "0px 0px -14% 0px", threshold: 0.06 }
+        { root: null, rootMargin: "0px", threshold: 0.01 }
       );
       io.observe(el);
+      /* 兜底：若元素已在视口内（如直接锚点跳转），立即触发 */
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        el.classList.add("is-in");
+        io.disconnect();
+      }
     });
   } else {
     root.querySelectorAll("[data-aw-reveal], [data-aw-rise], [data-aw-reveal-w3], [data-aw-rise-group]").forEach(function (el) {
@@ -71,22 +80,23 @@
 
   const w3Section = document.getElementById("work_1_3");
   function w3MorphTick() {
-    if (!w3Section || reduce) return;
-    var vh = window.innerHeight;
-    var r = w3Section.getBoundingClientRect();
-    var p;
-    if (r.top > vh * 0.9) {
-      p = 0;
-    } else if (r.bottom < -120) {
-      p = 1;
-    } else {
-      var span = Math.max(vh * 0.52, 340);
-      p = 1 - Math.min(Math.max(r.top / span, 0), 1);
+    if (!w3Section) return;
+    if (reduce) {
+      w3Section.style.setProperty("--aw-w3-progress", "1");
+      return;
     }
-    w3Section.style.setProperty("--aw-w3-morph", String(p));
+    var vh = window.innerHeight || 1;
+    var rect = w3Section.getBoundingClientRect();
+    var start = vh * 0.9;
+    var end = vh * 0.2;
+    var span = Math.max(start - end, 1);
+    var p = (start - rect.top) / span;
+    if (p < 0) p = 0;
+    if (p > 1) p = 1;
+    w3Section.style.setProperty("--aw-w3-progress", String(p));
   }
 
-  if (w3Section && !reduce) {
+  if (w3Section) {
     w3MorphTick();
     window.addEventListener("scroll", w3MorphTick, { passive: true });
     window.addEventListener("resize", w3MorphTick, { passive: true });

@@ -6,28 +6,27 @@
     <title>SSV — Surviving Silicon Valley — KMC+Lucas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="page-cursor.css" />
     <link rel="stylesheet" href="ssv.css" />
+    <link rel="stylesheet" href="ssv-timeline.css?v=2" />
+    <link rel="stylesheet" href="ssv-trigger.css" />
   </head>
   <body class="page-ssv">
 
-    <!-- ═══ FIXED NAV ═══ -->
-    <header class="ssv-nav" id="ssv-nav">
-      <a href="index.html" class="ssv-nav__logo js-go-home" aria-label="KMC × LUCAS — Home">
-        <img src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="272" height="48" />
+    <!-- ═══ TOP BAR ═══ -->
+    <header class="ssv-top" id="ssv-top">
+      <a href="index.html" class="ssv-top__logo js-go-home" aria-label="KMC × LUCAS — Home">
+        <img src="assets/ssv/logo.svg" alt="KMC × LUCAS" />
       </a>
-      <div class="ssv-nav__center">
-        <img class="ssv-nav__ssv-white" src="assets/ssv/ssv-logo-small.png" alt="SSV" width="88" height="31" />
-        <img class="ssv-nav__ssv-color" src="assets/ssv/ssv-logo-color.png"  alt="SSV" width="88" height="31" />
-      </div>
-      <button type="button" class="ssv-nav__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
-        <img class="ssv-nav__menu-icon" src="assets/menu-icon.svg" alt="" width="49" height="50" />
+      <button type="button" class="ssv-top__menu js-menu-toggle"
+              aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
+        <span class="ssv-top__menu-line"></span>
+        <span class="ssv-top__menu-line"></span>
       </button>
     </header>
 
-    <div class="ssv-stage" id="ssv-stage">
+<div class="ssv-stage" id="ssv-stage">
 
       <!-- ═══ S1: LANDING ═══ -->
       <section id="ssv-s1" class="ssv-section ssv-section--landing" data-theme="dark" aria-label="SSV Landing">
@@ -52,177 +51,216 @@
         </div>
       </section>
 
-      <!-- ═══ S2: ABOUT ═══ -->
-      <section id="ssv-s2" class="ssv-section ssv-section--about" data-theme="dark" aria-label="About SSV">
-        <!-- Large SSV letters (right side) — target of landing morph -->
-        <div class="ssv-about__sv" aria-hidden="true">
-          <img class="ssv-about__sv-img" src="assets/ssv/about_ssv.svg" alt="" />
-        </div>
-        <!-- Content (left) -->
-        <div class="ssv-about__content">
-          <h1 class="ssv-about__title">What's happening<br>in Silicon Valley?</h1>
-          <div class="ssv-about__body">
-            <p>Surviving Silicon Valley is the first reality series in the United States to use real estate as its central narrative, blending human exploration with real individuals telling their own authentic life stories.</p>
-            <p>Each episode uses a home as the medium to reveal the emotional crossroads and turning points in a person's life—uncovering the tension between human nature, money, family, and self-identity.</p>
+      <!-- ═══ S2+: TIMELINE (replaces old s2–s6) ═══ -->
+      <section id="ssv-s2" class="ssv-section ssv-tl" data-theme="light" aria-label="SSV Story">
+
+        <div class="ssv-tl__hero" id="ssv-hero-poster">
+          <h1 class="visually-hidden">Built for Silicon Valley. Inspired by humanity. Meet Surviving Silicon Valley.</h1>
+          <img class="ssv-tl__poster"
+               src="assets/ssv/hero-text.svg"
+               alt="Built for Silicon Valley. Inspired by humanity. Meet Surviving Silicon Valley — the first reality series in the United States to use real estate as its central narrative." />
+          <div class="ssv-poster-ctas">
+            <a href="#" class="ssv-poster-cta js-ssv-go" data-target="2" aria-label="Watch Episodes">
+              <svg class="ssv-poster-cta__icon" viewBox="0 0 60 60" aria-hidden="true">
+                <path d="M14 6 L14 54 L52 30 Z" />
+              </svg>
+              <span class="ssv-poster-cta__label">Watch Episodes</span>
+            </a>
+            <a href="#ssv-tl-events" class="ssv-poster-cta js-ssv-scroll-offline" aria-label="Offline Experience">
+              <img class="ssv-poster-cta__svg" src="assets/ssv/btn-offline.svg" alt="" />
+            </a>
           </div>
         </div>
-        <!-- Action buttons (bottom) -->
-        <nav class="ssv-about__actions" aria-label="SSV sections">
-          <a href="#ssv-s5" class="ssv-about__action js-ssv-go" data-target="4">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-              <circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M22 14v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Offline Experiences</span>
-          </a>
-          <a href="#ssv-s3" class="ssv-about__action js-ssv-go" data-target="2">
-            <svg width="36" height="44" viewBox="0 0 36 44" fill="none" aria-hidden="true">
-              <path d="M34 22 2 41V3l32 19z" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            <span>Watch Episodes</span>
-          </a>
-          <a href="#ssv-s6" class="ssv-about__action js-ssv-go" data-target="5">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-              <circle cx="22" cy="22" r="20.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M22 14v16m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Join Us</span>
-          </a>
-        </nav>
-      </section>
 
-      <!-- ═══ S3: WATCH EPISODES ═══ -->
-      <section id="ssv-s3" class="ssv-section ssv-section--episodes ssv-sheet" data-theme="dark" aria-label="Watch Episodes">
-        <div class="ssv-episodes__grid">
-          <a href="https://www.youtube.com/watch?v=ZA08V_XEicM" target="_blank" rel="noopener" class="ssv-episodes__main">
-            <img src="assets/ssv/ep3-cover.png" alt="Latest Episode — EP3" />
-            <div class="ssv-episodes__label">
-              <span class="ssv-episodes__label-text">Latest<br>Episode</span>
-              <span class="ssv-episodes__label-play" aria-hidden="true">&#9654;</span>
+        <div class="ssv-tl__cinema">
+          <img src="assets/ssv-timeline/cinema-audience.png" alt="SSV cinema audience" loading="lazy" />
+        </div>
+
+        <div class="ssv-tl__filters">
+          <a href="#ssv-tl-events" class="ssv-tl__filter ssv-tl__filter--screening morph-trigger"
+             data-portal-media="assets/ssv-timeline/premiere.png">
+            <span class="morph-trigger__circle">
+              <svg class="morph-trigger__arrow" viewBox="0 0 42 42" aria-hidden="true">
+                <path d="M41.58 24.56 L1 17.65 M1 17.65 L17.84 41.40 M1 17.65 L24.74 0.82"/>
+              </svg>
+            </span>
+            <span class="morph-trigger__label">Exclusive Screening</span>
+          </a>
+          <a href="#ssv-tl-events" class="ssv-tl__filter ssv-tl__filter--lecture morph-trigger"
+             data-portal-media="assets/ssv-timeline/valkyrie.png">
+            <span class="morph-trigger__circle">
+              <svg class="morph-trigger__arrow" viewBox="0 0 42 42" aria-hidden="true">
+                <path d="M41.58 24.56 L1 17.65 M1 17.65 L17.84 41.40 M1 17.65 L24.74 0.82"/>
+              </svg>
+            </span>
+            <span class="morph-trigger__label">Lecture + Cocktails</span>
+          </a>
+          <a href="#ssv-tl-events" class="ssv-tl__filter ssv-tl__filter--workshop morph-trigger"
+             data-portal-media="assets/ssv-timeline/interior.png">
+            <span class="morph-trigger__circle">
+              <svg class="morph-trigger__arrow" viewBox="0 0 42 42" aria-hidden="true">
+                <path d="M41.58 24.56 L1 17.65 M1 17.65 L17.84 41.40 M1 17.65 L24.74 0.82"/>
+              </svg>
+            </span>
+            <span class="morph-trigger__label">Workshop</span>
+          </a>
+        </div>
+
+        <div class="ssv-tl__events" id="ssv-tl-events">
+          <article class="ssv-tl__event ssv-tl__event--text-left">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head ssv-tl__event-head--amc">
+                <span class="ssv-tl__category ssv-tl__category--side">Exclusive Screening</span>
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-amc-date-trigger">02.06.2026</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--amc js-amc-reveal" aria-label="AMC screening description">
+                    <span class="line ssv-tl__reveal-line">Surviving Silicon Valley × AMC Year of the Horse EP2</span>
+                    <span class="line ssv-tl__reveal-line">Screening Draws a Full House. Following the momentum</span>
+                    <span class="line ssv-tl__reveal-line">of its debut episode, Surviving Silicon Valley returned</span>
+                    <span class="line ssv-tl__reveal-line">with a new chapter-this time on the big screen at AMC.</span>
+                    <span class="line ssv-tl__reveal-line">The EP2 preview screening brought audiences together</span>
+                    <span class="line ssv-tl__reveal-line">for a closer look at one of the show's central themes:</span>
+                    <span class="line ssv-tl__reveal-line">the tension between parental love, control, and the</span>
+                    <span class="line ssv-tl__reveal-line">complex space in between.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-amc-title-trigger">AMC Private<br>Screening</h3>
+                </div>
+              </div>
             </div>
-          </a>
-          <a href="#" class="ssv-episodes__thumb">
-            <img src="assets/ssv/ep2-cover.png" alt="Episode 2" />
-          </a>
-          <a href="#" class="ssv-episodes__thumb">
-            <img src="assets/ssv/ep1-cover.png" alt="Episode 1" />
-          </a>
-        </div>
-        <button type="button" class="ssv-cue js-ssv-next" aria-label="Next: Other Content">
-          <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
-            <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span>Past Episodes on Youtube</span>
-        </button>
-      </section>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/amc-screening.png" alt="AMC Private Screening" loading="lazy" /></div>
+          </article>
 
-      <!-- ═══ S4: OTHER CONTENT ═══ -->
-      <section id="ssv-s4" class="ssv-section ssv-section--other ssv-sheet" data-theme="dark" aria-label="Other Content">
-        <!-- Up arrow: goes back to Episodes -->
-        <button type="button" class="ssv-other__top js-ssv-prev" aria-label="Back to Episodes">
-          <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
-            <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M31 40V22m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <span>Past Episodes on Youtube</span>
-        </button>
-        <h2 class="ssv-other__title">Other<br>Content</h2>
-        <div class="ssv-other__scroll" role="list">
-          <a href="#" class="ssv-other__card" role="listitem">
-            <img src="assets/ssv/content-1.png" alt="LUCAS到你家" loading="lazy" />
-          </a>
-          <a href="#" class="ssv-other__card" role="listitem">
-            <img src="assets/ssv/content-2.png" alt="创始人生存法则" loading="lazy" />
-          </a>
-          <a href="#" class="ssv-other__card" role="listitem">
-            <img src="assets/ssv/content-3.png" alt="片头" loading="lazy" />
-          </a>
-          <a href="#" class="ssv-other__card" role="listitem">
-            <img src="assets/ssv/content-4.png" alt="What Makes Home" loading="lazy" />
-          </a>
-        </div>
-      </section>
-
-      <!-- ═══ S5: OFFLINE EXPERIENCES ═══ -->
-      <section id="ssv-s5" class="ssv-section ssv-section--offline ssv-sheet" data-theme="light" aria-label="Offline Experiences">
-        <div class="ssv-vert-logo" aria-hidden="true">
-          <img src="assets/logo-menu-bar-white.png" alt="" />
-        </div>
-        <nav class="ssv-offline__cats" aria-label="Offline experience types">
-          <a href="#ssv-s6" class="ssv-offline__cat js-ssv-go" data-target="5">
-            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
-              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Exclusive Screening</span>
-          </a>
-          <a href="#" class="ssv-offline__cat">
-            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
-              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Lectures + Cocktails</span>
-          </a>
-          <a href="#" class="ssv-offline__cat">
-            <svg width="62" height="62" viewBox="0 0 62 62" fill="none" aria-hidden="true">
-              <circle cx="31" cy="31" r="29.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M31 22v18m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span>Workshops</span>
-          </a>
-        </nav>
-        <div class="ssv-offline__photo">
-          <img src="assets/ssv/offline-cinema.jpg" alt="Exclusive screening audience" loading="lazy" />
-        </div>
-      </section>
-
-      <!-- ═══ S6: EXCLUSIVE SCREENING ═══ -->
-      <section id="ssv-s6" class="ssv-section ssv-section--screening ssv-sheet" data-theme="light" aria-label="Exclusive Screening">
-        <div class="ssv-vert-logo" aria-hidden="true">
-          <img src="assets/logo-menu-bar-white.png" alt="" />
-        </div>
-        <div class="ssv-screening__inner">
-          <h2 class="ssv-screening__headline">
-            <span>Exclusive</span>
-            <span>Screening</span>
-          </h2>
-          <div class="ssv-screening__articles">
-
-            <article class="ssv-screening__article">
-              <div class="ssv-screening__img">
-                <img src="assets/ssv/screening-amc.jpg" alt="AMC EP2 Premiere Poster" loading="lazy" />
+          <article class="ssv-tl__event ssv-tl__event--text-right">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head ssv-tl__event-head--premiere ssv-tl__event-head--right">
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-premiere-date-trigger">12.01.2025</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--premiere js-premiere-reveal" aria-label="Premiere screening description">
+                    <span class="line ssv-tl__reveal-line">Under the lights of Plug and Play, Surviving Silicon Valley</span>
+                    <span class="line ssv-tl__reveal-line">made its debut-surrounded by a crowd of people all navigating</span>
+                    <span class="line ssv-tl__reveal-line">their own versions of life in Silicon Valley. It wasn't just</span>
+                    <span class="line ssv-tl__reveal-line">a screening; it felt like a shared moment of recognition.</span>
+                    <span class="line ssv-tl__reveal-line">Positioned as the Valley's first real estate reality series,</span>
+                    <span class="line ssv-tl__reveal-line">the show doesn't hold back. It puts everything on the table-</span>
+                    <span class="line ssv-tl__reveal-line">personal truths, life choices, family dynamics, identity, and</span>
+                    <span class="line ssv-tl__reveal-line">the quiet struggles behind ambition.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-premiere-title-trigger">Surviving Silicon Valley<br>Premiere</h3>
+                </div>
+                <span class="ssv-tl__category ssv-tl__category--side">Exclusive Screening</span>
               </div>
-              <div class="ssv-screening__center">
-                <time class="ssv-screening__date" datetime="2026-02-06">02/06/2026</time>
-                <div class="ssv-screening__body">
-                  <p>Surviving Silicon Valley × AMC Year of the Horse EP2 Screening Draws a Full House. Following the momentum of its debut episode, Surviving Silicon Valley returned with a new chapter—this time on the big screen at AMC.</p>
-                  <p>The EP2 preview screening brought audiences together for a closer look at one of the show's central themes: the tension between parental love and control, and the complicated space in between.</p>
-                  <p>What began as a first-time screening for EP1 has quickly grown into something more. The latest event felt as much like a reunion as it did a premiere, welcoming back familiar supporters while opening the door to a wider community.</p>
+            </div>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/premiere.png" alt="SSV Premiere" loading="lazy" /></div>
+          </article>
+
+          <article class="ssv-tl__event ssv-tl__event--text-right">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head ssv-tl__event-head--right">
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-valkyrie-date-trigger">01.30.2026</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--valkyrie js-valkyrie-reveal" aria-label="Valkyrie session description">
+                    <span class="line ssv-tl__reveal-line">More than a conversation about business, this session explored</span>
+                    <span class="line ssv-tl__reveal-line">how advertising helps founders clarify identity and purpose.</span>
+                    <span class="line ssv-tl__reveal-line">Rather than becoming what others expect, great branding begins</span>
+                    <span class="line ssv-tl__reveal-line">with understanding who you truly are. Every person and every</span>
+                    <span class="line ssv-tl__reveal-line">brand carries a unique value worth expressing authentically.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-valkyrie-title-trigger">KMC + Valkyrie<br>Advertising For Founders</h3>
+                </div>
+                <span class="ssv-tl__category ssv-tl__category--side">Lecture + Cocktails</span>
+              </div>
+            </div>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/valkyrie.png" alt="KMC + Valkyrie talk" loading="lazy" /></div>
+          </article>
+
+          <article class="ssv-tl__event ssv-tl__event--text-left">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head">
+                <span class="ssv-tl__category ssv-tl__category--side">Workshop</span>
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-interior-date-trigger">09.13.2025</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--interior js-interior-reveal" aria-label="Interior session description">
+                    <span class="line ssv-tl__reveal-line">Inspired by Surviving Silicon Valley, this event explores how</span>
+                    <span class="line ssv-tl__reveal-line">luxury hotel design can transform everyday living. Designer</span>
+                    <span class="line ssv-tl__reveal-line">Jennifer shared insights on 2026 residential design trends,</span>
+                    <span class="line ssv-tl__reveal-line">premium materials, and practical strategies for kitchens, living</span>
+                    <span class="line ssv-tl__reveal-line">rooms, and master suites-balancing aesthetics, comfort, and</span>
+                    <span class="line ssv-tl__reveal-line">long-term property value.</span>
+                    <span class="line ssv-tl__reveal-line">In Silicon Valley, home was presented as more than a place for</span>
+                    <span class="line ssv-tl__reveal-line">rest; it became a space for lifestyle, experience, and personal</span>
+                    <span class="line ssv-tl__reveal-line">expression. Guests also enjoyed an exclusive afternoon tea by</span>
+                    <span class="line ssv-tl__reveal-line">Huaguoshan, along with audience interaction, giveaways, and</span>
+                    <span class="line ssv-tl__reveal-line">casting opportunities for real design stories featured in the</span>
+                    <span class="line ssv-tl__reveal-line">reality show.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-interior-title-trigger">Interior Design<br>Sharing Session</h3>
                 </div>
               </div>
-              <h3 class="ssv-screening__title">AMC Private<br>Screening</h3>
-            </article>
+            </div>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/interior.png" alt="Interior Design Session" loading="lazy" /></div>
+          </article>
 
-            <hr class="ssv-screening__divider" />
-
-            <article class="ssv-screening__article">
-              <div class="ssv-screening__img">
-                <img src="assets/ssv/screening-premiere.jpg" alt="Surviving Silicon Valley Premiere" loading="lazy" />
+          <article class="ssv-tl__event ssv-tl__event--text-right">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head ssv-tl__event-head--right">
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-culinary-date-trigger">09.05.2025</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--culinary js-culinary-reveal" aria-label="Culinary event description">
+                    <span class="line ssv-tl__reveal-line">As part of Surviving Silicon Valley, this offline gathering</span>
+                    <span class="line ssv-tl__reveal-line">transformed the stories of "home" and "love" into a shared</span>
+                    <span class="line ssv-tl__reveal-line">dining experience. More than a social event, it became a</span>
+                    <span class="line ssv-tl__reveal-line">meaningful journey through food, memory, and connection.</span>
+                    <span class="line ssv-tl__reveal-line">Guests enjoyed Huaguoshan's signature private dining</span>
+                    <span class="line ssv-tl__reveal-line">experience, where familiar flavors evoked personal memories</span>
+                    <span class="line ssv-tl__reveal-line">of home. The evening also featured surprise blind tastings,</span>
+                    <span class="line ssv-tl__reveal-line">hometown story sharing, and exclusive behind-the-scenes</span>
+                    <span class="line ssv-tl__reveal-line">moments from the reality show. Limited to 70 guests, the</span>
+                    <span class="line ssv-tl__reveal-line">event created an intimate space for warm conversation and</span>
+                    <span class="line ssv-tl__reveal-line">genuine connection.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-culinary-title-trigger">Culinary Storytelling:<br>Rediscovering Home<br>Through Food</h3>
+                </div>
+                <span class="ssv-tl__category ssv-tl__category--side">Workshop</span>
               </div>
-              <div class="ssv-screening__center">
-                <time class="ssv-screening__date" datetime="2025-12-01">12/01/2025</time>
-                <div class="ssv-screening__body">
-                  <p>Under the lights of Plug and Play, Surviving Silicon Valley made its debut—surrounded by a crowd of people all navigating their own versions of life in Silicon Valley. It wasn't just a screening; it felt like a shared moment of recognition.</p>
-                  <p>Positioned as the Valley's first real estate reality series, the show doesn't hold back. It puts everything on the table—personal truths, life choices, family dynamics, identity, and the quiet struggles behind ambition.</p>
-                  <p>The premiere may be over—but the story is only just beginning.</p>
+            </div>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/culinary.png" alt="Culinary Storytelling" loading="lazy" /></div>
+          </article>
+
+          <article class="ssv-tl__event ssv-tl__event--text-left">
+            <div class="ssv-tl__event-text">
+              <div class="ssv-tl__event-head">
+                <span class="ssv-tl__category ssv-tl__category--side">Lecture + Cocktails</span>
+                <div class="ssv-tl__event-main">
+                  <p class="ssv-tl__date js-web3-date-trigger">08.24.2025</p>
+                  <p class="ssv-tl__event-desc ssv-tl__event-desc--web3 js-web3-reveal" aria-label="Web3 event description">
+                    <span class="line ssv-tl__reveal-line">This session explored the lifestyles, personal journeys, and</span>
+                    <span class="line ssv-tl__reveal-line">living philosophies within the Web3 community. The conversation</span>
+                    <span class="line ssv-tl__reveal-line">focused on the realities behind entrepreneurship-successes,</span>
+                    <span class="line ssv-tl__reveal-line">setbacks, and the challenges founders faced while building in</span>
+                    <span class="line ssv-tl__reveal-line">fast-moving industries.</span>
+                    <span class="line ssv-tl__reveal-line">Beyond business, the discussion expanded into deeper reflections</span>
+                    <span class="line ssv-tl__reveal-line">on human nature, money, and relationships, revealing the</span>
+                    <span class="line ssv-tl__reveal-line">personal tests that often shaped professional paths. More than</span>
+                    <span class="line ssv-tl__reveal-line">a networking event, it became an honest dialogue about ambition,</span>
+                    <span class="line ssv-tl__reveal-line">resilience, and survival in Silicon Valley.</span>
+                  </p>
+                  <h3 class="ssv-tl__event-title js-web3-title-trigger">Web3 Founder<br>Sharing</h3>
                 </div>
               </div>
-              <h3 class="ssv-screening__title">Surviving Silicon Valley<br>Premiere &amp; Screening</h3>
-            </article>
-
-          </div>
+            </div>
+            <div class="ssv-tl__event-img"><img src="assets/ssv-timeline/web3.png" alt="Web3 Founder Sharing" loading="lazy" /></div>
+          </article>
         </div>
+
+        <div class="ssv-tl__back-wrap">
+          <button type="button" class="ssv-tl__back-btn js-back-to-top" aria-label="Back to top">
+            <svg class="ssv-tl__back-art" width="359" height="132" viewBox="0 0 359 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.76 123V118.815H15.345C17.175 118.815 18.555 118.35 19.485 117.42C20.445 116.46 20.925 115.155 20.925 113.505C20.925 111.885 20.415 110.625 19.395 109.725C18.405 108.795 17.055 108.33 15.345 108.33H5.76V104.28H14.625C15.615 104.28 16.47 104.1 17.19 103.74C17.94 103.35 18.51 102.84 18.9 102.21C19.32 101.55 19.53 100.8 19.53 99.96C19.53 98.67 19.095 97.635 18.225 96.855C17.385 96.075 16.185 95.685 14.625 95.685H5.76V91.5H14.625C17.565 91.5 19.86 92.28 21.51 93.84C23.16 95.37 23.985 97.35 23.985 99.78C23.985 100.86 23.73 101.88 23.22 102.84C22.71 103.8 22.02 104.61 21.15 105.27C20.28 105.93 19.305 106.365 18.225 106.575V105.495C19.575 105.615 20.79 106.065 21.87 106.845C22.98 107.625 23.85 108.6 24.48 109.77C25.14 110.94 25.47 112.245 25.47 113.685C25.47 116.505 24.6 118.77 22.86 120.48C21.12 122.16 18.705 123 15.615 123H5.76ZM3.42 123V91.5H7.83V123H3.42ZM34.8103 123.63C33.2803 123.63 31.9003 123.33 30.6703 122.73C29.4703 122.13 28.5253 121.305 27.8353 120.255C27.1453 119.175 26.8003 117.945 26.8003 116.565C26.8003 114.495 27.5203 112.845 28.9603 111.615C30.4003 110.355 32.4403 109.62 35.0803 109.41L43.8103 108.69V112.56L35.8453 113.19C34.3153 113.31 33.1903 113.64 32.4703 114.18C31.7503 114.72 31.3903 115.455 31.3903 116.385C31.3903 117.285 31.7803 118.035 32.5603 118.635C33.3403 119.205 34.3303 119.49 35.5303 119.49C36.7903 119.49 37.9303 119.19 38.9503 118.59C40.0003 117.99 40.8253 117.195 41.4253 116.205C42.0253 115.185 42.3253 114.09 42.3253 112.92V109.23C42.3253 107.64 41.8153 106.335 40.7953 105.315C39.8053 104.295 38.4853 103.785 36.8353 103.785C35.4553 103.785 34.3003 104.115 33.3703 104.775C32.4703 105.435 31.8703 106.305 31.5703 107.385H31.0753L27.2053 106.305C27.8053 104.295 28.9453 102.69 30.6253 101.49C32.3053 100.29 34.3753 99.69 36.8353 99.69C39.9853 99.69 42.4303 100.62 44.1703 102.48C45.9103 104.31 46.7803 106.89 46.7803 110.22V123H42.6403V116.43L44.2603 116.925C43.9003 118.155 43.2553 119.28 42.3253 120.3C41.4253 121.32 40.3303 122.13 39.0403 122.73C37.7503 123.33 36.3403 123.63 34.8103 123.63ZM60.5426 123.63C58.2626 123.63 56.2526 123.135 54.5126 122.145C52.7726 121.125 51.4076 119.715 50.4176 117.915C49.4576 116.115 48.9776 114.03 48.9776 111.66C48.9776 109.29 49.4576 107.22 50.4176 105.45C51.4076 103.65 52.7726 102.255 54.5126 101.265C56.2526 100.245 58.2626 99.735 60.5426 99.735C62.3126 99.735 63.8876 100.035 65.2676 100.635C66.6776 101.235 67.8776 102.12 68.8676 103.29C69.8576 104.43 70.5926 105.84 71.0726 107.52L67.2476 108.6H66.7526C66.2726 107.13 65.4626 105.975 64.3226 105.135C63.2126 104.295 61.9526 103.875 60.5426 103.875C59.1026 103.875 57.8576 104.205 56.8076 104.865C55.7576 105.525 54.9326 106.44 54.3326 107.61C53.7626 108.75 53.4776 110.1 53.4776 111.66C53.4776 113.22 53.7626 114.585 54.3326 115.755C54.9326 116.925 55.7576 117.84 56.8076 118.5C57.8576 119.13 59.1026 119.445 60.5426 119.445C61.5626 119.445 62.4926 119.265 63.3326 118.905C64.1726 118.545 64.8926 118.02 65.4926 117.33C66.1226 116.61 66.6026 115.755 66.9326 114.765H67.4276L71.2976 115.845C70.7576 117.525 69.9776 118.95 68.9576 120.12C67.9376 121.29 66.7226 122.175 65.3126 122.775C63.9326 123.345 62.3426 123.63 60.5426 123.63ZM76.1748 118.815V112.785L88.5498 100.365H94.0398V100.725L76.1748 118.815ZM73.7448 123V90.6L78.1098 90.06L78.2448 90.42V123H73.7448ZM89.0898 123L81.0798 111.48L84.1848 108.555L94.0848 122.64V123H89.0898ZM109.453 123V91.5H113.953V123H109.453ZM99.868 95.82V91.5H123.538V95.82H99.868ZM131.212 123.63C128.962 123.63 126.982 123.12 125.272 122.1C123.562 121.08 122.212 119.685 121.222 117.915C120.262 116.115 119.782 114.03 119.782 111.66C119.782 109.32 120.262 107.25 121.222 105.45C122.212 103.65 123.562 102.255 125.272 101.265C126.982 100.245 128.962 99.735 131.212 99.735C133.462 99.735 135.442 100.245 137.152 101.265C138.862 102.255 140.197 103.65 141.157 105.45C142.147 107.25 142.642 109.32 142.642 111.66C142.642 114.03 142.147 116.115 141.157 117.915C140.197 119.715 138.862 121.125 137.152 122.145C135.442 123.135 133.462 123.63 131.212 123.63ZM131.212 119.445C132.592 119.445 133.792 119.13 134.812 118.5C135.862 117.87 136.672 116.97 137.242 115.8C137.842 114.63 138.142 113.265 138.142 111.705C138.142 110.085 137.842 108.705 137.242 107.565C136.672 106.395 135.862 105.495 134.812 104.865C133.792 104.205 132.592 103.875 131.212 103.875C129.832 103.875 128.617 104.205 127.567 104.865C126.547 105.495 125.737 106.395 125.137 107.565C124.567 108.705 124.282 110.07 124.282 111.66C124.282 113.25 124.567 114.63 125.137 115.8C125.737 116.97 126.547 117.87 127.567 118.5C128.617 119.13 129.832 119.445 131.212 119.445ZM160.096 123V91.5H164.596V123H160.096ZM150.511 95.82V91.5H174.181V95.82H150.511ZM181.855 123.63C179.605 123.63 177.625 123.12 175.915 122.1C174.205 121.08 172.855 119.685 171.865 117.915C170.905 116.115 170.425 114.03 170.425 111.66C170.425 109.32 170.905 107.25 171.865 105.45C172.855 103.65 174.205 102.255 175.915 101.265C177.625 100.245 179.605 99.735 181.855 99.735C184.105 99.735 186.085 100.245 187.795 101.265C189.505 102.255 190.84 103.65 191.8 105.45C192.79 107.25 193.285 109.32 193.285 111.66C193.285 114.03 192.79 116.115 191.8 117.915C190.84 119.715 189.505 121.125 187.795 122.145C186.085 123.135 184.105 123.63 181.855 123.63ZM181.855 119.445C183.235 119.445 184.435 119.13 185.455 118.5C186.505 117.87 187.315 116.97 187.885 115.8C188.485 114.63 188.785 113.265 188.785 111.705C188.785 110.085 188.485 108.705 187.885 107.565C187.315 106.395 186.505 105.495 185.455 104.865C184.435 104.205 183.235 103.875 181.855 103.875C180.475 103.875 179.26 104.205 178.21 104.865C177.19 105.495 176.38 106.395 175.78 107.565C175.21 108.705 174.925 110.07 174.925 111.66C174.925 113.25 175.21 114.63 175.78 115.8C176.38 116.97 177.19 117.87 178.21 118.5C179.26 119.13 180.475 119.445 181.855 119.445ZM207.729 123.63C206.109 123.63 204.639 123.3 203.319 122.64C201.999 121.98 200.889 121.095 199.989 119.985C199.089 118.875 198.444 117.645 198.054 116.295V107.025C198.444 105.645 199.089 104.415 199.989 103.335C200.889 102.225 201.999 101.355 203.319 100.725C204.639 100.065 206.109 99.735 207.729 99.735C209.769 99.735 211.599 100.245 213.219 101.265C214.839 102.285 216.129 103.695 217.089 105.495C218.049 107.295 218.529 109.35 218.529 111.66C218.529 113.97 218.049 116.025 217.089 117.825C216.129 119.625 214.839 121.05 213.219 122.1C211.599 123.12 209.769 123.63 207.729 123.63ZM195.714 132V100.365H199.989V107.88L199.089 111.66L200.214 115.44V132H195.714ZM207.189 119.445C208.539 119.445 209.724 119.115 210.744 118.455C211.764 117.795 212.559 116.88 213.129 115.71C213.729 114.54 214.029 113.19 214.029 111.66C214.029 110.13 213.729 108.78 213.129 107.61C212.559 106.44 211.764 105.54 210.744 104.91C209.724 104.25 208.539 103.92 207.189 103.92C205.839 103.92 204.624 104.25 203.544 104.91C202.494 105.54 201.654 106.44 201.024 107.61C200.424 108.78 200.124 110.13 200.124 111.66C200.124 113.19 200.424 114.54 201.024 115.71C201.654 116.88 202.494 117.795 203.544 118.455C204.624 119.115 205.839 119.445 207.189 119.445Z" fill="#FF281B"/>
+              <path d="M236.5 123.5L356.5 2.50001M356.5 2.50001L356.5 123.5M356.5 2.50001L236.5 2.50001" stroke="#FF281B" stroke-width="5" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
       </section>
 
     </div><!-- /ssv-stage -->
@@ -253,9 +291,21 @@
       </div>
     </div>
 
-    <div class="pc" id="page-cursor" aria-hidden="true"><span class="pc__dot"></span></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="main.js"></script>
     <script src="ssv.js"></script>
-    <script src="page-cursor.js"></script>
+    <script src="ssv-trigger.js"></script>
+    <!-- ═══ Work footer (every piece + back to top) ═══ -->
+    <div class="work-footer">
+      <p class="work-footer__tagline">Every piece we create tells a<br />story about the quality of future living.</p>
+      <button type="button" class="work-footer__back js-back-to-top" aria-label="Back to top"><img src="assets/back-top.svg" alt="Back to top" class="work-footer__back-img" /></button>
+    </div>
+    <script>
+      document.querySelectorAll('.js-back-to-top').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,249 @@
+/* ═══════════════════════════════════════════════════
+   Morphing Circular Trigger
+   Used wherever a small circular CTA appears on SSV.
+   - Idle  : solid red (#FF281B), arrow at rest angle.
+   - Hover : circle morphs to translucent dark, arrow
+             rotates, optional underlying media reveals
+             through the circle (portal).
+   - Optional magnetic pull toward cursor within 100px.
+   ─────────────────────────────────────────────────── */
+
+:root {
+  --mt-red:       #FF281B;
+  --mt-dark:      rgba(0, 0, 0, 0.6);
+  --mt-size:      60px;
+  --mt-ease:      cubic-bezier(0.165, 0.84, 0.44, 1); /* power3.out */
+  --mt-dur:       0.4s;
+}
+
+.morph-trigger {
+  --mt-mx: 0px;
+  --mt-my: 0px;
+  --mt-arrow-rest:  180deg;
+  --mt-arrow-hover: 45deg;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.morph-trigger__circle {
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--mt-size);
+  height: var(--mt-size);
+  border-radius: 50%;
+  background: var(--mt-red);
+  overflow: hidden;
+  transform: translate3d(var(--mt-mx), var(--mt-my), 0);
+  transition: background-color var(--mt-dur) var(--mt-ease),
+              transform var(--mt-dur) var(--mt-ease);
+  will-change: transform, background-color;
+  isolation: isolate;
+}
+
+.morph-trigger__circle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--mt-dark);
+  opacity: 0;
+  transition: opacity var(--mt-dur) var(--mt-ease);
+  z-index: 1;
+}
+
+/* Portal media — visible only inside the circle on hover. */
+.morph-trigger__media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.15);
+  opacity: 0;
+  transition: opacity var(--mt-dur) var(--mt-ease),
+              transform 0.6s var(--mt-ease);
+  z-index: 0;
+}
+
+.morph-trigger__arrow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 42%;
+  height: 42%;
+  color: #fff;
+  opacity: 0;
+  transform: rotate(var(--mt-arrow-rest)) scale(0.6);
+  transition: transform var(--mt-dur) var(--mt-ease),
+              opacity var(--mt-dur) var(--mt-ease),
+              color var(--mt-dur) var(--mt-ease);
+  will-change: transform, opacity;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.morph-trigger__arrow path,
+.morph-trigger__arrow line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.morph-trigger__label {
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: 33px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  text-transform: capitalize;
+  transition: opacity var(--mt-dur) var(--mt-ease);
+}
+
+/* ─── Hover / focus state ─────────────────────────── */
+.morph-trigger:hover .morph-trigger__circle::after,
+.morph-trigger:focus-visible .morph-trigger__circle::after {
+  opacity: 1;
+}
+
+.morph-trigger:hover .morph-trigger__media,
+.morph-trigger:focus-visible .morph-trigger__media {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.morph-trigger:hover .morph-trigger__arrow,
+.morph-trigger:focus-visible .morph-trigger__arrow {
+  opacity: 1;
+  transform: rotate(var(--mt-arrow-hover)) scale(1);
+}
+
+.morph-trigger:hover .morph-trigger__label,
+.morph-trigger:focus-visible .morph-trigger__label {
+  opacity: 0.85;
+}
+
+/* ─── Size variants ───────────────────────────────── */
+.morph-trigger--lg .morph-trigger__circle { width: 80px; height: 80px; }
+.morph-trigger--sm .morph-trigger__circle { width: 48px; height: 48px; }
+
+/* ─── Filter cluster: match all_arr_ssv.svg layout ────
+   Reference SVG viewBox 417 × 247 with three triggers:
+     • Exclusive Screening: circle ~(41, 41),   label to right
+     • Lecture + Cocktails: circle ~(380, 122),  label to LEFT
+     • Workshop:            circle ~(67, 206),   label to right
+   We rebuild the cluster as an aspect-ratio canvas and place
+   each trigger absolutely using % of that box so it scales. */
+.ssv-tl__filters {
+  /* Figma frame 1440 wide: cluster size 416.258 × 246.301,
+     positioned at top 1869 / left 845 → right offset (1440-845-416)/1440 = 12.43% */
+  position: relative;
+  width: min(416px, 92vw);
+  height: auto;
+  aspect-ratio: 416.258 / 246.301;
+  margin: 119px 12.43% 80px auto;
+}
+
+.ssv-tl__filter.morph-trigger {
+  position: absolute;
+  gap: 16px;
+}
+.ssv-tl__filter.morph-trigger .morph-trigger__label {
+  font-size: clamp(22px, 2.2vw, 33px);
+  font-weight: 600;
+  color: var(--mt-red);
+  white-space: nowrap;
+}
+.ssv-tl__filter.morph-trigger::before { display: none; }
+
+/* Filter triggers ditch the portal-image effect — hover instead
+   recolors both the circle and its label to the "Let's talk" tone
+   (#645D45) for a quieter, brand-coherent state change. */
+.ssv-tl__filter.morph-trigger .morph-trigger__media { display: none; }
+
+.ssv-tl__filter.morph-trigger .morph-trigger__circle::after {
+  background: #645D45;
+}
+
+.ssv-tl__filter.morph-trigger:hover .morph-trigger__label,
+.ssv-tl__filter.morph-trigger:focus-visible .morph-trigger__label {
+  color: #645D45;
+  opacity: 1;
+}
+
+/* Override the legacy translateX positioning. */
+/* Arrow asset (arr_ssv.svg) natural direction ≈ -170°
+   (points roughly west with a slight upward tilt).
+   Hover angle = direction toward the label;
+   Rest  angle = hover − 90° (90° CCW from final). */
+.ssv-tl__filter--screening.morph-trigger {
+  top: 4.86%;          /* (41-29)/247 */
+  left: 2.88%;         /* (41-29)/417 */
+  right: auto;
+  transform: none;
+  /* label sits to the RIGHT → arrow points east */
+  --mt-arrow-hover: 170deg;
+  --mt-arrow-rest:   80deg;
+}
+
+.ssv-tl__filter--lecture.morph-trigger {
+  top: 37.65%;         /* (122-29)/247 */
+  right: 2.16%;        /* (417-(380+29))/417 */
+  left: auto;
+  flex-direction: row-reverse;
+  /* label sits to the LEFT → arrow points west */
+  --mt-arrow-hover: -10deg;
+  --mt-arrow-rest: -100deg;
+}
+
+.ssv-tl__filter--workshop.morph-trigger {
+  top: 71.66%;         /* (206-29)/247 */
+  left: 9.11%;         /* (67-29)/417 */
+  right: auto;
+  transform: none;
+  /* label sits to the RIGHT → arrow points east */
+  --mt-arrow-hover: 170deg;
+  --mt-arrow-rest:   80deg;
+}
+
+/* ─── Reduced motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .morph-trigger__circle,
+  .morph-trigger__arrow,
+  .morph-trigger__media,
+  .morph-trigger__circle::after,
+  .morph-trigger__label { transition: none; }
+}
+
+@media (max-width: 880px) {
+  .morph-trigger__label { font-size: 24px; }
+  .morph-trigger { gap: 14px; }
+  /* Stack the cluster vertically on narrow screens. */
+  .ssv-tl__filters {
+    width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 0 24px;
+  }
+  .ssv-tl__filter.morph-trigger {
+    position: static;
+    flex-direction: row;
+    transform: none;
+  }
+}

@@ -661,3 +661,48 @@ html.opening-finished .opening-lottie-root {
     transition-delay: 0s !important;
   }
 }
+
+/* ─── Shared work footer (Figma 699-477 + 895-465) ── */
+.work-footer {
+  background: #111111;
+  color: #f4f3ef;
+  width: 100%;
+  padding: clamp(60px, 9vw, 130px) clamp(40px, 8vw, 120px) clamp(60px, 8vw, 100px);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 40px;
+  font-family: 'Fustat', 'Inter', sans-serif;
+}
+
+.work-footer__tagline {
+  font-weight: 600;
+  font-size: clamp(14px, 1.4vw, 20px);
+  line-height: 1.25;
+  letter-spacing: -0.05em;
+  color: rgba(244, 243, 239, 0.7);
+  margin: 0;
+}
+
+.work-footer__back {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.work-footer__back:hover { opacity: 0.75; transform: translateY(-3px); }
+
+.work-footer__back-img {
+  display: block;
+  height: clamp(80px, 9vw, 130px);
+  width: auto;
+}
+
+@media (max-width: 720px) {
+  .work-footer { grid-template-columns: 1fr; gap: 28px; }
+  .work-footer__back { align-self: flex-start; }
+}

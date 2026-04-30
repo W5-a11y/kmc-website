@@ -78,6 +78,478 @@
   /* ─── Initialise ────────────────────────── */
   setNavTheme(0);
 
+  /* ─── S2 hero CTA hover (GSAP) ─ */
+  if (!reduced && window.gsap) {
+    document.querySelectorAll('.js-ssv-hero-cta').forEach(function (el) {
+      var icon = el.querySelector('.ssv-tl__cta-icon');
+      el.addEventListener('mouseenter', function () {
+        if (icon) window.gsap.to(icon, { scale: 1.1, duration: 0.32, ease: 'power2.out' });
+        window.gsap.to(el, { color: '#ff281b', duration: 0.24, ease: 'power2.out' });
+      });
+      el.addEventListener('mouseleave', function () {
+        if (icon) window.gsap.to(icon, { scale: 1, duration: 0.32, ease: 'power2.out' });
+        window.gsap.to(el, { color: '#f4f3ef', duration: 0.24, ease: 'power2.out' });
+      });
+    });
+  }
+
+  /* ─── AMC paragraph reveal: hover on date/title ─ */
+  var amcDateTrigger = document.querySelector('.js-amc-date-trigger');
+  var amcTitleTrigger = document.querySelector('.js-amc-title-trigger');
+  var amcBlock = document.querySelector('.js-amc-reveal');
+  var amcLines = Array.from(document.querySelectorAll('.js-amc-reveal .line'));
+  var amcTween = null;
+  var amcHideTimer = null;
+
+  if (amcBlock && amcLines.length) {
+    function showAmcBlock() {
+      if (amcHideTimer) {
+        clearTimeout(amcHideTimer);
+        amcHideTimer = null;
+      }
+      amcBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (amcTween) amcTween.kill();
+        window.gsap.set(amcLines, { opacity: 0, y: 30 });
+        amcTween = window.gsap.to(amcLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        amcLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideAmcBlock() {
+      amcBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (amcTween) amcTween.kill();
+        window.gsap.set(amcLines, { opacity: 0, y: 30 });
+      } else {
+        amcLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueHide() {
+      if (amcHideTimer) clearTimeout(amcHideTimer);
+      amcHideTimer = window.setTimeout(hideAmcBlock, 70);
+    }
+
+    [amcDateTrigger, amcTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showAmcBlock);
+      trigger.addEventListener('mouseleave', queueHide);
+    });
+
+    amcBlock.addEventListener('mouseenter', function () {
+      if (amcHideTimer) {
+        clearTimeout(amcHideTimer);
+        amcHideTimer = null;
+      }
+    });
+    amcBlock.addEventListener('mouseleave', queueHide);
+  }
+
+  /* ─── Premiere description: reveal on date/title hover ─ */
+  var premiereDateTrigger = document.querySelector('.js-premiere-date-trigger');
+  var premiereTitleTrigger = document.querySelector('.js-premiere-title-trigger');
+  var premiereBlock = document.querySelector('.js-premiere-reveal');
+  var premiereLines = Array.from(document.querySelectorAll('.js-premiere-reveal .line'));
+  var premiereTween = null;
+  var premiereHideTimer = null;
+
+  if (premiereBlock && premiereLines.length) {
+    function showPremiereBlock() {
+      if (premiereHideTimer) {
+        clearTimeout(premiereHideTimer);
+        premiereHideTimer = null;
+      }
+      premiereBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (premiereTween) premiereTween.kill();
+        window.gsap.set(premiereLines, { opacity: 0, y: 30 });
+        premiereTween = window.gsap.to(premiereLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        premiereLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hidePremiereBlock() {
+      premiereBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (premiereTween) premiereTween.kill();
+        window.gsap.set(premiereLines, { opacity: 0, y: 30 });
+      } else {
+        premiereLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queuePremiereHide() {
+      if (premiereHideTimer) clearTimeout(premiereHideTimer);
+      premiereHideTimer = window.setTimeout(hidePremiereBlock, 70);
+    }
+
+    [premiereDateTrigger, premiereTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showPremiereBlock);
+      trigger.addEventListener('mouseleave', queuePremiereHide);
+    });
+
+    premiereBlock.addEventListener('mouseenter', function () {
+      if (premiereHideTimer) {
+        clearTimeout(premiereHideTimer);
+        premiereHideTimer = null;
+      }
+    });
+    premiereBlock.addEventListener('mouseleave', queuePremiereHide);
+  }
+
+  /* ─── Interior description: reveal on date/title hover ─ */
+  var interiorDateTrigger = document.querySelector('.js-interior-date-trigger');
+  var interiorTitleTrigger = document.querySelector('.js-interior-title-trigger');
+  var interiorBlock = document.querySelector('.js-interior-reveal');
+  var interiorLines = Array.from(document.querySelectorAll('.js-interior-reveal .line'));
+  var interiorTween = null;
+  var interiorHideTimer = null;
+
+  if (interiorBlock && interiorLines.length) {
+    function showInteriorBlock() {
+      if (interiorHideTimer) {
+        clearTimeout(interiorHideTimer);
+        interiorHideTimer = null;
+      }
+      interiorBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (interiorTween) interiorTween.kill();
+        window.gsap.set(interiorLines, { opacity: 0, y: 30 });
+        interiorTween = window.gsap.to(interiorLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        interiorLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideInteriorBlock() {
+      interiorBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (interiorTween) interiorTween.kill();
+        window.gsap.set(interiorLines, { opacity: 0, y: 30 });
+      } else {
+        interiorLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueInteriorHide() {
+      if (interiorHideTimer) clearTimeout(interiorHideTimer);
+      interiorHideTimer = window.setTimeout(hideInteriorBlock, 70);
+    }
+
+    [interiorDateTrigger, interiorTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showInteriorBlock);
+      trigger.addEventListener('mouseleave', queueInteriorHide);
+    });
+
+    interiorBlock.addEventListener('mouseenter', function () {
+      if (interiorHideTimer) {
+        clearTimeout(interiorHideTimer);
+        interiorHideTimer = null;
+      }
+    });
+    interiorBlock.addEventListener('mouseleave', queueInteriorHide);
+  }
+
+  /* ─── Culinary description: reveal on date/title hover ─ */
+  var culinaryDateTrigger = document.querySelector('.js-culinary-date-trigger');
+  var culinaryTitleTrigger = document.querySelector('.js-culinary-title-trigger');
+  var culinaryBlock = document.querySelector('.js-culinary-reveal');
+  var culinaryLines = Array.from(document.querySelectorAll('.js-culinary-reveal .line'));
+  var culinaryTween = null;
+  var culinaryHideTimer = null;
+
+  if (culinaryBlock && culinaryLines.length) {
+    function showCulinaryBlock() {
+      if (culinaryHideTimer) {
+        clearTimeout(culinaryHideTimer);
+        culinaryHideTimer = null;
+      }
+      culinaryBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (culinaryTween) culinaryTween.kill();
+        window.gsap.set(culinaryLines, { opacity: 0, y: 30 });
+        culinaryTween = window.gsap.to(culinaryLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        culinaryLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideCulinaryBlock() {
+      culinaryBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (culinaryTween) culinaryTween.kill();
+        window.gsap.set(culinaryLines, { opacity: 0, y: 30 });
+      } else {
+        culinaryLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueCulinaryHide() {
+      if (culinaryHideTimer) clearTimeout(culinaryHideTimer);
+      culinaryHideTimer = window.setTimeout(hideCulinaryBlock, 70);
+    }
+
+    [culinaryDateTrigger, culinaryTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showCulinaryBlock);
+      trigger.addEventListener('mouseleave', queueCulinaryHide);
+    });
+
+    culinaryBlock.addEventListener('mouseenter', function () {
+      if (culinaryHideTimer) {
+        clearTimeout(culinaryHideTimer);
+        culinaryHideTimer = null;
+      }
+    });
+    culinaryBlock.addEventListener('mouseleave', queueCulinaryHide);
+  }
+
+  /* ─── Valkyrie description: reveal on date/title hover ─ */
+  var valkyrieDateTrigger = document.querySelector('.js-valkyrie-date-trigger');
+  var valkyrieTitleTrigger = document.querySelector('.js-valkyrie-title-trigger');
+  var valkyrieBlock = document.querySelector('.js-valkyrie-reveal');
+  var valkyrieLines = Array.from(document.querySelectorAll('.js-valkyrie-reveal .line'));
+  var valkyrieTween = null;
+  var valkyrieHideTimer = null;
+
+  if (valkyrieBlock && valkyrieLines.length) {
+    function showValkyrieBlock() {
+      if (valkyrieHideTimer) {
+        clearTimeout(valkyrieHideTimer);
+        valkyrieHideTimer = null;
+      }
+      valkyrieBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (valkyrieTween) valkyrieTween.kill();
+        window.gsap.set(valkyrieLines, { opacity: 0, y: 30 });
+        valkyrieTween = window.gsap.to(valkyrieLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        valkyrieLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideValkyrieBlock() {
+      valkyrieBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (valkyrieTween) valkyrieTween.kill();
+        window.gsap.set(valkyrieLines, { opacity: 0, y: 30 });
+      } else {
+        valkyrieLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueValkyrieHide() {
+      if (valkyrieHideTimer) clearTimeout(valkyrieHideTimer);
+      valkyrieHideTimer = window.setTimeout(hideValkyrieBlock, 70);
+    }
+
+    [valkyrieDateTrigger, valkyrieTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showValkyrieBlock);
+      trigger.addEventListener('mouseleave', queueValkyrieHide);
+    });
+
+    valkyrieBlock.addEventListener('mouseenter', function () {
+      if (valkyrieHideTimer) {
+        clearTimeout(valkyrieHideTimer);
+        valkyrieHideTimer = null;
+      }
+    });
+    valkyrieBlock.addEventListener('mouseleave', queueValkyrieHide);
+  }
+
+  /* ─── Web3 description: reveal on date/title hover ─ */
+  var web3DateTrigger = document.querySelector('.js-web3-date-trigger');
+  var web3TitleTrigger = document.querySelector('.js-web3-title-trigger');
+  var web3Block = document.querySelector('.js-web3-reveal');
+  var web3Lines = Array.from(document.querySelectorAll('.js-web3-reveal .line'));
+  var web3Tween = null;
+  var web3HideTimer = null;
+
+  if (web3Block && web3Lines.length) {
+    function showWeb3Block() {
+      if (web3HideTimer) {
+        clearTimeout(web3HideTimer);
+        web3HideTimer = null;
+      }
+      web3Block.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (web3Tween) web3Tween.kill();
+        window.gsap.set(web3Lines, { opacity: 0, y: 30 });
+        web3Tween = window.gsap.to(web3Lines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        web3Lines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideWeb3Block() {
+      web3Block.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (web3Tween) web3Tween.kill();
+        window.gsap.set(web3Lines, { opacity: 0, y: 30 });
+      } else {
+        web3Lines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueWeb3Hide() {
+      if (web3HideTimer) clearTimeout(web3HideTimer);
+      web3HideTimer = window.setTimeout(hideWeb3Block, 70);
+    }
+
+    [web3DateTrigger, web3TitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showWeb3Block);
+      trigger.addEventListener('mouseleave', queueWeb3Hide);
+    });
+
+    web3Block.addEventListener('mouseenter', function () {
+      if (web3HideTimer) {
+        clearTimeout(web3HideTimer);
+        web3HideTimer = null;
+      }
+    });
+    web3Block.addEventListener('mouseleave', queueWeb3Hide);
+  }
+
+  /* ─── Back-to-top area description: reveal on hover ─ */
+  var backTrigger = document.querySelector('.ssv-tl__back-btn');
+  var backBlock = document.querySelector('.js-back-reveal');
+  var backLines = Array.from(document.querySelectorAll('.js-back-reveal .line'));
+  var backTween = null;
+  var backHideTimer = null;
+
+  if (backTrigger && backBlock && backLines.length) {
+    function showBackBlock() {
+      if (backHideTimer) {
+        clearTimeout(backHideTimer);
+        backHideTimer = null;
+      }
+      backBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (backTween) backTween.kill();
+        window.gsap.set(backLines, { opacity: 0, y: 30 });
+        backTween = window.gsap.to(backLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        backLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideBackBlock() {
+      backBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (backTween) backTween.kill();
+        window.gsap.set(backLines, { opacity: 0, y: 30 });
+      } else {
+        backLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueBackHide() {
+      if (backHideTimer) clearTimeout(backHideTimer);
+      backHideTimer = window.setTimeout(hideBackBlock, 70);
+    }
+
+    backTrigger.addEventListener('mouseenter', showBackBlock);
+    backTrigger.addEventListener('mouseleave', queueBackHide);
+    backBlock.addEventListener('mouseenter', function () {
+      if (backHideTimer) {
+        clearTimeout(backHideTimer);
+        backHideTimer = null;
+      }
+    });
+    backBlock.addEventListener('mouseleave', queueBackHide);
+  }
+
   /* ─── Landing: click anywhere → About ──── */
   sections[0].addEventListener('click', function (e) {
     if (e.target.closest('a, button')) return;
@@ -92,6 +564,19 @@
       if (!isNaN(t)) goTo(t);
     });
   });
+
+  var offlineLink = document.querySelector('.js-ssv-scroll-offline');
+  if (offlineLink) {
+    offlineLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById('ssv-tl-events');
+      if (!target) return;
+      if (current !== 1) goTo(1);
+      window.setTimeout(function () {
+        target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }, reduced ? 20 : 160);
+    });
+  }
 
   /* ─── "Past Episodes on Youtube" next btn ─ */
   var nextBtn = document.querySelector('.js-ssv-next');
@@ -114,9 +599,17 @@
   /* ─── Wheel ─────────────────────────────── */
   var delta = 0, wTimer;
   document.addEventListener('wheel', function (e) {
-    // Allow native scroll inside the screening section
-    if (current === TOTAL - 1) {
-      var inner = sections[TOTAL - 1].querySelector('.ssv-screening__inner');
+    // Allow native scroll inside the timeline (s2) once active
+    if (current >= 1) {
+      var sec = sections[current];
+      if (sec && sec.scrollHeight > sec.clientHeight + 2) {
+        var atTop    = sec.scrollTop <= 0;
+        var atBottom = sec.scrollTop >= sec.scrollHeight - sec.clientHeight - 2;
+        if (e.deltaY > 0 && !atBottom) return;
+        if (e.deltaY < 0 && !atTop)    return;
+      }
+      // Legacy support for old screening inner if present
+      var inner = sec ? sec.querySelector('.ssv-screening__inner') : null;
       if (inner && e.deltaY > 0 &&
           inner.scrollTop < inner.scrollHeight - inner.clientHeight - 2) return;
     }
@@ -136,7 +629,8 @@
   }, { passive: true });
 
   document.addEventListener('touchmove', function (e) {
-    if (current < TOTAL - 1) e.preventDefault();
+    // Only block scroll on landing (s1); allow native scroll on timeline
+    if (current === 0) e.preventDefault();
   }, { passive: false });
 
   document.addEventListener('touchend', function (e) {

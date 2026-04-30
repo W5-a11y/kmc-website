@@ -40,6 +40,9 @@ kmc-website/
 
 每个页面通常对应同名 `.css` 和 `.js` 文件（如 `work.html` → `work.css` + `work.js`）。
 
+**SSV 复用组件**
+- `ssv-trigger.css` + `ssv-trigger.js` — Morphing Circular Trigger（实心红圆 60px + 箭头，hover 转深色半透 + 箭头旋转 + 磁吸 + 底层媒体 portal 揭示）。用 `.morph-trigger` 类，箭头角度通过 inline `--mt-arrow-rest` / `--mt-arrow-hover` 配置，可选 `data-portal-media="路径"` 传入悬停揭示的图。父容器加 `data-magnetic-zone` 可扩大磁吸响应区。
+
 ## SSV 页面动画说明
 
 `ssv.html` 的 Landing → About 形变动画：

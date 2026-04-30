@@ -26,7 +26,7 @@
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 20px clamp(24px, 4vw, 64px);
   pointer-events: none;
 }
@@ -35,6 +35,10 @@
 .ab-nav__menu,
 .ab-nav__links {
   pointer-events: auto;
+}
+
+.ab-nav__logo {
+  flex-shrink: 0;
 }
 
 .ab-nav__logo img {
@@ -51,32 +55,35 @@
 .ab-nav__links {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 2.5vw, 40px);
+  gap: clamp(24px, 3.3vw, 48px);
+  margin-left: auto;
 }
 
 .ab-nav__link {
-  font-family: 'Fustat', sans-serif;
+  font-family: 'Fustat', 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
   color: #929ec6;
   mix-blend-mode: exclusion;
-  transition: color 0.2s;
+  white-space: nowrap;
+  transition: opacity 0.2s;
 }
 
-.ab-nav__link--active {
-  color: var(--ab-red);
-  mix-blend-mode: normal;
+.ab-nav__link:hover {
+  opacity: 0.65;
 }
 
 .ab-nav__menu {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 6px;
   display: flex;
+  margin-left: clamp(16px, 2vw, 32px);
   mix-blend-mode: exclusion;
 }
 

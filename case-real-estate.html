@@ -1,164 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" class="work-page">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Real Estate Videos — KMC+Lucas</title>
+    <title>272 Fountain Grass Ter — KMC+Lucas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Inter:wght@400;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fustat:wght@300;400;500;600;700&family=Inter:wght@400;500;600;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="work.css" />
+    <link rel="stylesheet" href="case-detail.css?v=1" />
   </head>
-  <body class="page-work">
-    <div class="page" id="page">
-      <header class="site-header" aria-label="Primary">
-        <a href="index.html" class="site-header__logo site-header__logo--vertical js-go-home" aria-label="KMC × LUCAS — Home">
-          <img
-            src="assets/logo-vertical.png"
-            alt="KMC × LUCAS"
-            width="50"
-            height="273"
-            class="site-header__logo-img"
-          />
+  <body class="page-case-detail">
+    <div class="cd-stage" data-no-video>
+
+      <header class="cd-nav">
+        <a href="index.html" class="cd-nav__logo" aria-label="KMC × LUCAS — Home">
+          <img src="assets/kmc_logo_grey.svg" alt="KMC × LUCAS" />
         </a>
-        <nav class="site-header__nav" aria-label="Section links">
-          <a href="work.html#work_1_1">WORK</a>
-          <a href="ssv.html">SSV</a>
-          <a href="#">About</a>
-          <a href="#">Products</a>
-          <button type="button" class="site-header__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
-            <span class="site-header__menu-icon" aria-hidden="true">
-              <img src="assets/menu-icon.svg" alt="" width="49" height="50" />
-            </span>
-          </button>
+        <nav class="cd-nav__links" aria-label="Main">
+          <a href="work.html" class="cd-nav__link cd-nav__link--active">Works</a>
+          <a href="ssv.html" class="cd-nav__link">SSV</a>
+          <a href="about.html" class="cd-nav__link">About</a>
+          <a href="index.html#contact" class="cd-nav__link">Contact</a>
         </nav>
+        <button type="button" class="cd-nav__menu" aria-label="Open menu">
+          <img src="assets/menu-icon-new.svg" alt="" width="16" height="13" />
+        </button>
       </header>
 
-      <main>
-        <section class="work-hero" aria-label="Project hero">
-          <div class="work-hero__inner">
-            <img
-              class="work-hero__img"
-              src="https://www.figma.com/api/mcp/asset/7a7b5791-5a0f-42e0-9733-2ed7e0604de6"
-              alt=""
-              width="2000"
-              height="1333"
-              fetchpriority="high"
-            />
-            <div class="work-hero__veil" aria-hidden="true"></div>
-            <div class="work-hero__grain" aria-hidden="true"></div>
-          </div>
-        </section>
+      <div class="cd-hero">
+        <img class="cd-hero__img" src="assets/re-color.png" alt="272 Fountain Grass Ter" />
+      </div>
 
-        <section class="work-intro">
-          <p class="work-intro__label">Real Estate — Content Production</p>
-          <h1 class="work-intro__title">Real Estate Videos</h1>
-          <hr class="work-intro__rule" />
-          <p class="work-intro__body">
-            Property showcases, neighborhood and city narratives, and lifestyle content—produced in show format
-            to boost watch-through rates and conversion.
-          </p>
-          <p class="work-intro__body">
-            Each video is crafted to go beyond standard listings, telling the story of a space and its surroundings
-            in a way that connects emotionally with potential buyers and renters.
-          </p>
-          <p class="work-intro__meta">2024–2025 · Director · DP · Editor</p>
-        </section>
+      <button type="button" class="cd-play" aria-label="Video coming soon" disabled>
+        <img src="assets/play.svg" alt="" width="102" height="102" />
+      </button>
 
-        <section class="work-video-wrap" aria-label="Project film">
-          <div class="work-video is-playing">
-            <iframe
-              class="work-video__yt"
-              src="https://drive.google.com/file/d/1nQLYWm2xFOte0O3YM2GhJ5CAOPs0Hlq4/preview"
-              title="Real Estate Videos"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              frameborder="0"
-            ></iframe>
-          </div>
-          <p class="work-video__caption">Real Estate Video Reel</p>
-        </section>
+      <a href="index.html#contact" class="cd-talk" aria-label="Let's talk">
+        <img src="assets/lets-talk.svg" alt="Let's talk" />
+      </a>
 
-        <section class="work-gallery" aria-label="Selected frames">
-          <h2 class="work-gallery__title">Selected frames</h2>
-          <div class="work-gallery__grid work-gallery__grid--triple">
-            <div class="work-gallery__cell">
-              <img src="https://www.figma.com/api/mcp/asset/7a7b5791-5a0f-42e0-9733-2ed7e0604de6" alt="" width="900" height="675" loading="lazy" />
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <div
-        class="menu-drawer"
-        id="menu-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Site menu"
-        aria-hidden="true"
-      >
-        <div class="menu-drawer__panel">
-          <div class="menu-drawer__bar">
-            <div class="menu-drawer__brand">
-              <a href="index.html" class="menu-drawer__logo menu-drawer__logo--horizontal js-go-home" aria-label="KMC × LUCAS — Home">
-                <img
-                  class="menu-drawer__logo-img"
-                  src="assets/logo-menu-bar-white.png"
-                  alt="KMC × LUCAS"
-                  width="440"
-                  height="74"
-                />
-              </a>
-              <nav class="menu-drawer__nav" aria-label="Main menu">
-                <a href="index.html" class="menu-drawer__link js-go-home">Home</a>
-                <a href="work.html#work_1_1" class="menu-drawer__link">The Work</a>
-                <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
-                <a href="ssv.html" class="menu-drawer__link">SSV</a>
-                <a href="index.html#about" class="menu-drawer__link">About Us</a>
-                <a href="#" class="menu-drawer__link">Contact</a>
-              </nav>
-            </div>
-            <button type="button" class="menu-drawer__toggle js-menu-toggle" aria-label="Close menu" aria-expanded="true">
-              <span class="menu-drawer__toggle-icon" aria-hidden="true">
-                <img src="assets/icon-x.svg" alt="" width="48" height="48" />
-              </span>
-            </button>
-          </div>
+      <div class="cd-meta">
+        <p class="cd-meta__category">Real Estate Advertising</p>
+        <div class="cd-meta__credits">
+          <p>2025</p>
+          <p>Directed by Lucas</p>
         </div>
       </div>
+
+      <h1 class="cd-title">272 Fountain Grass Ter</h1>
+
+      <div class="cd-desc">
+        <p>Property showcases, neighborhood and city narratives, and lifestyle content — produced in show format to lift watch-through rates and convert viewers into qualified buyers. The film positions the home not as a listing, but as the everyday backdrop of a life worth choosing.</p>
+        <p>Produced by KMC+LUCAS, the campaign blends documentary pacing with editorial polish, giving each property its own story rather than a template.</p>
+      </div>
+
+      <a href="work.html" class="cd-back" aria-label="Back to works">
+        <svg class="cd-back__arrow" viewBox="0 0 86 86" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+          <path d="M68 68 L18 18 M18 18 L18 50 M18 18 L50 18" stroke="#f4f3ef" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="cd-back__label">Back</span>
+      </a>
+
     </div>
-    <script src="main.js"></script>
-    <script src="work.js"></script>
-    <script>
-    (function () {
-      var header = document.querySelector(".site-header");
-      if (!header) return;
-      var lastY = window.scrollY;
-      var hideThreshold = 80;
-      var ticking = false;
 
-      function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(function () {
-          var y = window.scrollY;
-          var delta = y - lastY;
-          if (delta > 8 && y > hideThreshold) {
-            header.classList.add("is-header-hidden");
-          } else if (delta < -4) {
-            header.classList.remove("is-header-hidden");
-          }
-          lastY = y;
-          ticking = false;
-        });
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-    })();
-    </script>
+    <script src="case-detail.js?v=1"></script>
   </body>
 </html>

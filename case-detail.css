@@ -1,0 +1,339 @@
+/* Case Detail Page — KMC+LUCAS (shared) */
+
+:root {
+  --cd-bg:    #201d13;
+  --cd-ink:   #f4f3ef;
+  --cd-red:   #c21f1f;
+  --cd-muted: #929ec6;
+  --cd-ease:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.page-case-detail {
+  background: var(--cd-bg);
+  color: var(--cd-ink);
+  font-family: 'Fustat', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* ─── Stage (1440 × ~1500) ───────────────────────── */
+.cd-stage {
+  position: relative;
+  width: 1440px;
+  margin: 0 auto;
+  height: 1500px;
+  overflow: hidden;
+}
+
+@media (max-width: 1440px) {
+  .cd-stage {
+    width: 100%;
+    transform-origin: top center;
+  }
+}
+
+/* ─── Nav (reuse aw-nav style from work page) ────── */
+.cd-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 32px 72px 0;
+  pointer-events: none;
+}
+
+.cd-nav__logo {
+  pointer-events: auto;
+  display: block;
+}
+
+.cd-nav__logo img {
+  display: block;
+  height: 17px;
+  filter: invert(1);
+  opacity: 0.9;
+  mix-blend-mode: exclusion;
+}
+
+.cd-nav__links {
+  pointer-events: auto;
+  margin-left: auto;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+.cd-nav__link {
+  font-family: 'Fustat', 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cd-muted);
+  mix-blend-mode: exclusion;
+  transition: opacity 0.2s;
+}
+
+.cd-nav__link--active { color: var(--cd-red); mix-blend-mode: normal; }
+.cd-nav__link:hover { opacity: 0.65; }
+
+.cd-nav__menu {
+  pointer-events: auto;
+  background: none;
+  border: none;
+  padding: 6px;
+  margin-left: 32px;
+  cursor: pointer;
+  mix-blend-mode: exclusion;
+}
+
+.cd-nav__menu img {
+  display: block;
+  filter: invert(1);
+  opacity: 0.7;
+}
+
+/* ─── Hero ───────────────────────────────────────── */
+.cd-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 679px;
+  overflow: hidden;
+}
+
+.cd-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Play button */
+.cd-play {
+  position: absolute;
+  top: 306px;
+  left: calc(50% - 51px);
+  width: 102px;
+  height: 102px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.4s var(--cd-ease), opacity 0.3s;
+}
+
+.cd-play:hover { transform: scale(1.08); }
+
+.cd-play svg,
+.cd-play img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.35));
+}
+
+.cd-play[hidden] { display: none; }
+
+/* ─── Let's Talk badge (top right, over hero) ───── */
+.cd-talk {
+  position: absolute;
+  top: 631px;
+  right: 19px;
+  width: 126px;
+  height: 126px;
+  z-index: 6;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.4s var(--cd-ease);
+}
+
+.cd-talk:hover { transform: rotate(8deg) scale(1.05); }
+
+.cd-talk img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Meta row (Category | Year + Directed by) ─── */
+.cd-meta {
+  position: absolute;
+  top: 742px;
+  left: 70px;
+  right: 70px;
+  display: flex;
+  gap: 64px;
+  z-index: 4;
+}
+
+.cd-meta__category {
+  margin: 0;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--cd-ink);
+  min-width: 230px;
+  padding-top: 7px;
+}
+
+.cd-meta__credits {
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: var(--cd-ink);
+}
+
+.cd-meta__credits p { margin: 0; }
+
+/* ─── Title (right-aligned, uppercase) ──────────── */
+.cd-title {
+  position: absolute;
+  top: 734px;
+  right: 79px;
+  width: 688px;
+  margin: 0;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 65px;
+  line-height: 85px;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--cd-ink);
+  z-index: 3;
+}
+
+/* ─── Description ───────────────────────────────── */
+.cd-desc {
+  position: absolute;
+  top: 945px;
+  left: 884px;
+  width: 485px;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.05em;
+  color: var(--cd-ink);
+  z-index: 3;
+}
+
+.cd-desc p { margin: 0 0 25px; }
+.cd-desc p:last-child { margin-bottom: 0; }
+
+/* ─── Back ──────────────────────────────────────── */
+.cd-back {
+  position: absolute;
+  top: 1287px;
+  left: calc(50% - 43px);
+  width: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--cd-ink);
+  z-index: 4;
+  transition: transform 0.3s var(--cd-ease);
+}
+
+.cd-back:hover { transform: translate(-3px, -3px); }
+
+.cd-back__arrow {
+  width: 86px;
+  height: 86px;
+  display: block;
+}
+
+.cd-back__label {
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 45px;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  color: var(--cd-ink);
+}
+
+/* ─── YouTube player overlay (Playing state) ────── */
+.cd-player {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 130px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.35s var(--cd-ease);
+}
+
+.cd-player.is-on {
+  display: flex;
+  opacity: 1;
+}
+
+.cd-player__frame {
+  position: relative;
+  width: 981px;
+  max-width: calc(100% - 64px);
+  aspect-ratio: 981 / 549;
+  border-radius: 23px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cd-player__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.cd-player__close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--cd-ink);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-family: 'Fustat', sans-serif;
+  opacity: 0.85;
+}
+
+.cd-player__close:hover { opacity: 1; }
+
+/* ─── No-video variant (real estate) ────────────── */
+.cd-stage[data-no-video] .cd-play {
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ─── Reduced motion ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cd-play, .cd-talk, .cd-back, .cd-player { transition: none; }
+}
