@@ -8,13 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="ssv-watch-episodes.css?v=12" />
+    <link rel="stylesheet" href="ssv-watch-episodes.css?v=15" />
     <link rel="stylesheet" href="ssv-episodes.css?v=2" />
   </head>
   <body class="page-ssv-we">
     <header class="ssv-we-top" id="ssv-we-top">
-      <a href="index.html" class="ssv-we-top__logo js-go-home" aria-label="KMC × LUCAS — Home">
-        <img src="assets/ssv/logo.svg" alt="KMC × LUCAS" width="141" height="17" />
+      <a href="https://www.youtube.com/@SurvivingSiliconValley" class="ssv-we-top__logo js-go-home" aria-label="KMC × LUCAS — Home" rel="noopener noreferrer">
+        <img src="assets/ssv/watch-episodes/logo-purple.svg" alt="KMC × LUCAS" width="141" height="17" />
       </a>
       <nav class="ssv-we-top__nav" aria-label="Section shortcuts">
         <a href="work.html#work_1_1">Works</a>
@@ -105,28 +105,28 @@
         <h2 class="ssv-we-other__title">Other<br />Content</h2>
 
         <div class="ssv-we-thumbs js-we-thumbs">
-          <a class="js-we-thumb" href="https://www.youtube.com/@survivingsiliconvalley" rel="noopener noreferrer"
+          <a class="js-we-thumb" href="https://www.youtube.com/watch?v=trA9w5f4gGM" rel="noopener noreferrer"
              data-hero="assets/ssv/watch-episodes/thumb-1.jpg"
              data-ep="3"
              data-label="EP 3: Leaving The Life I Built"
              aria-label="Episode 3: Leaving The Life I Built">
             <img src="assets/ssv/watch-episodes/thumb-1.jpg" alt="" loading="lazy" />
           </a>
-          <a class="js-we-thumb" href="https://www.youtube.com/@survivingsiliconvalley" rel="noopener noreferrer"
+          <a class="js-we-thumb" href="https://www.youtube.com/watch?v=YG4ls24fuh0" rel="noopener noreferrer"
              data-hero="assets/ssv/watch-episodes/thumb-2.png"
              data-ep="2"
              data-label="EP 2: A Mother's Plan"
              aria-label="Episode 2: A Mother's Plan">
             <img src="assets/ssv/watch-episodes/thumb-2.png" alt="" loading="lazy" />
           </a>
-          <a class="js-we-thumb" href="https://www.youtube.com/@survivingsiliconvalley" rel="noopener noreferrer"
+          <a class="js-we-thumb" href="https://www.youtube.com/watch?v=BzSWCCyJ9hE" rel="noopener noreferrer"
              data-hero="assets/ssv/watch-episodes/thumb-3.png"
              data-ep="1"
              data-label="EP 1: A Trans Couple in Silicon Valley"
              aria-label="Episode 1: A Trans Couple in Silicon Valley">
             <img src="assets/ssv/watch-episodes/thumb-3.png" alt="" loading="lazy" />
           </a>
-          <a class="js-we-thumb" href="https://www.youtube.com/@survivingsiliconvalley" rel="noopener noreferrer"
+          <a class="js-we-thumb" href="https://www.youtube.com/watch?v=-HKGj3bgvbg" rel="noopener noreferrer"
              data-hero="assets/ssv/watch-episodes/thumb-4.png"
              data-ep="4"
              data-label="More Episodes"
@@ -135,9 +135,8 @@
           </a>
         </div>
 
-        <a href="ssv.html" class="ssv-we-back" aria-label="Back to SSV story">
-          <img src="assets/ssv/watch-episodes/icon-back.svg" alt="" />
-          <span>Back</span>
+        <a href="ssv.html" class="ssv-we-back" aria-label="Back to SSV story" data-ai-id="el-60" rel="noopener noreferrer">
+          <img src="assets/ssv/watch-episodes/icon-back.svg" alt="" data-ai-id="el-61" />
         </a>
       </div>
     </main>
@@ -168,106 +167,17 @@
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="main.js"></script>
+    <script src="ssv-episodes.js?v=2"></script>
     <script>
       (function () {
-        if (!window.gsap) return;
-
-        var EPISODES = {
-          '1': { hero: 'assets/ssv/watch-episodes/thumb-3.png', title: ['EP 1:', 'A Trans Couple', 'in Silicon Valley'], url: 'https://www.youtube.com/@survivingsiliconvalley' },
-          '2': { hero: 'assets/ssv/watch-episodes/thumb-2.png', title: ['EP 2:', "A Mother's Plan"],                      url: 'https://www.youtube.com/@survivingsiliconvalley' },
-          '3': { hero: 'assets/ssv/watch-episodes/thumb-1.jpg', title: ['EP 3:', 'Leaving The Life', 'I Built'],          url: 'https://www.youtube.com/@survivingsiliconvalley' },
-          '4': { hero: 'assets/ssv/watch-episodes/thumb-4.png', title: ['More', 'Episodes'],                              url: 'https://www.youtube.com/@survivingsiliconvalley' }
+        var topBar = document.getElementById('ssv-we-top');
+        if (!topBar) return;
+        var syncTopBarCompact = function () {
+          topBar.classList.toggle('is-compact', window.scrollY > 24);
         };
-
-        var hero    = document.querySelector('.ssv-we-hero__main');
-        if (!hero) return;
-        var base    = hero.querySelector('.is-base');
-        var swap    = hero.querySelector('.is-swap');
-        var caption = hero.querySelector('.ssv-we-hero__caption');
-        var mask    = hero.querySelector('.ssv-we-hero__mask');
-        var triggers = document.querySelectorAll('.js-we-thumb');
-        var current = null;
-        var animating = false;
-
-        function buildCaption(lines) {
-          caption.innerHTML = lines.map(function (l) {
-            return '<span class="line"><span>' + l + '</span></span>';
-          }).join('<br>');
-          return caption.querySelectorAll('.line > span');
-        }
-
-        function preload(src) {
-          return new Promise(function (resolve) {
-            var img = new Image();
-            img.onload = img.onerror = function () { resolve(src); };
-            img.src = src;
-          });
-        }
-
-        function transitionTo(epKey) {
-          var ep = EPISODES[epKey];
-          if (!ep || epKey === current || animating) return;
-          animating = true;
-
-          preload(ep.hero).then(function () {
-            var oldLines = caption.querySelectorAll('.line > span');
-            var tl = gsap.timeline({
-              defaults: { ease: 'expo.inOut' },
-              onComplete: function () { animating = false; current = epKey; }
-            });
-
-            if (oldLines.length) {
-              tl.to(oldLines, { xPercent: -40, autoAlpha: 0, duration: 0.45, stagger: 0.04, ease: 'power4.in' }, 0);
-            }
-            tl.to([base, swap], { xPercent: -8, scale: 1.06, duration: 0.9 }, 0);
-            tl.fromTo(mask,
-              { scaleX: 0, transformOrigin: 'left center', autoAlpha: 1 },
-              { scaleX: 1, duration: 0.55, ease: 'expo.inOut' },
-              0.05
-            );
-            tl.add(function () {
-              swap.setAttribute('src', ep.hero);
-              gsap.set([base, swap], { xPercent: 0, scale: 1 });
-              gsap.set(swap, { autoAlpha: 1 });
-              gsap.set(base, { autoAlpha: 0 });
-              hero.classList.add('is-hovered');
-            });
-            tl.set(mask, { transformOrigin: 'right center' })
-              .to(mask, { scaleX: 0, duration: 0.55, ease: 'expo.inOut' });
-            tl.add(function () {
-              var spans = buildCaption(ep.title);
-              gsap.set(caption, { autoAlpha: 1, y: 0 });
-              gsap.fromTo(spans,
-                { yPercent: 110 },
-                { yPercent: 0, duration: 0.85, stagger: 0.08, ease: 'expo.out' }
-              );
-            }, '-=0.35');
-          });
-        }
-
-        triggers.forEach(function (a) {
-          var ep = a.getAttribute('data-ep');
-          if (!ep) return;
-
-          a.addEventListener('mouseenter', function () { transitionTo(ep); });
-
-          a.addEventListener('click', function (e) {
-            var dest = (EPISODES[ep] && EPISODES[ep].url) || a.getAttribute('href');
-            if (!dest || dest === '#') return;
-            if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-            e.preventDefault();
-
-            var out = gsap.timeline({
-              defaults: { ease: 'power4.inOut' },
-              onComplete: function () { window.location.href = dest; }
-            });
-            out.to('.ssv-we-thumbs, .ssv-we-find, .ssv-we-social, .ssv-we-other__title, .ssv-we-hero__label',
-              { autoAlpha: 0, y: 30, duration: 0.55, stagger: 0.04 }, 0);
-            out.to(hero, { scale: 1.08, autoAlpha: 0, duration: 1.0 }, 0.1);
-          });
-        });
+        syncTopBarCompact();
+        window.addEventListener('scroll', syncTopBarCompact, { passive: true });
       })();
     </script>
   </body>

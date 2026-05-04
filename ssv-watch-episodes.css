@@ -44,25 +44,43 @@ body.page-ssv-we {
   z-index: 80;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 18px clamp(20px, 4vw, 72px);
   pointer-events: none;
+  transition:
+    padding 260ms var(--we-ease),
+    background-color 260ms var(--we-ease),
+    backdrop-filter 260ms var(--we-ease),
+    box-shadow 260ms var(--we-ease);
 }
 .ssv-we-top > * { pointer-events: auto; }
+.ssv-we-top.is-compact {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: color-mix(in srgb, var(--we-bg) 86%, transparent);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 0 rgba(244, 243, 239, 0.08);
+}
 
 .ssv-we-top__logo img {
   display: block;
   height: 17px;
   width: auto;
   mix-blend-mode: exclusion;
+  transition: height 260ms var(--we-ease);
 }
+.ssv-we-top.is-compact .ssv-we-top__logo img { height: 14px; }
 
 .ssv-we-top__nav {
   display: flex;
   align-items: center;
   gap: clamp(10px, 2vw, 28px);
+  margin-left: auto;
+  margin-right: clamp(0px, 0.8vw, 8px);
   mix-blend-mode: exclusion;
+  transition: gap 260ms var(--we-ease);
 }
+.ssv-we-top.is-compact .ssv-we-top__nav { gap: clamp(8px, 1.5vw, 20px); }
 
 .ssv-we-top__nav a {
   font-family: 'Fustat', sans-serif;
@@ -75,6 +93,7 @@ body.page-ssv-we {
   transition: color 0.25s var(--we-ease);
 }
 .ssv-we-top__nav a:hover { color: var(--we-cream); }
+.ssv-we-top__nav a:nth-of-type(2) { color: var(--we-cream); }
 .ssv-we-top__nav a.is-current {
   color: var(--we-cream);
 }
@@ -90,7 +109,9 @@ body.page-ssv-we {
   background: transparent;
   cursor: pointer;
   mix-blend-mode: exclusion;
+  transition: transform 260ms var(--we-ease);
 }
+.ssv-we-top.is-compact .ssv-we-top__menu { transform: scale(0.9); }
 .ssv-we-top__menu img { display: block; width: 12px; height: auto; }
 
 /* ─── Main stack ─── */
@@ -106,151 +127,18 @@ body.page-ssv-we {
   padding: 0 clamp(16px, 4vw, 48px);
 }
 
-/* ─── Hero collage ─── */
-.ssv-we-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.85fr);
-  grid-template-rows: minmax(120px, 1fr) minmax(120px, 1fr);
-  gap: 0;
-  width: 100%;
-  max-height: min(70vw, 540px);
-  min-height: 280px;
-}
-
-.ssv-we-hero__main {
-  grid-row: 1 / -1;
-  position: relative;
-  overflow: hidden;
-}
-.ssv-we-hero__main img,
-.ssv-we-hero__main-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* Two stacked images for crossfade */
-.ssv-we-hero__main-img {
-  position: absolute;
-  inset: 0;
-  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.ssv-we-hero__main-img.is-base { position: relative; opacity: 1; }
-.ssv-we-hero__main-img.is-swap { opacity: 0; transform: scale(1.04); }
-.ssv-we-hero__main.is-hovered .is-base { opacity: 0; }
-.ssv-we-hero__main.is-hovered .is-swap { opacity: 1; transform: scale(1); }
-
-/* Episode caption overlay */
-.ssv-we-hero__caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: clamp(16px, 3vw, 36px) clamp(18px, 3vw, 40px);
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
-  color: var(--we-cream);
-  font-family: 'Fustat', sans-serif;
-  font-weight: 400;
-  font-size: clamp(20px, 2.6vw, 33px);
-  letter-spacing: -0.05em;
-  line-height: 1.15;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 80ms,
-              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
-  pointer-events: none;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.ssv-we-hero__caption::before {
-  content: "›";
-  font-weight: 200;
-  font-size: 1.4em;
-  line-height: 0.9;
-  display: inline-block;
-  transform: translateY(-2px);
-}
-.ssv-we-hero__main.is-hovered .ssv-we-hero__caption {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger-friendly multi-line caption */
-.ssv-we-hero__caption .line {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-.ssv-we-hero__caption .line > span {
-  display: inline-block;
-  will-change: transform;
-}
-
-/* Red mask sweep used by GSAP transition */
-.ssv-we-hero__mask {
-  position: absolute;
-  inset: 0;
-  background: #c21f1f;
-  transform-origin: left center;
-  transform: scaleX(0);
-  pointer-events: none;
-  z-index: 5;
-  visibility: hidden;
-}
-
-/* Click → navigate transition: zoom hero + fade out */
-.ssv-we-hero__main {
-  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1),
-              opacity   500ms cubic-bezier(0.65, 0, 0.35, 1);
-}
-.ssv-we-hero__main.is-leaving {
-  transform: scale(1.08);
-  opacity: 0;
+/* Hero collage replaced by .eps (see ssv-episodes.css). Spacing for the new
+   hero in this page context: */
+.ssv-we__inner > .eps {
+  margin-bottom: clamp(32px, 6vw, 72px);
 }
 .page-ssv-we.is-leaving { pointer-events: none; }
 .page-ssv-we.is-leaving .ssv-we-thumbs,
 .page-ssv-we.is-leaving .ssv-we-find,
 .page-ssv-we.is-leaving .ssv-we-social,
-.page-ssv-we.is-leaving .ssv-we-other__title,
-.page-ssv-we.is-leaving .ssv-we-hero__label {
+.page-ssv-we.is-leaving .ssv-we-other__title {
   opacity: 0;
   transition: opacity 400ms ease-out;
-}
-
-.ssv-we-hero__still,
-.ssv-we-hero__cover {
-  position: relative;
-  overflow: hidden;
-}
-.ssv-we-hero__still img,
-.ssv-we-hero__cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.ssv-we-hero__label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: clamp(20px, 3vw, 32px);
-  margin-bottom: clamp(32px, 6vw, 72px);
-}
-.ssv-we-hero__dot {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  background: var(--we-red);
-}
-.ssv-we-hero__label span {
-  font-weight: 600;
-  font-size: clamp(22px, 3.2vw, 45px);
-  letter-spacing: -0.05em;
-  line-height: 1.1;
 }
 
 /* ─── Let’s talk (Figma I805:954) ─── */
@@ -334,9 +222,11 @@ body.page-ssv-we {
 }
 .ssv-we-social__item:hover { opacity: 0.75; }
 .ssv-we-social__item img {
-  --we-social-icon: clamp(28px, 4vw, 39px);
-  width: var(--we-social-icon);
-  height: var(--we-social-icon);
+  /* Equal height for mixed-aspect Figma lockups (XHS / IG / YT); width follows each SVG */
+  --we-social-icon-h: clamp(32px, 5vw, 44px);
+  height: var(--we-social-icon-h);
+  width: auto;
+  max-width: min(160px, 42vw);
   object-fit: contain;
   object-position: center;
   display: block;
@@ -402,24 +292,9 @@ body.page-ssv-we {
   width: clamp(56px, 10vw, 86px);
   height: auto;
   display: block;
-  transform: scaleY(-1);
-}
-.ssv-we-back span {
-  font-weight: 600;
-  font-size: clamp(28px, 4vw, 45px);
-  letter-spacing: -0.05em;
-  text-transform: capitalize;
 }
 
 @media (max-width: 900px) {
-  .ssv-we-hero {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    max-height: none;
-  }
-  .ssv-we-hero__main { grid-row: auto; min-height: 220px; }
-  .ssv-we-hero__still { min-height: 160px; }
-  .ssv-we-hero__cover { min-height: 160px; }
   .ssv-we-lets { display: none; }
   .ssv-we-find { justify-content: center; padding-right: 0; }
   .ssv-we-find__mark { width: min(88vw, 360px); }
