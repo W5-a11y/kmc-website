@@ -8,12 +8,14 @@
   /* ─── Elements ──────────────────────────── */
   var sections = Array.from(document.querySelectorAll('.ssv-section'));
   var nav      = document.getElementById('ssv-nav');
-  var TOTAL    = sections.length;          // 6
+  var TOTAL    = sections.length;
   var current  = 0;
   var busy     = false;
   var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var DURATION = reduced ? 20 : 950;
   var htmlRoot = document.documentElement;
+  /* Current SSV page is landing + native-scroll timeline (no stacked sheets). */
+  var nativeTimelineScroll = !document.querySelector('.ssv-sheet');
 
 /* ─── Nav theme ─────────────────────────── */
   function setNavTheme(idx) {
@@ -661,6 +663,15 @@
   /* ─── Wheel ─────────────────────────────── */
   var delta = 0, wTimer;
   document.addEventListener('wheel', function (e) {
+    /* Native timeline mode: keep browser scrolling. Only first down-scroll
+       on landing is hijacked to trigger the landing->timeline handoff. */
+    if (nativeTimelineScroll) {
+      if (current === 0 && e.deltaY > 12) {
+        e.preventDefault();
+        next();
+      }
+      return;
+    }
     if (TOTAL <= 1) return; // single-section mode: allow native page scroll
     // Allow native scroll inside the timeline (s2) once active
     if (current >= 1) {
@@ -692,12 +703,18 @@
   }, { passive: true });
 
   document.addEventListener('touchmove', function (e) {
+    if (nativeTimelineScroll) return;
     if (TOTAL <= 1) return; // single-section mode: allow native scroll
     // Only block scroll on landing (s1); allow native scroll on timeline
     if (current === 0) e.preventDefault();
   }, { passive: false });
 
   document.addEventListener('touchend', function (e) {
+    if (nativeTimelineScroll) {
+      var nativeDy = ty - e.changedTouches[0].clientY;
+      if (current === 0 && nativeDy > 44) next();
+      return;
+    }
     var dy = ty - e.changedTouches[0].clientY;
     if (Math.abs(dy) < 44) return;
     if (dy > 0) next(); else prev();
@@ -705,9 +722,26 @@
 
   /* ─── Keyboard ───────────────────────────── */
   document.addEventListener('keydown', function (e) {
+    if (nativeTimelineScroll) {
+      if ((e.key === 'ArrowDown' || e.key === ' ') && current === 0) {
+        e.preventDefault();
+        next();
+      }
+      return;
+    }
     if (e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
     if (e.key === 'ArrowUp')                     { e.preventDefault(); prev(); }
   });
+
+  /* In native mode, keep section index in sync with actual page position. */
+  if (nativeTimelineScroll) {
+    function syncCurrentByScroll() {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      current = y > 24 ? 1 : 0;
+    }
+    window.addEventListener('scroll', syncCurrentByScroll, { passive: true });
+    syncCurrentByScroll();
+  }
 
   /* ─── Other Content: drag + auto-scroll ─── */
   var track = document.querySelector('.ssv-other__scroll');
