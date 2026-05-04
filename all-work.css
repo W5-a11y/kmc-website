@@ -24,8 +24,23 @@ body.page-all-work {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px clamp(24px, 4vw, 64px);
+  /* Match index nav layout; fallback keeps spacing if --gutter is missing */
+  padding: 40px var(--gutter, clamp(24px, 4vw, 64px)) 0;
+  max-height: 120px;
+  overflow: hidden;
+  opacity: 1;
   pointer-events: none;
+  transition:
+    padding 280ms var(--aw-ease),
+    max-height 280ms var(--aw-ease),
+    opacity 220ms ease;
+}
+
+.aw-nav.is-collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  opacity: 0;
 }
 
 .aw-nav__logo,
@@ -36,6 +51,7 @@ body.page-all-work {
 
 .aw-nav__logo {
   flex-shrink: 0;
+  line-height: 0;
 }
 
 .aw-nav__logo img {
@@ -65,14 +81,14 @@ body.page-all-work {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--aw-olive);
-  mix-blend-mode: exclusion;
+  color: #645D45;
+  mix-blend-mode: normal;
   white-space: nowrap;
   transition: opacity 0.2s;
 }
 
 .aw-nav__link--active {
-  color: var(--aw-red);
+  color: #C21F1F;
   mix-blend-mode: normal;
 }
 
@@ -84,6 +100,8 @@ body.page-all-work {
   cursor: pointer;
   padding: 6px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-left: clamp(16px, 2vw, 32px);
   mix-blend-mode: exclusion;
 }
@@ -131,7 +149,7 @@ body.page-all-work {
 .aw-work-title {
   position: absolute;
   right: 80px;
-  top: 88px;
+  top: 173px;  /* shifted down by half a WORK (170px / 2 ≈ 85px) for nav clearance */
   margin: 0;
   font-family: 'Fustat', 'Inter', sans-serif;
   font-weight: 500;
@@ -158,12 +176,12 @@ body.page-all-work {
 }
 
 .aw-body--1 {
-  top: 411px;
+  top: 496px;  /* shifted to keep relative spacing under the title */
   width: 391px;
 }
 
 .aw-body--2 {
-  top: 501px;
+  top: 586px;
   width: 366px;
 }
 
@@ -285,17 +303,83 @@ body.page-all-work {
 .aw-body--2[data-aw-reveal].is-in    { transition-delay: 0.18s; }
 
 /* ─── Section 2: Disposable ──────────────────────── */
+/* Pinning is handled by GSAP ScrollTrigger in work-disposable.js.
+   We only set z-order so #work_2 slides up over #work_1_3 cleanly. */
+/* No position:relative on #work_1_3 — let GSAP's pin-spacer handle stacking.
+   Forcing relative here interacts badly with pinType:transform on release. */
+#work_1_3 { z-index: 1; }
+#work_2   { position: relative; z-index: 2; }
+
 .aw-page--3 {
   overflow: visible;
   --aw-w3-progress: 0;
 }
 
+/* Frame deco (Figma 1016:454): gray rect (mix-blend-difference) + dark blocks.
+   The 1440×1024 stage is the design canvas; child positions match Figma px.
+   NOTE: no z-index here — adding one creates a stacking context that would
+   sandbox the blend and render the rect as plain #d5d5d5. Natural source
+   order (frame after text in HTML) keeps deco on top. */
+.aw-w3-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+/* (Removed: full-stage cream ::before backdrop — was rendering as the
+   white rectangle visible above the text. Blend now resolves against
+   the section's own cream background.) */
+#work_1_3 .aw-stage { isolation: isolate; background: var(--aw-bg); }
+/* Both z-index: auto so source order applies — stack first, frame after,
+   meaning frame paints on top of text and mix-blend-difference can read it. */
+#work_1_3 .aw-w3-stack { z-index: auto; }
+#work_1_3 .aw-w3-frame { z-index: auto; }
+.aw-w3-frame > * {
+  position: absolute;
+  display: block;
+}
+/* Gray rect — mix-blend-difference inverts the disposable text where overlapped */
+.aw-w3-frame__rect {
+  left: 182px;
+  top: 311px;            /* 1041 - 730 (figma section starts at ~730) */
+  width: 1079px;
+  height: 402px;
+  background: #ffffff;     /* white + difference: cream-on-text inside, near-black on cream outside */
+  mix-blend-mode: difference;
+}
+/* Vertical bars (35×273) at section mid-height */
+.aw-w3-frame__bar {
+  width: 35px;
+  height: 273px;
+  background: #201d13;
+  top: 713px;            /* 1443 - 730 */
+}
+.aw-w3-frame__bar--l { left: 147px; }
+.aw-w3-frame__bar--r { right: 147px; }
+/* Large bottom corner blocks (76×138) */
+.aw-w3-frame__lg {
+  width: 76px;
+  height: 138px;
+  background: #201d13;
+  top: 986px;            /* 1716 - 730 */
+}
+.aw-w3-frame__lg--l { left: 71px; }
+.aw-w3-frame__lg--r { right: 71px; }
+/* Small upper-side accent blocks (38×56) */
+.aw-w3-frame__sm {
+  width: 38px;
+  height: 56px;
+  background: #201d13;
+  top: 657px;            /* 1387 - 730 */
+}
+.aw-w3-frame__sm--l { left: 109px; }
+.aw-w3-frame__sm--r { right: 109px; }
+
 .aw-w3-stack {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 901px;
-  max-width: 62.57%;
+  width: 1352px;        /* 901 × 1.5 — enlarged disposable text */
+  max-width: 93.86%;    /* 62.57 × 1.5 */
   transform: translate(-50%, -50%) translateY(40px);
   display: flex;
   align-items: center;
@@ -313,8 +397,13 @@ body.page-all-work {
   display: block;
   width: 100%;
   height: auto;
-  transform: translateY(calc((1 - var(--aw-w3-progress, 0)) * 24px));
+  transform: translateY(calc((1 - var(--aw-w3-progress, 0)) * 24px)) scale(1.125);  /* was 1.5; ×0.75 */
+  transform-origin: center center;
   transition: none;
+  /* Re-map the text artwork to BLACK. With bg-block set to #FFFFFF and
+     mix-blend-difference: outside the rect the text reads as black on
+     cream; inside the rect it inverts to ~cream (|FF-00| = #FFF). */
+  filter: brightness(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -323,7 +412,7 @@ body.page-all-work {
     transform: translate(-50%, -50%);
     transition: none;
   }
-  .aw-w3-img { transform: none; }
+  .aw-w3-img { transform: scale(1.5); }
 }
 
 /* ─── Section 3: Work grid (dark) ───────────────── */
@@ -695,11 +784,21 @@ body.page-all-work {
   z-index: 2;
   max-width: 1370px;
   margin: 0 auto;
-  padding: clamp(60px, 9vw, 130px) clamp(20px, 4vw, 36px) clamp(60px, 8vw, 100px);
+  /* Tighter shell + corner only — tagline typography unchanged */
+  padding: clamp(30px, 4.5vw, 65px) clamp(10px, 2vw, 18px) clamp(30px, 4vw, 50px);
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
-  gap: 40px;
+  gap: 20px;
+}
+
+.work-footer.js-work-footer-top {
+  cursor: pointer;
+}
+
+.work-footer.js-work-footer-top:focus-visible {
+  outline: 2px solid rgba(244, 243, 239, 0.6);
+  outline-offset: 4px;
 }
 
 .work-footer__tagline {
@@ -717,10 +816,19 @@ body.page-all-work {
   text-align: center;
 }
 
+.work-footer__corner-art {
+  position: absolute;
+  right: clamp(10px, 2vw, 18px);
+  bottom: clamp(6px, 1.4vw, 17px);
+  width: clamp(90px, 12vw, 180px);
+  height: auto;
+  display: block;
+}
+
 .work-footer__back {
   display: inline-flex;
   align-items: center;
-  gap: clamp(14px, 1.6vw, 24px);
+  gap: clamp(7px, 0.8vw, 12px);
   background: none;
   border: none;
   padding: 0;
@@ -728,7 +836,7 @@ body.page-all-work {
   color: rgba(244, 243, 239, 0.85);
   font-family: 'Fustat', sans-serif;
   font-weight: 600;
-  font-size: clamp(28px, 3.2vw, 45px);
+  font-size: clamp(14px, 1.6vw, 22.5px);
   letter-spacing: -0.05em;
   text-transform: capitalize;
   line-height: 1;
@@ -736,12 +844,12 @@ body.page-all-work {
 }
 
 .work-footer__back:hover { opacity: 0.7; }
-.work-footer__back:hover .work-footer__back-icon { transform: translateY(-3px); }
+.work-footer__back:hover .work-footer__back-icon { transform: translateY(-1.5px); }
 
 .work-footer__back-icon {
   display: inline-flex;
-  width: clamp(64px, 7vw, 100px);
-  height: clamp(64px, 7vw, 100px);
+  width: clamp(32px, 3.5vw, 50px);
+  height: clamp(32px, 3.5vw, 50px);
   transition: transform 0.3s var(--aw-ease);
 }
 
@@ -754,10 +862,14 @@ body.page-all-work {
 @media (max-width: 720px) {
   .work-footer {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 14px;
     text-align: left;
   }
-  .work-footer__back { align-self: flex-start; }
+  .work-footer__corner-art {
+    right: 10px;
+    bottom: 5px;
+    width: min(31vw, 140px);
+  }
 }
 
 /* Footer on cream pages (case-* / ssv) */
@@ -913,6 +1025,16 @@ body.page-all-work {
   .aw-card__body  { font-size: 16px; }
 }
 
+@media (max-width: 1023px) {
+  .aw-nav {
+    padding-top: 24px;
+  }
+
+  .aw-nav__links { display: none; }
+
+  .aw-nav__menu { margin-left: auto; }
+}
+
 @media (max-width: 600px) {
   .aw-work-grid {
     padding: 80px 20px 60px;
@@ -931,6 +1053,4 @@ body.page-all-work {
   }
   .aw-card__title { font-size: 20px; }
   .aw-card__body  { font-size: 15px; }
-
-  .aw-nav__links { display: none; }
 }

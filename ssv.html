@@ -9,8 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="ssv.css" />
-    <link rel="stylesheet" href="ssv-timeline.css?v=11" />
+    <link rel="stylesheet" href="ssv-timeline.css?v=12" />
     <link rel="stylesheet" href="ssv-trigger.css" />
+    <link rel="stylesheet" href="ssv-landing.css?v=4" />
   </head>
   <body class="page-ssv">
 
@@ -22,7 +23,7 @@
       <nav class="ssv-top__nav" aria-label="Section shortcuts">
         <a href="work.html#work_1_1" data-ai-id="el-4">Works</a>
         <a href="ssv.html" data-ai-id="el-5">SSV</a>
-        <a href="index.html#about" data-ai-id="el-6">About</a>
+        <a href="about.html" data-ai-id="el-6">About</a>
         <a href="#" data-ai-id="el-7">Contact</a>
       </nav>
       <button type="button" class="ssv-top__menu js-menu-toggle"
@@ -32,6 +33,18 @@
     </header>
 
 <div class="ssv-stage" id="ssv-stage">
+
+<!-- ═══ S1: LANDING — Figma Flow 5 (1002:702 → 798) ═══ -->
+      <section id="ssv-s1" class="ssv-section ssv-section--landing" aria-label="SSV Landing" data-theme="dark">
+        <div class="ssv-flow" id="ssv-flow" data-step="1">
+          <video class="ssv-flow__cover" id="ssv-flow-cover" autoplay muted playsinline preload="auto" aria-hidden="true" poster="assets/ssv/landing-flow/cover.png">
+            <source src="assets/ssv/landing-flow/cover.webm" type="video/webm" />
+            <source src="assets/ssv/landing-flow/cover.mp4" type="video/mp4" />
+          </video>
+          <!-- Single mask layer — src swaps through Exclude1→6 keyframes -->
+          <img class="ssv-flow__mask" id="ssv-flow-mask" src="assets/ssv/landing-flow/Exclude1.svg" alt="" aria-hidden="true" />
+        </div>
+      </section>
 
 <!-- ═══ S2+: TIMELINE (replaces old s2–s6) ═══ -->
       <section id="ssv-s2" class="ssv-section ssv-tl" data-theme="light" aria-label="SSV Story">
@@ -71,7 +84,7 @@
             </span>
             <span class="morph-trigger__label">Exclusive Screening</span>
           </a>
-          <a href="#ssv-tl-events" class="ssv-tl__filter ssv-tl__filter--lecture morph-trigger"
+          <a href="#ssv-tl-event-valkyrie" class="ssv-tl__filter ssv-tl__filter--lecture morph-trigger"
              data-portal-media="assets/ssv-timeline/valkyrie.png">
             <span class="morph-trigger__circle">
               <svg class="morph-trigger__arrow" viewBox="0 0 42 42" aria-hidden="true">
@@ -140,7 +153,7 @@
 
           <article class="ssv-tl__event ssv-tl__event--text-right">
             <div class="ssv-tl__event-text">
-              <div class="ssv-tl__event-head ssv-tl__event-head--right">
+              <div class="ssv-tl__event-head ssv-tl__event-head--right" id="ssv-tl-event-valkyrie">
                 <div class="ssv-tl__event-main">
                   <p class="ssv-tl__date js-valkyrie-date-trigger">01.30.2026</p>
                   <p class="ssv-tl__event-desc ssv-tl__event-desc--valkyrie js-valkyrie-reveal" aria-label="Valkyrie session description">
@@ -263,7 +276,7 @@
               <a href="work.html#work_1_1" class="menu-drawer__link">The Work</a>
               <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
               <a href="ssv.html" class="menu-drawer__link menu-drawer__link--accent">SSV</a>
-              <a href="index.html#about" class="menu-drawer__link">About Us</a>
+              <a href="about.html" class="menu-drawer__link">About Us</a>
               <a href="#" class="menu-drawer__link">Contact</a>
             </nav>
           </div>
@@ -287,6 +300,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="main.js"></script>
     <script src="ssv.js"></script>
+    <script src="ssv-landing.js?v=2" defer></script>
     <script src="ssv-trigger.js"></script>
     <script>
       document.querySelectorAll('.js-back-to-top').forEach(function(btn){

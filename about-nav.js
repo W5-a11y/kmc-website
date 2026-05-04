@@ -46,4 +46,31 @@
     var overlay = document.querySelector('.menu-overlay');
     if (overlay) overlay.addEventListener('click', function () { setMenuOpen(false); });
   }
+
+  (function aboutNavCollapseOnScroll() {
+    var nav = document.getElementById('ab-nav');
+    if (!nav) return;
+
+    var lastY = window.scrollY || window.pageYOffset || 0;
+    var DELTA = 6;
+    var TOP_HOLD = 24;
+
+    function onScroll() {
+      var y = window.scrollY || window.pageYOffset || 0;
+      var diff = y - lastY;
+
+      if (y <= TOP_HOLD) {
+        nav.classList.remove('is-collapsed');
+      } else if (diff > DELTA) {
+        nav.classList.add('is-collapsed');
+      } else if (diff < -DELTA) {
+        nav.classList.remove('is-collapsed');
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 })();

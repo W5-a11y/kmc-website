@@ -79,6 +79,34 @@
   /* ─── Initialise ────────────────────────── */
   setNavTheme(0);
 
+  /* ─── Top bar collapse on scroll-down ───── */
+  (function topBarCollapseOnScroll() {
+    var topBar = document.getElementById('ssv-top');
+    if (!topBar) return;
+
+    var lastY = window.scrollY || window.pageYOffset || 0;
+    var DELTA = 6;
+    var TOP_HOLD = 24;
+
+    function onScroll() {
+      var y = window.scrollY || window.pageYOffset || 0;
+      var diff = y - lastY;
+
+      if (y <= TOP_HOLD) {
+        topBar.classList.remove('is-collapsed');
+      } else if (diff > DELTA) {
+        topBar.classList.add('is-collapsed');
+      } else if (diff < -DELTA) {
+        topBar.classList.remove('is-collapsed');
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
   /* ─── S2 hero CTA hover (GSAP) ─ */
   if (!reduced && window.gsap) {
     document.querySelectorAll('.js-ssv-hero-cta').forEach(function (el) {

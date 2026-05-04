@@ -11,11 +11,21 @@
   display: flex;
   align-items: center;
   padding: 40px var(--gutter) 0;
+  max-height: 120px;
+  overflow: hidden;
+  opacity: 1;
   pointer-events: none; /* re-enabled on children */
 
   /* Default blend: exclusion works on cream + dark */
   mix-blend-mode: exclusion;
-  transition: mix-blend-mode 0s;
+  transition: mix-blend-mode 0s, padding 280ms var(--ease-std), max-height 280ms var(--ease-std), opacity 220ms ease;
+}
+
+.site-nav.is-collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  opacity: 0;
 }
 
 /* ── Per-section blend overrides (set by IntersectionObserver in site.js) ── */

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="ssv-watch-episodes.css?v=15" />
+    <link rel="stylesheet" href="ssv-watch-episodes.css?v=16" />
     <link rel="stylesheet" href="ssv-episodes.css?v=2" />
   </head>
   <body class="page-ssv-we">
@@ -19,7 +19,7 @@
       <nav class="ssv-we-top__nav" aria-label="Section shortcuts">
         <a href="work.html#work_1_1">Works</a>
         <a href="ssv.html">SSV</a>
-        <a href="index.html#about">About</a>
+        <a href="about.html">About</a>
         <a href="#">Contact</a>
       </nav>
       <button type="button" class="ssv-we-top__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
@@ -154,7 +154,7 @@
               <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
               <a href="ssv.html" class="menu-drawer__link">SSV</a>
               <a href="ssv-watch-episodes.html" class="menu-drawer__link menu-drawer__link--accent">Watch Episodes</a>
-              <a href="index.html#about" class="menu-drawer__link">About Us</a>
+              <a href="about.html" class="menu-drawer__link">About Us</a>
               <a href="#" class="menu-drawer__link">Contact</a>
             </nav>
           </div>
@@ -173,11 +173,27 @@
       (function () {
         var topBar = document.getElementById('ssv-we-top');
         if (!topBar) return;
-        var syncTopBarCompact = function () {
-          topBar.classList.toggle('is-compact', window.scrollY > 24);
+        var lastY = window.scrollY || window.pageYOffset || 0;
+        var DELTA = 6;
+        var TOP_HOLD = 24;
+
+        var syncTopBarCollapse = function () {
+          var y = window.scrollY || window.pageYOffset || 0;
+          var diff = y - lastY;
+
+          if (y <= TOP_HOLD) {
+            topBar.classList.remove('is-collapsed');
+          } else if (diff > DELTA) {
+            topBar.classList.add('is-collapsed');
+          } else if (diff < -DELTA) {
+            topBar.classList.remove('is-collapsed');
+          }
+
+          lastY = y;
         };
-        syncTopBarCompact();
-        window.addEventListener('scroll', syncTopBarCompact, { passive: true });
+
+        syncTopBarCollapse();
+        window.addEventListener('scroll', syncTopBarCollapse, { passive: true });
       })();
     </script>
   </body>

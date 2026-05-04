@@ -15,6 +15,33 @@
   awScale();
   window.addEventListener("resize", awScale, { passive: true });
 
+  (function awNavCollapseOnScroll() {
+    const nav = document.getElementById("aw-nav");
+    if (!nav) return;
+
+    let lastY = window.scrollY || window.pageYOffset || 0;
+    const DELTA = 6;
+    const TOP_HOLD = 24;
+
+    function onScroll() {
+      const y = window.scrollY || window.pageYOffset || 0;
+      const diff = y - lastY;
+
+      if (y <= TOP_HOLD) {
+        nav.classList.remove("is-collapsed");
+      } else if (diff > DELTA) {
+        nav.classList.add("is-collapsed");
+      } else if (diff < -DELTA) {
+        nav.classList.remove("is-collapsed");
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+
   if (!reduce) {
     root.querySelectorAll("[data-aw-reveal]").forEach(function (el) {
       const io = new IntersectionObserver(
@@ -254,4 +281,31 @@
     overlay.addEventListener("transitionend", onCoverEnd);
   });
   }
+
+  (function workFooterScrollTop() {
+    const footer = document.querySelector(".js-work-footer-top");
+    const hero = document.getElementById("work_1_1");
+    if (!footer || !hero) return;
+
+    function goTop() {
+      hero.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      window.setTimeout(w3MorphTick, reduce ? 80 : 520);
+      try {
+        history.replaceState(null, "", "#work_1_1");
+      } catch (err) {
+        /* ignore */
+      }
+    }
+
+    footer.addEventListener("click", function (ev) {
+      if (ev.target.closest && ev.target.closest("a[href], button")) return;
+      goTop();
+    });
+
+    footer.addEventListener("keydown", function (ev) {
+      if (ev.key !== "Enter" && ev.key !== " ") return;
+      ev.preventDefault();
+      goTop();
+    });
+  })();
 })();

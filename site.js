@@ -28,8 +28,27 @@
     window.addEventListener('pageshow', function (e) {
       if (e.persisted) {
         gsap.set(PAGE_WRAP, { opacity: 1, clearProps: 'opacity' });
+        /* Reset body bg morph leftover (cream→red→dark timeline can leave
+           inline backgroundColor at #201d13 on bfcache restore). */
+        document.body.style.backgroundColor = '#f4f3ef';
+        /* Clear any GSAP-applied filter/transform on services items so
+           bfcache restore can't leave them in a blurred state. */
+        document.querySelectorAll('.services-item').forEach(function (el) {
+          el.style.filter = '';
+          el.style.transform = '';
+          el.style.opacity = '';
+        });
       }
     });
+
+    /* Hard safety: when user scrolls back near the top (within 80px),
+       force body back to cream regardless of where the morph timeline
+       thinks it is. Prevents the "stuck dark bg on scroll-up" bug. */
+    window.addEventListener('scroll', function () {
+      if ((window.scrollY || document.documentElement.scrollTop) < 80) {
+        document.body.style.backgroundColor = '#f4f3ef';
+      }
+    }, { passive: true });
   }
 
   /* Intercept internal link clicks → dissolve out → navigate */
@@ -185,6 +204,34 @@
   }
 
   /* ══════════════════════════════════════
+     4.1 NAV COLLAPSE ON SCROLL DIRECTION
+     Scroll down => collapse, scroll up => expand
+  ══════════════════════════════════════ */
+  if (NAV) {
+    let lastY = window.scrollY || window.pageYOffset || 0;
+    const DELTA = 6;
+    const TOP_HOLD = 24;
+
+    function onNavScroll() {
+      const y = window.scrollY || window.pageYOffset || 0;
+      const diff = y - lastY;
+
+      if (y <= TOP_HOLD) {
+        NAV.classList.remove('is-collapsed');
+      } else if (diff > DELTA) {
+        NAV.classList.add('is-collapsed');
+      } else if (diff < -DELTA) {
+        NAV.classList.remove('is-collapsed');
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', onNavScroll, { passive: true });
+    onNavScroll();
+  }
+
+  /* ══════════════════════════════════════
      5. BRAND MARK ENTRY ANIMATION
      After 0.8s (matches Figma AFTER_TIMEOUT),
      SMART_ANIMATE the brand mark into view.
@@ -196,18 +243,26 @@
     /* Letters start slightly offset — animate to natural position */
     const letters = BRAND.querySelectorAll('.bm-slot, .part-left, .part-right');
 
-    gsap.set(letters, { opacity: 0, scale: 0.96, transformOrigin: 'center center' });
-    gsap.set(BRAND, { opacity: 1 });
+    function runBrandMarkEntry() {
+      gsap.set(letters, { opacity: 0, scale: 0.96, transformOrigin: 'center center' });
+      gsap.set(BRAND, { opacity: 1 });
 
-    /* Delay 0.8s, then stagger each letter in */
-    gsap.to(letters, {
-      opacity: 1,
-      scale: 1,
-      duration: 1.25,
-      ease: 'power3.out',
-      stagger: { amount: 0.35, from: 'random' },
-      delay: 0.8
-    });
+      gsap.to(letters, {
+        opacity: 1,
+        scale: 1,
+        duration: 1.25,
+        ease: 'power3.out',
+        stagger: { amount: 0.35, from: 'random' },
+        delay: 0.8
+      });
+    }
+
+    var HTML_DE = document.documentElement;
+    if (HTML_DE.classList.contains('has-opening') && !HTML_DE.classList.contains('opening-finished')) {
+      window.addEventListener('kmc-opening-done', runBrandMarkEntry, { once: true });
+    } else {
+      runBrandMarkEntry();
+    }
   }
 
   /* ══════════════════════════════════════
@@ -426,13 +481,14 @@
     var svcLayers = Array.from(servicesPreview.querySelectorAll('.svc-layer'));
     var currentSvc = '01';
 
-    /* Scroll entrance: subtle rise + blur clear for editorial feel. */
+    /* Scroll entrance: subtle rise. (Removed blur — was causing residual
+       frosted-glass appearance on bfcache restore when ScrollTrigger did
+       not re-fire on back-navigation.) */
     gsap.fromTo(svcItems,
-      { opacity: 0, y: 14, filter: 'blur(6px)' },
+      { opacity: 0, y: 14 },
       {
         opacity: 0.4,
         y: 0,
-        filter: 'blur(0px)',
         duration: 0.9,
         ease: 'power3.out',
         stagger: 0.08,
@@ -490,90 +546,113 @@
   }
 
   /* ══════════════════════════════════════
-     12. STORIES CAPSULE — CLICK TO EXPAND + PLAY
-     Click capsule: NO/ADS split, capsule expands, video plays.
-     Click again: collapse to initial state.
+     12. STORIES CAPSULE — SCROLL TO EXPAND + PLAY
+     While the red stories section scrolls through the viewport, the
+     vertical capsule widens and the clip cross-fades to the looping video.
   ══════════════════════════════════════ */
+  var storiesSection = document.querySelector('.stories-section');
   var storiesRow = document.querySelector('.stories-row-1');
   var storiesCapsule = storiesRow ? storiesRow.querySelector('.stories-capsule') : null;
   var storiesNo = storiesRow ? storiesRow.querySelector('.stories-no') : null;
   var storiesAds = storiesRow ? storiesRow.querySelector('.stories-ads') : null;
   var storiesVideo = storiesCapsule ? storiesCapsule.querySelector('.stories-capsule__video') : null;
+  var storiesImg = storiesCapsule ? storiesCapsule.querySelector('img') : null;
 
-  if (storiesRow && storiesCapsule && storiesNo && storiesAds && storiesVideo) {
-    var storiesOpen = false;
-    var baseW = storiesCapsule.offsetWidth;
-    var baseH = storiesCapsule.offsetHeight;
-    var baseRadius = Number(gsap.getProperty(storiesCapsule, 'borderRadius')) || (baseW / 2);
+  if (storiesSection && storiesRow && storiesCapsule && storiesNo && storiesAds && storiesVideo) {
+    var storiesCapsuleTl = null;
+    var storiesResizeTimer = null;
 
     gsap.set(storiesCapsule, { transformOrigin: '50% 100%' });
 
-    function openStoriesCapsule() {
-      if (storiesOpen) return;
-      storiesOpen = true;
-      storiesCapsule.classList.add('is-open');
-      storiesCapsule.setAttribute('aria-expanded', 'true');
-
+    function readCapsuleMetrics() {
+      gsap.set(storiesCapsule, { clearProps: 'width,height,borderRadius' });
+      var bw = storiesCapsule.offsetWidth;
+      var bh = storiesCapsule.offsetHeight;
+      var br = parseFloat(window.getComputedStyle(storiesCapsule).borderRadius);
+      if (Number.isNaN(br) || br <= 0) {
+        br = Math.min(bw, bh) * 0.5;
+      }
       var adsFontSize = parseFloat(window.getComputedStyle(storiesAds).fontSize) || 120;
       var expandedW = adsFontSize * 2.5;
-      expandedW = Math.max(baseW * 2.7, Math.min(expandedW, storiesRow.offsetWidth * 0.5));
-      var expandedH = 170;
-      var expandedRadius = 58;
-
-      /* justify-content:center handles NO/ADS reflow automatically */
-      gsap.to(storiesNo, { x: 0, duration: 0.65, ease: 'power3.out', overwrite: true });
-      gsap.to(storiesAds, { x: 0, duration: 0.65, ease: 'power3.out', overwrite: true });
-      gsap.to(storiesCapsule, {
-        width: expandedW,
-        height: expandedH,
-        x: 0,
-        borderRadius: expandedRadius,
-        duration: 0.72,
-        ease: 'expo.out',
-        overwrite: true
-      });
-
-      try {
-        storiesVideo.currentTime = 0;
-      } catch (_) {}
-      var p = storiesVideo.play();
-      if (p && typeof p.catch === 'function') p.catch(function () {});
+      expandedW = Math.max(bw * 2.7, Math.min(expandedW, storiesRow.offsetWidth * 0.5));
+      return {
+        baseW: bw,
+        baseH: bh,
+        baseRadius: br,
+        expandedW: expandedW,
+        expandedH: 170,
+        expandedRadius: 58
+      };
     }
 
-    function closeStoriesCapsule() {
-      if (!storiesOpen) return;
-      storiesOpen = false;
-      storiesCapsule.classList.remove('is-open');
-      storiesCapsule.setAttribute('aria-expanded', 'false');
+    function buildStoriesCapsuleScroll() {
+      if (storiesCapsuleTl) {
+        storiesCapsuleTl.kill();
+        storiesCapsuleTl = null;
+      }
 
-      gsap.to(storiesNo, { x: 0, duration: 0.45, ease: 'power2.inOut', overwrite: true });
-      gsap.to(storiesAds, { x: 0, duration: 0.45, ease: 'power2.inOut', overwrite: true });
-      gsap.to(storiesCapsule, {
-        width: baseW,
-        height: baseH,
-        x: 0,
-        borderRadius: baseRadius,
-        duration: 0.5,
-        ease: 'power2.inOut',
-        overwrite: true
+      var m = readCapsuleMetrics();
+      gsap.set(storiesNo, { x: 0 });
+      gsap.set(storiesAds, { x: 0 });
+      gsap.set(storiesCapsule, {
+        width: m.baseW,
+        height: m.baseH,
+        borderRadius: m.baseRadius,
+        x: 0
       });
+      if (storiesImg) gsap.set(storiesImg, { opacity: 1 });
+      gsap.set(storiesVideo, { opacity: 0 });
 
-      storiesVideo.pause();
-      try {
-        storiesVideo.currentTime = 0;
-      } catch (_) {}
+      storiesCapsuleTl = gsap.timeline({
+        scrollTrigger: {
+          id: 'index-stories-capsule',
+          trigger: storiesSection,
+          start: 'top 88%',
+          end: 'top 22%',
+          scrub: 1.35,
+          invalidateOnRefresh: true,
+          onUpdate: function () {
+            var st = ScrollTrigger.getById('index-stories-capsule');
+            if (!st) return;
+            var p = st.progress;
+            if (p > 0.38) {
+              if (storiesVideo.paused) {
+                var pr = storiesVideo.play();
+                if (pr && typeof pr.catch === 'function') pr.catch(function () {});
+              }
+            } else if (p < 0.22) {
+              storiesVideo.pause();
+              try {
+                storiesVideo.currentTime = 0;
+              } catch (err) {}
+            }
+          }
+        }
+      });
+      storiesCapsuleTl.to(
+        storiesCapsule,
+        {
+          width: m.expandedW,
+          height: m.expandedH,
+          borderRadius: m.expandedRadius,
+          ease: 'none'
+        },
+        0
+      );
+      if (storiesImg) {
+        storiesCapsuleTl.to(storiesImg, { opacity: 0, ease: 'none' }, 0);
+      }
+      storiesCapsuleTl.to(storiesVideo, { opacity: 1, ease: 'none' }, 0);
     }
 
-    storiesCapsule.setAttribute('aria-expanded', 'false');
-    storiesCapsule.addEventListener('click', function () {
-      storiesOpen ? closeStoriesCapsule() : openStoriesCapsule();
-    });
+    buildStoriesCapsuleScroll();
 
     window.addEventListener('resize', function () {
-      if (!storiesOpen) {
-        baseW = storiesCapsule.offsetWidth;
-        baseH = storiesCapsule.offsetHeight;
-      }
+      clearTimeout(storiesResizeTimer);
+      storiesResizeTimer = setTimeout(function () {
+        buildStoriesCapsuleScroll();
+        ScrollTrigger.refresh();
+      }, 120);
     });
   }
 

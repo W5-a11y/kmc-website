@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="page-cursor.css" />
     <link rel="stylesheet" href="about-page.css" />
   </head>
   <body class="page-about">
@@ -21,8 +20,8 @@
       <nav class="ab-nav__links" aria-label="Main navigation">
         <a href="work.html" class="ab-nav__link">Works</a>
         <a href="ssv.html" class="ab-nav__link">SSV</a>
-        <a href="about.html" class="ab-nav__link">About</a>
-        <a href="#contact" class="ab-nav__link">Contact</a>
+        <a href="about.html" class="ab-nav__link ab-nav__link--active">About</a>
+        <a href="index.html#contact" class="ab-nav__link">Contact</a>
       </nav>
       <button type="button" class="ab-nav__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
         <img src="assets/menu-icon-new.svg" alt="" width="16" height="13" />
@@ -94,8 +93,8 @@
       </div>
 
       <!-- Bottom CTA -->
-      <div class="ab-cta-wrap">
-        <a class="ab-cta" href="index.html#contact" aria-label="Let's Talk">
+      <div class="ab-cta-wrap" id="contact">
+        <a class="ab-cta" href="index.html#contact-heading" aria-label="Let's Talk">
           <img src="assets/about/talk.svg" alt="Let's Talk" class="ab-cta__svg" />
         </a>
       </div>
@@ -127,9 +126,7 @@
       </div>
     </div>
 
-    <div class="pc" id="page-cursor" aria-hidden="true"><span class="pc__dot"></span></div>
     <script src="about-nav.js"></script>
     <script src="about-page.js"></script>
-    <script src="page-cursor.js"></script>
   </body>
 </html>

@@ -42,8 +42,10 @@
   height: clamp(88px, 8.75vw, 126px);
   z-index: calc(var(--z-nav) + 2);
   display: block;
-  transition: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.hero-lets-talk:hover { transform: scale(1.07) rotate(15deg); }
 
 .hero-lets-talk img {
   width: 100%;
@@ -55,7 +57,7 @@
 
 .stories-section {
   position: relative;
-  background: var(--red);
+  background: #C21F1F;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -78,7 +80,7 @@
   line-height: 1;
   letter-spacing: -0.05em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: #F4F3EF;
   margin: 0;
 }
 
@@ -99,7 +101,7 @@
   font-size: inherit;
   line-height: inherit;
   letter-spacing: inherit;
-  color: inherit;
+  color: #f4f3ef;
   text-transform: inherit;
 }
 
@@ -121,7 +123,7 @@
   height: clamp(150px, 15vw, 200px);
   border-radius: 999px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: default;
   position: relative;
   align-self: flex-end;
   transform: translateY(0);
@@ -133,7 +135,6 @@
   object-fit: cover;
   object-position: 56% center;
   display: block;
-  transition: opacity 0.35s var(--ease-std);
 }
 
 .stories-capsule__video {
@@ -145,7 +146,6 @@
   object-position: center;
   display: block;
   opacity: 0;
-  transition: opacity 0.35s var(--ease-std);
 }
 
 .stories-capsule.is-open img {
@@ -649,5 +649,75 @@
 
   .contact-section__heading {
     text-align: left;
+  }
+}
+
+/* ═══ Lottie opening (homepage; assets/opening-xl.json) ═══ */
+html.opening-active {
+  overflow: hidden;
+}
+
+.opening-lottie-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.75s;
+  touch-action: none;
+}
+
+.opening-lottie-view {
+  width: min(96vw, calc(96vh * 1920 / 1080));
+  max-height: 96vh;
+}
+
+.opening-lottie-view svg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+html.has-opening:not(.opening-finished) .site-nav,
+html.has-opening:not(.opening-finished) .hero-container {
+  opacity: 0;
+  transform: translate3d(0, clamp(1.25rem, 4vh, 2.75rem), 0);
+  filter: blur(10px);
+  pointer-events: none;
+  transition: none;
+}
+
+html.has-opening.opening-finished .site-nav,
+html.has-opening.opening-finished .hero-container {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: none;
+  pointer-events: auto;
+  transition: none;
+}
+
+html.opening-finished .opening-lottie-root {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, -2.5vh, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-lottie-root {
+    display: none !important;
+  }
+
+  html.has-opening:not(.opening-finished) .site-nav,
+  html.has-opening:not(.opening-finished) .hero-container {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    pointer-events: auto;
   }
 }

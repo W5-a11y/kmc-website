@@ -191,7 +191,11 @@
   align-self: stretch;
   width: 100%;
   max-width: 100%;
-  padding-left: calc(var(--hero-copy-shift) + var(--hero-cta-shift));
+  padding-left: calc(
+    var(--hero-copy-shift) + var(--hero-cta-shift)
+    + clamp(150px, 16.5vw, 219.75px)   /* one CTA slot width — shifts watcheps to offexp's prior spot */
+    + clamp(6px, 1.2vw, 16px)          /* the column-gap between the two CTAs */
+  );
   column-gap: clamp(6px, 1.2vw, 16px);
   margin-top: calc(var(--hero-content-mark-width) * 166 / 818 * 0.5);
 }
@@ -255,9 +259,23 @@
   z-index: 80;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: clamp(20px, 3vh, 36px) clamp(22px, 5vw, 72px);
+  justify-content: flex-start;
+  padding: 40px var(--gutter, clamp(24px, 4vw, 64px)) 0;
+  max-height: 120px;
+  overflow: hidden;
+  opacity: 1;
   pointer-events: none;
+  transition:
+    padding 280ms var(--tl-ease),
+    max-height 280ms var(--tl-ease),
+    opacity 220ms ease;
+}
+
+.ssv-top.is-collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  opacity: 0;
 }
 
 .ssv-top__logo,
@@ -271,16 +289,17 @@
 }
 .ssv-top__logo img {
   display: block;
-  width: clamp(110px, 11vw, 160px);
-  height: auto;
+  height: 17px;
+  width: auto;
+  filter: invert(1);
 }
 
 .ssv-top__nav {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 2vw, 28px);
+  gap: clamp(24px, 3.3vw, 48px);
   margin-left: auto;
-  margin-right: clamp(10px, 1.8vw, 24px);
+  margin-right: 0;
   mix-blend-mode: exclusion;
 }
 
@@ -288,13 +307,14 @@
   font-family: 'Fustat', sans-serif;
   font-weight: 800;
   font-size: 10px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
   color: #929ec6;
-  transition: color 0.25s var(--tl-ease);
+  white-space: nowrap;
+  transition: opacity 0.2s var(--tl-ease);
 }
-.ssv-top__nav a:hover { color: var(--tl-cream); }
+.ssv-top__nav a:hover { opacity: 0.65; }
 .ssv-top__nav a:nth-of-type(2) { color: #FF281B; }
 
 /* Same hamburger as the index page (assets/menu-icon-new.svg).
@@ -304,12 +324,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: auto;
+  height: auto;
   background: none;
   border: 0;
   cursor: pointer;
   padding: 6px;
+  margin-left: clamp(16px, 2vw, 32px);
   transition: opacity 0.2s ease;
 }
 .ssv-top__menu:hover { opacity: 0.7; }
@@ -317,6 +338,18 @@
   display: block;
   width: 16px;
   height: auto;
+}
+
+@media (max-width: 1023px) {
+  .ssv-top {
+    padding-top: 24px;
+  }
+  .ssv-top__nav {
+    display: none;
+  }
+  .ssv-top__menu {
+    margin-left: auto;
+  }
 }
 
 /* Hero CTAs decomposed out of the master poster SVG.
@@ -816,6 +849,16 @@
 
 /* ─── Mobile ────────────────────────────────────── */
 @media (max-width: 880px) {
+  .ssv-top {
+    padding-top: 24px;
+  }
+  .ssv-top__nav {
+    display: none;
+  }
+  .ssv-top__menu {
+    margin-left: auto;
+  }
+
   #ssv-hero-poster.ssv-tl__hero {
     padding: 108px 24px 60px;
     background-image: url('assets/ssv/bkg-red-gradient.png');
