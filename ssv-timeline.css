@@ -27,54 +27,220 @@
   padding-bottom: 120px;
 }
 
+/* ─── Floating "Let's talk" button (fixed bottom-right) ── */
+.ssv-lets-talk {
+  position: fixed;
+  right: clamp(18px, 2.2vw, 34px);
+  bottom: clamp(18px, 2.2vw, 34px);
+  width: clamp(88px, 8.75vw, 126px);
+  height: clamp(88px, 8.75vw, 126px);
+  z-index: 100;
+  display: block;
+  transition: transform 0.35s var(--tl-ease), opacity 0.35s var(--tl-ease);
+  will-change: transform;
+}
+.ssv-lets-talk img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Three-state morph: rest → hh1 (instant on hover) → hh2 (animated) */
+.ssv-lets-talk__rest,
+.ssv-lets-talk__hh1,
+.ssv-lets-talk__hh2 {
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ssv-lets-talk__rest { opacity: 1; transform: scale(1); }
+.ssv-lets-talk__hh1  { opacity: 0; transform: scale(1); }
+.ssv-lets-talk__hh2  { opacity: 0; transform: scale(0.96); }
+
+/* On hover: rest snaps out, hh1 snaps in immediately, then morphs to hh2 over 600ms */
+.ssv-lets-talk:hover .ssv-lets-talk__rest {
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+.ssv-lets-talk:hover .ssv-lets-talk__hh1 {
+  opacity: 0;                /* hh1 fades back out as hh2 takes over */
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+}
+.ssv-lets-talk:hover .ssv-lets-talk__hh2 {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms,
+              transform 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+}
+
+/* Show hh1 immediately when hover begins (before hh2 fades in over it) */
+.ssv-lets-talk:hover .ssv-lets-talk__hh1 {
+  animation: ssvLetsTalkHh1Flash 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes ssvLetsTalkHh1Flash {
+  0%   { opacity: 1; }
+  60%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* ─── Hero (red gradient + headline) ────────────── */
 #ssv-hero-poster.ssv-tl__hero {
   position: relative;
-  padding: clamp(56px, 7vh, 96px) clamp(22px, 5vw, 72px) clamp(84px, 12vh, 136px);
-  background-color: #f4f3ef;
-  background-image: url('assets/ssv/hero-bg.png');
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 100% 100%;
+  min-height: 100vh;
+  padding: clamp(96px, 14vh, 160px) clamp(28px, 6vw, 96px) clamp(40px, 6vh, 80px);
+  background: url('assets/ssv/bkg-red-gradient.png') center center / cover no-repeat;
   color: var(--tl-cream);
   isolation: isolate;
   overflow: hidden;
-}
-
-/* Subtle breathing overlay — shifts the red→cream stop ±4% over 16s */
-#ssv-hero-poster.ssv-tl__hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg,
-    rgba(255, 40, 27, 0.08) 0%,
-    rgba(255, 40, 27, 0.02) 35%,
-    rgba(244, 243, 239, 0) 70%
-  );
-  mix-blend-mode: soft-light;
-  pointer-events: none;
-  z-index: 0;
-  animation: ssv-tl-breathe 16s ease-in-out infinite alternate;
-}
-
-@keyframes ssv-tl-breathe {
-  0%   { transform: translateY(-3%);  opacity: 0.85; }
-  100% { transform: translateY(3%);   opacity: 1; }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  --hero-content-mark-width: min(108vw, 960px);
 }
 
 #ssv-hero-poster.ssv-tl__hero > * { position: relative; z-index: 1; }
 
-/* Hero text rendered as a single SVG poster (ssv_1st_text.svg).
-   Native viewBox is 1515 × 1125. Scale to fit the hero width while
-   keeping the original aspect ratio. */
-.ssv-tl__poster {
+/* Title + body copy artwork — stacked under header, left-aligned */
+.ssv-hero__lead {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  max-width: min(1290px, 100%);
+}
+
+.ssv-hero__title-mark {
+  width: min(87vw, 780px);
+  max-width: 100%;
+  margin: 0;
+  margin-bottom: clamp(18px, 2.8vh, 32px);
+  line-height: 0;
+  /* Entrance: drop-in + curtain reveal */
+  opacity: 0;
+  transform: translateY(40px);
+  clip-path: inset(0 0 100% 0);
+  animation: ssvHeroTitleIn 1.25s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, clip-path;
+}
+
+@keyframes ssvHeroTitleIn {
+  0%   { opacity: 0; transform: translateY(40px); clip-path: inset(0 0 100% 0); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0);   clip-path: inset(0 0 0 0); }
+}
+
+.ssv-hero__title-mark img {
   display: block;
-  width: min(1100px, 92%);
+  width: 100%;
   height: auto;
-  margin: 0 0 clamp(28px, 4vh, 54px);
   user-select: none;
   -webkit-user-drag: none;
 }
+
+.ssv-hero__content-mark {
+  width: var(--hero-content-mark-width);
+  max-width: 100%;
+  margin: 0;
+  line-height: 0;
+  /* Entrance: light fade-up after title */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ssvHeroContentIn 0.9s 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes ssvHeroContentIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssv-hero__title-mark,
+  .ssv-hero__content-mark {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+.ssv-hero__content-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* CTAs: centered under hero copy; spacing ≈ ½ content SVG height */
+.ssv-hero__ctas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  column-gap: clamp(6px, 1.2vw, 16px);
+  margin-top: calc(var(--hero-content-mark-width) * 166 / 818 * 0.5);
+}
+
+.ssv-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--tl-cream);
+  text-decoration: none;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 400;
+  font-size: clamp(24px, 2.4vw, 33px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: capitalize;
+  transition: opacity 0.28s var(--tl-ease);
+}
+.ssv-hero__cta:hover { opacity: 0.78; }
+
+.ssv-hero__cta--svg { padding: 0; }
+/* Hero SVG CTAs: shared slot (293×66 AR), scaled 0.75× vs prior clamp */
+.ssv-hero__cta--svg img {
+  display: block;
+  width: clamp(150px, 16.5vw, 219.75px);
+  aspect-ratio: 293 / 66;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#ssv-hero-poster.ssv-tl__hero .ssv-hero__ctas .ssv-hero__cta--svg {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.ssv-hero__cta-arrow {
+  display: inline-flex;
+  width: clamp(40px, 3.6vw, 54px);
+  height: clamp(40px, 3.6vw, 54px);
+  color: var(--tl-cream);
+  flex-shrink: 0;
+}
+.ssv-hero__cta-arrow svg { width: 100%; height: 100%; display: block; }
+
+.ssv-hero__cta-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.ssv-hero__cta-label span { display: block; }
+.ssv-hero__cta-label--single { display: inline; }
 
 /* ═══ Top bar (split out from poster: logo + menu trigger) ═══ */
 .ssv-top {
@@ -104,25 +270,26 @@
   height: auto;
 }
 
+/* Same hamburger as the index page (assets/menu-icon-new.svg).
+   The SVG itself is filled #929EC6 with mix-blend-mode:exclusion baked in,
+   which produces a bright cyan/lavender inversion on the red gradient. */
 .ssv-top__menu {
   display: inline-flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
   width: 32px;
   height: 32px;
   background: none;
   border: 0;
   cursor: pointer;
-  padding: 0;
-  mix-blend-mode: exclusion;
+  padding: 6px;
+  transition: opacity 0.2s ease;
 }
-.ssv-top__menu-line {
+.ssv-top__menu:hover { opacity: 0.7; }
+.ssv-top__menu img {
   display: block;
-  height: 2px;
-  width: 100%;
-  background: #f4f3ef;
-  border-radius: 2px;
+  width: 16px;
+  height: auto;
 }
 
 /* Hero CTAs decomposed out of the master poster SVG.
@@ -133,7 +300,8 @@
   flex-wrap: wrap;
   gap: clamp(28px, 4vw, 64px);
   align-items: center;
-  margin-top: clamp(8px, 2vh, 24px);
+  justify-content: center;
+  margin-top: clamp(24px, 5vh, 56px);
 }
 
 .ssv-poster-cta {
@@ -622,12 +790,20 @@
 /* ─── Mobile ────────────────────────────────────── */
 @media (max-width: 880px) {
   #ssv-hero-poster.ssv-tl__hero {
-    padding: 108px 24px 78px;
-    background-color: #f4f3ef;
-    background-image: url('assets/ssv/hero-bg.png');
-    background-repeat: no-repeat;
-    background-position: center top;
+    padding: 108px 24px 60px;
+    background-image: url('assets/ssv/bkg-red-gradient.png');
     background-size: cover;
+    background-position: center center;
+    --hero-content-mark-width: min(94vw, 780px);
+  }
+  .ssv-hero__lead {
+    max-width: 100%;
+  }
+  #ssv-hero-poster.ssv-tl__hero .ssv-hero__cta--svg img {
+    width: clamp(90px, 24vw, 219.75px);
+  }
+  .ssv-hero__title-mark {
+    width: min(92vw, 660px);
   }
   .ssv-tl__title {
     max-width: 100%;

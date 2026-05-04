@@ -1,0 +1,209 @@
+/* SSV Episodes — Figma node 973:620 (v1–v6) with prototype interactions.
+   Single stage; one element per "logical" image (A=cart, B=couch, C=red coat).
+   States transition with ~1250ms cubic-bezier(0,0,0,1) (Figma SLOW).
+   v4 → v1 uses 300ms dissolve. */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+.page-ssv-eps {
+  background: #111;
+  color: #f4f3ef;
+  font-family: 'Fustat', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Container ─────────────────────────────────────────── */
+.eps {
+  width: 100%;
+  max-width: 1441px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 80px; /* room for caption */
+}
+
+.eps__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1441 / 538;
+  container-type: inline-size;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── Image elements (Smart Animate matched layers) ────── */
+.img {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  --gray: 0;
+  --blur: 0px;
+  --scale: 1;
+  filter: grayscale(var(--gray));
+  transition:
+    left  1250ms cubic-bezier(0,0,0,1),
+    top   1250ms cubic-bezier(0,0,0,1),
+    width 1250ms cubic-bezier(0,0,0,1),
+    height 1250ms cubic-bezier(0,0,0,1),
+    filter 1250ms cubic-bezier(0,0,0,1);
+}
+
+.img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  filter: blur(var(--blur));
+  transform: scale(var(--scale));
+  transition:
+    filter 1250ms cubic-bezier(0,0,0,1),
+    transform 1250ms cubic-bezier(0,0,0,1);
+}
+
+/* ── Per-state positions (% of 1441×538) ───────────────── */
+/* A — cart */
+.eps[data-state="v1"] .img--A,
+.eps[data-state="v4"] .img--A { left: 0; top: 0; width: 66.9%; height: 100%; --gray: 0; }
+.eps[data-state="v2"] .img--A,
+.eps[data-state="v5"] .img--A { left: 0; top: 0; width: 33.45%; height: 50%; --gray: 1; }
+.eps[data-state="v3"] .img--A,
+.eps[data-state="v6"] .img--A { left: 0; top: 50%; width: 33.45%; height: 50%; --gray: 1; }
+.eps[data-state="v4"] .img--A { --blur: 10px; --scale: 1.04; }
+
+/* B — couch */
+.eps[data-state="v1"] .img--B,
+.eps[data-state="v4"] .img--B { left: 66.83%; top: 50%; width: 33.17%; height: 50%; --gray: 1; }
+.eps[data-state="v2"] .img--B,
+.eps[data-state="v5"] .img--B { left: 0; top: 50%; width: 33.45%; height: 50%; --gray: 1; }
+.eps[data-state="v3"] .img--B,
+.eps[data-state="v6"] .img--B { left: 33.45%; top: 0; width: 66.55%; height: 100%; --gray: 0; }
+.eps[data-state="v6"] .img--B { --blur: 10px; --scale: 1.04; }
+
+/* C — red coat */
+.eps[data-state="v1"] .img--C,
+.eps[data-state="v4"] .img--C { left: 66.83%; top: 0; width: 33.17%; height: 50%; --gray: 1; }
+.eps[data-state="v2"] .img--C,
+.eps[data-state="v5"] .img--C { left: 33.38%; top: 0; width: 66.62%; height: 100%; --gray: 0; }
+.eps[data-state="v3"] .img--C,
+.eps[data-state="v6"] .img--C { left: 0; top: 0; width: 33.45%; height: 50%; --gray: 1; }
+.eps[data-state="v5"] .img--C { --blur: 10px; --scale: 1.04; }
+
+/* ── Play button ───────────────────────────────────────── */
+.play {
+  position: absolute;
+  width: 5.27%;        /* 76/1441 */
+  aspect-ratio: 1 / 1;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateZ(0);
+  transition:
+    opacity 600ms ease,
+    left 1250ms cubic-bezier(0,0,0,1),
+    top  1250ms cubic-bezier(0,0,0,1);
+}
+.play img {
+  width: 100%; height: 100%; display: block;
+  filter: brightness(0) invert(1);
+}
+.eps[data-state="v4"] .play { opacity: 1; left: 1.80%;  top: 39.41%; }
+.eps[data-state="v5"] .play { opacity: 1; left: 35.53%; top: 36.25%; }
+.eps[data-state="v6"] .play { opacity: 1; left: 35.53%; top: 26.77%; }
+
+/* ── Episode overlays ──────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.overlay__title {
+  position: absolute;
+  margin: 0;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 200;
+  font-size: 4.51cqi;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #f4f3ef;
+  text-transform: capitalize;
+}
+.overlay__desc {
+  position: absolute;
+  margin: 0;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 0.833cqi;
+  line-height: 1.417;
+  letter-spacing: -0.05em;
+  color: #f4f3ef;
+}
+
+.overlay--ep3 .overlay__title { left: 3.05%;  top: 58.55%; right: 47.26%; }
+.overlay--ep3 .overlay__desc  { left: 3.47%;  top: 72.68%; width: 27.76%; }
+.overlay--ep2 .overlay__title { left: 36.64%; top: 54.65%; right: 20.96%; }
+.overlay--ep2 .overlay__desc  { left: 37.06%; top: 68.77%; width: 32.96%; }
+.overlay--ep1 .overlay__title { left: 36.57%; top: 44.42%; right: 27.48%; }
+.overlay--ep1 .overlay__desc  { left: 37.00%; top: 70.26%; width: 32.96%; }
+
+.eps[data-state="v4"] .overlay--ep3,
+.eps[data-state="v5"] .overlay--ep2,
+.eps[data-state="v6"] .overlay--ep1 { opacity: 1; }
+
+/* ── v1 caption (red square + The Latest Episode) ──────── */
+.eps__caption {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.eps[data-state="v1"] .eps__caption { opacity: 1; }
+
+.eps__redmark {
+  position: absolute;
+  left: 5.55%;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: #ff281b;
+}
+.eps__heading {
+  position: absolute;
+  left: 5.48%;
+  top: 36px;
+  margin: 8px 0 0;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 51px;
+  letter-spacing: -2.25px;
+  color: #f4f3ef;
+  white-space: nowrap;
+}
+
+/* ── v4 → v1 dissolve override (300ms EASE_OUT) ────────── */
+.eps.is-dissolve .img,
+.eps.is-dissolve .img > img,
+.eps.is-dissolve .play,
+.eps.is-dissolve .overlay,
+.eps.is-dissolve .eps__caption {
+  transition-duration: 300ms !important;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .eps__heading { font-size: 32px; line-height: 36px; letter-spacing: -1.5px; }
+  .eps__redmark { width: 24px; height: 24px; }
+  .eps__heading { top: 26px; }
+  .eps__caption { height: 70px; }
+}

@@ -9,65 +9,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="ssv.css" />
-    <link rel="stylesheet" href="ssv-timeline.css?v=2" />
+    <link rel="stylesheet" href="ssv-timeline.css?v=10" />
     <link rel="stylesheet" href="ssv-trigger.css" />
   </head>
   <body class="page-ssv">
 
-    <!-- ═══ TOP BAR ═══ -->
+<!-- ═══ TOP BAR ═══ -->
     <header class="ssv-top" id="ssv-top">
       <a href="index.html" class="ssv-top__logo js-go-home" aria-label="KMC × LUCAS — Home">
         <img src="assets/ssv/logo.svg" alt="KMC × LUCAS" />
       </a>
       <button type="button" class="ssv-top__menu js-menu-toggle"
               aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
-        <span class="ssv-top__menu-line"></span>
-        <span class="ssv-top__menu-line"></span>
+        <img src="assets/menu-icon-new.svg" alt="" width="16" height="20" />
       </button>
     </header>
 
 <div class="ssv-stage" id="ssv-stage">
 
-      <!-- ═══ S1: LANDING ═══ -->
-      <section id="ssv-s1" class="ssv-section ssv-section--landing" data-theme="dark" aria-label="SSV Landing">
-        <!-- SSV opening loop video — plays through letterform cutouts -->
-        <video
-          class="ssv-landing__video"
-          autoplay muted loop playsinline
-          preload="auto"
-          aria-hidden="true"
-        >
-          <source src="assets/ssv/ssv-open.webm" type="video/webm">
-          <source src="assets/ssv/ssv-open.mp4" type="video/mp4">
-        </video>
-        <!-- Red overlay: SSV letters are transparent cutouts revealing the video -->
-        <div class="ssv-landing__mask-wrap" aria-hidden="true">
-          <img class="ssv-landing__mask-img" src="assets/ssv/landing.svg" alt="" />
-        </div>
-        <!-- Scroll hint -->
-        <div class="ssv-landing__hint" aria-hidden="true">
-          <span class="ssv-landing__hint-text">SCROLL</span>
-          <div class="ssv-landing__hint-bar"><div class="ssv-landing__hint-fill"></div></div>
-        </div>
-      </section>
-
-      <!-- ═══ S2+: TIMELINE (replaces old s2–s6) ═══ -->
+<!-- ═══ S2+: TIMELINE (replaces old s2–s6) ═══ -->
       <section id="ssv-s2" class="ssv-section ssv-tl" data-theme="light" aria-label="SSV Story">
 
         <div class="ssv-tl__hero" id="ssv-hero-poster">
           <h1 class="visually-hidden">Built for Silicon Valley. Inspired by humanity. Meet Surviving Silicon Valley.</h1>
-          <img class="ssv-tl__poster"
-               src="assets/ssv/hero-text.svg"
-               alt="Built for Silicon Valley. Inspired by humanity. Meet Surviving Silicon Valley — the first reality series in the United States to use real estate as its central narrative." />
-          <div class="ssv-poster-ctas">
-            <a href="#" class="ssv-poster-cta js-ssv-go" data-target="2" aria-label="Watch Episodes">
-              <svg class="ssv-poster-cta__icon" viewBox="0 0 60 60" aria-hidden="true">
-                <path d="M14 6 L14 54 L52 30 Z" />
-              </svg>
-              <span class="ssv-poster-cta__label">Watch Episodes</span>
+
+          <div class="ssv-hero__lead">
+            <div class="ssv-hero__title-mark">
+              <img src="assets/ssv/title.svg" width="946" height="581" alt="Built for Silicon Valley. Inspired by humanity." />
+            </div>
+            <div class="ssv-hero__content-mark">
+              <img src="assets/ssv/content.svg" width="818" height="166" alt="Meet Surviving Silicon Valley — the first U.S. reality series centered on real estate; episodes explore emotional crossroads, family, money, and identity through the lens of home." />
+            </div>
+          </div>
+          <div class="ssv-hero__ctas">
+            <a href="ssv-watch-episodes.html" class="ssv-hero__cta ssv-hero__cta--svg" aria-label="Watch Episodes">
+              <img src="assets/ssv/watcheps.svg" width="196" height="66" alt="Watch Episodes" />
             </a>
-            <a href="#ssv-tl-events" class="ssv-poster-cta js-ssv-scroll-offline" aria-label="Offline Experience">
-              <img class="ssv-poster-cta__svg" src="assets/ssv/btn-offline.svg" alt="" />
+            <a href="#ssv-s2" class="ssv-hero__cta ssv-hero__cta--svg js-ssv-go" data-target="2" aria-label="Watch Episodes">
+              <img src="assets/ssv/offexp.svg" width="293" height="66" alt="Watch Episodes" />
             </a>
           </div>
         </div>
@@ -291,15 +270,18 @@
       </div>
     </div>
 
+    <!-- Floating "Let's talk" button — jumps to index.html contact section -->
+    <a class="ssv-lets-talk" href="index.html#contact" aria-label="Let's talk — contact us">
+      <img class="ssv-lets-talk__rest" src="assets/lets-talk.svg"     alt="Let's talk" />
+      <img class="ssv-lets-talk__hh1"  src="assets/lets-talk-hh1.svg" alt="" aria-hidden="true" />
+      <img class="ssv-lets-talk__hh2"  src="assets/lets-talk-hh2.svg" alt="" aria-hidden="true" />
+    </a>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="main.js"></script>
     <script src="ssv.js"></script>
     <script src="ssv-trigger.js"></script>
-    <!-- ═══ Work footer (every piece + back to top) ═══ -->
-    <div class="work-footer">
-      <p class="work-footer__tagline">Every piece we create tells a<br />story about the quality of future living.</p>
-      <button type="button" class="work-footer__back js-back-to-top" aria-label="Back to top"><img src="assets/back-top.svg" alt="Back to top" class="work-footer__back-img" /></button>
-    </div>
     <script>
       document.querySelectorAll('.js-back-to-top').forEach(function(btn){
         btn.addEventListener('click', function(){

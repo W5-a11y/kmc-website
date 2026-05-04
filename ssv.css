@@ -42,6 +42,21 @@
 .ssv-section--offline   { z-index: 40; }
 .ssv-section--screening { z-index: 50; overflow-y: auto; }
 
+/* Timeline section is now the entire page — allow vertical scroll */
+/* Landing removed — unlock the page so it scrolls naturally */
+body.page-ssv { overflow: visible !important; }
+.ssv-stage {
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+}
+#ssv-s2.ssv-section {
+  position: static !important;
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+}
+
 /* Sheets (s3–s6): start below, slide up like paper */
 .ssv-sheet {
   transform: translateY(100%);
@@ -120,6 +135,48 @@
 
 .ssv-nav__menu-icon { display: block; width: 44px; height: 44px; }
 .ssv-nav--light .ssv-nav__menu-icon { filter: invert(1); }
+
+/* ─── Opening animation (Lottie) ───────────────── */
+html.ssv-opening-active {
+  overflow: hidden;
+}
+
+.ssv-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f3ef;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+html.ssv-opening-active .ssv-opening {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+html.ssv-opening-done .ssv-opening {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ssv-opening__view {
+  width: min(96vw, calc(96vh * 1920 / 1080));
+  max-height: 96vh;
+}
+
+.ssv-opening__view svg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
 
 /* ─── S1: LANDING ───────────────────────────── */
 .ssv-section--landing {
@@ -758,6 +815,10 @@
 
 /* ─── Reduced motion ────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+  .ssv-opening {
+    display: none !important;
+  }
+
   .ssv-landing__video,
   .ssv-landing__mask-wrap,
   .ssv-landing__hint,

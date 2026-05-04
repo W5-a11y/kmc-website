@@ -13,8 +13,9 @@
   var busy     = false;
   var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var DURATION = reduced ? 20 : 950;
+  var htmlRoot = document.documentElement;
 
-  /* ─── Nav theme ─────────────────────────── */
+/* ─── Nav theme ─────────────────────────── */
   function setNavTheme(idx) {
     if (!nav) return;
     var theme = sections[idx].getAttribute('data-theme') || 'dark';
@@ -561,7 +562,21 @@
     el.addEventListener('click', function (e) {
       e.preventDefault();
       var t = parseInt(el.getAttribute('data-target'), 10);
-      if (!isNaN(t)) goTo(t);
+      if (isNaN(t)) return;
+      /* Single-section timeline page: “Watch Episodes” (2) → scroll to #ssv-s2 */
+      if (t === 2) {
+        var s2 = document.getElementById('ssv-s2');
+        if (s2) {
+          s2.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          try {
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', window.location.pathname + window.location.search + '#ssv-s2');
+            }
+          } catch (err) { /* ignore */ }
+        }
+        return;
+      }
+      goTo(t);
     });
   });
 
@@ -596,9 +611,29 @@
     });
   }
 
+  /* ─── Back to top buttons ────────────────── */
+  document.querySelectorAll('.js-back-to-top').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Timeline section uses its own scroll container.
+      var timelineSection = document.querySelector('.ssv-section.ssv-tl');
+      if (timelineSection) {
+        timelineSection.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      }
+
+      // Return to the first section in this page flow.
+      if (current !== 0) goTo(0);
+
+      // Fallback for any native page scroll.
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    });
+  });
+
   /* ─── Wheel ─────────────────────────────── */
   var delta = 0, wTimer;
   document.addEventListener('wheel', function (e) {
+    if (TOTAL <= 1) return; // single-section mode: allow native page scroll
     // Allow native scroll inside the timeline (s2) once active
     if (current >= 1) {
       var sec = sections[current];
@@ -629,6 +664,7 @@
   }, { passive: true });
 
   document.addEventListener('touchmove', function (e) {
+    if (TOTAL <= 1) return; // single-section mode: allow native scroll
     // Only block scroll on landing (s1); allow native scroll on timeline
     if (current === 0) e.preventDefault();
   }, { passive: false });
@@ -680,5 +716,69 @@
       }
     }, { threshold: 0.3 }).observe(track);
   }
+
+  /* ─── Hero parallax: scroll + mouse on title/content marks ─ */
+  (function heroParallax() {
+    if (reduced) return;
+    var hero    = document.getElementById('ssv-hero-poster');
+    var title   = document.querySelector('.ssv-hero__title-mark');
+    var content = document.querySelector('.ssv-hero__content-mark');
+    if (!hero || !title || !content) return;
+
+    var scrollY = 0, mouseX = 0, mouseY = 0;
+    var tx = 0, ty = 0;          // smoothed mouse offsets for title
+    var rafId = null;
+
+    function onScroll() { scrollY = window.scrollY || window.pageYOffset || 0; queue(); }
+    function onMouse(e) {
+      var r = hero.getBoundingClientRect();
+      // -1 .. 1 from hero center
+      mouseX = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      mouseY = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+      queue();
+    }
+    function onLeave() { mouseX = 0; mouseY = 0; queue(); }
+
+    function queue() {
+      if (rafId) return;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function tick() {
+      rafId = null;
+      var h = window.innerHeight || 1;
+      // progress 0..1 across one viewport of scroll
+      var p = Math.max(0, Math.min(1, scrollY / h));
+
+      // Scroll: title drifts up + lightly scales down + fades
+      var titleY     = -80 * p;
+      var titleScale = 1 - 0.04 * p;
+      var titleOp    = 1 - 0.15 * p;
+      // Content drifts at half speed (parallax depth)
+      var contentY   = -30 * p;
+
+      // Mouse parallax: smoothed lerp toward target
+      var targetX = mouseX * 6;   // ±6px
+      var targetY = mouseY * 4;   // ±4px
+      tx += (targetX - tx) * 0.12;
+      ty += (targetY - ty) * 0.12;
+
+      title.style.transform   = 'translate3d(' + tx.toFixed(2) + 'px,' + (titleY + ty).toFixed(2) + 'px,0) scale(' + titleScale.toFixed(4) + ')';
+      title.style.opacity     = titleOp.toFixed(3);
+      content.style.transform = 'translate3d(' + (tx * 0.4).toFixed(2) + 'px,' + (contentY + ty * 0.4).toFixed(2) + 'px,0)';
+
+      // Keep ticking while mouse-smoothing settles
+      if (Math.abs(targetX - tx) > 0.05 || Math.abs(targetY - ty) > 0.05) queue();
+    }
+
+    // Wait for the entrance animation to finish before taking over transforms,
+    // so we don't fight the CSS keyframes (~1.4s total: title delay 0.15 + 1.25).
+    setTimeout(function () {
+      window.addEventListener('scroll',     onScroll, { passive: true });
+      hero.addEventListener('mousemove',    onMouse,  { passive: true });
+      hero.addEventListener('mouseleave',   onLeave,  { passive: true });
+      onScroll();
+    }, 1500);
+  })();
 
 })();

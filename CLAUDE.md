@@ -27,6 +27,8 @@ kmc-website/
 ├── index.html          # 首页（大标题 KMC+ LUCAS + 汉堡菜单）
 ├── work.html           # 作品列表（6 sections，paper-slide 动画）
 ├── ssv.html            # Surviving Silicon Valley 专题页
+├── ssv-watch-episodes.html  # SSV「Watch Episodes」落地页（Figma 805:927）
+├── ssv-watch-episodes.css
 ├── about.html          # 关于页面
 ├── case-stanford.html  # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html
@@ -35,6 +37,7 @@ kmc-website/
 ├── styles.css          # 全局样式
 ├── assets/
 │   └── ssv/            # SSV 专题资源（SVG、视频）
+│       └── watch-episodes/  # Watch Episodes 页导出图（Figma MCP）
 └── scroll-editorial/   # React+Vite 子项目（实验）
 ```
 
