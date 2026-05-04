@@ -456,12 +456,14 @@ html.intro-active .hero-brand__scan {
 .menu-drawer__panel {
   height: 100%;
   min-height: 50vh;
-  background: var(--color-primary);
+  background: rgba(244, 243, 239, 0.2);
+  backdrop-filter: blur(9.3px);
+  -webkit-backdrop-filter: blur(9.3px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: clamp(0.75rem, 2vh, 1.25rem) clamp(1rem, 4vw, 72px) clamp(1rem, 2.5vh, 1.75rem);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
 }
 
 .menu-drawer__bar {
@@ -486,14 +488,14 @@ html.intro-active .hero-brand__scan {
   gap: clamp(0.525rem, 2.1vh, 1.125rem);
 }
 
-/* Horizontal wordmark in drawer (white asset on brand red) */
+/* Horizontal wordmark in drawer (now on frosted glass — use dark filter) */
 .menu-drawer__logo--horizontal {
   display: block;
   flex-shrink: 1;
   min-width: 0;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.22));
   line-height: 0;
   height: var(--menu-drawer-bar-icon-h);
+  mix-blend-mode: exclusion;
 }
 
 .menu-drawer__logo-img {
@@ -509,11 +511,12 @@ html.intro-active .hero-brand__scan {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-bg);
+  color: #645d45;
   flex-shrink: 0;
   padding: 0.2rem;
   height: var(--menu-drawer-bar-icon-h);
   align-self: flex-start;
+  mix-blend-mode: exclusion;
 }
 
 .menu-drawer__toggle-icon {
@@ -541,30 +544,42 @@ html.intro-active .hero-brand__scan {
   max-width: 100%;
 }
 
-/* 半屏菜单：六项 + 较长文案，略收字号与行距 */
+/* 半屏菜单 */
 .menu-drawer__link {
   font-weight: 400;
-  font-size: clamp(22.5px, 2.025vh + 0.825rem, 33px);
+  font-size: 20px;
   line-height: 1.2;
-  letter-spacing: 0.02em;
-  color: var(--color-bg);
+  letter-spacing: 0.29em;
+  text-transform: uppercase;
+  color: #929ec6;
+  mix-blend-mode: exclusion;
   width: fit-content;
   max-width: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   transition: opacity 0.25s var(--ease-eco);
 }
 
-/* Home 与其余项同字重、同字号（保留 class 供当前页标记） */
+/* 当前页面标记：颜色加方块指示器 */
 .menu-drawer__link--accent {
-  font-weight: 400;
-  font-size: clamp(22.5px, 2.025vh + 0.825rem, 33px);
-  letter-spacing: 0.02em;
+  color: #a3add0;
+}
+
+.menu-drawer__link--accent::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #a3add0;
+  flex-shrink: 0;
 }
 
 .menu-drawer__link:hover,
 .menu-drawer__link:focus-visible {
-  opacity: 0.88;
+  opacity: 0.75;
 }
 
 .menu-drawer__link::after {
@@ -574,7 +589,7 @@ html.intro-active .hero-brand__scan {
   bottom: 1px;
   width: 100%;
   height: 1px;
-  background: var(--color-bg);
+  background: #929ec6;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s var(--ease-eco);

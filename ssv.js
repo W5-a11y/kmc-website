@@ -666,9 +666,15 @@
     /* Native timeline mode: keep browser scrolling. Only first down-scroll
        on landing is hijacked to trigger the landing->timeline handoff. */
     if (nativeTimelineScroll) {
-      if (current === 0 && e.deltaY > 12) {
-        e.preventDefault();
-        next();
+      if (current === 0) {
+        var s0w = sections[0];
+        var landingGone = !s0w || s0w.style.display === 'none' || s0w.classList.contains('is-finished');
+        if (!landingGone && e.deltaY > 12) {
+          e.preventDefault();
+          s0w.classList.add('is-finished');
+          setTimeout(function () { s0w.style.display = 'none'; }, 700);
+          current = 1;
+        }
       }
       return;
     }
@@ -712,7 +718,15 @@
   document.addEventListener('touchend', function (e) {
     if (nativeTimelineScroll) {
       var nativeDy = ty - e.changedTouches[0].clientY;
-      if (current === 0 && nativeDy > 44) next();
+      if (current === 0 && nativeDy > 44) {
+        var s0t = sections[0];
+        var lgone = !s0t || s0t.style.display === 'none' || s0t.classList.contains('is-finished');
+        if (!lgone) {
+          s0t.classList.add('is-finished');
+          setTimeout(function () { s0t.style.display = 'none'; }, 700);
+          current = 1;
+        }
+      }
       return;
     }
     var dy = ty - e.changedTouches[0].clientY;
