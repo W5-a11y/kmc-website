@@ -145,22 +145,23 @@
   pointer-events: none;
 }
 
-/* ── Mobile (< 1024px): static logo instead of SVG mark ── */
+/* ── Mobile (< 1024px): scaled-down brand mark ── */
 @media (max-width: 1023px) {
   .brand-wrap {
-    display: none;
+    left: 0;
+    width: 100%;
+    /* Height = cover photo top + cover photo height (matches hero-container need) */
+    height: calc(clamp(200px, 38vw, 450px) + clamp(200px, 45vw, 400px));
+    max-height: none;
   }
 
-  /* Mobile pages show a static logo in the hero instead */
-  .brand-mobile {
-    display: block;
-    padding: 100px var(--gutter) 40px;
+  /* Remove sticky on mobile — brand sits statically above cover photo */
+  .brand-mark {
+    position: static;
+    max-height: none;
   }
 
-  .brand-mobile img {
-    height: clamp(40px, 12vw, 80px);
-    width: auto;
-  }
+  .brand-mobile { display: none; }
 }
 
 @media (min-width: 1024px) {

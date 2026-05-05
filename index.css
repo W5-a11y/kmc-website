@@ -705,7 +705,11 @@
   .about-photo {
     position: static;
     width: 100%;
-    height: clamp(240px, 60vw, 420px);
+    height: clamp(340px, 80vw, 520px);
+  }
+
+  .about-photo__img {
+    object-position: bottom center;
   }
 
   .about-content {
