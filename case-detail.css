@@ -33,6 +33,24 @@ body.page-case-detail {
   }
 }
 
+/* ─── Mobile scale (JS sets --cd-scale via cdScale()) ── */
+@media (max-width: 768px) {
+  .cd-stage {
+    transform: scale(var(--cd-scale, 1));
+    transform-origin: top center;
+    /* collapse excess whitespace after downscale */
+    margin-bottom: calc((var(--cd-scale, 1) - 1) * 1500px);
+  }
+
+  .cd-nav {
+    padding: 24px 32px 0;
+  }
+
+  .cd-player {
+    padding-top: 60px;
+  }
+}
+
 /* ─── Nav (reuse aw-nav style from work page) ────── */
 .cd-nav {
   position: absolute;

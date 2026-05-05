@@ -1,6 +1,16 @@
 (function () {
   'use strict';
 
+  /* ── Mobile scale ── */
+  (function cdScale() {
+    function apply() {
+      var s = Math.min(window.innerWidth / 1440, 1);
+      document.documentElement.style.setProperty('--cd-scale', s > 0 ? String(s) : '1');
+    }
+    apply();
+    window.addEventListener('resize', apply, { passive: true });
+  })();
+
   var stage = document.querySelector('.cd-stage');
   if (!stage) return;
 

@@ -61,11 +61,12 @@
     scrollTrigger: {
       trigger: section,
       start: 'top top',
-      end: '+=220%',         /* longer travel = frame opens more slowly while scrolling */
+      end: '+=55%',          /* one scroll gesture completes the full animation */
       pin: true,
       pinSpacing: true,
       pinType: 'transform',  /* avoid position:fixed snap-back at pin release */
-      scrub: 0.65,           /* a bit more smoothing as the scrub follows the wheel */
+      scrub: 0.35,           /* snappier follow so all phases feel responsive in one gesture */
+      fastScrollEnd: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
     },
@@ -77,34 +78,34 @@
     yPercent: 0,
     scale: 1.125,
     opacity: 1,
-    duration: 0.30,
+    duration: 0.22,
   }, 0);
 
   // Phase B — bg-block sweeps in
   tl.to('.aw-w3-frame__rect', {
     scaleX: 1,
-    duration: 0.35,
+    duration: 0.28,
     ease: 'expo.out',
-  }, 0.15);
+  }, 0.10);
 
   // Phase C — bars → small caps → large caps
   tl.to([
     '.aw-w3-frame__bar--l',
     '.aw-w3-frame__bar--r',
-  ], { xPercent: 0, opacity: 1, duration: 0.20, stagger: 0.04 }, 0.40);
+  ], { xPercent: 0, opacity: 1, duration: 0.16, stagger: 0.03 }, 0.30);
 
   tl.to([
     '.aw-w3-frame__sm--l',
     '.aw-w3-frame__sm--r',
-  ], { xPercent: 0, opacity: 1, duration: 0.18, stagger: 0.05 }, 0.55);
+  ], { xPercent: 0, opacity: 1, duration: 0.15, stagger: 0.04 }, 0.42);
 
   tl.to([
     '.aw-w3-frame__lg--l',
     '.aw-w3-frame__lg--r',
-  ], { xPercent: 0, opacity: 1, duration: 0.20, stagger: 0.05 }, 0.68);
+  ], { xPercent: 0, opacity: 1, duration: 0.16, stagger: 0.04 }, 0.53);
 
   // Phase D — hold at baseline 1.5× scale through unpin
-  tl.to('.aw-w3-img', { scale: 1.125, duration: 0.16 }, 0.84);
+  tl.to('.aw-w3-img', { scale: 1.125, duration: 0.12 }, 0.69);
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     tl.progress(1).pause();

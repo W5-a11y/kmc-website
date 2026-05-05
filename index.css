@@ -348,15 +348,20 @@
 }
 
 .about-nav-item {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 10px 0;
   border-top: 1px solid rgba(100, 93, 69, 0.15);
+  cursor: default;
+  outline: none;
 }
 
 .about-nav-item:last-of-type {
   border-bottom: 1px solid rgba(100, 93, 69, 0.15);
+}
+
+.about-nav-item__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
 .about-nav-item__label {
@@ -367,6 +372,7 @@
   letter-spacing: -0.05em;
   text-transform: capitalize;
   color: var(--sand);
+  transition: color 0.25s var(--ease-std);
 }
 
 .about-nav-item__num {
@@ -375,6 +381,70 @@
   line-height: 1;
   text-transform: uppercase;
   color: var(--red-hot);
+  flex-shrink: 0;
+  transition: transform 0.32s var(--ease-std);
+}
+
+/* ── Expand detail on hover / keyboard focus ── */
+.about-nav-item__detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s var(--ease-std);
+}
+
+.about-nav-item__detail-inner p {
+  margin: 0 0 14px;
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(11px, 0.85vw, 13px);
+  line-height: 1.5;
+  letter-spacing: -0.04em;
+  color: var(--sand);
+  max-width: 420px;
+}
+
+.about-nav-item__reveal-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.48s var(--ease-std),
+    transform 0.62s var(--ease-std);
+}
+
+.about-nav-item__reveal-line + .about-nav-item__reveal-line {
+  margin-top: 2px;
+}
+
+.about-nav-item:hover .about-nav-item__detail,
+.about-nav-item:focus-within .about-nav-item__detail {
+  max-height: 120px;
+}
+
+.about-nav-item:hover .about-nav-item__reveal-line,
+.about-nav-item:focus-within .about-nav-item__reveal-line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-nav-item:hover .about-nav-item__reveal-line:nth-child(1),
+.about-nav-item:focus-within .about-nav-item__reveal-line:nth-child(1) {
+  transition-delay: 0.02s;
+}
+
+.about-nav-item:hover .about-nav-item__reveal-line:nth-child(2),
+.about-nav-item:focus-within .about-nav-item__reveal-line:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+.about-nav-item:hover .about-nav-item__label,
+.about-nav-item:focus-within .about-nav-item__label {
+  color: var(--red-hot);
+}
+
+.about-nav-item:hover .about-nav-item__num,
+.about-nav-item:focus-within .about-nav-item__num {
+  transform: translateX(-3px);
 }
 
 .about-more-link {

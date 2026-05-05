@@ -352,6 +352,7 @@ body.page-all-work {
   height: 273px;
   background: #201d13;
   top: 713px;            /* 1443 - 730 */
+  will-change: transform, opacity;
 }
 .aw-w3-frame__bar--l { left: 147px; }
 .aw-w3-frame__bar--r { right: 147px; }
@@ -361,6 +362,7 @@ body.page-all-work {
   height: 138px;
   background: #201d13;
   top: 986px;            /* 1716 - 730 */
+  will-change: transform, opacity;
 }
 .aw-w3-frame__lg--l { left: 71px; }
 .aw-w3-frame__lg--r { right: 71px; }
@@ -370,6 +372,7 @@ body.page-all-work {
   height: 56px;
   background: #201d13;
   top: 657px;            /* 1387 - 730 */
+  will-change: transform, opacity;
 }
 .aw-w3-frame__sm--l { left: 109px; }
 .aw-w3-frame__sm--r { right: 109px; }
