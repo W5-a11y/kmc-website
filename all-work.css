@@ -137,9 +137,9 @@ body.page-all-work {
   background: var(--aw-bg);
 }
 
-#work_1_1,
-#work_1_3,
-#work_2 {
+#work-hero,
+#work-disposable,
+#work-grid {
   scroll-margin-top: min(12vh, 120px);
 }
 
@@ -243,14 +243,14 @@ body.page-all-work {
 }
 
 /* ─── Section 1 exit transition ──────────────────── */
-#work_1_1 {
+#work-hero {
   transition:
     transform 0.55s var(--aw-ease),
     opacity 0.55s var(--aw-ease),
     filter 0.5s ease;
 }
 
-#work_1_1.aw-s1-exit {
+#work-hero.aw-s1-exit {
   transform: translateY(-1.25vh) scale(0.985);
   opacity: 0.82;
   filter: blur(5px);
@@ -278,7 +278,7 @@ body.page-all-work {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #work_1_1.aw-s1-exit {
+  #work-hero.aw-s1-exit {
     transform: none;
     opacity: 1;
     filter: none;
@@ -304,11 +304,11 @@ body.page-all-work {
 
 /* ─── Section 2: Disposable ──────────────────────── */
 /* Pinning is handled by GSAP ScrollTrigger in work-disposable.js.
-   We only set z-order so #work_2 slides up over #work_1_3 cleanly. */
-/* No position:relative on #work_1_3 — let GSAP's pin-spacer handle stacking.
+   We only set z-order so #work_2 slides up over #work-disposable cleanly. */
+/* No position:relative on #work-disposable — let GSAP's pin-spacer handle stacking.
    Forcing relative here interacts badly with pinType:transform on release. */
-#work_1_3 { z-index: 1; }
-#work_2   { position: relative; z-index: 2; }
+#work-disposable { z-index: 1; }
+#work-grid   { position: relative; z-index: 2; }
 
 .aw-page--3 {
   overflow: visible;
@@ -328,11 +328,11 @@ body.page-all-work {
 /* (Removed: full-stage cream ::before backdrop — was rendering as the
    white rectangle visible above the text. Blend now resolves against
    the section's own cream background.) */
-#work_1_3 .aw-stage { isolation: isolate; background: var(--aw-bg); }
+#work-disposable .aw-stage { isolation: isolate; background: var(--aw-bg); }
 /* Both z-index: auto so source order applies — stack first, frame after,
    meaning frame paints on top of text and mix-blend-difference can read it. */
-#work_1_3 .aw-w3-stack { z-index: auto; }
-#work_1_3 .aw-w3-frame { z-index: auto; }
+#work-disposable .aw-w3-stack { z-index: auto; }
+#work-disposable .aw-w3-frame { z-index: auto; }
 .aw-w3-frame > * {
   position: absolute;
   display: block;
@@ -969,9 +969,9 @@ body.page-all-work {
   }
 }
 
-#work_2 .aw-card .aw-card__media.aw-rise-piece { --aw-rise-step: 0; }
-#work_2 .aw-card .aw-card__title.aw-rise-piece  { --aw-rise-step: 1; }
-#work_2 .aw-card .aw-card__body.aw-rise-piece   { --aw-rise-step: 2; }
+#work-grid .aw-card .aw-card__media.aw-rise-piece { --aw-rise-step: 0; }
+#work-grid .aw-card .aw-card__title.aw-rise-piece  { --aw-rise-step: 1; }
+#work-grid .aw-card .aw-card__body.aw-rise-piece   { --aw-rise-step: 2; }
 
 /* Card grid placements — editorial zigzag */
 .aw-card--1 { grid-column: 1 / 7; margin-bottom: 80px; }

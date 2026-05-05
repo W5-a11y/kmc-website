@@ -38,7 +38,7 @@ kmc-website/
 ├── case-real-estate.html
 ├── case-q3d.html
 ├── case-winery.html
-├── case-study.html         # Aloe Blacc 案例
+├── case-aloe-blacc.html    # 案例：Aloe Blacc "What Makes a House a Home?"
 ├── styles.css              # 全局样式（含 menu drawer、hero、work-footer）
 ├── menu.css                # index.html 专用 menu drawer 覆盖样式
 ├── index.css               # 首页专用样式
@@ -50,7 +50,8 @@ kmc-website/
 ├── ssv-timeline.css        # SSV timeline section 样式
 ├── ssv-watch-episodes.css  # Watch Episodes 页样式
 ├── ssv-episodes.css/js     # SSV episode 卡片状态机组件（v1-v6，FSM）
-├── work-disposable.js      # GSAP ScrollTrigger — #work_1_3 disposable 滚动叙事
+├── nav.js                  # 全站共用 nav：menu drawer + goHome + about-nav collapse + home intro
+├── work-disposable.js      # GSAP ScrollTrigger — #work-disposable scrollytelling
 ├── ssv-landing.js          # SSV landing 6帧 SVG mask 动画驱动
 ├── ssv.js                  # SSV 页面交互（nativeTimelineScroll 模式）
 ├── work-list.js            # work.html 交互（含 awScale 移动缩放函数）
@@ -91,15 +92,15 @@ kmc-website/
 ## work.html — 架构
 
 三个 section：
-1. `#work_1_1` — Hero（"Work" 大标题 + 向下箭头）
-2. `#work_1_3` — Disposable 滚动叙事（GSAP pin + scrub）
-3. `#work_2` — 暗色卡片网格（6 个项目，paper-slide 覆盖钉住区域）
+1. `#work-hero` — Hero（"Work" 大标题 + 向下箭头）
+2. `#work-disposable` — Disposable 滚动叙事（GSAP pin + scrub）
+3. `#work-grid` — 暗色卡片网格（6 个项目，paper-slide 覆盖钉住区域）
 
 **Disposable Section 关键规则：**
 - `.aw-w3-img`（disposable.svg）无 z-index，自然源序在 `.aw-w3-frame` 之前
 - `.aw-w3-frame__rect`：`background:#fff; mix-blend-mode:difference` → 文字在 rect 内显示米白色
 - `.aw-stage`：`isolation:isolate; background:var(--aw-bg)` 提供混合背景
-- `#work_2 { z-index:2 }` 使暗色区域滑过钉住的 disposable
+- `#work-grid { z-index:2 }` 使暗色区域滑过钉住的 disposable
 - GSAP：`pin:true, pinType:'transform', scrub:0.65, end:'+=220%'`
 
 **移动端缩放（已实现）：**

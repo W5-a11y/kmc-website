@@ -1,6 +1,6 @@
 /* work-disposable.js
  * ─────────────────────────────────────────────────────────────────
- * Scroll-driven storytelling for #work_1_3 (Figma 699:454 + 905:352).
+ * Scroll-driven storytelling for #work-disposable (Figma 699:454 + 905:352).
  *
  * Stage: 1440 × 1024. Section is pinned by ScrollTrigger while a single
  * GSAP timeline scrubs from State 1 (disposable text alone on cream)
@@ -15,7 +15,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const section = document.querySelector('#work_1_3');
+  const section = document.querySelector('#work-disposable');
   if (!section) return;
 
   const TOKENS = {

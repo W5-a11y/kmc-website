@@ -105,7 +105,7 @@
     });
   }
 
-  const w3Section = document.getElementById("work_1_3");
+  const w3Section = document.getElementById("work-disposable");
   function w3MorphTick() {
     if (!w3Section) return;
     if (reduce) {
@@ -130,7 +130,7 @@
   }
 
   function scrollToHash() {
-    var map = { "#work_1_1": "work_1_1", "#work_1_3": "work_1_3", "#work_2": "work_2" };
+    var map = { "#work-hero": "work-hero", "#work-disposable": "work-disposable", "#work-grid": "work-grid" };
     var id = map[window.location.hash];
     if (!id) return;
     var el = document.getElementById(id);
@@ -142,11 +142,11 @@
   }
 
   var hash = window.location.hash || "";
-  var deepWork = /^#work_1_3|^#work_2/.test(hash);
+  var deepWork = /^#work-disposable|^#work-grid/.test(hash);
   scrollToHash();
 
-  var s1 = document.getElementById("work_1_1");
-  var s3 = document.getElementById("work_1_3");
+  var s1 = document.getElementById("work-hero");
+  var s3 = document.getElementById("work-disposable");
   var downBtn = document.querySelector(".js-aw-down-next");
   var overlay = document.getElementById("aw-page-transition");
   var awGateActive = !deepWork && !!(s1 && s3 && downBtn);
@@ -232,7 +232,7 @@
       s1.classList.remove("aw-s1-exit");
       downBtn.disabled = false;
       try {
-        history.replaceState(null, "", "#work_1_3");
+        history.replaceState(null, "", "#work-disposable");
       } catch (errSkip) {
         /* ignore */
       }
@@ -270,7 +270,7 @@
         s1.classList.remove("aw-s1-exit");
         finishAwTransition();
         try {
-          history.replaceState(null, "", "#work_1_3");
+          history.replaceState(null, "", "#work-disposable");
         } catch (err) {
           /* ignore */
         }
@@ -284,14 +284,14 @@
 
   (function workFooterScrollTop() {
     const footer = document.querySelector(".js-work-footer-top");
-    const hero = document.getElementById("work_1_1");
+    const hero = document.getElementById("work-hero");
     if (!footer || !hero) return;
 
     function goTop() {
       hero.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       window.setTimeout(w3MorphTick, reduce ? 80 : 520);
       try {
-        history.replaceState(null, "", "#work_1_1");
+        history.replaceState(null, "", "#work-hero");
       } catch (err) {
         /* ignore */
       }
