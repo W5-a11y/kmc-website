@@ -187,7 +187,7 @@
 
 .ab-team__body {
   font-family: 'Fustat', sans-serif;
-  font-size: clamp(18px, 2.5vw, 38px);
+  font-size: clamp(15px, 1.9vw, 28px);
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.05em;
@@ -195,12 +195,75 @@
   margin: 0;
 }
 
+/* ─── Equation marquee ──────────────────────────── */
+.ab-equation-marquee {
+  overflow: hidden;
+  margin: 0 0 clamp(48px, 7vw, 96px);
+  border-top: 1px solid rgba(100, 93, 69, 0.2);
+  border-bottom: 1px solid rgba(100, 93, 69, 0.2);
+}
+
+.ab-equation-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: ab-eq-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.ab-equation-marquee:hover .ab-equation-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes ab-eq-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ab-equation-marquee__item {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: 'Fustat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--ab-olive);
+  padding: clamp(24px, 3.5vh, 44px) clamp(60px, 7vw, 120px) clamp(24px, 3.5vh, 44px) 0;
+}
+
+.ab-equation__op {
+  color: var(--ab-red);
+  font-weight: 800;
+  margin: 0 0.18em;
+}
+
+.ab-equation__eq {
+  color: var(--ab-red);
+  font-weight: 800;
+  margin: 0 0.18em;
+}
+
+/* Result phrase after = stands out with outline style */
+.ab-equation__result {
+  -webkit-text-stroke: 1.5px var(--ab-olive);
+  color: transparent;
+  font-weight: 200;
+}
+
 /* ─── Team grid ─────────────────────────────────── */
 .ab-team__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(20px, 3vw, 48px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.4vw, 40px);
   align-items: start;
+}
+
+@media (max-width: 900px) {
+  .ab-team__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(20px, 4vw, 40px);
+  }
 }
 
 /* ─── Member card ───────────────────────────────── */
@@ -241,6 +304,11 @@
 /* Lucas portrait: keep subject centered in frame */
 .ab-member:nth-child(2) .ab-member__img {
   object-position: center center;
+}
+
+/* Eason portrait: seated pose, focus upper body */
+.ab-member:nth-child(4) .ab-member__img {
+  object-position: center 15%;
 }
 
 .ab-member:hover .ab-member__img {
