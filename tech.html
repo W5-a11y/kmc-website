@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="tech-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech + Venture — KMC+Lucas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Handjet:ELGR,ELSH,wght@1,2,200&family=Funnel+Display:wght@300&family=Micro+5&family=Inter:wght@400;500;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="page-cursor.css" />
+    <link rel="stylesheet" href="tech.css" />
+    <!-- set --tech-scale before first paint to avoid layout jump -->
+    <script>
+      (function () {
+        var s = window.innerWidth / 1440;
+        document.documentElement.style.setProperty('--tech-scale', String(s > 0 ? s : 1));
+      })();
+    </script>
+  </head>
+  <body class="page-tech">
+
+    <!-- ═══ NAV ═══ -->
+    <header class="aw-nav" id="aw-nav">
+      <a href="index.html" class="aw-nav__logo js-go-home" aria-label="KMC × LUCAS — Home">
+        <img src="assets/kmc_logo_grey.svg" alt="KMC × LUCAS" height="17" />
+      </a>
+      <nav class="aw-nav__links" aria-label="Main navigation">
+        <a href="work.html" class="aw-nav__link">Works</a>
+        <a href="tech.html" class="aw-nav__link aw-nav__link--active">Tech+Venture</a>
+        <a href="ssv.html" class="aw-nav__link">SSV</a>
+        <a href="about.html" class="aw-nav__link">About</a>
+        <a href="index.html#contact" class="aw-nav__link">Contact</a>
+      </nav>
+      <button
+        type="button"
+        class="aw-nav__menu js-menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="menu-drawer"
+      >
+        <img src="assets/menu-icon-new.svg" alt="" width="16" height="13" />
+      </button>
+    </header>
+
+    <main class="tech">
+
+      <!-- ═══ HERO ═══ -->
+      <section id="tech-hero" class="th-hero">
+        <div class="th-hero__stage">
+
+          <!-- Static headline -->
+          <p class="th-text th-stories">We Tell Stories for</p>
+
+          <!-- Row 2: Founders + sep + desc → Investors pushed off right -->
+          <div class="th-kw-row th-row-fi">
+            <div class="th-kw-group" data-key="founders">
+              <span class="th-kw th-founders-kw">Founders</span>
+              <span class="th-sep" aria-hidden="true">+</span>
+              <div class="th-founder-desc" aria-hidden="true">
+                <strong class="th-desc-title">Storytelling</strong>
+                <p class="th-desc-body">We turn complex technologies, founder journeys, and product visions into compelling human stories that investors, customers, and communities can understand.</p>
+              </div>
+            </div>
+            <div class="th-kw-group" data-key="investors">
+              <span class="th-kw th-investors-kw">Investors</span>
+            </div>
+          </div>
+
+          <!-- Row 3: × + two desc cols + Builders pushed right -->
+          <div class="th-kw-row th-row-b">
+            <div class="th-kw-group" data-key="builders">
+              <span class="th-builders-plus" aria-hidden="true">+</span>
+              <div class="th-builder-descs" aria-hidden="true">
+                <div class="th-builder-desc">
+                  <strong class="th-desc-title">Branding</strong>
+                  <p class="th-desc-body">We help founders, investors, and technical builders shape their public narratives, personal brands, and thought leadership for the tech and venture ecosystem.</p>
+                </div>
+                <div class="th-builder-desc">
+                  <strong class="th-desc-title">Community Events</strong>
+                  <p class="th-desc-body">We cover hackathons, summits, demo days, founder dinners, and investor gatherings — turning real interactions into lasting media assets.</p>
+                </div>
+              </div>
+              <span class="th-kw th-builders-kw">Builders</span>
+            </div>
+          </div>
+
+          <!-- Static: and the -->
+          <p class="th-text th-andthe">and the</p>
+
+          <!-- (Future): compact by default, expands to full-width panel on hover -->
+          <div class="th-future-group" data-key="future">
+
+            <!-- Default compact view (fades out on hover) -->
+            <p class="th-future-compact" aria-label="(Future)">
+              <span class="th-paren">(</span><span class="th-future">Future</span><span class="th-paren">)</span>
+            </p>
+
+            <!-- Expanded view -->
+            <div class="th-future-expanded" aria-hidden="true">
+              <!-- Row 1+2: ( [cols + cross-cultural] ) -->
+              <div class="th-future-top">
+                <span class="th-paren th-paren-l">(</span>
+                <div class="th-future-cols-wrap">
+                  <div class="th-future-cols">
+                    <div class="th-future-item">
+                      <strong class="th-desc-title">Tech Brand Content</strong>
+                      <p class="th-desc-body">From product narratives to launch campaigns, we craft content that makes innovation visible, credible, and memorable.</p>
+                    </div>
+                    <div class="th-future-item">
+                      <strong class="th-desc-title">Private Community Media</strong>
+                      <p class="th-desc-body">We create content for high-trust communities where founders, investors, operators, and university networks exchange ideas and build relationships.</p>
+                    </div>
+                  </div>
+                  <div class="th-future-item">
+                    <strong class="th-desc-title">Cross-Cultural Market Communication</strong>
+                    <p class="th-desc-body">We bridge global tech brands with Silicon Valley audiences through localized storytelling, cultural fluency, and platform-native content.</p>
+                  </div>
+                </div>
+                <span class="th-paren th-paren-r">)</span>
+              </div>
+              <!-- Row 3: Future pixel text, aligned with ( -->
+              <span class="th-future th-future-big">Future</span>
+            </div>
+
+          </div>
+
+          <a href="#tech-projects" class="th-collab" aria-label="View selected collaborations">
+            <span class="th-collab__arrow" aria-hidden="true">↗</span>
+            <span class="th-collab__text">Selected<br />Collaboration</span>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ═══ RED SECTION ═══ -->
+      <section id="tech-red" class="th-red">
+
+        <!-- Project Cards -->
+        <div id="tech-projects" class="th-projects">
+
+          <article class="th-card" data-project="beta">
+            <div class="th-card__media">
+              <img class="th-card__img th-card__img--bw"    src="assets/tech-beta-bw.png"    alt="KMC + Berkeley BETA" loading="lazy" />
+              <img class="th-card__img th-card__img--color" src="assets/tech-beta-color.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <div class="th-card__info">
+              <h2 class="th-card__title"><span class="th-card__title-hl">KMC +<br />Berkeley<br />BETA</span></h2>
+              <p class="th-card__desc">Partnering with one of UC Berkeley's leading venture communities, we support storytelling, founder visibility, and content production for emerging founders and ideas. We help early-stage innovation become easier to understand, share, and support.</p>
+            </div>
+          </article>
+
+          <article class="th-card" data-project="ai">
+            <div class="th-card__media">
+              <img class="th-card__img th-card__img--bw"    src="assets/tech-ai-bw.png"    alt="AI Summits + Hackathons" loading="lazy" />
+              <img class="th-card__img th-card__img--color" src="assets/tech-ai-color.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <div class="th-card__info">
+              <h2 class="th-card__title"><span class="th-card__title-hl">AI Summits +<br />Hackathons</span></h2>
+              <p class="th-card__desc">On-site production and real-time storytelling for cutting-edge AI events in Silicon Valley. We capture builders, ideas, community energy, and the momentum behind the next generation of AI products.</p>
+            </div>
+          </article>
+
+          <article class="th-card" data-project="q3d">
+            <div class="th-card__media">
+              <img class="th-card__img th-card__img--bw"    src="assets/tech-q3d-bw.png"    alt="Q3D × Stanford University Interviews" loading="lazy" />
+              <img class="th-card__img th-card__img--color" src="assets/tech-q3d-color.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <div class="th-card__info">
+              <h2 class="th-card__title"><span class="th-card__title-hl">Q3D ×<br />Stanford<br />University<br />Interviews</span></h2>
+              <p class="th-card__desc">A founder-focused interview series highlighting deep-tech perspectives and innovation narratives from Stanford's ecosystem. The series translates technical insight into accessible stories for broader audiences.</p>
+            </div>
+          </article>
+
+          <article class="th-card" data-project="dreame">
+            <div class="th-card__media">
+              <img class="th-card__img th-card__img--bw"    src="assets/tech-dreame-bw.png"    alt="Dreame Technology Silicon Valley Campaign" loading="lazy" />
+              <img class="th-card__img th-card__img--color" src="assets/tech-dreame-color.png" alt="" aria-hidden="true" loading="lazy" />
+            </div>
+            <div class="th-card__info">
+              <h2 class="th-card__title"><span class="th-card__title-hl">Dreame<br />Technology<br />Silicon Valley<br />Campaign</span></h2>
+              <p class="th-card__desc">Supporting Dreame's U.S. brand activation through visual storytelling, event coverage, and localized content production. The campaign connects a global technology brand with Silicon Valley's tech and lifestyle audiences.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Why Choose Us -->
+        <div id="tech-why" class="th-why">
+          <div class="th-why__words" aria-label="Why Choose Us">
+            <div class="th-why__word th-why__word--why">
+              <img src="assets/tech-why.png" alt="Why" />
+            </div>
+            <div class="th-why__word th-why__word--choose">
+              <img src="assets/tech-choose.png" alt="Choose" />
+            </div>
+            <div class="th-why__word th-why__word--us">
+              <img src="assets/tech-us.png" alt="Us" />
+            </div>
+          </div>
+
+          <div class="th-why__footer">
+            <button type="button" class="th-back-top js-th-back-top" aria-label="Back to top of page">
+              Back to top
+            </button>
+            <span class="th-back-top__arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ═══ Let's Talk ═══ -->
+    <a class="aw-talk" href="index.html#contact" aria-label="Let's talk">
+      <img src="assets/lets-talk.svg" alt="Let's Talk" />
+    </a>
+
+    <!-- ═══ MENU DRAWER ═══ -->
+    <div class="menu-drawer" id="menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+      <div class="menu-drawer__panel">
+        <div class="menu-drawer__bar">
+          <div class="menu-drawer__brand">
+            <a href="index.html" class="menu-drawer__logo menu-drawer__logo--horizontal js-go-home" aria-label="KMC × LUCAS — Home">
+              <img class="menu-drawer__logo-img" src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="440" height="74" />
+            </a>
+            <nav class="menu-drawer__nav" aria-label="Main menu">
+              <a href="index.html"          class="menu-drawer__link js-go-home">Home</a>
+              <a href="work.html#work-hero" class="menu-drawer__link">The Work</a>
+              <a href="tech.html"           class="menu-drawer__link menu-drawer__link--accent">Tech+Venture</a>
+              <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
+              <a href="ssv.html"            class="menu-drawer__link">SSV</a>
+              <a href="about.html"          class="menu-drawer__link">About Us</a>
+              <a href="index.html#contact"  class="menu-drawer__link">Contact</a>
+            </nav>
+          </div>
+          <button type="button" class="menu-drawer__toggle js-menu-toggle" aria-label="Close menu" aria-expanded="true">
+            <span class="menu-drawer__toggle-icon" aria-hidden="true">
+              <img src="assets/icon-x.svg" alt="" width="48" height="48" />
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc" id="page-cursor" aria-hidden="true"><span class="pc__dot"></span></div>
+
+    <script src="nav.js"></script>
+    <script src="tech.js"></script>
+    <script src="page-cursor.js"></script>
+  </body>
+</html>
