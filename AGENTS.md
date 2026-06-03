@@ -63,8 +63,9 @@ npm run build  # 构建
 
 ## 设计资源
 
-- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`
-- Figma API Token：`figd_rCX0OgmA6_ex-UyO64WgVT65yOYmMm_hvKKlzvV9`
+- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`（环境变量 `FIGMA_FILE_KEY`）
+- Figma API Token：存放在 **`.env.local`** 的 `FIGMA_ACCESS_TOKEN`（勿写入本文件或提交 git；模板见 `.env.example`）
+- Cloud Agent 持久化：在 Cursor → Background Agent → Secrets 添加同名变量 `FIGMA_ACCESS_TOKEN`
 - 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
 
 ## 维护说明
