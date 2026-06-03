@@ -144,9 +144,14 @@ npm run build
 
 ## 设计资源
 
-- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`
-- Figma API Token：`figd_rCX0OgmA6_ex-UyO64WgVT65yOYmMm_hvKKlzvV9`
+- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`（环境变量 `FIGMA_FILE_KEY`）
+- Figma API Token：存放在 **`.env.local`** 的 `FIGMA_ACCESS_TOKEN`（勿写入本文件或提交 git；模板见 `.env.example`）
+- Cloud Agent 持久化：在 Cursor → Background Agent → Secrets 添加同名变量 `FIGMA_ACCESS_TOKEN`
 - 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
+
+## 上线前待办（最终修复时提醒）
+
+- **`work.html` — 5 张 work 网格卡片的黑白图**仍使用 Figma MCP 临时 URL（`figma.com/api/mcp/asset/...`，会 404）。用户计划自行改；**项目最后收尾时必须替换为 `assets/` 本地文件并更新 `src`**。位置：约第 91、103、119、131、155 行（SSV、Aloe Blacc、Stanford、Real Estate、Winery 各一张 `.aw-card-v2__img--bw`）。
 
 ## 维护说明
 
