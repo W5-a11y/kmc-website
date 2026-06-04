@@ -277,62 +277,83 @@
   max-width: 349px;
 }
 
-/* ─── Why choose us ─── */
+/* ─── Why choose us (th-why__word — Figma why / choose / us) ─── */
 .tech-why {
   background: var(--red);
   padding: clamp(40px, 5vw, 80px) var(--gutter) clamp(80px, 10vw, 140px);
   color: var(--red-hot);
 }
 
-.tech-why__title {
+.th-why__row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: end;
-  gap: clamp(8px, 1.5vw, 24px);
-  max-width: 1100px;
-  margin-bottom: clamp(32px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
+  max-width: 1200px;
 }
 
-.tech-why__title img {
-  display: block;
-  height: auto;
-  max-width: 100%;
-}
-
-.tech-why__title-why {
-  width: min(348px, 32vw);
-}
-
-.tech-why__title-choose {
-  width: min(706px, 52vw);
-  justify-self: center;
-}
-
-.tech-why__title-us {
-  width: min(229px, 22vw);
-  justify-self: end;
-}
-
-.tech-why__copy {
-  max-width: 900px;
-  margin-left: auto;
+.th-why__word {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 3vw, 40px);
+  gap: clamp(16px, 2vw, 28px);
 }
 
-#tech-why > div:nth-of-type(1) > div:nth-of-type(1) > div > p,
-.tech-why__lead,
-.tech-why__body {
+/* Same display height for Why / Choose / Us (US no longer one size down) */
+.th-why__mark {
+  position: relative;
+  height: clamp(180px, 22vw, 220px);
+  display: flex;
+  align-items: flex-end;
+}
+
+.th-why__stay,
+.th-why__slide {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left bottom;
+  transition: opacity 0.45s var(--ease-std);
+}
+
+.th-why__slide {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-std);
+}
+
+.th-why__word:hover .th-why__stay,
+.th-why__word:focus-within .th-why__stay {
+  opacity: 0;
+}
+
+.th-why__word:hover .th-why__slide,
+.th-why__word:focus-within .th-why__slide {
+  opacity: 1;
+}
+
+/* Us — match Why/Choose visual scale (Figma asset is narrower) */
+.th-why__word--us .th-why__mark {
+  height: clamp(180px, 22vw, 220px);
+}
+
+.th-why__word--us .th-why__stay,
+.th-why__word--us .th-why__slide {
+  height: 100%;
+  transform: scale(1.48);
+  transform-origin: left bottom;
+}
+
+.th-why__word p {
   margin: 0;
   font-weight: 600;
   font-size: clamp(16px, 1.6vw, 23px);
   line-height: 1.35;
   letter-spacing: -0.03em;
-}
-
-.tech-why__body {
-  max-width: 680px;
+  max-width: 28em;
 }
 
 /* ─── Footer ─── */
@@ -407,14 +428,8 @@
 }
 
 @media (max-width: 720px) {
-  .tech-why__title {
+  .th-why__row {
     grid-template-columns: 1fr;
-    justify-items: start;
-  }
-
-  .tech-why__title-choose,
-  .tech-why__title-us {
-    justify-self: start;
   }
 
   .tech-red__stories {
