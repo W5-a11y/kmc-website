@@ -1,6 +1,5 @@
 /* tech.css — Tech + Venture page (Figma 1120:733)
- * Card hover red blocks: see tech-card-hover.css (pseudo-elements only).
- * Do NOT re-enable per-span hover width/background below.
+ * Card hover: load tech-card-hover.css AFTER this file (see tech.html).
  */
 
 .page-tech {
@@ -112,38 +111,20 @@
   max-width: 349px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   REMOVED — per-span hover width/background (caused fragmented rects).
-   Hover interaction lives in tech-card-hover.css via ::before/::after.
-   ═══════════════════════════════════════════════════════════════
-
+/* Span hl never expands here — hover blocks live in tech-card-hover.css */
+#tech-projects > article:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects > article:is(:hover, :focus-within) .th-card__title-hl > .th-card__hl,
+#tech-projects > article:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text),
+#tech-projects > article:is(:hover, :focus-within) .th-card__desc-hl > span:not(.th-card__desc-text),
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__body-hl > .th-card__hl,
 .th-card:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-.th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text) {
-  width: 100%;
-  background: var(--red-hot, #ff271a);
-}
-
-.th-card:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text):nth-of-type(1) {
-  width: 482px;
-}
-
-.th-card:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text):nth-of-type(2) {
-  width: 525px;
-}
-
 .th-card:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text),
-.th-card:is(:hover, :focus-within) .th-card__desc-hl > span:not(.th-card__desc-text) {
-  width: 479px;
-  background: var(--red-hot, #ff271a);
+.th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text) {
+  width: 0 !important;
+  max-width: 0 !important;
+  background: transparent !important;
 }
-
-.th-card:is(:hover, :focus-within) .th-card__title-text,
-.th-card:is(:hover, :focus-within) .th-card__body-text,
-.th-card:is(:hover, :focus-within) .th-card__desc-text {
-  color: var(--cream, #f4f3ef);
-}
-
-   ═══════════════════════════════════════════════════════════════ */
 
 /* ─── Card grid when article lacks .th-card class (Desktop markup) ─── */
 #tech-projects > article {
