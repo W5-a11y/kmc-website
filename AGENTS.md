@@ -29,6 +29,8 @@ kmc-website/
 ├── ssv.html            # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html  # SSV「Watch Episodes」落地页（Figma 805:927）
 ├── ssv-watch-episodes.css
+├── tech.html           # Tech + Venture（Figma 1120:733）
+├── tech.css / tech.js
 ├── about.html          # 关于页面
 ├── case-stanford.html  # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html

@@ -33,6 +33,8 @@ kmc-website/
 ├── work.html               # 作品列表（Hero → Disposable 滚动叙事 → 暗色卡片网格）
 ├── ssv.html                # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html # SSV「Watch Episodes」落地页
+├── tech.html               # Tech + Venture（Figma 1120:733）
+├── tech.css / tech.js
 ├── about.html              # 关于页面（无 page cursor；nav 色 #645D45）
 ├── case-stanford.html      # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html
@@ -88,6 +90,7 @@ kmc-website/
 - `ssv.html` → SSV
 - `ssv-watch-episodes.html` → Watch Episodes
 - `about.html` → About Us
+- `tech.html` → Tech + Venture
 
 ## work.html — 架构
 

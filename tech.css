@@ -1,0 +1,321 @@
+/* tech.css — Tech + Venture (Figma 1120:733) */
+
+.page-tech {
+  margin: 0;
+  background: var(--cream);
+  color: var(--red-hot);
+  font-family: var(--font-fustat);
+}
+
+.tech-main {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ─── Nav ─── */
+.tech-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(16px, 2.5vw, 50px) var(--gutter);
+  background: var(--cream);
+}
+
+.tech-nav__links {
+  display: flex;
+  gap: clamp(20px, 3vw, 48px);
+  font-size: var(--fs-nav);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: capitalize;
+}
+
+.tech-nav__link {
+  color: var(--sand);
+  text-decoration: none;
+  transition: color 0.2s var(--ease-std);
+}
+
+.tech-nav__link:hover,
+.tech-nav__link--active {
+  color: var(--red-hot);
+}
+
+.tech-nav__menu {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .tech-nav__links { display: none; }
+}
+
+/* ─── Hero ─── */
+.tech-hero {
+  position: relative;
+  padding: clamp(24px, 4vw, 48px) var(--gutter) clamp(80px, 10vw, 140px);
+  min-height: clamp(520px, 52vw, 756px);
+}
+
+.tech-hero__headlines {
+  max-width: 1200px;
+}
+
+.tech-hero__line {
+  margin: 0;
+  font-weight: 200;
+  font-size: clamp(56px, 11.8vw, 170px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--red-hot);
+}
+
+.tech-hero__line--founders {
+  margin-top: clamp(4px, 0.5vw, 8px);
+}
+
+.tech-hero__words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 32px);
+  margin-top: clamp(8px, 1.2vw, 20px);
+}
+
+.tech-hero__word {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.tech-hero__word--builders {
+  width: min(689px, 48vw);
+}
+
+.tech-hero__word--investors {
+  width: min(580px, 40vw);
+  margin-left: auto;
+}
+
+.tech-hero__tail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 28px);
+  margin-top: clamp(12px, 1.5vw, 24px);
+}
+
+.tech-hero__line--and {
+  font-size: clamp(40px, 8vw, 170px);
+}
+
+.tech-hero__word--future {
+  width: min(484px, 34vw);
+}
+
+.tech-hero__collab-label {
+  position: absolute;
+  right: var(--gutter);
+  bottom: clamp(32px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: clamp(18px, 2.3vw, 33px);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  color: var(--red-hot);
+}
+
+.tech-hero__collab-icon {
+  width: clamp(32px, 3.75vw, 54px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* ─── Red section ─── */
+.tech-red {
+  position: relative;
+  background: var(--red);
+  padding: clamp(48px, 6vw, 100px) var(--gutter) clamp(64px, 8vw, 120px);
+  overflow: hidden;
+}
+
+.tech-red__stories {
+  position: absolute;
+  right: clamp(-8px, 2vw, 72px);
+  top: clamp(24px, 4vw, 80px);
+  margin: 0;
+  font-weight: 200;
+  font-size: clamp(56px, 11.8vw, 170px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.tech-cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 56px);
+  max-width: 1370px;
+  margin: 0 auto;
+}
+
+.tech-card {
+  margin: 0;
+}
+
+.tech-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ─── Why choose us ─── */
+.tech-why {
+  background: var(--red);
+  padding: clamp(40px, 5vw, 80px) var(--gutter) clamp(80px, 10vw, 140px);
+  color: var(--red-hot);
+}
+
+.tech-why__title {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: clamp(8px, 1.5vw, 24px);
+  max-width: 1100px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.tech-why__title img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.tech-why__title-why {
+  width: min(348px, 32vw);
+}
+
+.tech-why__title-choose {
+  width: min(706px, 52vw);
+  justify-self: center;
+}
+
+.tech-why__title-us {
+  width: min(229px, 22vw);
+  justify-self: end;
+}
+
+.tech-why__copy {
+  max-width: 900px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.tech-why__lead,
+.tech-why__body {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(16px, 1.6vw, 23px);
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.tech-why__body {
+  max-width: 680px;
+}
+
+@media (max-width: 720px) {
+  .tech-why__title {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .tech-why__title-choose,
+  .tech-why__title-us {
+    justify-self: start;
+  }
+  .tech-red__stories {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-bottom: 24px;
+  }
+  .tech-hero__collab-label {
+    position: static;
+    margin-top: 40px;
+  }
+}
+
+/* ─── Footer ─── */
+.tech-footer {
+  background: var(--red);
+  padding: 0 var(--gutter) clamp(48px, 6vw, 80px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tech-footer__back {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 18px);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--red-hot);
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(28px, 3.1vw, 45px);
+  letter-spacing: -0.05em;
+  transition: opacity 0.25s var(--ease-std);
+}
+
+.tech-footer__back:hover {
+  opacity: 0.75;
+}
+
+.tech-footer__back-icon {
+  display: inline-flex;
+  width: clamp(64px, 8.3vw, 120px);
+  height: clamp(64px, 8.3vw, 120px);
+}
+
+.tech-footer__back-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ─── Let's talk ─── */
+.tech-talk {
+  position: fixed;
+  right: clamp(18px, 2.2vw, 34px);
+  bottom: clamp(18px, 2.2vw, 34px);
+  width: clamp(88px, 8.75vw, 126px);
+  height: clamp(88px, 8.75vw, 126px);
+  z-index: calc(var(--z-nav) + 2);
+  transition: transform 0.3s var(--ease-gentle);
+}
+
+.tech-talk:hover {
+  transform: scale(1.06) rotate(12deg);
+}
+
+.tech-talk img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
