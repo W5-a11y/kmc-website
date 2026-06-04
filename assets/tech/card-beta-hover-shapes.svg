@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 645 272" fill="none" aria-hidden="true">
-  <!-- Figma 1166:565 Variant2  Group 150 highlight shapes only -->
-  <rect x="163" y="5" width="482" height="51" fill="#FF271A"/>
-  <rect x="120" y="56" width="525" height="120" fill="#FF271A"/>
-  <rect x="166" y="173" width="479" height="94" fill="#FF271A"/>
+<svg width="526" height="265" viewBox="0 0 526 265" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Figma 1197:565 Group 150 — shapes only (#FF281B) -->
+  <path d="M43.4348 51.3942H525.899V0.345058H43.4348V51.3942Z" fill="#FF281B"/>
+  <path d="M0.393445 171.51H525.899V51.3942H0.393445V171.51Z" fill="#FF281B"/>
+  <path d="M46.4377 262.597H525.899V168.507H46.4377V262.597Z" fill="#FF281B"/>
 </svg>

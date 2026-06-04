@@ -10,7 +10,7 @@ hover_css = (root / "tech-card-hover.css").read_text() if (root / "tech-card-hov
 svg = root / "assets/tech/card-beta-hover-shapes.svg"
 
 print("=== tech.html ===")
-for name in ["tech.css", "tech-card-hover.css", "th-card__hover-reveal", "card-beta-hover-shapes.svg"]:
+for name in ["tech.css", "tech-card-hover.css", "th-card__hover-reveal", "th-card__hover-shapes", "th-card__copy", "card-beta-hover-shapes.svg"]:
     print(f"  {name}:", name in html or (name.endswith(".svg") and svg.exists()))
 
 print("\n=== tech.css ===")

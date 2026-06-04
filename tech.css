@@ -35,6 +35,12 @@
   overflow: hidden;
 }
 
+.th-card__copy {
+  position: relative;
+  width: 100%;
+  max-width: 526px;
+}
+
 .th-card__title {
   margin: 0 0 clamp(20px, 3vw, 40px);
   font-weight: 500;

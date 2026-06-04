@@ -1,28 +1,26 @@
 /**
- * Tech card hover — single overlay (Figma 1166:565 Variant2 shapes)
- * assets/tech/card-beta-hover-shapes.svg reveals left → right on hover.
+ * Tech card hover — inline SVG (Figma 1197:565), left → right reveal.
  * Load AFTER tech.css.
  */
 
 .th-card__hover-reveal {
   position: absolute;
   z-index: 1;
-  left: 77px;
-  top: 120px;
-  width: 645px;
-  max-width: calc(100% - 77px);
-  height: 272px;
+  left: 0;
+  top: 0;
+  width: 526px;
+  max-width: 100%;
+  height: 265px;
   overflow: hidden;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.th-card__hover-reveal img {
+.th-card__hover-shapes {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: fill;
 }
 
 /* Hover scope: first BETA card */
@@ -48,11 +46,9 @@
 
 @media (max-width: 900px) {
   .th-card__hover-reveal {
-    left: clamp(16px, 5vw, 77px);
-    top: clamp(80px, 18vw, 120px);
-    width: min(645px, calc(100% - clamp(16px, 5vw, 77px)));
+    width: 100%;
     height: auto;
-    aspect-ratio: 645 / 272;
+    aspect-ratio: 526 / 265;
   }
 }
 
