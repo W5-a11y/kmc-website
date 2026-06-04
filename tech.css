@@ -231,7 +231,10 @@
 }
 
 .th-card--beta .th-lh-tight {
+  position: relative;
+  display: inline-block;
   margin-left: -43px;
+  padding: 0.05em 0.12em 0.05em 0.14em;
 }
 
 .th-card--q3d .th-card__title-hl {

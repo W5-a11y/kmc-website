@@ -21,9 +21,25 @@
 }
 
 .th-card--beta .th-card__hover-reveal {
-  width: 526px;
-  max-width: calc(100% + 43px);
+  left: -24px;
+  width: 558px;
+  max-width: calc(100% + 67px);
   height: 265px;
+}
+
+/* Berkeley row — fill any SVG gap at line edges */
+.th-card--beta:is(:hover) .th-lh-tight::before,
+.th-card--beta:is(:focus-within) .th-lh-tight::before,
+.th-card--beta .th-card__info:is(:hover) .th-lh-tight::before,
+.th-card--beta .th-card__info:is(:focus-within) .th-lh-tight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.14em;
+  right: -0.1em;
+  top: -0.08em;
+  bottom: -0.08em;
+  background: var(--red-hot, #ff281b);
 }
 
 .th-card--ai-hack .th-card__hover-reveal {
@@ -116,6 +132,11 @@
 
   .th-card--beta .th-card__title-hl {
     padding-left: clamp(20px, 6vw, 43px);
+  }
+
+  .th-card--beta .th-card__hover-reveal {
+    left: -12px;
+    width: 100%;
   }
 
   .th-card--beta .th-lh-tight {
