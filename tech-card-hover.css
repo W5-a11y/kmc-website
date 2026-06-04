@@ -1,101 +1,143 @@
 /**
- * Tech BETA card — hover red highlight blocks (Figma 1166:565 Variant2).
- * Load AFTER tech.css. Does not define default/rest styles.
- *
- * Fixes fragmented per-line highlights: uses two blocks on .th-card__title-hl
- * and one on .th-card__body-hl, sized/positioned from the 1370×583 card.
+ * Tech card hover — Figma 1166:565 Variant2
+ * Load AFTER tech.css. Overrides any per-span hover width/background.
  */
 
-/* ── Title: hide broken per-line hl spans on hover only ── */
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-hl > .th-card__hl,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-hl > .th-card__hl {
+/* ── Kill legacy per-line hl spans on hover (must beat local tech.css) ── */
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects .th-card:first-child .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+.th-card--beta:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-hl > .th-card__hl,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__desc-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) > p > span:not(.th-card__body-text):not(.th-card__desc-text) {
+  width: 0 !important;
+  max-width: 0 !important;
+  min-width: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
   display: none !important;
 }
 
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-hl,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-hl {
+/* ── Hover scope: first card / beta ── */
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__info,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__info,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within),
+.th-card--beta:is(:hover, :focus-within) .th-card__info,
+.th-card--beta .th-card__info:is(:hover, :focus-within) {
   position: relative;
-  z-index: 0;
+  isolation: isolate;
 }
 
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-text,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-text {
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--beta:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-hl {
   position: relative;
-  z-index: 1;
-  color: var(--cream, #f4f3ef);
+  isolation: isolate;
+  min-height: 176px;
 }
 
-/* Rectangle 7 — main title block 525×120 @ (120, 56) from title box origin */
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-hl::before,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-hl::before {
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-text,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-text,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-text,
+.th-card--beta:is(:hover, :focus-within) .th-card__title-text,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-text,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__body-text,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__desc-text,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__body-text,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__desc-text {
+  position: relative;
+  z-index: 2;
+  color: var(--cream, #f4f3ef) !important;
+}
+
+/* Rectangle 7 — 525×120 @ (120, 56) relative to title box */
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-hl::before,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl::before,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl::before,
+.th-card--beta:is(:hover, :focus-within) .th-card__title-hl::before,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-hl::before {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   left: 120px;
   top: 56px;
-  width: min(525px, 88.7%);
+  width: 525px;
+  max-width: calc(100% - 120px);
   height: 120px;
   background: var(--red-hot, #ff271a);
   pointer-events: none;
 }
 
-/* Rectangle 6 — top strip 482×51 @ (163, 5) */
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__title-hl::after,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__title-hl::after {
+/* Rectangle 6 — 482×51 @ (163, 5) */
+#tech-projects .th-card:first-child:is(:hover, :focus-within) .th-card__title-hl::after,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl::after,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl::after,
+.th-card--beta:is(:hover, :focus-within) .th-card__title-hl::after,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-hl::after {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   left: 163px;
   top: 5px;
-  width: min(482px, 81.4%);
+  width: 482px;
+  max-width: calc(100% - 163px);
   height: 51px;
   background: var(--red-hot, #ff271a);
   pointer-events: none;
 }
 
-/* ── Body: hide fragment hl spans on hover ── */
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__desc-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) > p > span:not(.th-card__body-text):not(.th-card__desc-text),
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__body-hl > .th-card__hl,
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__desc-hl > .th-card__hl {
-  display: none !important;
-}
-
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__body-hl,
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__desc-hl,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__body-hl,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__desc-hl,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) > p {
+/* Body area stacking */
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__body-hl,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__desc-hl,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__body-hl,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__desc-hl,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) > p,
+.th-card--beta:is(:hover, :focus-within) .th-card__body-hl,
+.th-card--beta .th-card__info:is(:hover, :focus-within) > p {
   position: relative;
-  z-index: 0;
+  isolation: isolate;
 }
 
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__body-text,
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__desc-text,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__body-text,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__desc-text {
-  position: relative;
-  z-index: 1;
-  color: var(--cream, #f4f3ef);
-}
-
-/* Rectangle 8 — body block 479×94 (offset above body copy) */
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__body-hl::before,
-#tech-projects > article:nth-of-type(1):is(:hover, :focus-within) .th-card__desc-hl::before,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__body-hl::before,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) .th-card__desc-hl::before,
-#tech-projects > article:nth-of-type(1) .th-card__info:is(:hover, :focus-within) > p::before {
+/* Rectangle 8 — 479×94 @ (166, 173) relative to .th-card__info */
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__info::before,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within)::before,
+.th-card--beta:is(:hover, :focus-within) .th-card__info::before,
+.th-card--beta .th-card__info:is(:hover, :focus-within)::before {
   content: "";
   position: absolute;
-  z-index: -1;
-  left: 0;
-  top: -31px;
-  width: min(479px, 100%);
+  z-index: 1;
+  left: 166px;
+  top: 173px;
+  width: 479px;
+  max-width: calc(100% - 166px);
   height: 94px;
   background: var(--red-hot, #ff271a);
   pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl::before,
+  #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl::before {
+    left: clamp(40px, 12vw, 120px);
+    width: min(525px, calc(100% - clamp(40px, 12vw, 120px)));
+  }
+
+  #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl::after,
+  #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl::after {
+    left: clamp(56px, 16vw, 163px);
+    width: min(482px, calc(100% - clamp(56px, 16vw, 163px)));
+  }
+
+  #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__info::before,
+  #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within)::before {
+    left: clamp(24px, 8vw, 166px);
+    width: min(479px, calc(100% - clamp(24px, 8vw, 166px)));
+  }
 }

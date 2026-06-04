@@ -32,6 +32,7 @@
   justify-content: center;
   padding: clamp(24px, 4vw, 48px);
   color: var(--red-hot, #ff271a);
+  position: relative;
 }
 
 .th-card__title {
@@ -47,6 +48,14 @@
 .th-card__desc-hl {
   position: relative;
   display: block;
+}
+
+/* Rest: no pseudo highlight blocks (hover in tech-card-hover.css) */
+.th-card__title-hl::before,
+.th-card__title-hl::after,
+.th-card__info::before,
+.th-card__info::after {
+  content: none;
 }
 
 .th-card__title-text,
