@@ -1,6 +1,6 @@
 /**
- * Tech card hover — inline SVG (Figma 1197:565), left → right reveal.
- * Load AFTER tech.css.
+ * Tech card hover — SVG overlay in h2, LTR reveal. Matches Desktop:
+ * #tech-projects > article:nth-of-type(1) > div:nth-of-type(2) > h2 > span
  */
 
 .th-card__hover-reveal {
@@ -9,7 +9,7 @@
   left: 0;
   top: 0;
   width: 526px;
-  max-width: 100%;
+  max-width: calc(100% + 43px);
   height: 265px;
   overflow: hidden;
   pointer-events: none;
@@ -23,24 +23,29 @@
   height: 100%;
 }
 
-/* Hover scope: first BETA card */
 #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__hover-reveal,
 #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal,
-#tech-projects .th-card--beta:is(:hover, :focus-within) .th-card__hover-reveal,
-#tech-projects .th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal {
+.th-card--beta:is(:hover, :focus-within) .th-card__hover-reveal,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal {
   clip-path: inset(0 0 0 0);
 }
 
-#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-text,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article:first-of-type:is(:hover, :focus-within) .th-lh-tight,
 #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__body-text,
-#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-text,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-lh-tight,
 #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__body-text,
-.th-card--beta:is(:hover, :focus-within) .th-card__title-text,
+.th-card--beta:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--beta:is(:hover, :focus-within) .th-lh-std,
+.th-card--beta:is(:hover, :focus-within) .th-lh-tight,
 .th-card--beta:is(:hover, :focus-within) .th-card__body-text,
-.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-text,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-lh-std,
+.th-card--beta .th-card__info:is(:hover, :focus-within) .th-lh-tight,
 .th-card--beta .th-card__info:is(:hover, :focus-within) .th-card__body-text {
-  position: relative;
-  z-index: 2;
   color: var(--cream, #f4f3ef);
 }
 
@@ -49,6 +54,14 @@
     width: 100%;
     height: auto;
     aspect-ratio: 526 / 265;
+  }
+
+  .th-card__title-hl {
+    padding-left: clamp(20px, 6vw, 43px);
+  }
+
+  .th-lh-tight {
+    margin-left: clamp(-43px, -6vw, -20px);
   }
 }
 

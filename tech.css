@@ -1,5 +1,5 @@
 /* tech.css — Tech + Venture page (Figma 1120:733)
- * Card hover overlay: tech-card-hover.css (see tech.html).
+ * Card hover: tech-card-hover.css after this file.
  */
 
 .page-tech {
@@ -9,7 +9,6 @@
   font-family: var(--font-fustat, "Fustat", system-ui, sans-serif);
 }
 
-/* ─── Project cards ─── */
 .th-card {
   display: grid;
   grid-template-columns: minmax(0, 778fr) minmax(0, 592fr);
@@ -35,37 +34,43 @@
   overflow: hidden;
 }
 
-.th-card__copy {
-  position: relative;
-  width: 100%;
-  max-width: 526px;
-}
-
 .th-card__title {
+  position: relative;
   margin: 0 0 clamp(20px, 3vw, 40px);
   font-weight: 500;
   font-size: clamp(40px, 4.5vw, 65px);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
 }
 
 .th-card__title-hl,
 .th-card__body-hl,
 .th-card__desc-hl {
   position: relative;
+  z-index: 2;
   display: block;
 }
 
-.th-card__title-text,
+/* Figma: R6/R8 indent 43px; R7 (Berkeley row) extends 43px further left */
+.th-card__title-hl {
+  padding-left: 43px;
+}
+
+.th-lh-std {
+  display: block;
+  line-height: 1;
+}
+
+.th-lh-tight {
+  display: block;
+  margin-left: -43px;
+  line-height: 1;
+}
+
 .th-card__body-text,
 .th-card__desc-text {
   position: relative;
   z-index: 2;
   display: block;
-}
-
-.th-card__body-text,
-.th-card__desc-text {
   margin: 0;
   font-weight: 600;
   font-size: clamp(11px, 1vw, 12px);
@@ -74,7 +79,6 @@
   max-width: 349px;
 }
 
-/* ─── Card grid when article lacks .th-card class (Desktop markup) ─── */
 #tech-projects > article {
   display: grid;
   grid-template-columns: minmax(0, 778fr) minmax(0, 592fr);
