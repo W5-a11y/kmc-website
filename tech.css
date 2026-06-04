@@ -321,6 +321,7 @@
   gap: clamp(20px, 3vw, 40px);
 }
 
+#tech-why > div:nth-of-type(1) > div:nth-of-type(1) > div > p,
 .tech-why__lead,
 .tech-why__body {
   margin: 0;
