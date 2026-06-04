@@ -33,6 +33,8 @@ kmc-website/
 ├── work.html               # 作品列表（Hero → Disposable 滚动叙事 → 暗色卡片网格）
 ├── ssv.html                # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html # SSV「Watch Episodes」落地页
+├── tech.html               # Tech + Venture（Figma 1120:733）
+├── tech.css / tech.js
 ├── about.html              # 关于页面（无 page cursor；nav 色 #645D45）
 ├── case-stanford.html      # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html
@@ -88,6 +90,7 @@ kmc-website/
 - `ssv.html` → SSV
 - `ssv-watch-episodes.html` → Watch Episodes
 - `about.html` → About Us
+- `tech.html` → Tech + Venture
 
 ## work.html — 架构
 
@@ -144,9 +147,13 @@ npm run build
 
 ## 设计资源
 
-- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`
-- Figma API Token：`figd_rCX0OgmA6_ex-UyO64WgVT65yOYmMm_hvKKlzvV9`
-- 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
+- Figma 设计稿由维护者在本地查看；**勿在本仓库任何文件或 commit 中写入 API token、`.env` 路径或密钥说明**。
+- 页面注释中的 Figma 节点 ID（如 `1120:733`）仅作设计对照，非 API 配置。
+- 原始 SVG 等源文件在维护者本机，不随公开仓库分发。
+
+## 上线前待办（最终修复时提醒）
+
+- **`work.html` — 5 张 work 网格卡片的黑白图**仍使用 Figma MCP 临时 URL（`figma.com/api/mcp/asset/...`，会 404）。用户计划自行改；**项目最后收尾时必须替换为 `assets/` 本地文件并更新 `src`**。位置：约第 91、103、119、131、155 行（SSV、Aloe Blacc、Stanford、Real Estate、Winery 各一张 `.aw-card-v2__img--bw`）。
 
 ## 维护说明
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="tech-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech + Venture — KMC+Lucas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Handjet:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="tech.css?v=1" />
+  </head>
+  <body class="page-tech">
+
+    <header class="tech-nav" id="tech-nav">
+      <a href="index.html" class="tech-nav__logo js-go-home" aria-label="KMC × LUCAS — Home">
+        <img src="assets/kmc_logo_grey.svg" alt="KMC × LUCAS" height="17" />
+      </a>
+      <nav class="tech-nav__links" aria-label="Main navigation">
+        <a href="work.html" class="tech-nav__link">Works</a>
+        <a href="ssv.html" class="tech-nav__link">SSV</a>
+        <a href="about.html" class="tech-nav__link">About</a>
+        <a href="tech.html" class="tech-nav__link tech-nav__link--active">Tech+Venture</a>
+        <a href="index.html#contact" class="tech-nav__link">Contact</a>
+      </nav>
+      <button type="button" class="tech-nav__menu js-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu-drawer">
+        <img src="assets/menu-icon-new.svg" alt="" width="16" height="13" />
+      </button>
+    </header>
+
+    <main class="tech-main" id="tech-top">
+
+      <!-- Hero — Figma 1120:733 cream area -->
+      <section class="tech-hero" aria-label="Tech and venture storytelling">
+        <div class="tech-hero__headlines">
+          <p class="tech-hero__line">We Tell Stories for</p>
+          <p class="tech-hero__line tech-hero__line--founders">Founders</p>
+          <div class="tech-hero__words">
+            <img class="tech-hero__word tech-hero__word--builders" src="assets/tech/word-builders.png" alt="Builders" width="689" height="141" />
+            <img class="tech-hero__word tech-hero__word--investors" src="assets/tech/word-investors.png" alt="Investors" width="580" height="141" />
+          </div>
+          <div class="tech-hero__tail">
+            <p class="tech-hero__line tech-hero__line--and">and the</p>
+            <img class="tech-hero__word tech-hero__word--future" src="assets/tech/word-future.png" alt="Future" width="484" height="155" />
+          </div>
+        </div>
+        <p class="tech-hero__collab-label">
+          <img src="assets/tech/collab-arrow.svg" alt="" width="54" height="53" aria-hidden="true" class="tech-hero__collab-icon" />
+          Selected Collaboration
+        </p>
+      </section>
+
+      <!-- Red band + collaboration cards -->
+      <section class="tech-red" aria-label="Selected collaborations">
+        <p class="tech-red__stories" aria-hidden="true">But Stories</p>
+
+        <div class="tech-cards">
+          <article class="tech-card">
+            <img src="assets/tech/card-beta.png" alt="KMC + Berkeley BETA — Partnering with one of UC Berkeley’s leading venture communities." loading="lazy" />
+          </article>
+          <article class="tech-card">
+            <img src="assets/tech/card-ai-hack.png" alt="AI Summits + Hackathons — On-site production and real-time storytelling for cutting-edge AI events in Silicon Valley." loading="lazy" />
+          </article>
+          <article class="tech-card">
+            <img src="assets/tech/card-q3d.png" alt="Q3D × Stanford University Interviews — A founder-focused interview series highlighting deep-tech perspectives." loading="lazy" />
+          </article>
+          <article class="tech-card">
+            <img src="assets/tech/card-dreame.png" alt="Dreame Technology Silicon Valley Campaign — Supporting Dreame’s U.S. brand activation through visual storytelling." loading="lazy" />
+          </article>
+        </div>
+      </section>
+
+      <!-- Why choose us -->
+      <section class="tech-why" aria-label="Why choose us">
+        <div class="tech-why__title" aria-hidden="true">
+          <img src="assets/tech/why.png" alt="" class="tech-why__title-why" width="348" height="220" />
+          <img src="assets/tech/choose.png" alt="" class="tech-why__title-choose" width="706" height="205" />
+          <img src="assets/tech/us.png" alt="" class="tech-why__title-us" width="229" height="204" />
+        </div>
+        <div class="tech-why__copy">
+          <p class="tech-why__lead">We operate at the intersection of media, design, technology, and venture capital.</p>
+          <p class="tech-why__body">Our network includes private founder communities, venture capital partners, university clubs, and technology ecosystems.</p>
+        </div>
+      </section>
+
+      <footer class="tech-footer">
+        <button type="button" class="tech-footer__back js-tech-back-top" aria-label="Back to top">
+          <span>Back to top</span>
+          <span class="tech-footer__back-icon" aria-hidden="true">
+            <img src="assets/back-top.svg" alt="" width="120" height="120" />
+          </span>
+        </button>
+      </footer>
+    </main>
+
+    <a class="tech-talk" href="index.html#contact" aria-label="Let's talk">
+      <img src="assets/lets-talk.svg" alt="Let's Talk" />
+    </a>
+
+    <div class="menu-drawer" id="menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+      <div class="menu-drawer__panel">
+        <div class="menu-drawer__bar">
+          <div class="menu-drawer__brand">
+            <a href="index.html" class="menu-drawer__logo menu-drawer__logo--horizontal js-go-home" aria-label="KMC × LUCAS — Home">
+              <img class="menu-drawer__logo-img" src="assets/logo-menu-bar-white.png" alt="KMC × LUCAS" width="440" height="74" />
+            </a>
+            <nav class="menu-drawer__nav" aria-label="Main menu">
+              <a href="index.html" class="menu-drawer__link js-go-home">Home</a>
+              <a href="work.html#work-hero" class="menu-drawer__link">The Work</a>
+              <a href="tech.html" class="menu-drawer__link menu-drawer__link--accent">Tech + Venture</a>
+              <a href="ssv.html" class="menu-drawer__link">SSV</a>
+              <a href="about.html" class="menu-drawer__link">About Us</a>
+              <a href="index.html#contact" class="menu-drawer__link">Contact</a>
+            </nav>
+          </div>
+          <button type="button" class="menu-drawer__toggle js-menu-toggle" aria-label="Close menu" aria-expanded="true">
+            <span class="menu-drawer__toggle-icon" aria-hidden="true">
+              <img src="assets/icon-x.svg" alt="" width="48" height="48" />
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="nav.js"></script>
+    <script src="tech.js?v=1"></script>
+  </body>
+</html>

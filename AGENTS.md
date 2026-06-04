@@ -29,6 +29,8 @@ kmc-website/
 ├── ssv.html            # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html  # SSV「Watch Episodes」落地页（Figma 805:927）
 ├── ssv-watch-episodes.css
+├── tech.html           # Tech + Venture（Figma 1120:733）
+├── tech.css / tech.js
 ├── about.html          # 关于页面
 ├── case-stanford.html  # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html
@@ -63,9 +65,9 @@ npm run build  # 构建
 
 ## 设计资源
 
-- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`
-- Figma API Token：`figd_rCX0OgmA6_ex-UyO64WgVT65yOYmMm_hvKKlzvV9`
-- 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
+- Figma 设计稿由维护者在本地查看；**勿在本仓库任何文件或 commit 中写入 API token、`.env` 路径或密钥说明**。
+- 页面注释中的 Figma 节点 ID（如 `1120:733`）仅作设计对照，非 API 配置。
+- 原始 SVG 等源文件在维护者本机，不随公开仓库分发。
 
 ## 维护说明
 
