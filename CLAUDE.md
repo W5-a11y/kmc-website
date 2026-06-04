@@ -145,7 +145,7 @@ npm run build
 ## 设计资源
 
 - Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`
-- Figma API Token：`figd_BTeKrJBbVzSnn8S-3j8rWOFsS-bd1roWJKXq9ss3`
+- Figma API Token：私密保管，**不要提交到仓库**（放本地环境变量或私人笔记，公开仓库严禁出现 `figd_` 开头的令牌）
 - 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
 
 ## 维护说明
