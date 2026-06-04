@@ -207,6 +207,7 @@
   font-weight: 200;
   font-variation-settings: 'ELGR' 1, 'ELSH' 2;
   color: var(--red-hot);
+  transition: opacity 0.4s ease;
 }
 
 .th-builders-kw {
@@ -214,15 +215,9 @@
   font-weight: 300;
 }
 
-/* Investors + (solid, rotates on hover) */
-.th-investors-plus {
-  display: inline-block;
-  color: var(--red-hot);
-  transition: transform 800ms cubic-bezier(0.45, 0, 0.55, 1);
-}
-
-.th-kw-group[data-key="investors"].is-active .th-investors-plus {
-  transform: rotate(45deg);
+/* Investors keyword — subtle fade on hover */
+.th-kw-group[data-key="investors"].is-active .th-investors-kw {
+  opacity: 0.55;
 }
 
 /* ── Sep + (always visible between Founders and Investors, rotates × on hover) ── */
@@ -320,6 +315,10 @@
   color: var(--red-hot);
   margin: 0;
 }
+
+/* Per-row line-height for title spans (BETA card: 65 / 60 / 65 px) */
+.th-lh-std   { line-height: 65px; }
+.th-lh-tight { line-height: 60px; }
 
 /* ── Future group ── */
 .th-future-group {
@@ -464,7 +463,10 @@
   line-height: 1;
   font-family: var(--font-fustat);
   flex-shrink: 0;
+  transition: transform 0.3s var(--ease-slow);
 }
+
+.th-collab:hover .th-collab__arrow { transform: translate(3px, -3px); }
 
 .th-collab__text {
   font-family: var(--font-fustat);
@@ -544,6 +546,14 @@
   text-align: right;
 }
 
+/* BETA: red info panel — same dark-red base as the section (#c21f1f).
+   Default: red-hot text on red = hidden (like the other cards).
+   Hover: red-hot staircase block wipes in from the right → cream text on
+   bright red = visible, stepped left edge reveals the dark-red base behind. */
+.th-card[data-project="beta"] .th-card__info {
+  background: var(--red);
+}
+
 .th-card__title {
   font-family: var(--font-fustat);
   font-weight: 500;
@@ -583,8 +593,9 @@
   color: var(--red-hot);
   margin: 0;
   margin-left: auto;
-  max-width: 280px;
+  max-width: 370px;
   padding: 8px 12px;
+  text-align: left;
   transition: color 600ms var(--ease-slow);
 }
 
@@ -651,24 +662,58 @@
   transform: scaleX(1);
 }
 
-/* ── BETA: staircase shape from SVG (Group 152.svg)
-   SVG viewBox 0 0 415 262, 3 bars:
-     Bar1 x=43→415  y=0→51   (10.4% → top 19.5%)
-     Bar2 x=0→415   y=51→171 (0%    → 19.5%–65.3%)
-     Bar3 x=46→415  y=168→262(11.1% → 64.1%–100%)
-   Polygon traces the outer left-staircase edge clockwise.
-──────────────────────────────────────────────────────── */
+/* ── BETA: one connected red staircase that bleeds to the right edge.
+   Reference: Group 156.svg — three stacked bars sharing the right edge,
+   stepped on the LEFT (Berkeley widest → furthest left). The text is
+   right-aligned into the left-centre, so red fills out to the panel edge on
+   its right. The title staircase and the description block both bleed right
+   and stack flush, reading as a single shape. */
+
+/* Let the panel content run to the card's right edge (no right padding);
+   the TEXT is then inset by element padding so red shows to its right. */
+.th-card[data-project="beta"] .th-card__info {
+  justify-content: center;
+  padding-right: 0;
+}
+
+/* Title sits in the left-centre; its block bleeds out to 100%. */
+.th-card[data-project="beta"] .th-card__title {
+  margin: 0;
+  padding-right: 36%;
+  transition: color 300ms var(--ease-slow);
+}
+
+/* Staircase block: flush right edge, stepped left, fades in on hover.
+   Steps land on the 65 / 60 / 65px line boundaries (34.2% / 65.8%). */
 .th-card[data-project="beta"] .th-card__title::before {
+  background-color: var(--red-hot);
+  transform: none;
+  opacity: 0;
+  transition: opacity 300ms var(--ease-slow);
+  /* Edge aligned to the glyphs: KMC covered (edge 32% < K-left 33.8%);
+     Berkeley+BETA edge at the Berkeley r/k seam (40.3%) so "Ber" stays on the
+     dark panel and "keley" + all of BETA are inside the bright block.
+     Right edge bleeds to 100%. */
   clip-path: polygon(
-    10.4% 0%,
-    100%  0%,
-    100%  100%,
-    11.1% 100%,
-    11.1% 65.3%,
-    0%    65.3%,
-    0%    19.5%,
-    10.4% 19.5%
+    24% 0%,
+    100% 0%,
+    100% 100%,
+    24% 100%,
+    24% 65.8%,
+    32.4% 65.8%,
+    32.4% 34.2%,
+    24% 34.2%
   );
+}
+
+.th-card[data-project="beta"]:hover .th-card__title::before { opacity: 1; }
+
+/* Description spans from the staircase left out to the edge; its red block
+   bleeds right and butts against the title's bottom line. */
+.th-card[data-project="beta"] .th-card__desc {
+  margin-left: 22%;
+  max-width: none;
+  text-align: left;
 }
 
 /* ── Q3D: shape from SVG (Group 153.svg)
@@ -693,6 +738,26 @@
   );
 }
 
+/* ── Dreame: 4-line staircase (Dreame / Technology / Silicon Valley / Campaign)
+   Right-aligned text — wider lines extend further left.
+   Left edges per row: Dreame≈55%, Technology≈28%, Silicon Valley≈5%, Campaign≈40%
+   Row boundaries at 25% intervals (line-height:1, 4 equal lines).
+──────────────────────────────────────────────────────── */
+.th-card[data-project="dreame"] .th-card__title::before {
+  clip-path: polygon(
+    55% 0%,
+    100% 0%,
+    100% 100%,
+    40% 100%,
+    40% 75%,
+    5%  75%,
+    5%  50%,
+    28% 50%,
+    28% 25%,
+    55% 25%
+  );
+}
+
 /* ══════════════════════════════════════════════
    WHY CHOOSE US
 ══════════════════════════════════════════════ */
@@ -709,32 +774,90 @@
 }
 
 .th-why__word {
+  position: relative;
   display: block;
   line-height: 0;
 }
 
-.th-why__word img {
+/* Proportions from Figma: Why@5%+24.2w, Choose@5%+49w, Us@46.4%+15.9w.
+   --slide = how far the trailing letters travel right on hover, opening the
+   gap the bar fills (Why "W" stays / "hy" slides, Choose "Ch" / "oose",
+   Us "U" / "s"). */
+.th-why__word--why    { width: 24.2%; margin-left: 5%;    margin-bottom: -1%; --slide: 72%; }
+.th-why__word--choose { width: 49%;   margin-left: 5%;    margin-bottom: -1%; --slide: 40%; }
+.th-why__word--us     { width: 15.9%; margin-left: 46.4%; --slide: 130%; }
+
+/* Each word is split into a fixed leading part and a sliding trailing part —
+   two transparent PNGs the full size of the word, so they overlay perfectly.
+   Both are dimmed to a low-key dark red and light up on hover. */
+.th-why__stay,
+.th-why__slide {
   display: block;
   width: 100%;
   height: auto;
+  filter: brightness(0.6);
+  transition: filter 420ms var(--ease-slow);
 }
 
-/* Proportions from Figma: Why@5%+24.2w, Choose@5%+49w, Us@46.4%+15.9w */
-.th-why__word--why {
-  width: 24.2%;
-  margin-left: 5%;
-  margin-bottom: -1%;
+.th-why__stay { position: relative; }  /* in flow → sets the word height */
+
+.th-why__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:
+    filter 420ms var(--ease-slow),
+    transform 600ms var(--ease-slow);
+  will-change: transform;
 }
 
-.th-why__word--choose {
-  width: 49%;
-  margin-left: 5%;
-  margin-bottom: -1%;
+.th-why__word:hover .th-why__stay,
+.th-why__word:hover .th-why__slide { filter: brightness(1); }
+
+.th-why__word:hover .th-why__slide { transform: translateX(var(--slide)); }
+
+/* ── Hover bar: a bright-red block wipes through the word's negative space,
+   the body copy sitting on it in the section's own red (#c21f1f) so it reads
+   as text cut out of the bar (Figma "Why Choose Us" Variant2). The bar and the
+   lit letters share #ff281b, so they merge into one solid red shape. ── */
+.th-why__card {
+  position: absolute;
+  background: var(--red-hot);
+  padding: clamp(10px, 0.85vw, 15px) clamp(14px, 1.15vw, 21px);
+  width: max-content;
+  max-width: clamp(240px, 34vw, 520px);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 600ms var(--ease-slow);
+  will-change: clip-path;
+  z-index: 1;
 }
 
-.th-why__word--us {
-  width: 15.9%;
-  margin-left: 46.4%;
+.th-why__card p {
+  margin: 0;
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 23px);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  color: var(--red);
+}
+
+/* Each bar sits in its word's open negative space (Why upper, Choose middle,
+   Us upper) and extends rightward into the empty area. */
+.th-why__card--why    { top: 2%;  left: 34%; }
+.th-why__card--choose { top: 40%; left: 35%; }
+.th-why__card--us     { top: 0%;  left: 25%; }
+
+.th-why__word:hover .th-why__card { clip-path: inset(0 0 0 0); }
+
+/* Touch / no-hover: no hover to drive the reveal. Light every word back to
+   bright (matching the section's original look) and hide the side cards —
+   the cramped giant-text layout has no room for them here. A dedicated mobile
+   card layout is a separate pass. */
+@media (hover: none), (pointer: coarse) {
+  .th-why__stay,
+  .th-why__slide { filter: brightness(1); }
+  .th-why__card { display: none; }
 }
 
 /* ── Footer: back to top ── */
@@ -814,10 +937,40 @@
   .th-card__title { font-size: clamp(28px, 8vw, 48px); margin-bottom: 6%; }
   .th-card__desc  { max-width: none; font-size: 12px; }
 
+  /* BETA: drop the desktop staircase/bleed treatment when stacked — a plain
+     full-width red block stays readable on a phone. */
+  .th-card[data-project="beta"] .th-card__info { justify-content: flex-start; }
+  .th-card[data-project="beta"] .th-card__title { padding-right: 0; }
+  .th-card[data-project="beta"] .th-card__title::before { clip-path: none; }
+  .th-card[data-project="beta"] .th-card__desc { margin-left: 0; }
+
   .th-why__word--why    { width: 55%;  margin-left: 5%; }
   .th-why__word--choose { width: 92%;  margin-left: 5%; }
   .th-why__word--us     { width: 32%;  margin-left: 38%; }
   .th-why__footer       { margin-left: 20%; }
+}
+
+/* ──────────────────────────────────────────────
+   TOUCH / NO-HOVER DEVICES
+   No hover means the card reveal animation never fires, leaving titles
+   (#ff281b) sitting on the red section (#c21f1f) — ~1.1:1 contrast, invisible.
+   On coarse pointers we render the *revealed* end-state by default:
+   colour photo, red block shown, cream text. Matches the desktop hover look.
+────────────────────────────────────────────── */
+@media (hover: none), (pointer: coarse) {
+  /* Photos already in colour */
+  .th-card__img--color { filter: grayscale(0%); }
+
+  /* Title + desc read as cream on the revealed red/cream block */
+  .th-card[data-project] .th-card__title,
+  .th-card[data-project] .th-card__desc { color: var(--cream); }
+
+  /* Reveal the title block (each project keeps its own staircase clip) */
+  .th-card[data-project] .th-card__title::before  { transform: translateY(0); }
+  .th-card[data-project="beta"] .th-card__title::before { opacity: 1; }
+
+  /* Reveal the desc block */
+  .th-card[data-project] .th-card__desc::before { transform: scaleX(1); }
 }
 
 /* Reduced motion */
@@ -830,8 +983,11 @@
   .th-card[data-project] .th-card__desc::before,
   .th-back-top__arrow,
   .th-collab,
+  .th-collab__arrow,
+  .th-investors-kw,
   .aw-talk { transition: none !important; }
 
-  .th-card[data-project] .th-card__title::before { transform: translateY(0) !important; }
-  .th-card[data-project] .th-card__desc::before  { transform: scaleX(1) !important; }
+  .th-card[data-project] .th-card__title::before            { transform: translateY(0)  !important; }
+  .th-card[data-project="beta"] .th-card__title::before     { transform: translateX(0)  !important; }
+  .th-card[data-project] .th-card__desc::before             { transform: scaleX(1)      !important; }
 }

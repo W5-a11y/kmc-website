@@ -54,12 +54,34 @@
     });
   }
 
-  /* ── Keyword push interaction ── */
+  /* ── Keyword push interaction ──
+     Hover devices: reveal on mouseenter, hide on mouseleave.
+     Touch / no-hover devices: tap to toggle one group at a time, so the
+     Storytelling / Branding / Community / Future copy stays reachable. */
   (function initKeywords() {
     var groups = document.querySelectorAll('.th-kw-group, .th-future-group');
     if (!groups.length) return;
 
-groups.forEach(function (group) {
+    var coarse = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+    if (coarse) {
+      groups.forEach(function (group) {
+        group.addEventListener('click', function () {
+          var wasActive = group.classList.contains('is-active');
+          groups.forEach(function (g) { g.classList.remove('is-active'); });
+          if (!wasActive) group.classList.add('is-active');
+        });
+      });
+
+      /* Tap outside any group collapses the open one */
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('.th-kw-group, .th-future-group')) return;
+        groups.forEach(function (g) { g.classList.remove('is-active'); });
+      });
+      return;
+    }
+
+    groups.forEach(function (group) {
       group.addEventListener('mouseenter', function () { group.classList.add('is-active'); });
       group.addEventListener('mouseleave', function () { group.classList.remove('is-active'); });
     });
