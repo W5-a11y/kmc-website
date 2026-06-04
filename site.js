@@ -417,7 +417,8 @@
 
   if (betaContainer && partLeft && partRight && bearGraphic) {
 
-    /* GSAP owns the initial state entirely — prevents CSS↔GSAP transform conflict */
+    /* Bear hidden at rest — only appears on hover (Moses split).
+       GSAP owns the initial state entirely — prevents CSS↔GSAP transform conflict */
     gsap.set(bearGraphic, {
       xPercent: -50,
       yPercent: -50,
@@ -467,6 +468,87 @@
                              ease: 'power2.inOut',                                overwrite: true });
     });
   }
+
+  /* ══════════════════════════════════════
+     10b. BRAND LOCKUP SCROLL MORPH
+     Expanded lockup (KM / big-arc C / upright + / BETA stacked over the big
+     "UC Berkeley") → compact one-line "KMC ✕ BETA · Berkeley".
+     Scrubbed by the sticky brand-wrap scroll — no extra pin, so the existing
+     sticky / cover-parallax base is untouched.
+     Figma 1264:589 — Default → Variant2 (deltas are % of the 1301×847 box).
+  ══════════════════════════════════════ */
+
+  (function brandMorph() {
+    var BM        = document.querySelector('.brand-mark');
+    var brandWrap = document.querySelector('.brand-wrap');
+    if (!BM || !brandWrap || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 1023px)').matches) return; /* desktop-only morph */
+
+    var K    = BM.querySelector('.bm-k');
+    var M    = BM.querySelector('.bm-m');
+    var C    = BM.querySelector('.bm-c');
+    var PLUS = BM.querySelector('.bm-plus');
+    var BETA = BM.querySelector('.beta-container');
+    var UCB  = BM.querySelector('.bm-uc');
+    if (!(K && M && C && PLUS && BETA && UCB)) return;
+
+    var W = function () { return BM.offsetWidth; };
+    var H = function () { return BM.offsetHeight; };
+
+    var TL_ORIGIN = '0% 0%';   /* top-left: translate + scale map cleanly to target inset */
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.hero-container',
+        start: 'top top',
+        end: function () { return '+=' + Math.max(440, brandWrap.offsetHeight - BM.offsetHeight); },
+        scrub: 0.6,
+        invalidateOnRefresh: true
+      }
+    });
+
+    tl.to(K,    { transformOrigin: TL_ORIGIN, x: 0,
+                  y: function () { return   0.59 / 100 * H(); }, scaleX: 0.967, scaleY: 0.968, ease: 'none' }, 0)
+      .to(M,    { transformOrigin: TL_ORIGIN, x: function () { return  -1.00 / 100 * W(); },
+                  y: function () { return   0.59 / 100 * H(); }, scaleX: 0.964, scaleY: 0.968, ease: 'none' }, 0)
+      .to(C,    { transformOrigin: TL_ORIGIN, x: function () { return  14.76 / 100 * W(); },
+                  y: function () { return -41.56 / 100 * H(); }, scaleX: 0.918, scaleY: 0.920, ease: 'none' }, 0)
+      .to(PLUS, { transformOrigin: '50% 50%', x: function () { return   9.58 / 100 * W(); },
+                  y: function () { return -34.72 / 100 * H(); }, rotation: 45,                  ease: 'none' }, 0)
+      .to(BETA, { transformOrigin: TL_ORIGIN, x: function () { return   6.84 / 100 * W(); },
+                  y: function () { return -41.56 / 100 * H(); }, scaleX: 0.815, scaleY: 0.812, ease: 'none' }, 0)
+      .to(UCB,  { transformOrigin: TL_ORIGIN, x: 0,
+                  y: function () { return -46.76 / 100 * H(); }, opacity: 0,                     ease: 'none' }, 0);
+  })();
+
+  /* ── Align the big "UC Berkeley" line's left edge to BETA's "B" glyph ──
+     BETA is centered in its box, so the glyph's left isn't a fixed %. Measure
+     it and pin UC Berkeley's left to match (left-aligned under BETA). */
+  (function alignUCBtoBeta() {
+    var BM  = document.querySelector('.brand-mark');
+    if (!BM) return;
+    var ucb = BM.querySelector('.bm-uc');
+    var be  = BM.querySelector('.part-left');
+    if (!ucb || !be || !be.firstChild) return;
+
+    function align() {
+      var range = document.createRange();
+      range.selectNodeContents(be);
+      var tr = range.getBoundingClientRect();
+      var bm = BM.getBoundingClientRect();
+      if (!tr.width || !bm.width) return;
+      ucb.style.left = ((tr.left - bm.left) / bm.width * 100) + '%';
+    }
+
+    align();
+    window.addEventListener('resize', align, { passive: true });
+    window.addEventListener('load', align);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
+    /* re-measure once the brand-entry scale settles */
+    window.addEventListener('kmc-opening-done', function () { setTimeout(align, 2300); });
+    setTimeout(align, 2500);
+  })();
 
   /* ══════════════════════════════════════
      11. SERVICES — linked hover preview
@@ -655,5 +737,53 @@
       }, 120);
     });
   }
+
+  /* ══════════════════════════════════════
+     N. CONTACT FORM — Web3Forms async submit
+  ══════════════════════════════════════ */
+  (function contactForm() {
+    var form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    var btn       = form.querySelector('.contact-form__submit');
+    var status    = form.querySelector('.contact-form__status');
+    var btnMarkup = btn ? btn.innerHTML : '';
+
+    function setStatus(msg, state) {
+      if (!status) return;
+      status.textContent = msg || '';
+      status.hidden = !msg;
+      if (state) { status.setAttribute('data-state', state); }
+      else { status.removeAttribute('data-state'); }
+    }
+
+    /* submit fires only after native required-validation passes */
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      setStatus('', '');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && data.success) {
+            form.reset();
+            setStatus('Thank you — your message has been sent.', 'ok');
+          } else {
+            setStatus('Something went wrong. Please email tech.ai@kmclucas.com.', 'error');
+          }
+        })
+        .catch(function () {
+          setStatus('Network error. Please email tech.ai@kmclucas.com.', 'error');
+        })
+        .finally(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = btnMarkup; }
+        });
+    });
+  })();
 
 })();

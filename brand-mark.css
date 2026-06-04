@@ -15,12 +15,13 @@
   position: relative;
   z-index: var(--z-brand);
   left: var(--gutter);
-  /* Width tracks gutter so mark starts at left edge */
-  width: calc(100% - var(--gutter));
-  max-width: 1297px;
-  /* Height = brand height + cover photo overlap zone */
-  height: calc(59.06vw + 360px);
-  max-height: calc(766px + 360px);
+  /* Fill gutter-to-gutter so the lockup extends to the right edge on wide screens */
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 1728px;
+  /* Height = brand height + crew-photo overlap zone (keeps full cutout visible).
+     Travel = wrap − mark ≈ 554px (uncapped) / 460px (capped) ≥ morph distance. */
+  height: calc(65.1vw + 460px);
+  max-height: calc(1125px + 460px);
   pointer-events: none;
 }
 
@@ -29,9 +30,9 @@
   position: sticky;
   top: 0;
   width: 100%;
-  /* Maintain 1297:766 aspect ratio */
-  aspect-ratio: 1297 / 766;
-  max-height: 766px;
+  /* Maintain 1301:847 aspect ratio (figma node 1117:453 — cover final) */
+  aspect-ratio: 1301 / 847;
+  max-height: 1125px; /* = max-width 1728 ÷ (1301/847); scales up to fill wide screens */
   overflow: visible;
   pointer-events: auto;
 
@@ -46,7 +47,7 @@
 /* ── Cream strip at top (above the letterforms) ── */
 .bm-cream-strip {
   position: absolute;
-  inset: 0 0 79.37% 0; /* top 20.63% of the mark */
+  inset: 0 0 86.66% 0; /* top 13.34% of the mark */
   background: var(--cream);
   z-index: 1;
 }
@@ -65,35 +66,51 @@
 }
 
 /*
-  Positions from Figma node 699:83 (1297 × 766px)
+  Positions from Figma node 1117:453 — cover final (1301 × 847px)
   Format: inset: top% right% bottom% left%
 */
 
-/* KMC+ */
-.bm-m    { inset: 21.41% 85.58% 44.78%  0.62%; }
-.bm-k    { inset: 21.41% 64.07% 44.78% 16.11%; }
-.bm-c    { inset: 58.70% 20.43% 22.63% 73.86%; }
-.bm-c2   { inset: 58.88% 63.99%  0.00% 23.28%; }
-.bm-plus { inset: 46.36% 45.88% 27.40% 38.63%; }
+/* KMC + */
+.bm-k    { inset: 13.34% 82.86% 50.18%  0.77%; }
+.bm-m    { inset: 13.34% 57.26% 50.18% 19.22%; }
+.bm-c    { inset: 55.61% 57.03%  0.00% 27.82%; }
+.bm-plus { inset: 46.60% 40.35% 34.39% 47.27%; }
 
-/* LUCAS */
-.bm-l    { inset: 59.09% 27.76% 22.63% 63.53%; }
-.bm-u    { inset: 59.09% 36.93% 22.89% 56.90%; }
-.bm-a    { inset: 59.09%  8.94% 23.02% 81.42%; }
-.bm-s    { inset: 58.70%  0.31% 22.63% 91.52%; }
-
-/* Media Production Company subtitle */
-.bm-subtitle { inset: 80.16% 15.11% 17.62% 56.36%; }
+/* Silicon Valley / Media Production Company subtitle (left of the big C) */
+.bm-subtitle { inset: 53.48% 80.86% 41.32% 0.54%; }
 
 .bm-subtitle__text {
   display: block;
   width: 100%;
   height: 100%;
   font-family: var(--font-fustat);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.02em;
   color: var(--red);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* UC Berkeley — co-brand line under BETA.
+   Left edge is aligned to BETA's "B" glyph at runtime by alignUCBtoBeta() in
+   site.js (BETA is centered in its box, so the exact glyph left isn't a fixed %).
+   The 69% left here is just a pre-JS fallback. */
+.bm-uc {
+  top: 73.32%;
+  right: auto;        /* box hugs the text, starting at the BETA-aligned left */
+  bottom: 9.21%;
+  left: 69%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: var(--font-fustat);
+  font-weight: 400;
+  font-size: clamp(40px, 6.2vw, 90px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--sand);
   white-space: nowrap;
 }
 
@@ -101,10 +118,10 @@
 
 .beta-container {
   position: absolute;
-  left:   69.54%; /* 902 / 1297 */
-  top:    39.69%; /* 304 / 766  */
-  width:  29.92%; /* 388 / 1297 */
-  height: 15.14%; /* 116 / 766  */
+  left:   63.03%; /* figma 1117:463 — cover final */
+  top:    55.73%;
+  width:  36.97%;
+  height: 17.59%;
   display: flex;
   align-items: center;
   justify-content: center;

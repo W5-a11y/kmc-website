@@ -33,22 +33,102 @@ body.page-case-detail {
   }
 }
 
-/* ─── Mobile scale (JS sets --cd-scale via cdScale()) ── */
+/* ─── Mobile (≤768px): stacked fluid layout (desktop ≥769 untouched) ─────
+   Replaces the scaled 1440 canvas with a real vertical flow so text stays
+   readable on phones. */
 @media (max-width: 768px) {
   .cd-stage {
-    transform: scale(var(--cd-scale, 1));
-    transform-origin: top center;
-    /* collapse excess whitespace after downscale */
-    margin-bottom: calc((var(--cd-scale, 1) - 1) * 1500px);
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
+    margin: 0;
+    overflow: visible;
+    padding-bottom: 64px;
   }
 
+  /* Nav: fixed bar, logo only (case pages have no menu drawer) */
   .cd-nav {
-    padding: 24px 32px 0;
+    position: fixed;
+    padding: 18px 20px 0;
+  }
+  .cd-nav__links,
+  .cd-nav__menu { display: none; }
+
+  /* Hero: full-width image with a phone-friendly aspect */
+  .cd-hero {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
 
-  .cd-player {
-    padding-top: 60px;
+  /* Play: centered over the hero (≈ half hero height = 100vw / 1.5 / 2) */
+  .cd-play {
+    position: absolute;
+    top: 33vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
   }
+
+  /* Let's-talk badge: floats bottom-right */
+  .cd-talk {
+    position: fixed;
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    width: 84px;
+    height: 84px;
+  }
+
+  /* Meta: stacked under hero */
+  .cd-meta {
+    position: static;
+    margin: 28px 20px 0;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cd-meta__category { min-width: 0; padding-top: 0; font-size: 15px; line-height: 1.4; }
+  .cd-meta__credits { font-size: 15px; line-height: 1.4; }
+
+  /* Title: left-aligned, fluid */
+  .cd-title {
+    position: static;
+    width: auto;
+    margin: 14px 20px 0;
+    font-size: clamp(30px, 9vw, 46px);
+    line-height: 1.04;
+    text-align: left;
+  }
+
+  /* Description: full width */
+  .cd-desc {
+    position: static;
+    width: auto;
+    margin: 22px 20px 0;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .cd-desc p { margin: 0 0 16px; }
+
+  /* Back: centered */
+  .cd-back {
+    position: static;
+    width: 86px;
+    margin: 44px auto 0;
+  }
+  .cd-back__arrow { width: 56px; height: 56px; }
+  .cd-back__label { font-size: 34px; line-height: 1; }
+
+  /* Video overlay: center + breathing room */
+  .cd-player {
+    align-items: center;
+    padding: 20px;
+  }
+  .cd-player__frame { max-width: 100%; }
+  .cd-player__close { top: -40px; }
 }
 
 /* ─── Nav (reuse aw-nav style from work page) ────── */
@@ -70,9 +150,9 @@ body.page-case-detail {
 .cd-nav__logo img {
   display: block;
   height: 17px;
-  filter: invert(1);
+  /* Dark (#201d13) case-study theme — render the red brand mark white */
+  filter: brightness(0) invert(1);
   opacity: 0.9;
-  mix-blend-mode: exclusion;
 }
 
 .cd-nav__links {

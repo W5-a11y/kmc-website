@@ -266,16 +266,14 @@
   opacity: 1;
   pointer-events: none;
   transition:
-    padding 280ms var(--tl-ease),
-    max-height 280ms var(--tl-ease),
+    transform 320ms var(--tl-ease),
     opacity 220ms ease;
 }
 
 .ssv-top.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .ssv-top__logo,
@@ -285,13 +283,13 @@
 .ssv-top__logo {
   display: block;
   line-height: 0;
-  mix-blend-mode: exclusion;
 }
 .ssv-top__logo img {
   display: block;
   height: 17px;
   width: auto;
-  filter: invert(1);
+  /* SSV runs a dark/red theme — render the red brand mark white so it stays legible */
+  filter: brightness(0) invert(1);
 }
 
 .ssv-top__nav {
@@ -698,6 +696,20 @@
 
 .ssv-tl__event-desc--web3.is-open {
   max-height: 280px;
+  opacity: 1;
+  margin: 14px 0 14px;
+}
+
+.ssv-tl__event-desc--nextgen {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  transition: max-height 0.45s var(--tl-ease), opacity 0.25s ease, margin 0.3s var(--tl-ease);
+}
+
+.ssv-tl__event-desc--nextgen.is-open {
+  max-height: 270px;
   opacity: 1;
   margin: 14px 0 14px;
 }

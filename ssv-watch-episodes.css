@@ -51,23 +51,22 @@ body.page-ssv-we {
   opacity: 1;
   pointer-events: none;
   transition:
-    padding 260ms var(--we-ease),
-    max-height 260ms var(--we-ease),
+    transform 320ms var(--we-ease),
     opacity 220ms ease;
 }
 .ssv-we-top > * { pointer-events: auto; }
 .ssv-we-top.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .ssv-we-top__logo img {
   display: block;
   height: 17px;
   width: auto;
-  mix-blend-mode: exclusion;
+  /* Dark (#201d13) page theme — render the red brand mark white for legibility */
+  filter: brightness(0) invert(1);
 }
 
 .ssv-we-top__nav {

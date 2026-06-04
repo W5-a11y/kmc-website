@@ -7,7 +7,6 @@
 
   /* ─── Elements ──────────────────────────── */
   var sections = Array.from(document.querySelectorAll('.ssv-section'));
-  var nav      = document.getElementById('ssv-nav');
   var TOTAL    = sections.length;
   var current  = 0;
   var busy     = false;
@@ -16,14 +15,6 @@
   var htmlRoot = document.documentElement;
   /* Current SSV page is landing + native-scroll timeline (no stacked sheets). */
   var nativeTimelineScroll = !document.querySelector('.ssv-sheet');
-
-/* ─── Nav theme ─────────────────────────── */
-  function setNavTheme(idx) {
-    if (!nav) return;
-    var theme = sections[idx].getAttribute('data-theme') || 'dark';
-    nav.classList.toggle('ssv-nav--light',   theme === 'light');
-    nav.classList.toggle('ssv-nav--landing', idx === 0);
-  }
 
   /* ─── Go to section ─────────────────────── */
   function goTo(idx) {
@@ -71,15 +62,11 @@
       }
     }
 
-    setNavTheme(idx);
     setTimeout(function () { busy = false; }, DURATION);
   }
 
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
-
-  /* ─── Initialise ────────────────────────── */
-  setNavTheme(0);
 
   /* ─── Top bar collapse on scroll-down ───── */
   (function topBarCollapseOnScroll() {
@@ -386,6 +373,72 @@
       }
     });
     culinaryBlock.addEventListener('mouseleave', queueCulinaryHide);
+  }
+
+  /* ─── Next Generation of Media description: reveal on date/title hover ─ */
+  var nextgenDateTrigger = document.querySelector('.js-nextgen-date-trigger');
+  var nextgenTitleTrigger = document.querySelector('.js-nextgen-title-trigger');
+  var nextgenBlock = document.querySelector('.js-nextgen-reveal');
+  var nextgenLines = Array.from(document.querySelectorAll('.js-nextgen-reveal .line'));
+  var nextgenTween = null;
+  var nextgenHideTimer = null;
+
+  if (nextgenBlock && nextgenLines.length) {
+    function showNextgenBlock() {
+      if (nextgenHideTimer) {
+        clearTimeout(nextgenHideTimer);
+        nextgenHideTimer = null;
+      }
+      nextgenBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (nextgenTween) nextgenTween.kill();
+        window.gsap.set(nextgenLines, { opacity: 0, y: 30 });
+        nextgenTween = window.gsap.to(nextgenLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        nextgenLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideNextgenBlock() {
+      nextgenBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (nextgenTween) nextgenTween.kill();
+        window.gsap.set(nextgenLines, { opacity: 0, y: 30 });
+      } else {
+        nextgenLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueNextgenHide() {
+      if (nextgenHideTimer) clearTimeout(nextgenHideTimer);
+      nextgenHideTimer = window.setTimeout(hideNextgenBlock, 70);
+    }
+
+    [nextgenDateTrigger, nextgenTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showNextgenBlock);
+      trigger.addEventListener('mouseleave', queueNextgenHide);
+    });
+
+    nextgenBlock.addEventListener('mouseenter', function () {
+      if (nextgenHideTimer) {
+        clearTimeout(nextgenHideTimer);
+        nextgenHideTimer = null;
+      }
+    });
+    nextgenBlock.addEventListener('mouseleave', queueNextgenHide);
   }
 
   /* ─── Valkyrie description: reveal on date/title hover ─ */

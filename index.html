@@ -12,9 +12,9 @@
     />
     <link rel="stylesheet" href="tokens.css" />
     <link rel="stylesheet" href="base.css" />
-    <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="nav.css?v=4" />
     <link rel="stylesheet" href="menu.css" />
-    <link rel="stylesheet" href="brand-mark.css" />
+    <link rel="stylesheet" href="brand-mark.css?v=3" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="marquee.css" />
   </head>
@@ -28,7 +28,7 @@
     <!-- ═══ NAV ═══ -->
     <header class="site-nav" id="site-nav">
       <a href="/" class="site-nav__logo js-go-home" aria-label="KMC+LUCAS — Home">
-        <img src="assets/nav-logo-new.png" alt="KMC+LUCAS" />
+        <img src="assets/kmc-beta.svg" alt="KMC+LUCAS" />
       </a>
       <nav class="site-nav__links" aria-label="Site navigation">
         <a href="work.html">Works</a>
@@ -52,43 +52,26 @@
           <!-- Cream strip at top (above letters) -->
           <div class="bm-cream-strip"></div>
 
-          <!-- KMC+ letters -->
-          <div class="bm-slot bm-m">
-            <img src="assets/brand-m.svg" alt="" />
-          </div>
+          <!-- KMC + letters (figma node 1117:453 — cover final) -->
           <div class="bm-slot bm-k">
-            <img src="assets/brand-k.svg" alt="" />
+            <img src="assets/hero-k.svg" alt="" />
+          </div>
+          <div class="bm-slot bm-m">
+            <img src="assets/hero-m.svg" alt="" />
           </div>
           <div class="bm-slot bm-c">
-            <img src="assets/brand-c.svg" alt="" />
-          </div>
-          <div class="bm-slot bm-c2">
-            <img src="assets/brand-c2.svg" alt="" />
+            <img src="assets/hero-c.svg" alt="" />
           </div>
           <div class="bm-slot bm-plus">
-            <img src="assets/brand-plus.svg" alt="" />
+            <img src="assets/hero-plus.svg" alt="" />
           </div>
 
-          <!-- LUCAS letters -->
-          <div class="bm-slot bm-l">
-            <img src="assets/brand-l.svg" alt="" />
-          </div>
-          <div class="bm-slot bm-u">
-            <img src="assets/brand-u.svg" alt="" />
-          </div>
-          <div class="bm-slot bm-a">
-            <img src="assets/brand-a.svg" alt="" />
-          </div>
-          <div class="bm-slot bm-s">
-            <img src="assets/brand-s.svg" alt="" />
-          </div>
-
-          <!-- Subtitle: Media Production Company -->
+          <!-- Subtitle: Silicon Valley Media Production Company -->
           <div class="bm-slot bm-subtitle">
-            <span class="bm-subtitle__text">Silicon Valley Media Production Company</span>
+            <span class="bm-subtitle__text">Silicon Valley<br />Media Production Company</span>
           </div>
 
-          <!-- BETA — Moses Split component -->
+          <!-- BETA — Moses Split component (bear = UC Berkeley mascot) -->
           <!-- Hover: "BE" splits left, "TA" splits right, bear pops from center -->
           <div class="beta-container" aria-label="BETA">
             <div class="beta-text">
@@ -98,13 +81,16 @@
             <img class="bear-graphic" src="assets/bear.svg" alt="" aria-hidden="true" />
           </div>
 
+          <!-- UC Berkeley — big co-brand line under BETA (fades out on scroll) -->
+          <div class="bm-slot bm-uc">UC Berkeley</div>
+
         </div><!-- /brand-mark -->
       </div><!-- /brand-wrap -->
 
-      <!-- Cover photo: overlaps brand area -->
+      <!-- Cover photo: crew composite (transparent cutout), overlaps brand area -->
       <div class="hero-cover">
         <img
-          src="assets/cover-photo.svg"
+          src="assets/crews.png"
           alt="KMC+LUCAS film crew on location"
           class="hero-cover__img"
         />
@@ -155,23 +141,18 @@
       <div class="services-preview" aria-hidden="true">
         <div class="svc-layer is-active" data-svc="01">
           <img class="svc-layer__img" src="assets/FounderNarrative.png" alt="" />
-          <p class="svc-layer__desc">We talk with founders.</p>
         </div>
         <div class="svc-layer" data-svc="02">
           <img class="svc-layer__img" src="assets/ssv-reality-new.png" alt="" />
-          <p class="svc-layer__desc">A reality show in Silicon Valley.</p>
         </div>
         <div class="svc-layer" data-svc="03">
           <img class="svc-layer__img" src="assets/advertising.png" alt="" />
-          <p class="svc-layer__desc">We're here to help with branding…</p>
         </div>
         <div class="svc-layer" data-svc="04">
           <img class="svc-layer__img" src="assets/real.png" alt="" />
-          <p class="svc-layer__desc">We're here to help with real estate…</p>
         </div>
         <div class="svc-layer" data-svc="05">
           <img class="svc-layer__img" src="assets/PrivateEvent.png" alt="" />
-          <p class="svc-layer__desc">We're here for private events…</p>
         </div>
       </div>
 
@@ -311,7 +292,12 @@
           </a>
         </div>
 
-        <form class="contact-form" action="#" method="POST" novalidate>
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="2f93d368-3274-4fce-a513-1e5f91b49628" />
+          <input type="hidden" name="subject" value="New enquiry from kmc.celiawang.com" />
+          <input type="hidden" name="from_name" value="KMC+LUCAS Website" />
+          <!-- Honeypot: hidden from users, bots fill it → submission rejected -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
           <div class="contact-form__field">
             <label for="ct-name">Name</label>
             <input type="text" id="ct-name" name="name" placeholder="Your name" autocomplete="name" required />
@@ -330,6 +316,7 @@
               <path d="M2 9h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
+          <p class="contact-form__status" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
 
@@ -362,13 +349,13 @@
 
         <!-- Nav links -->
         <nav class="menu-drawer__nav" aria-label="Main menu">
-          <a href="/" class="menu-drawer__link menu-drawer__link--accent js-go-home">Home</a>
-          <a href="work.html" class="menu-drawer__link">Works</a>
+          <a href="index.html" class="menu-drawer__link menu-drawer__link--accent js-go-home">Home</a>
+          <a href="work.html#work-hero" class="menu-drawer__link">The Work</a>
           <a href="tech.html" class="menu-drawer__link">Tech+Venture</a>
+          <a href="index.html#services" class="menu-drawer__link">Services &amp; Products</a>
           <a href="ssv.html" class="menu-drawer__link">SSV</a>
           <a href="about.html" class="menu-drawer__link">About Us</a>
-          <a href="#services" class="menu-drawer__link">Services</a>
-          <a href="#contact" class="menu-drawer__link">Contact</a>
+          <a href="index.html#contact" class="menu-drawer__link">Contact</a>
         </nav>
 
       </div>

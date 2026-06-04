@@ -12,6 +12,7 @@
 ## 设计规范
 
 **字体**
+
 - `Fustat` — 主要标题/UI（替换原 Inter 作为主字体）
 - `Inter` — 部分正文
 - `Kyiv Type Sans`（`--font-kyiv`）— menu drawer 链接
@@ -19,6 +20,7 @@
 - `Inria Serif` — work 页面正文
 
 **颜色**
+
 - 品牌红：`#C21F1F`
 - 背景米白：`#F4F3EF`（部分旧文件写作 `#EEECE6`，以 `#F4F3EF` 为准）
 - 深色：`#201D13`（deep brown-black，work/SSV 页用）
@@ -31,6 +33,7 @@
 kmc-website/
 ├── index.html              # 首页（KMC+ LUCAS 大标题 + Lottie 开场 + 汉堡菜单）
 ├── work.html               # 作品列表（Hero → Disposable 滚动叙事 → 暗色卡片网格）
+├── tech.html               # Tech+Venture 页（科技 × 投资；th-why "choose" 字词动画）
 ├── ssv.html                # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html # SSV「Watch Episodes」落地页
 ├── about.html              # 关于页面（无 page cursor；nav 色 #645D45）
@@ -43,6 +46,7 @@ kmc-website/
 ├── menu.css                # index.html 专用 menu drawer 覆盖样式
 ├── index.css               # 首页专用样式
 ├── all-work.css            # work.html 样式（含 .aw-stage 1440×1024 + awScale 移动缩放）
+├── tech.css                # tech.html 样式
 ├── about-page.css          # about.html 样式
 ├── case-detail.css         # 案例页共用样式（.cd-stage 1440×1500）
 ├── ssv.css                 # SSV 页样式
@@ -55,6 +59,7 @@ kmc-website/
 ├── ssv-landing.js          # SSV landing 6帧 SVG mask 动画驱动
 ├── ssv.js                  # SSV 页面交互（nativeTimelineScroll 模式）
 ├── work-list.js            # work.html 交互（含 awScale 移动缩放函数）
+├── tech.js                 # tech.html 交互
 ├── site.js                 # 首页全局 JS（bfcache 修复、services、hero 动画）
 ├── tokens.css              # CSS 变量（--font-kyiv、--red、--cream 等）
 ├── assets/
@@ -77,26 +82,35 @@ kmc-website/
 ## Menu Drawer（全局共用）
 
 **视觉设计**（Figma 1033:544）：
+
 - 背景：毛玻璃 `rgba(244,243,239,0.2)` + `backdrop-filter: blur(9.3px)`
 - 链接颜色：`#929ec6`，`mix-blend-mode: exclusion`，`font-size: 20px`，`letter-spacing: 0.29em`，`text-transform: uppercase`
 - 当前页面链接：`--accent` class → 颜色 `#a3add0` + `::before` 16×16 实心方块指示器
 - `index.html` 用 `menu.css` 覆盖（结构为 `.menu-drawer__top` + `.menu-drawer__close`）；其他页面用 `styles.css`（结构为 `.menu-drawer__bar` + `.menu-drawer__toggle`）
 
+全站 6 个带抽屉的页面菜单链接已统一（以 SSV 为基准），固定 7 项同序：
+`Home · The Work · Tech+Venture · Services & Products · SSV · About Us · Contact`
+（Contact 统一指向 `index.html#contact`；菜单中不含 Watch Episodes 入口）
+
 **各页面当前页 `--accent` 位置：**
+
 - `index.html` → Home
 - `work.html` → The Work
+- `tech.html` → Tech+Venture
 - `ssv.html` → SSV
-- `ssv-watch-episodes.html` → Watch Episodes
+- `ssv-watch-episodes.html` → SSV（该页属 SSV 子页，菜单高亮 SSV）
 - `about.html` → About Us
 
 ## work.html — 架构
 
 三个 section：
+
 1. `#work-hero` — Hero（"Work" 大标题 + 向下箭头）
 2. `#work-disposable` — Disposable 滚动叙事（GSAP pin + scrub）
 3. `#work-grid` — 暗色卡片网格（6 个项目，paper-slide 覆盖钉住区域）
 
 **Disposable Section 关键规则：**
+
 - `.aw-w3-img`（disposable.svg）无 z-index，自然源序在 `.aw-w3-frame` 之前
 - `.aw-w3-frame__rect`：`background:#fff; mix-blend-mode:difference` → 文字在 rect 内显示米白色
 - `.aw-stage`：`isolation:isolate; background:var(--aw-bg)` 提供混合背景
@@ -110,13 +124,15 @@ kmc-website/
 
 当前架构：Landing（6帧动画）+ 原生滚动 Timeline（无 paper-slide sheets）。
 
-**`nativeTimelineScroll` 模式：**
+`**nativeTimelineScroll` 模式：**
+
 - `var nativeTimelineScroll = !document.querySelector('.ssv-sheet')` — 当前为 `true`
 - wheel handler：landing 未结束时拦截向下滚动（跳过动画）；landing 结束后放行原生滚动
 - touch handler：landing 活跃时拦截，结束后放行
 - `syncCurrentByScroll()`：通过 `scrollY > 24` 同步 `current` 索引
 
 **Landing 动画（ssv-landing.js）：**
+
 - 6 帧 SVG mask（Exclude1-6.svg）每 800ms 切换
 - 结束后：`is-finished` class → `display:none` → `#ssv-hero-poster.scrollIntoView()`
 - 点击可跳过
@@ -124,6 +140,7 @@ kmc-website/
 ## SSV Episodes 组件（ssv-episodes.js/css）
 
 用于 `ssv-watch-episodes.html`：
+
 - 3 个图层（A=cart, B=couch, C=red-coat），`data-state="v1"–"v6"` 驱动 CSS
 - FSM：v1→hover:C→v2, v1→hover:B→v3, v1→click:A→v4, v2→click:C→v5 等
 - v4→v1 用 `is-dissolve` class（300ms ease-out）
@@ -151,6 +168,7 @@ npm run build
 ## 维护说明
 
 每次执行 `git commit` 或 `git push` 前，自动检查并更新本文件：
+
 - 新增或删除了页面（`.html` 文件）→ 更新「文件结构」章节
 - 引入了新的字体、颜色、JS 库 → 更新「技术栈」或「设计规范」章节
 - 新增了重要资源（SVG、视频、子项目）→ 更新对应章节

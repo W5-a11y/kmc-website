@@ -15,33 +15,29 @@
   overflow: hidden;
   opacity: 1;
   pointer-events: none; /* re-enabled on children */
-
-  /* Default blend: exclusion works on cream + dark */
-  mix-blend-mode: exclusion;
-  transition: mix-blend-mode 0s, padding 280ms var(--ease-std), max-height 280ms var(--ease-std), opacity 220ms ease;
+  transition: transform 320ms var(--ease-std), opacity 220ms ease;
 }
 
+/* Exclusion blend (cream + dark adaptive) applies to the links + menu icon
+   only — never the brand logo, which must render full-color red. */
+.site-nav__links,
+.site-nav__hamburger {
+  mix-blend-mode: exclusion;
+}
+
+/* Scroll-down hides the bar by sliding it up off the top (drag-away);
+   scroll-up slides it back down. */
 .site-nav.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 /* ── Per-section blend overrides (set by IntersectionObserver in site.js) ── */
 
-/* On cream bg: exclusion → links appear dark/olive */
-.site-nav.nav--on-cream {
-  mix-blend-mode: exclusion;
-}
-
-/* On dark bg: exclusion → links appear light */
-.site-nav.nav--on-dark {
-  mix-blend-mode: exclusion;
-}
-
-/* On red bg: disable blend, force white */
-.site-nav.nav--on-red {
+/* On red bg: disable the links/menu blend and force them white */
+.site-nav.nav--on-red .site-nav__links,
+.site-nav.nav--on-red .site-nav__hamburger {
   mix-blend-mode: normal;
 }
 
@@ -62,7 +58,6 @@
 .site-nav__logo img {
   height: 17px;
   width: auto;
-  filter: invert(1); /* exclusion mode makes this work on both light/dark */
   transition: opacity 0.25s var(--ease-std);
 }
 

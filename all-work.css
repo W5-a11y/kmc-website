@@ -31,16 +31,14 @@ body.page-all-work {
   opacity: 1;
   pointer-events: none;
   transition:
-    padding 280ms var(--aw-ease),
-    max-height 280ms var(--aw-ease),
+    transform 320ms var(--aw-ease),
     opacity 220ms ease;
 }
 
 .aw-nav.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .aw-nav__logo,
@@ -58,9 +56,7 @@ body.page-all-work {
   display: block;
   height: 17px;
   width: auto;
-  filter: invert(1);
-  opacity: 0.85;
-  mix-blend-mode: exclusion;
+  opacity: 0.95;
   transition: opacity 0.25s;
 }
 
@@ -88,7 +84,7 @@ body.page-all-work {
 }
 
 .aw-nav__link--active {
-  color: #C21F1F;
+  color: var(--aw-red);
   mix-blend-mode: normal;
 }
 

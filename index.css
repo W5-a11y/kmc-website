@@ -15,19 +15,24 @@
 
 .hero-cover {
   position: absolute;
-  top: 656px;
-  left: 138px;
-  width: calc(100% - 210px);
-  max-width: 1193px;
-  height: 598px;
-  overflow: hidden;
+  top: 809px;          /* figma crew group 1256:588 (y=809) */
+  /* Centered + enlarged so it fills the width on wide screens.
+     margin:auto centering (not transform) keeps the GSAP translateY parallax intact. */
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 1500px;
+  aspect-ratio: 1159 / 463;
   z-index: var(--z-cover);
+  pointer-events: none;
 }
 
 .hero-cover__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* crew composite is a transparent cutout — show it whole, no crop */
+  object-fit: contain;
   object-position: bottom center;
   display: block;
 }
@@ -644,6 +649,17 @@
 
 .contact-form__submit:hover { opacity: 0.85; }
 .contact-form__submit svg { width: 18px; height: 18px; }
+.contact-form__submit:disabled { opacity: 0.5; cursor: default; }
+
+.contact-form__status {
+  align-self: flex-end;
+  margin: 4px 0 0;
+  font-family: var(--font-fustat);
+  font-size: 14px;
+  font-weight: 500;
+}
+.contact-form__status[data-state="ok"]    { color: var(--sand); }
+.contact-form__status[data-state="error"] { color: var(--red); }
 
 .contact-section__footer {
   display: flex;
@@ -665,7 +681,9 @@
     top: clamp(200px, 38vw, 450px);
     left: var(--gutter);
     width: calc(100% - calc(var(--gutter) * 2));
-    height: clamp(200px, 45vw, 400px);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1159 / 463;
   }
 
   .hero-lets-talk {

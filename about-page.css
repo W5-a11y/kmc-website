@@ -5,7 +5,7 @@
 :root {
   --ab-cream:  #f4f3ef;
   --ab-olive:  #645d45;
-  --ab-red:    #C21F1F;
+  --ab-red:    #c21f1f;
   --ab-dark:   #111111;
   --ab-ease:   cubic-bezier(0.16, 1, 0.3, 1);
   --ab-dur:    0.55s;
@@ -33,16 +33,14 @@
   opacity: 1;
   pointer-events: none;
   transition:
-    padding 280ms var(--ab-ease),
-    max-height 280ms var(--ab-ease),
+    transform 320ms var(--ab-ease),
     opacity 220ms ease;
 }
 
 .ab-nav.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .ab-nav__logo,
@@ -60,8 +58,7 @@
   display: block;
   height: 17px;
   width: auto;
-  filter: invert(1);
-  opacity: 0.85;
+  opacity: 0.95;
   transition: opacity 0.25s;
 }
 
@@ -82,7 +79,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #645D45;
+  color: var(--ab-olive);
   white-space: nowrap;
   transition: opacity 0.2s;
 }
@@ -92,7 +89,7 @@
 }
 
 .ab-nav__link--active {
-  color: #C21F1F;
+  color: var(--ab-red);
 }
 
 .ab-nav__menu {
@@ -301,9 +298,16 @@
     transform var(--ab-dur) var(--ab-ease);
 }
 
-/* Lucas portrait: keep subject centered in frame */
+/* Lucas portrait: the source photo has dead black space above the head, so
+   centering sits him low. Anchor to the bottom + zoom slightly to lift him up
+   and let the figure fill ~2/3 of the frame. */
 .ab-member:nth-child(2) .ab-member__img {
-  object-position: center center;
+  object-position: center bottom;
+  transform: scale(1.1);
+  transform-origin: center bottom;
+}
+.ab-member:nth-child(2):hover .ab-member__img {
+  transform: scale(1.13);
 }
 
 /* Eason portrait: seated pose, focus upper body */

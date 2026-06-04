@@ -5,7 +5,7 @@
 
 :root {
   --ssv-red:    #C21F1F;
-  --ssv-cream:  #EEECE6;
+  --ssv-cream:  #F4F3EF;
   --ssv-dark:   #111111;
   --ssv-ease:   cubic-bezier(0.22, 1, 0.36, 1);
   --ssv-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -68,73 +68,6 @@ body.page-ssv { overflow: visible !important; }
   transform: translateY(0);
   border-radius: 0;
 }
-
-/* ─── Fixed Nav ─────────────────────────────── */
-.ssv-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  padding: 16px 20px;
-  pointer-events: none;
-}
-
-.ssv-nav > * { pointer-events: auto; }
-
-.ssv-nav__logo img {
-  height: 40px;
-  width: auto;
-  mix-blend-mode: plus-lighter;
-  display: block;
-}
-
-.ssv-nav__center {
-  margin: 0 auto;
-  position: relative;
-  height: 28px;
-  display: flex;
-  align-items: center;
-}
-
-.ssv-nav__ssv-white,
-.ssv-nav__ssv-color {
-  height: 28px;
-  width: auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: opacity 0.4s ease;
-}
-
-/* Dark sections: white logo */
-.ssv-nav__ssv-white { opacity: 1; }
-.ssv-nav__ssv-color { opacity: 0; }
-
-/* Light sections: color logo */
-.ssv-nav--light .ssv-nav__ssv-white { opacity: 0; }
-.ssv-nav--light .ssv-nav__ssv-color { opacity: 1; }
-
-/* Landing: nav logo hidden (the SSV fills the whole page) */
-.ssv-nav--landing .ssv-nav__center {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.ssv-nav--landing .ssv-nav__logo img { opacity: 0; transition: opacity 0.3s ease; }
-
-.ssv-nav__menu {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.ssv-nav__menu-icon { display: block; width: 44px; height: 44px; }
-.ssv-nav--light .ssv-nav__menu-icon { filter: invert(1); }
 
 /* ─── Opening animation (Lottie) ───────────────── */
 html.ssv-opening-active {

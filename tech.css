@@ -27,16 +27,14 @@
   opacity: 1;
   pointer-events: none;
   transition:
-    padding 280ms var(--ease-slow),
-    max-height 280ms var(--ease-slow),
+    transform 320ms var(--ease-slow),
     opacity 220ms ease;
 }
 
 .aw-nav.is-collapsed {
-  padding-top: 0;
-  padding-bottom: 0;
-  max-height: 0;
+  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
 }
 
 .aw-nav__logo,
@@ -54,9 +52,7 @@
   display: block;
   height: 17px;
   width: auto;
-  filter: invert(1);
-  opacity: 0.85;
-  mix-blend-mode: exclusion;
+  opacity: 0.95;
   transition: opacity 0.25s;
 }
 
