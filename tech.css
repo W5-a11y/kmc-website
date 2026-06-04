@@ -50,20 +50,34 @@
   display: block;
 }
 
-/* Figma: R6/R8 indent 43px; R7 (Berkeley row) extends 43px further left */
-.th-card__title-hl {
-  padding-left: 43px;
-}
-
+/* Keep “KMC +” / “AI Summits +” on one line (symbol with words) */
 .th-lh-std {
   display: block;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .th-lh-tight {
   display: block;
-  margin-left: -43px;
   line-height: 1;
+}
+
+/* BETA: middle row steps left for red block */
+.th-card--beta .th-card__title-hl {
+  padding-left: 43px;
+}
+
+.th-card--beta .th-lh-tight {
+  margin-left: -43px;
+}
+
+/* AI hack: two title lines, no Berkeley-style step */
+.th-card--ai-hack .th-card__title-hl {
+  padding-left: 0;
+}
+
+.th-card--ai-hack .th-lh-second {
+  margin-left: 0;
 }
 
 .th-card__body-text,
@@ -89,4 +103,8 @@
 
 #tech-projects > article .th-card__info {
   background: var(--red, #c21f1f);
+}
+
+#tech-projects > article + article {
+  margin-top: clamp(32px, 5vw, 64px);
 }

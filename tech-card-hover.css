@@ -1,6 +1,5 @@
 /**
- * Tech card hover — SVG overlay in h2, LTR reveal. Matches Desktop:
- * #tech-projects > article:nth-of-type(1) > div:nth-of-type(2) > h2 > span
+ * Tech card hover — SVG in h2, left → right reveal.
  */
 
 .th-card__hover-reveal {
@@ -8,13 +7,22 @@
   z-index: 1;
   left: 0;
   top: 0;
-  width: 526px;
-  max-width: calc(100% + 43px);
-  height: 265px;
   overflow: hidden;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.th-card--beta .th-card__hover-reveal {
+  width: 526px;
+  max-width: calc(100% + 43px);
+  height: 265px;
+}
+
+.th-card--ai-hack .th-card__hover-reveal {
+  width: 589px;
+  max-width: 100%;
+  height: 357px;
 }
 
 .th-card__hover-shapes {
@@ -23,6 +31,7 @@
   height: 100%;
 }
 
+/* ── BETA (card 1) ── */
 #tech-projects > article:first-of-type:is(:hover, :focus-within) .th-card__hover-reveal,
 #tech-projects > article:first-of-type .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal,
 .th-card--beta:is(:hover, :focus-within) .th-card__hover-reveal,
@@ -49,18 +58,51 @@
   color: var(--cream, #f4f3ef);
 }
 
+/* ── AI Summits + Hackathons (card 2) ── */
+#tech-projects > article:nth-of-type(2):is(:hover, :focus-within) .th-card__hover-reveal,
+#tech-projects > article:nth-of-type(2) .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal,
+.th-card--ai-hack:is(:hover, :focus-within) .th-card__hover-reveal,
+.th-card--ai-hack .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal {
+  clip-path: inset(0 0 0 0);
+}
+
+#tech-projects > article:nth-of-type(2):is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:nth-of-type(2):is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article:nth-of-type(2):is(:hover, :focus-within) .th-lh-second,
+#tech-projects > article:nth-of-type(2):is(:hover, :focus-within) .th-card__body-text,
+#tech-projects > article:nth-of-type(2) .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:nth-of-type(2) .th-card__info:is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article:nth-of-type(2) .th-card__info:is(:hover, :focus-within) .th-lh-second,
+#tech-projects > article:nth-of-type(2) .th-card__info:is(:hover, :focus-within) .th-card__body-text,
+.th-card--ai-hack:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--ai-hack:is(:hover, :focus-within) .th-lh-std,
+.th-card--ai-hack:is(:hover, :focus-within) .th-lh-second,
+.th-card--ai-hack:is(:hover, :focus-within) .th-card__body-text,
+.th-card--ai-hack .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+.th-card--ai-hack .th-card__info:is(:hover, :focus-within) .th-lh-std,
+.th-card--ai-hack .th-card__info:is(:hover, :focus-within) .th-lh-second,
+.th-card--ai-hack .th-card__info:is(:hover, :focus-within) .th-card__body-text {
+  color: var(--cream, #f4f3ef);
+}
+
 @media (max-width: 900px) {
-  .th-card__hover-reveal {
+  .th-card--beta .th-card__hover-reveal {
     width: 100%;
     height: auto;
     aspect-ratio: 526 / 265;
   }
 
-  .th-card__title-hl {
+  .th-card--ai-hack .th-card__hover-reveal {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 589 / 357;
+  }
+
+  .th-card--beta .th-card__title-hl {
     padding-left: clamp(20px, 6vw, 43px);
   }
 
-  .th-lh-tight {
+  .th-card--beta .th-lh-tight {
     margin-left: clamp(-43px, -6vw, -20px);
   }
 }
