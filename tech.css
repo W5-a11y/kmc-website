@@ -671,7 +671,7 @@
    Us "U" / "s"). */
 .th-why__word--why    { width: 24.2%; margin-left: 5%;    margin-bottom: -1%; --slide: 148%; }
 .th-why__word--choose { width: 49%;   margin-left: 5%;    margin-bottom: -1%; --slide: 40%; --slide-se: 40%; }
-.th-why__word--us     { width: 15.9%; margin-left: 46.4%; --slide: 117%; }
+.th-why__word--us     { width: 15.9%; margin-left: 46.4%; margin-top: 7.4%; --slide: 117%; }
 
 /* Each word is split into a fixed leading part and a sliding trailing part —
    two transparent PNGs the full size of the word, so they overlay perfectly.
