@@ -1,5 +1,5 @@
 /* tech.css — Tech + Venture page (Figma 1120:733)
- * Card hover: load tech-card-hover.css AFTER this file (see tech.html).
+ * Card hover overlay: tech-card-hover.css (see tech.html).
  */
 
 .page-tech {
@@ -32,6 +32,7 @@
   padding: clamp(24px, 4vw, 48px);
   color: var(--red-hot, #ff271a);
   position: relative;
+  overflow: hidden;
 }
 
 .th-card__title {
@@ -49,56 +50,12 @@
   display: block;
 }
 
-/* Rest: no pseudo highlight blocks (hover in tech-card-hover.css) */
-.th-card__title-hl::before,
-.th-card__title-hl::after,
-.th-card__info::before,
-.th-card__info::after {
-  content: none;
-}
-
 .th-card__title-text,
 .th-card__body-text,
 .th-card__desc-text {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: block;
-}
-
-/* Default: highlight spans collapsed (Figma Default — width 0) */
-.th-card__title-hl > span:not(.th-card__title-text),
-.th-card__title-hl > .th-card__hl,
-.th-card__body-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
-.th-card__desc-hl > span:not(.th-card__body-text):not(.th-card__desc-text),
-.th-card__body-hl > .th-card__hl,
-.th-card__desc-hl > .th-card__hl {
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  width: 0;
-  overflow: hidden;
-  background: var(--red-hot, #ff271a);
-  pointer-events: none;
-  transition: none;
-}
-
-.th-card__title-hl > span:not(.th-card__title-text):nth-of-type(1),
-.th-card__title-hl > .th-card__hl--r6 {
-  height: 51px;
-}
-
-.th-card__title-hl > span:not(.th-card__title-text):nth-of-type(2),
-.th-card__title-hl > .th-card__hl--r7 {
-  top: 56px;
-  height: 120px;
-}
-
-.th-card__body-hl > span:not(.th-card__body-text),
-.th-card__desc-hl > span:not(.th-card__desc-text),
-.th-card__body-hl > .th-card__hl--r8 {
-  top: -31px;
-  height: 94px;
 }
 
 .th-card__body-text,
@@ -109,21 +66,6 @@
   line-height: 1.35;
   letter-spacing: -0.02em;
   max-width: 349px;
-}
-
-/* Span hl never expands here — hover blocks live in tech-card-hover.css */
-#tech-projects > article:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-#tech-projects > article:is(:hover, :focus-within) .th-card__title-hl > .th-card__hl,
-#tech-projects > article:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text),
-#tech-projects > article:is(:hover, :focus-within) .th-card__desc-hl > span:not(.th-card__desc-text),
-#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__body-hl > .th-card__hl,
-.th-card:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text),
-.th-card:is(:hover, :focus-within) .th-card__body-hl > span:not(.th-card__body-text),
-.th-card__info:is(:hover, :focus-within) .th-card__title-hl > span:not(.th-card__title-text) {
-  width: 0 !important;
-  max-width: 0 !important;
-  background: transparent !important;
 }
 
 /* ─── Card grid when article lacks .th-card class (Desktop markup) ─── */
