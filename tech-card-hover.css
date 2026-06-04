@@ -1,0 +1,159 @@
+/**
+ * Tech project cards — Figma hover shapes, left → right reveal.
+ * Load after tech.css. Targets #tech-projects articles.
+ */
+
+.th-card__hover-reveal {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.th-card__hover-shapes {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.th-card--beta .th-card__hover-reveal {
+  left: -24px;
+  width: 558px;
+  max-width: calc(100% + 67px);
+  height: 265px;
+}
+
+/* Berkeley row — fill any SVG gap at line edges */
+.th-card--beta:is(:hover) .th-lh-tight::before,
+.th-card--beta:is(:focus-within) .th-lh-tight::before,
+.th-card--beta .th-card__info:is(:hover) .th-lh-tight::before,
+.th-card--beta .th-card__info:is(:focus-within) .th-lh-tight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.14em;
+  right: -0.1em;
+  top: -0.08em;
+  bottom: -0.08em;
+  background: var(--red-hot, #ff281b);
+}
+
+.th-card--ai-hack .th-card__hover-reveal {
+  width: 589px;
+  max-width: 100%;
+  height: 357px;
+}
+
+.th-card--q3d .th-card__hover-reveal {
+  width: 572px;
+  max-width: 100%;
+  height: 317px;
+}
+
+.th-card--dreame .th-card__content {
+  position: relative;
+  width: 100%;
+  max-width: 662px;
+}
+
+.th-card--dreame .th-card__hover-reveal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  max-width: 662px;
+  height: 100%;
+  min-height: 325px;
+}
+
+.th-card--dreame .th-card__title {
+  margin-bottom: clamp(16px, 2vw, 28px);
+}
+
+.th-card--dreame .th-card__title-hl {
+  padding-left: 0;
+}
+
+.th-card--dreame .th-lh-tight {
+  margin-left: 0;
+}
+
+.th-card--dreame .th-lh-step {
+  margin-left: -24px;
+}
+
+#tech-projects > article:is(:hover, :focus-within) .th-card__hover-reveal,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__hover-reveal {
+  clip-path: inset(0 0 0 0);
+}
+
+#tech-projects > article:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article:is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article:is(:hover, :focus-within) .th-lh-tight,
+#tech-projects > article:is(:hover, :focus-within) .th-lh-step,
+#tech-projects > article:is(:hover, :focus-within) .th-lh-second,
+#tech-projects > article:is(:hover, :focus-within) .th-card__body-text,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__title-hl,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-lh-std,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-lh-tight,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-lh-step,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-lh-second,
+#tech-projects > article .th-card__info:is(:hover, :focus-within) .th-card__body-text {
+  color: var(--cream, #f4f3ef);
+}
+
+@media (max-width: 900px) {
+  .th-card--beta .th-card__hover-reveal {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 526 / 265;
+  }
+
+  .th-card--ai-hack .th-card__hover-reveal {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 589 / 357;
+  }
+
+  .th-card--q3d .th-card__hover-reveal {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 572 / 317;
+  }
+
+  .th-card--dreame .th-card__hover-reveal {
+    min-height: 280px;
+  }
+
+  .th-card--beta .th-card__title-hl {
+    padding-left: clamp(20px, 6vw, 43px);
+  }
+
+  .th-card--beta .th-card__hover-reveal {
+    left: -12px;
+    width: 100%;
+  }
+
+  .th-card--beta .th-lh-tight {
+    margin-left: clamp(-43px, -6vw, -20px);
+  }
+
+  .th-card--q3d .th-card__title-hl {
+    padding-left: clamp(20px, 6vw, 99px);
+  }
+
+  .th-card--q3d .th-lh-tight {
+    margin-left: clamp(-99px, -12vw, -20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-card__hover-reveal {
+    transition: none;
+  }
+}
