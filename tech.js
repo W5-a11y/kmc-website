@@ -54,6 +54,17 @@
     });
   }
 
+  /* ── Selected Collaboration → smooth-scroll to the project cards ── */
+  var collab   = document.querySelector('.th-collab');
+  var projects = document.getElementById('tech-projects');
+
+  if (collab && projects) {
+    collab.addEventListener('click', function (e) {
+      e.preventDefault();
+      projects.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
   /* ── Keyword push interaction ──
      Hover devices: reveal on mouseenter, hide on mouseleave.
      Touch / no-hover devices: tap to toggle one group at a time, so the
