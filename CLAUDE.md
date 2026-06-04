@@ -147,10 +147,9 @@ npm run build
 
 ## 设计资源
 
-- Figma 文件：`PMj0WnXSp4qBpFj48SE2Fr`（环境变量 `FIGMA_FILE_KEY`）
-- Figma API Token：存放在 **`.env.local`** 的 `FIGMA_ACCESS_TOKEN`（勿写入本文件或提交 git；模板见 `.env.example`）
-- Cloud Agent 持久化：在 Cursor → Background Agent → Secrets 添加同名变量 `FIGMA_ACCESS_TOKEN`
-- 原始 SVG 素材：`~/Desktop/Web資料/SSV/`
+- Figma 设计稿由维护者在本地查看；**勿在本仓库任何文件或 commit 中写入 API token、`.env` 路径或密钥说明**。
+- 页面注释中的 Figma 节点 ID（如 `1120:733`）仅作设计对照，非 API 配置。
+- 原始 SVG 等源文件在维护者本机，不随公开仓库分发。
 
 ## 上线前待办（最终修复时提醒）
 
