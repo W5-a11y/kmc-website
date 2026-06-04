@@ -15,3 +15,8 @@
 # Node (scroll-editorial subproject)
 node_modules/
 dist/
+
+# Temp / debug / scratch (figma refs, render checks, backups, scratch html)
+.tmp-blueprint/
+_t*.html
+_debug-*.html
