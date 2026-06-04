@@ -144,3 +144,16 @@
 }
 
    ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Card grid when article lacks .th-card class (Desktop markup) ─── */
+#tech-projects > article {
+  display: grid;
+  grid-template-columns: minmax(0, 778fr) minmax(0, 592fr);
+  align-items: stretch;
+  max-width: 1370px;
+  min-height: 583px;
+}
+
+#tech-projects > article .th-card__info {
+  background: var(--red, #c21f1f);
+}
