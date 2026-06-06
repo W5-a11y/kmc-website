@@ -196,36 +196,3 @@
 @media (min-width: 1024px) {
   .brand-mobile { display: none; }
 }
-
-/* ── Phone (≤600px): keep the KMC+ · BETA wordmark, but reflow the two text
-   annotations (subtitle, UC Berkeley) so they stop overflowing onto the photo. ── */
-@media (max-width: 600px) {
-  /* The 1023 block makes .brand-mark position:static, which (re)parents the
-     %-positioned letter slots to .brand-wrap instead of .brand-mark — stretching
-     the lockup to the wrap's full height. Restore relative so slots resolve
-     against the mark's own aspect-ratio box and the lockup stays compact. */
-  .brand-mark {
-    position: relative;
-  }
-
-  /* Subtitle: lift out of its cramped right-aligned desktop slot and set it as a
-     small, left-aligned, wrapping line tucked under the K/M letters. */
-  .bm-subtitle {
-    inset: 56% auto auto 5%;
-    width: 56%;
-    height: auto;
-  }
-  .bm-subtitle__text {
-    font-size: 11px;
-    line-height: 1.3;
-    letter-spacing: 0;
-    text-align: left;
-    white-space: normal;
-  }
-
-  /* UC Berkeley co-brand line: shrink so it fits under BETA without right-overflow.
-     (left edge is still pinned to BETA's "B" by alignUCBtoBeta() in site.js) */
-  .bm-uc {
-    font-size: clamp(15px, 5.2vw, 24px);
-  }
-}

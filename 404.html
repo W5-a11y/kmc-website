@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — KMC+LUCAS</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="assets/kmc-beta.svg" />
+    <meta name="theme-color" content="#C21F1F" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root { --cream: #f4f3ef; --dark: #201d13; --red: #c21f1f; }
+      * { margin: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        background: var(--cream);
+        color: var(--dark);
+        font-family: "Fustat", system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(18px, 3vh, 32px);
+        text-align: center;
+        padding: 24px;
+      }
+      .e404__logo { height: 18px; width: auto; margin-bottom: clamp(8px, 2vh, 20px); }
+      .e404__code {
+        font-weight: 800;
+        font-size: clamp(72px, 18vw, 200px);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        color: var(--red);
+      }
+      .e404__msg {
+        font-weight: 500;
+        font-size: clamp(15px, 2.4vw, 20px);
+        letter-spacing: -0.02em;
+        max-width: 32ch;
+        color: var(--dark);
+      }
+      .e404__home {
+        display: inline-block;
+        margin-top: clamp(6px, 1.5vh, 14px);
+        font-weight: 600;
+        font-size: clamp(13px, 1.8vw, 16px);
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--cream);
+        background: var(--red);
+        padding: 0.85em 1.6em;
+        border-radius: 999px;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      }
+      .e404__home:hover { transform: translateY(-2px); opacity: 0.92; }
+    </style>
+  </head>
+  <body>
+    <img class="e404__logo" src="assets/kmc-beta.svg" alt="KMC × BETA" />
+    <p class="e404__code">404</p>
+    <p class="e404__msg">This page wandered off set. The story continues back home.</p>
+    <a class="e404__home" href="/">Back to Home</a>
+  </body>
+</html>

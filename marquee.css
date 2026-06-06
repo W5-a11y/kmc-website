@@ -27,6 +27,10 @@
   to   { transform: translateX(-50%); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .mrq__track { animation: none; transform: none; }
+}
+
 /* ─── Each cell ─────────────────────────────────── */
 .mrq__cell {
   width: 250px;

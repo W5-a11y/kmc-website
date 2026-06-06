@@ -1053,3 +1053,53 @@ body.page-all-work {
   .aw-card__title { font-size: 20px; }
   .aw-card__body  { font-size: 15px; }
 }
+
+/* ─── Phone (≤768px) ───────────────────────────────────────────
+   The 1440 hero canvas scales to ~0.27 on a phone, which makes its body copy
+   unreadable; and the "We do not create disposable advertising" scrollytelling
+   doesn't translate to a small screen. So: reflow the hero as readable flow,
+   and drop the disposable section entirely. ── */
+@media (max-width: 768px) {
+  /* Remove the disposable statement section on phones */
+  #work-disposable {
+    display: none;
+  }
+
+  /* Hero: stop scaling the canvas; lay title + copy out in normal flow */
+  #work-hero {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+  #work-hero .aw-stage {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    padding: 116px clamp(24px, 6vw, 40px) 56px;
+  }
+  #work-hero .aw-work-title {
+    position: static;
+    right: auto;
+    top: auto;
+    font-size: clamp(72px, 24vw, 120px);
+    line-height: 0.9;
+    text-align: left;
+    margin: 0 0 28px;
+  }
+  #work-hero .aw-body {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    font-size: clamp(18px, 5vw, 21px);
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    margin: 0 0 22px;
+  }
+  #work-hero .aw-down {
+    position: static;
+    transform: none;
+    margin: 24px auto 0;
+  }
+}

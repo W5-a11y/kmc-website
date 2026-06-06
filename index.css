@@ -58,6 +58,14 @@
   display: block;
 }
 
+/* ─── SIMPLIFIED MOBILE HERO (≤600px only) ─────────────
+   The desktop KMC+ · BETA lockup is a wide, layered composition that can't hold
+   its annotations at phone widths, so on small screens we hide it and show a
+   clean stacked wordmark + tagline instead (cover photo flows below). ── */
+.hero-mobile {
+  display: none;
+}
+
 /* ─── NO ADS / BUT STORIES — FULLSCREEN POSTER ─── */
 
 .stories-section {
@@ -188,6 +196,13 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* Desktop shows the full graphic (with tagline); the compact "See The Works"
+   arrow is for the phone layout only. (element+class specificity to beat the
+   `.stories-info img` base rule above.) */
+.stories-info img.stories-info__img--compact {
+  display: none;
 }
 
 /* ─── SERVICES SECTION ──────────────────────── */
@@ -355,13 +370,15 @@
 }
 
 .services-item:hover .services-item__num,
-.services-item:focus-within .services-item__num {
+.services-item:focus-within .services-item__num,
+.services-item.is-open .services-item__num {
   opacity: 1;
   transform: translateX(0);
 }
 
 .services-item:hover,
-.services-item.is-current {
+.services-item.is-current,
+.services-item.is-open {
   color: #fff;
   transform: translateX(-8px);
   letter-spacing: -0.03em;
@@ -397,13 +414,15 @@
 }
 
 .services-item:hover .services-item__detail,
-.services-item:focus-within .services-item__detail {
+.services-item:focus-within .services-item__detail,
+.services-item.is-open .services-item__detail {
   max-height: 360px;
   padding-top: 14px;
 }
 
 .services-item:hover .services-item__line,
-.services-item:focus-within .services-item__line {
+.services-item:focus-within .services-item__line,
+.services-item.is-open .services-item__line {
   opacity: 1;
   transform: translateY(0);
 }
@@ -485,7 +504,13 @@
 .about-nav-item {
   border-top: 1px solid rgba(100, 93, 69, 0.15);
   cursor: default;
-  outline: none;
+}
+
+/* Keyboard focus ring (mouse focus stays clean via :focus-visible) */
+.about-nav-item:focus { outline: none; }
+.about-nav-item:focus-visible {
+  outline: 2px solid var(--red, #c21f1f);
+  outline-offset: 3px;
 }
 
 .about-nav-item:last-of-type {
@@ -833,10 +858,19 @@
     height: 88px;
   }
 
-  /* stories: vw units self-scale; hide info block on small screens */
+  /* stories: vw units self-scale. On phones, show the compact "See The Works"
+     arrow pinned to the bottom-right corner (clearing the floating Let's Talk
+     button), and hide the full tagline graphic. */
   .stories-info {
-    display: none;
+    position: absolute;
+    right: clamp(16px, 5vw, 28px);
+    bottom: clamp(100px, 17vh, 150px);
+    width: clamp(128px, 40vw, 176px);
+    margin: 0;
+    will-change: auto;
   }
+  .stories-info img.stories-info__img--full { display: none; }
+  .stories-info img.stories-info__img--compact { display: block; }
 
   .services-preview {
     display: none;
@@ -858,21 +892,11 @@
     justify-content: flex-start;
   }
 
-  .services-item__num {
-    opacity: 1;
-    transform: none;
-  }
-
-  .services-item__detail {
-    max-height: none;
-    padding-top: 8px;
-  }
-
+  /* Detail is collapsed by default; tapping a service toggles .is-open to
+     reveal it (mirrors the desktop hover-to-reveal, driven by site.js). */
   .services-item__line {
     margin-left: 0;
     max-width: 100%;
-    opacity: 1;
-    transform: none;
   }
 
   .about-card {
@@ -906,18 +930,43 @@
   }
 }
 
-/* ─── Phone (≤600px): separate the cover photo from the KMC+ wordmark so they
-   stop colliding, and give the hero enough height to show both cleanly. ── */
+/* ─── Phone (≤600px): use the simplified stacked hero instead of the lockup ── */
 @media (max-width: 600px) {
-  .hero-container {
-    min-height: 430px;
-  }
+  /* Hide the desktop lockup; show the stacked wordmark + tagline */
   .brand-wrap {
-    height: 260px;
+    display: none;
+  }
+  .hero-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 104px var(--gutter) 0;
+  }
+  .hero-mobile__mark {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+  }
+  .hero-mobile__tag {
+    font-family: var(--font-fustat);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0;
+    color: var(--red);
+  }
+
+  /* Cover photo flows below the wordmark (no more absolute overlap) */
+  .hero-container {
+    min-height: auto;
   }
   .hero-cover {
-    top: 272px;
+    position: static;
+    margin: 28px auto 0;
+    top: auto;
+    left: auto;
     width: calc(100% - var(--gutter) * 2);
+    max-width: none;
     aspect-ratio: 1159 / 463;
   }
   .hero-lets-talk {

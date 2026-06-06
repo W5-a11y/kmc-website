@@ -466,6 +466,12 @@
 }
 
 @media (max-width: 600px) {
+  /* Drop the 80vh reservation so the founding-team section follows the intro
+     copy directly instead of leaving a tall empty gap. */
+  .ab-hero {
+    min-height: auto;
+    padding-bottom: clamp(32px, 6vh, 56px);
+  }
   .ab-hero__sub { margin-left: 0; }
   .ab-hero__talk {
     right: 14px;

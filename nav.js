@@ -22,34 +22,40 @@
     });
   }
 
-  document.querySelectorAll('.js-menu-toggle').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      setMenuOpen(!isMenuOpen());
+  /* On index.html, site.js already owns the menu drawer + go-home (using the
+     classes menu.css styles). It sets window.__kmcSiteMenu so we skip these
+     bindings here and avoid double-firing — the home-intro logic below still
+     runs on index. On every other page site.js is absent, so nav.js binds. */
+  if (!window.__kmcSiteMenu) {
+    document.querySelectorAll('.js-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        setMenuOpen(!isMenuOpen());
+      });
     });
-  });
 
-  document.querySelectorAll('.js-go-home').forEach(function (el) {
-    el.addEventListener('click', function (ev) {
-      var href = el.getAttribute('href') || '';
-      setMenuOpen(false);
-      if (!href || href === '#') {
+    document.querySelectorAll('.js-go-home').forEach(function (el) {
+      el.addEventListener('click', function (ev) {
+        var href = el.getAttribute('href') || '';
+        setMenuOpen(false);
+        if (!href || href === '#') {
+          ev.preventDefault();
+          var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+          return;
+        }
         ev.preventDefault();
-        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-        return;
-      }
-      ev.preventDefault();
-      window.location.href = href;
+        window.location.href = href;
+      });
     });
-  });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && isMenuOpen()) setMenuOpen(false);
-  });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isMenuOpen()) setMenuOpen(false);
+    });
 
-  var overlay = document.querySelector('.menu-overlay');
-  if (overlay) overlay.addEventListener('click', function () { setMenuOpen(false); });
+    var overlay = document.querySelector('.menu-overlay');
+    if (overlay) overlay.addEventListener('click', function () { setMenuOpen(false); });
+  }
 
   /* ── About-nav collapse on scroll (only active when #ab-nav exists) ── */
 

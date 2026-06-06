@@ -157,6 +157,10 @@
     }
   }
 
+  /* Flag so nav.js (also loaded on index.html for the home-intro sequence)
+     skips its own menu / go-home binding and we don't double-fire. */
+  window.__kmcSiteMenu = true;
+
   document.querySelectorAll('.js-menu-toggle').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
@@ -344,12 +348,21 @@
      (for nav links that target page sections)
   ══════════════════════════════════════ */
 
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-      const target = document.querySelector(this.getAttribute('href'));
+      var href = this.getAttribute('href');
+      if (!href || href === '#') return;          // ignore bare "#" (invalid selector)
+      const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
       closeMenu();
+      if (prefersReduced) {
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 60;
+        window.scrollTo(0, top);                  // instant jump for reduced motion
+        return;
+      }
       gsap.to(window, {
         scrollTo: { y: target, offsetY: 60 },
         duration: 1.25,
@@ -655,6 +668,23 @@
         gsap.to(svcItems, { opacity: 0.4, duration: 0.2, overwrite: true });
         gsap.to(item, { opacity: 1, duration: 0.2, overwrite: true });
         liftListFor(item);
+      });
+    });
+
+    /* Touch / small-screen: tap to reveal the description (mirrors desktop hover).
+       A tap on a collapsed item opens it (and closes the others) without
+       navigating; tapping an already-open item follows its link. */
+    function isTouchLayout() {
+      return window.matchMedia('(max-width: 600px)').matches;
+    }
+    svcItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        if (!isTouchLayout()) return;
+        if (!item.classList.contains('is-open')) {
+          e.preventDefault();
+          svcItems.forEach(function (el) { if (el !== item) el.classList.remove('is-open'); });
+          item.classList.add('is-open');
+        }
       });
     });
 

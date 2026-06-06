@@ -4,7 +4,6 @@ tmp/
 output/
 .tmp-blueprint/
 scroll-editorial/
-_t*.html
-_debug-*.html
+_*.html
 .DS_Store
 **/.DS_Store

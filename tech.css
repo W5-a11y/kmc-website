@@ -871,6 +871,16 @@
 
 /* Mobile */
 @media (max-width: 640px) {
+  /* The scaled hero stage starts at y0, so its first line sits right under the
+     fixed nav logo. Push the stage down (and grow the hero by the same amount
+     so nothing clips at the bottom) to give the logo / headline breathing room. */
+  .th-hero {
+    height: calc(1401px * var(--tech-scale, 1) + 64px);
+  }
+  .th-hero__stage {
+    top: 64px;
+  }
+
   .th-card {
     flex-direction: column;
   }
