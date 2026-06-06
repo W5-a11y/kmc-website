@@ -906,6 +906,26 @@
   }
 }
 
+/* ─── Phone (≤600px): separate the cover photo from the KMC+ wordmark so they
+   stop colliding, and give the hero enough height to show both cleanly. ── */
+@media (max-width: 600px) {
+  .hero-container {
+    min-height: 430px;
+  }
+  .brand-wrap {
+    height: 260px;
+  }
+  .hero-cover {
+    top: 272px;
+    width: calc(100% - var(--gutter) * 2);
+    aspect-ratio: 1159 / 463;
+  }
+  .hero-lets-talk {
+    width: 72px;
+    height: 72px;
+  }
+}
+
 /* ═══ Lottie opening (homepage; assets/opening-xl.json) ═══ */
 html.opening-active {
   overflow: hidden;

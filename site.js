@@ -38,6 +38,13 @@
           el.style.transform = '';
           el.style.opacity = '';
         });
+        /* Brand morph (KMC×BETA / UC Berkeley) is scrubbed by ScrollTrigger,
+           which does NOT re-fire on bfcache restore — leaving "UC Berkeley"
+           stuck at opacity:0 from the scrolled-away state. Force it visible,
+           then refresh ScrollTrigger so the scrub re-syncs to scrollY=0. */
+        var ucbRestore = document.querySelector('.bm-uc');
+        if (ucbRestore) ucbRestore.style.opacity = '';
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
       }
     });
 
@@ -390,7 +397,8 @@
       trigger: document.documentElement,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 2
+      scrub: 1,
+      invalidateOnRefresh: true
     }
   })
   .to('body', {
@@ -403,6 +411,22 @@
     ease: 'power3.inOut',
     duration: 0.6
   });
+
+  /* Recompute every ScrollTrigger once the page reaches its final height.
+     Late-loading images (large service previews, crew composite) and webfonts
+     grow the document AFTER triggers initialize; without this the body-bg
+     morph's end='bottom bottom' is stale and can park the background on red
+     near the top until a manual reload. */
+  function refreshTriggers() {
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  }
+  window.addEventListener('load', refreshTriggers);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshTriggers);
+  /* Each in-viewport <img> that finishes decoding can shift layout height. */
+  document.querySelectorAll('img').forEach(function (img) {
+    if (!img.complete) img.addEventListener('load', refreshTriggers, { once: true });
+  });
+  window.addEventListener('kmc-opening-done', function () { setTimeout(refreshTriggers, 100); });
 
   /* ══════════════════════════════════════
      10. BETA "MOSES SPLIT" HOVER

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-opening">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,13 +17,15 @@
     <link rel="stylesheet" href="brand-mark.css?v=3" />
     <link rel="stylesheet" href="index.css?v=9" />
     <link rel="stylesheet" href="marquee.css" />
-  </head>
+  <style>
+      .brand-mark,.bm-slot,.part-left,.part-right{opacity:1!important;}
+      .reveal,.reveal-left,.reveal-right{opacity:1!important;transform:none!important;}
+      .hero-container,body,.page-wrap{opacity:1!important;}
+    </style></head>
   <body class="page-wrap">
 
     <!-- Fullscreen Lottie opening (first visit per tab session) -->
-    <div id="opening-lottie-root" class="opening-lottie-root" aria-hidden="true">
-      <div id="opening-lottie-view" class="opening-lottie-view"></div>
-    </div>
+    
 
     <!-- ═══ NAV ═══ -->
     <header class="site-nav" id="site-nav">

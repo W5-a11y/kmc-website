@@ -6,9 +6,9 @@
     <title>About — KMC+Lucas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="about-page.css?v=4" />
+    <link rel="stylesheet" href="about-page.css?v=7" />
   </head>
   <body class="page-about">
 
@@ -52,12 +52,12 @@
         </p>
       </div>
 
-      <!-- Equation marquee -->
-      <div class="ab-equation-marquee" aria-label="Advertising plus Real Estate plus Technology plus Entertainment equals Human Future Life Style">
-        <div class="ab-equation-marquee__track">
-          <span class="ab-equation-marquee__item">ADVERTISING <span class="ab-equation__op">+</span> REAL ESTATE <span class="ab-equation__op">+</span> TECHNOLOGY <span class="ab-equation__op">+</span> ENTERTAINMENT <span class="ab-equation__eq">=</span> <span class="ab-equation__result">HUMAN FUTURE LIFE STYLE</span></span>
-          <span class="ab-equation-marquee__item" aria-hidden="true">ADVERTISING <span class="ab-equation__op">+</span> REAL ESTATE <span class="ab-equation__op">+</span> TECHNOLOGY <span class="ab-equation__op">+</span> ENTERTAINMENT <span class="ab-equation__eq">=</span> <span class="ab-equation__result">HUMAN FUTURE LIFE STYLE</span></span>
-        </div>
+      <!-- Equation — typed out like a typewriter when scrolled into view -->
+      <div class="ab-equation" aria-label="Advertising plus Real Estate plus Technology plus Entertainment equals Human Future Life Style">
+        <p class="ab-equation__line" data-equation-typewriter>
+          <span class="ab-equation__sizer" aria-hidden="true">Advertising + Real Estate + Technology + Entertainment = Human Future Life Style</span>
+          <span class="ab-equation__typed" aria-hidden="true"></span>
+        </p>
       </div>
 
       <div class="ab-team__grid">
@@ -148,6 +148,6 @@
     </div>
 
     <script src="nav.js"></script>
-    <script src="about-page.js"></script>
+    <script src="about-page.js?v=4"></script>
   </body>
 </html>

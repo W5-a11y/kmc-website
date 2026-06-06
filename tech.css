@@ -575,13 +575,39 @@
    NO vertical padding — block height is driven by line-height alone so each
    line-block stays inside its own line box and can't cover the line above.
    Breathing room above/below the glyphs comes from the title's line-height. */
+/* Each line is its OWN highlight block (inline-block) so it can be nudged,
+   rotated and padded independently — the tidy right-aligned staircase becomes
+   a hand-placed, collaged set of red blocks. Blocks read on hover (cream text
+   over red); the slight per-line offsets give the section its design edge. */
 .th-card__title-hl {
-  display: inline;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  padding: 0 0.3em;
+  display: inline-block;
+  padding: 0 0.32em;
   background-color: transparent;
+  transform-origin: 100% 50%;
   transition: background-color 600ms var(--ease-slow);
+  will-change: transform;
+}
+
+/* Per-line irregularity (nth-of-type skips the <br> separators). Offsets are
+   small so text stays readable but the blocks no longer line up. */
+.th-card__title-hl:nth-of-type(1) {
+  transform: translateX(-5%) rotate(-1.8deg);
+  padding-right: 0.5em;
+}
+.th-card__title-hl:nth-of-type(2) {
+  transform: translateX(4%) rotate(1.4deg);
+  padding-left: 0.55em;
+  padding-right: 0.18em;
+  margin-top: -0.04em;
+}
+.th-card__title-hl:nth-of-type(3) {
+  transform: translateX(-2.5%) rotate(-1deg);
+  padding-right: 0.62em;
+}
+.th-card__title-hl:nth-of-type(4) {
+  transform: translateX(6%) rotate(1.9deg);
+  padding-left: 0.5em;
+  margin-top: -0.05em;
 }
 
 .th-card__desc {

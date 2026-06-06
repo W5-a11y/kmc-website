@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-opening">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,9 +21,7 @@
   <body class="page-wrap">
 
     <!-- Fullscreen Lottie opening (first visit per tab session) -->
-    <div id="opening-lottie-root" class="opening-lottie-root" aria-hidden="true">
-      <div id="opening-lottie-view" class="opening-lottie-view"></div>
-    </div>
+    
 
     <!-- ═══ NAV ═══ -->
     <header class="site-nav" id="site-nav">
@@ -419,5 +417,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="site.js?v=4"></script>
     <script src="nav.js"></script>
-  </body>
+  <script>
+    window.addEventListener("load",function(){setTimeout(function(){
+      function r(sel){var e=document.querySelector(sel);if(!e)return sel+": (none)";var b=e.getBoundingClientRect();return sel+": x"+Math.round(b.left)+" y"+Math.round(b.top)+" "+Math.round(b.width)+"x"+Math.round(b.height)+" R"+Math.round(b.right);}
+      var o=document.createElement("pre");
+      o.style.cssText="position:fixed;left:0;top:0;z-index:99999;background:#000;color:#0f0;font:20px monospace;padding:6px;margin:0;white-space:pre;";
+      o.textContent=["vw="+window.innerWidth,r(".brand-wrap"),r(".brand-mark"),r(".bm-k"),r(".bm-c"),r(".beta-container"),r(".bm-subtitle__text"),r(".bm-uc"),r(".hero-cover")].join("\n");
+      document.body.appendChild(o);
+    },1500);});
+  </script></body>
 </html>
