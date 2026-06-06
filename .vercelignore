@@ -1,0 +1,10 @@
+# Dev / scratch — not part of the deployed static site
+.git
+tmp/
+output/
+.tmp-blueprint/
+scroll-editorial/
+_t*.html
+_debug-*.html
+.DS_Store
+**/.DS_Store

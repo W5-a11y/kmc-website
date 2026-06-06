@@ -216,17 +216,19 @@
 /* Preview area — left column */
 .services-preview {
   position: relative;
-  width: clamp(280px, 36vw, 520px);
-  height: clamp(320px, 36vw, 480px);
+  width: clamp(360px, 52vw, 780px);
+  height: clamp(420px, 48vw, 660px);
   margin-top: 80px;
-  overflow: hidden;
-  border-radius: 4px;
+  overflow: visible;
 }
 
+/* Each service image is its own composition — distinct size, distinct
+   placement (no shared crop, no single alignment edge). Only one shows at a
+   time via cross-fade, so each occupies its own footprint within the canvas. */
 .svc-layer {
   position: absolute;
-  inset: 0;
   opacity: 0;
+  transform-origin: center;
 }
 
 .svc-layer.is-active {
@@ -235,18 +237,45 @@
 
 .svc-layer__img {
   display: block;
-  width: auto;
+  width: 100%;
   height: auto;
-  max-width: none;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
 }
 
-/* Keep SSV preview image fully visible with gentle letterboxing if needed. */
-.svc-layer[data-svc="02"] .svc-layer__img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  background: #111;
+/* 01 — portrait, upper-left */
+.svc-layer[data-svc="01"] {
+  width: clamp(230px, 30vw, 420px);
+  top: 0;
+  left: 2%;
+}
+
+/* 02 — wide landscape, largest, dropped center-low */
+.svc-layer[data-svc="02"] {
+  width: clamp(400px, 48vw, 700px);
+  top: 26%;
+  left: 8%;
+}
+
+/* 03 — very wide, anchored lower, slightly off the right */
+.svc-layer[data-svc="03"] {
+  width: clamp(360px, 44vw, 640px);
+  bottom: 2%;
+  left: 12%;
+}
+
+/* 04 — wide, mid, offset inward */
+.svc-layer[data-svc="04"] {
+  width: clamp(340px, 42vw, 600px);
+  top: 16%;
+  left: 6%;
+}
+
+/* 05 — landscape, upper area */
+.svc-layer[data-svc="05"] {
+  width: clamp(360px, 44vw, 620px);
+  top: 4%;
+  left: 10%;
 }
 
 .svc-layer__desc {
@@ -264,16 +293,29 @@
   margin: 0;
 }
 
-.services-list {
+/* Fixed clip region — list slides inside it; anything pushed past the top
+   edge (e.g. item 01 when hovering 04/05) is clipped out of view. */
+.services-list-clip {
   position: absolute;
   right: var(--gutter);
   top: 140px;
+  width: min(760px, 72vw);
+  height: clamp(440px, 64vh, 780px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.services-list {
+  position: absolute;
+  right: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 0;
   margin: 0;
   padding: 0;
+  pointer-events: auto;
 }
 
 .services-item {
@@ -289,9 +331,33 @@
   opacity: 0.4;
   text-align: right;
   text-decoration: none;
-  white-space: nowrap;
   transform: translateX(0);
   transition: opacity 0.28s var(--ease-std), transform 0.32s var(--ease-std), letter-spacing 0.32s var(--ease-std), color 0.32s var(--ease-std);
+}
+
+.services-item__name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3em;
+  white-space: nowrap;
+}
+
+.services-item__num {
+  height: 0.6em;
+  width: auto;
+  flex: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition:
+    opacity 0.34s var(--ease-std),
+    transform 0.42s var(--ease-std);
+}
+
+.services-item:hover .services-item__num,
+.services-item:focus-within .services-item__num {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .services-item:hover,
@@ -299,6 +365,70 @@
   color: #fff;
   transform: translateX(-8px);
   letter-spacing: -0.03em;
+}
+
+/* Hover-reveal description (mirrors About nav-item interaction) */
+.services-item__detail {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease-std);
+}
+
+.services-item__line {
+  display: block;
+  max-width: 360px;
+  margin-left: auto;
+  font-family: var(--font-fustat);
+  font-weight: 300;
+  font-size: clamp(12px, 0.95vw, 14px);
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  color: var(--sand);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.48s var(--ease-std),
+    transform 0.62s var(--ease-std);
+}
+
+.services-item__line + .services-item__line {
+  margin-top: 6px;
+}
+
+.services-item:hover .services-item__detail,
+.services-item:focus-within .services-item__detail {
+  max-height: 360px;
+  padding-top: 14px;
+}
+
+.services-item:hover .services-item__line,
+.services-item:focus-within .services-item__line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bottom items (04/05) push the list UP instead of overflowing downward.
+   The detail stays in flow; site.js translates the whole list up by the
+   revealed height on hover, so items above slide up and items below hold. */
+.services-list {
+  transition: transform 0.5s var(--ease-std);
+  will-change: transform;
+}
+
+.services-item:hover .services-item__line:nth-child(1),
+.services-item:focus-within .services-item__line:nth-child(1) {
+  transition-delay: 0.04s;
+}
+
+.services-item:hover .services-item__line:nth-child(2),
+.services-item:focus-within .services-item__line:nth-child(2) {
+  transition-delay: 0.14s;
+}
+
+.services-item:hover .services-item__line:nth-child(3),
+.services-item:focus-within .services-item__line:nth-child(3) {
+  transition-delay: 0.24s;
 }
 
 /* ─── ABOUT SECTION ─────────────────────────── */
@@ -423,7 +553,7 @@
 
 .about-nav-item:hover .about-nav-item__detail,
 .about-nav-item:focus-within .about-nav-item__detail {
-  max-height: 120px;
+  max-height: 240px;
 }
 
 .about-nav-item:hover .about-nav-item__reveal-line,
@@ -440,6 +570,16 @@
 .about-nav-item:hover .about-nav-item__reveal-line:nth-child(2),
 .about-nav-item:focus-within .about-nav-item__reveal-line:nth-child(2) {
   transition-delay: 0.12s;
+}
+
+.about-nav-item:hover .about-nav-item__reveal-line:nth-child(3),
+.about-nav-item:focus-within .about-nav-item__reveal-line:nth-child(3) {
+  transition-delay: 0.22s;
+}
+
+.about-nav-item:hover .about-nav-item__reveal-line:nth-child(4),
+.about-nav-item:focus-within .about-nav-item__reveal-line:nth-child(4) {
+  transition-delay: 0.32s;
 }
 
 .about-nav-item:hover .about-nav-item__label,
@@ -711,6 +851,28 @@
   .services-item {
     text-align: left;
     white-space: normal;
+  }
+
+  /* No hover on touch — reveal descriptions inline, left-aligned */
+  .services-item__name {
+    justify-content: flex-start;
+  }
+
+  .services-item__num {
+    opacity: 1;
+    transform: none;
+  }
+
+  .services-item__detail {
+    max-height: none;
+    padding-top: 8px;
+  }
+
+  .services-item__line {
+    margin-left: 0;
+    max-width: 100%;
+    opacity: 1;
+    transform: none;
   }
 
   .about-card {

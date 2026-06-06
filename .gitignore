@@ -20,3 +20,4 @@ dist/
 .tmp-blueprint/
 _t*.html
 _debug-*.html
+.vercel

@@ -178,7 +178,9 @@ body.page-case-detail {
 .cd-nav__link--active { color: var(--cd-red); mix-blend-mode: normal; }
 .cd-nav__link:hover { opacity: 0.65; }
 
+/* Case pages have no menu drawer — the hamburger has no handler, so hide it. */
 .cd-nav__menu {
+  display: none;
   pointer-events: auto;
   background: none;
   border: none;

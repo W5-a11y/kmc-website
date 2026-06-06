@@ -611,12 +611,26 @@
       });
     }
 
+    /* Bottom items (.services-item--up) reveal upward: shift the whole list
+       up by the description's height so items above slide up and items below
+       stay put — mirroring how top items push the list downward. */
+    function liftListFor(item) {
+      if (item.classList.contains('services-item--up')) {
+        var detail = item.querySelector('.services-item__detail');
+        var h = detail ? Math.min(detail.scrollHeight, 360) : 0;
+        servicesList.style.transform = 'translateY(-' + h + 'px)';
+      } else {
+        servicesList.style.transform = 'translateY(0)';
+      }
+    }
+
     svcItems.forEach(function (item) {
       item.addEventListener('mouseenter', function () {
         var id = item.getAttribute('data-svc');
         switchService(id);
         gsap.to(svcItems, { opacity: 0.4, duration: 0.2, overwrite: true });
         gsap.to(item, { opacity: 1, duration: 0.2, overwrite: true });
+        liftListFor(item);
       });
     });
 
@@ -624,6 +638,7 @@
       var activeItem = servicesList.querySelector('[data-svc="' + currentSvc + '"]');
       gsap.to(svcItems, { opacity: 0.4, duration: 0.3, overwrite: true });
       if (activeItem) gsap.to(activeItem, { opacity: 1, duration: 0.3, overwrite: true });
+      servicesList.style.transform = 'translateY(0)';
     });
   }
 

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="nav.css?v=4" />
     <link rel="stylesheet" href="menu.css" />
     <link rel="stylesheet" href="brand-mark.css?v=3" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index.css?v=9" />
     <link rel="stylesheet" href="marquee.css" />
   </head>
   <body class="page-wrap">
@@ -27,8 +27,8 @@
 
     <!-- ═══ NAV ═══ -->
     <header class="site-nav" id="site-nav">
-      <a href="/" class="site-nav__logo js-go-home" aria-label="KMC+LUCAS — Home">
-        <img src="assets/kmc-beta.svg" alt="KMC+LUCAS" />
+      <a href="/" class="site-nav__logo js-go-home" aria-label="KMC × BETA — Home">
+        <img src="assets/kmc-beta.svg" alt="KMC × BETA" />
       </a>
       <nav class="site-nav__links" aria-label="Site navigation">
         <a href="work.html">Works</a>
@@ -156,14 +156,51 @@
         </div>
       </div>
 
-      <!-- Service list: right side -->
+      <!-- Service list: right side (clip wrapper hides items that slide past the top) -->
+      <div class="services-list-clip">
       <nav class="services-list" aria-label="Services">
-        <a href="https://www.youtube.com/watch?v=YG4ls24fuh0" class="services-item" data-svc="01" target="_blank" rel="noopener noreferrer">Founder Narrative</a>
-        <a href="ssv.html" class="services-item" data-svc="02">SSV Reality show</a>
-        <a href="case-aloe-blacc.html" class="services-item" data-svc="03">advertising/Branding</a>
-        <a href="case-real-estate.html" class="services-item" data-svc="04">Real estate service</a>
-        <a href="ssv.html#ssv-tl-filters" class="services-item" data-svc="05">Private Events</a>
+        <a href="https://www.youtube.com/watch?v=YG4ls24fuh0" class="services-item" data-svc="01" target="_blank" rel="noopener noreferrer">
+          <span class="services-item__name"><img class="services-item__num" src="assets/svc-num-01.svg" alt="" aria-hidden="true" />Founder Narrative</span>
+          <span class="services-item__detail">
+            <span class="services-item__line">Builds a credible, sustainable, and memorable founder-led public narrative, so the brand is understood through the person, values, and story behind it.</span>
+            <span class="services-item__line">Clarifies founder positioning, investor-facing message, and personal media voice.</span>
+            <span class="services-item__line">Helps founders connect with the right investors, partners, customers, and communities.</span>
+          </span>
+        </a>
+        <a href="ssv.html" class="services-item" data-svc="02">
+          <span class="services-item__name"><img class="services-item__num" src="assets/svc-num-02.svg" alt="" aria-hidden="true" />SSV Reality show</span>
+          <span class="services-item__detail">
+            <span class="services-item__line">Develops and produces Surviving Silicon Valley as a reality + storytelling content IP, capturing entrepreneurship, capital, immigration, identity, pressure, and survival in Silicon Valley.</span>
+            <span class="services-item__line">Creates long-form YouTube episodes, short clips, behind-the-scenes content, and social assets.</span>
+            <span class="services-item__line">Turns real founders, investors, and business moments into watchable narrative arcs, integrating brands naturally through story, character, and scene.</span>
+          </span>
+        </a>
+        <a href="case-aloe-blacc.html" class="services-item" data-svc="03">
+          <span class="services-item__name"><img class="services-item__num" src="assets/svc-num-03.svg" alt="" aria-hidden="true" />advertising/Branding</span>
+          <span class="services-item__detail">
+            <span class="services-item__line">Translates business strategy into campaign concepts, brand messaging, and creative direction.</span>
+            <span class="services-item__line">Creates brand films, social ads, short videos, and founder-led advertising, built platform-ready for YouTube, Instagram, TikTok, LinkedIn, Xiaohongshu, and WeChat.</span>
+            <span class="services-item__line">Moves the brand from product features to emotional relevance and audience trust, supporting market education and cross-border brand storytelling.</span>
+          </span>
+        </a>
+        <a href="case-real-estate.html" class="services-item services-item--up" data-svc="04">
+          <span class="services-item__name"><img class="services-item__num" src="assets/svc-num-04.svg" alt="" aria-hidden="true" />Real estate service</span>
+          <span class="services-item__detail">
+            <span class="services-item__line">Produces high-quality real-estate advertising content for Silicon Valley properties, combining video, photography, listing storytelling, neighborhood context, and buyer insight.</span>
+            <span class="services-item__line">Turns listings into lifestyle narratives that help buyers imagine identity, community, and future life.</span>
+            <span class="services-item__line">Supports realtors, developers, property owners, and relocation-focused buyers, building on KMC+LUCAS experience in real-estate production and buyer community building.</span>
+          </span>
+        </a>
+        <a href="ssv.html#ssv-tl-filters" class="services-item services-item--up" data-svc="05">
+          <span class="services-item__name"><img class="services-item__num" src="assets/svc-num-05.svg" alt="" aria-hidden="true" />Private Events</span>
+          <span class="services-item__detail">
+            <span class="services-item__line">Curates private salons, founder gatherings, investor dinners, and content-driven networking, with event themes, guest lists, conversation formats, and post-event follow-up loops.</span>
+            <span class="services-item__line">Turns offline rooms into content assets, relationship capital, and long-term community memory.</span>
+            <span class="services-item__line">Creates high-trust environments where founders, investors, brands, and institutions can connect meaningfully, linking media exposure with real conversations, partnerships, and business opportunities.</span>
+          </span>
+        </a>
       </nav>
+      </div>
 
     </section>
 
@@ -191,8 +228,9 @@
               <div class="about-nav-item__detail">
                 <div class="about-nav-item__detail-inner">
                   <p>
-                    <span class="about-nav-item__reveal-line">We've spent years crafting real stories for real brands —</span>
-                    <span class="about-nav-item__reveal-line">and learned that trust, clarity and taste matter more than buzzwords.</span>
+                    <span class="about-nav-item__reveal-line">We craft real stories for real brands, not empty marketing noise.</span>
+                    <span class="about-nav-item__reveal-line">We believe trust, clarity, and taste matter more than buzzwords, helping people understand the human truth behind a company, founder, or institution.</span>
+                    <span class="about-nav-item__reveal-line">By turning authentic stories into meaningful connections, we create long-term influence rather than one-time exposure.</span>
                   </p>
                 </div>
               </div>
@@ -204,7 +242,12 @@
               </div>
               <div class="about-nav-item__detail">
                 <div class="about-nav-item__detail-inner">
-                  <!-- detail coming soon -->
+                  <p>
+                    <span class="about-nav-item__reveal-line">Start with a clear business strategy, defining positioning, target audience, core message, and growth objectives.</span>
+                    <span class="about-nav-item__reveal-line">Build a content ecosystem that spans long-form, short-form, documentary, and reality-driven storytelling.</span>
+                    <span class="about-nav-item__reveal-line">Turn content into community through curated events, founder gatherings, and high-trust conversations.</span>
+                    <span class="about-nav-item__reveal-line">Ensure every story is discoverable, shareable, reusable, and capable of generating long-term commercial value.</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -215,7 +258,11 @@
               </div>
               <div class="about-nav-item__detail">
                 <div class="about-nav-item__detail-inner">
-                  <!-- detail coming soon -->
+                  <p>
+                    <span class="about-nav-item__reveal-line">Help founders become credible public voices, not just visible personalities.</span>
+                    <span class="about-nav-item__reveal-line">Help brands and institutions build trust, cultural relevance, and media assets that continue to compound over time.</span>
+                    <span class="about-nav-item__reveal-line">Turn content into community, and community into lasting business opportunities.</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -339,8 +386,8 @@
 
         <!-- Top bar: logo + close -->
         <div class="menu-drawer__top">
-          <a href="/" class="menu-drawer__logo js-go-home" aria-label="KMC+LUCAS — Home">
-            <img class="menu-drawer__logo-img" src="assets/logo-menu-bar-white.png" alt="KMC+LUCAS" />
+          <a href="/" class="menu-drawer__logo js-go-home" aria-label="KMC × BETA — Home">
+            <img class="menu-drawer__logo-img" src="assets/kmc-beta-white.svg" alt="KMC × BETA" />
           </a>
           <button type="button" class="menu-drawer__close js-menu-toggle" aria-label="Close menu" aria-expanded="true">
             <img src="assets/icon-x.svg" alt="" width="36" height="36" />
@@ -370,7 +417,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-    <script src="site.js"></script>
+    <script src="site.js?v=2"></script>
     <script src="nav.js"></script>
   </body>
 </html>
