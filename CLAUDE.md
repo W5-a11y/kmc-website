@@ -18,6 +18,7 @@
 - `Kyiv Type Sans`（`--font-kyiv`）— menu drawer 链接
 - `IBM Plex Sans` — MENU 标签
 - `Inria Serif` — work 页面正文
+- `Space Mono` — about 页 equation 打字机（等宽，逐字打出后整栏收起）
 
 **颜色**
 
@@ -37,6 +38,8 @@ kmc-website/
 ├── ssv.html                # Surviving Silicon Valley 专题页
 ├── ssv-watch-episodes.html # SSV「Watch Episodes」落地页
 ├── about.html              # 关于页面（无 page cursor；nav 色 #645D45）
+├── 404.html                # 品牌化 404（GitHub Pages 自动启用）
+├── robots.txt / sitemap.xml # SEO（域名 kmc.celiawang.com）
 ├── case-stanford.html      # 案例：LabOS (YouTube: uW-h7aeZOz8)
 ├── case-real-estate.html
 ├── case-q3d.html

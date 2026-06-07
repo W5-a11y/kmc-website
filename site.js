@@ -680,11 +680,15 @@
     svcItems.forEach(function (item) {
       item.addEventListener('click', function (e) {
         if (!isTouchLayout()) return;
-        if (!item.classList.contains('is-open')) {
-          e.preventDefault();
-          svcItems.forEach(function (el) { if (el !== item) el.classList.remove('is-open'); });
-          item.classList.add('is-open');
-        }
+        /* Phones: tapping a service only expands/collapses its description — it
+           never navigates. preventDefault stops the link; stopPropagation keeps
+           the event from reaching the global page-transition click handler
+           (which would otherwise force window.location to the link). */
+        e.preventDefault();
+        e.stopPropagation();
+        var willOpen = !item.classList.contains('is-open');
+        svcItems.forEach(function (el) { el.classList.remove('is-open'); });
+        if (willOpen) item.classList.add('is-open');
       });
     });
 
@@ -826,9 +830,19 @@
       else { status.removeAttribute('data-state'); }
     }
 
-    /* submit fires only after native required-validation passes */
+    /* Form is novalidate: we validate here so an invalid field shows an inline
+       message instead of the browser scrolling/jumping to it (the "first press
+       jumps up, doesn't submit" behaviour). Valid → submit on the first click. */
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      if (!form.checkValidity()) {
+        var firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid && firstInvalid.focus) firstInvalid.focus({ preventScroll: true });
+        setStatus('Please fill in your name, a valid email, and a message.', 'error');
+        return;
+      }
+
       setStatus('', '');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 

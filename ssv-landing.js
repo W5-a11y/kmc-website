@@ -43,7 +43,13 @@
     landing.classList.add('is-finished');
     hero.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
-  at(FADE_OUT, () => { landing.style.display = 'none'; });
+  at(FADE_OUT, () => {
+    landing.style.display = 'none';
+    /* Removing the 100vh landing collapses the layout upward; the browser
+       keeps scrollY, so without re-anchoring the viewport lands a full screen
+       past the hero (on the Exclusive Screening events). Snap back to hero. */
+    hero.scrollIntoView({ behavior: 'auto', block: 'start' });
+  });
 
   if (reduce) {
     setStep(6);
@@ -54,6 +60,9 @@
   flow.addEventListener('click', () => {
     landing.classList.add('is-finished');
     hero.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    setTimeout(() => { landing.style.display = 'none'; }, FADE_OUT);
+    setTimeout(() => {
+      landing.style.display = 'none';
+      hero.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, FADE_OUT);
   });
 })();

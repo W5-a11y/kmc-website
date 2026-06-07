@@ -28,7 +28,10 @@
 /* Scroll-down hides the bar by sliding it up off the top (drag-away);
    scroll-up slides it back down. */
 .site-nav.is-collapsed {
-  transform: translateY(-100%);
+  /* !important so the collapse always wins over the home-intro entrance
+     transform (html.has-opening:not(.opening-finished) .site-nav), which is
+     more specific and would otherwise pin the bar in place on first visit. */
+  transform: translateY(-100%) !important;
   opacity: 0;
   pointer-events: none;
 }

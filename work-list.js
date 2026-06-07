@@ -146,10 +146,18 @@
   scrollToHash();
 
   var s1 = document.getElementById("work-hero");
-  var s3 = document.getElementById("work-disposable");
+  /* On phones the disposable section is hidden, so the down arrow jumps straight
+     to the first work case (the SSV card) instead of a display:none target. */
+  var disposableHidden = window.matchMedia("(max-width: 768px)").matches;
+  var s3 = (!disposableHidden && document.getElementById("work-disposable")) ||
+           document.querySelector("#work-grid .aw-card-v2") ||
+           document.getElementById("work-grid");
   var downBtn = document.querySelector(".js-aw-down-next");
   var overlay = document.getElementById("aw-page-transition");
-  var awGateActive = !deepWork && !!(s1 && s3 && downBtn);
+  /* The gated entrance (scroll-lock + overlay wipe) is a desktop device. On
+     phones it just traps scrolling on the hero, so disable it there — the page
+     scrolls naturally and the down arrow simply smooth-scrolls to the cases. */
+  var awGateActive = !deepWork && !disposableHidden && !!(s1 && s3 && downBtn);
 
   if (downBtn && s1 && s3) {
   function releaseAwScrollLock() {

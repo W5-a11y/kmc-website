@@ -98,4 +98,26 @@
     });
   })();
 
+  /* ── Why Choose Us — touch: hover can't reveal the cards, so tap a word to
+     drop its description below it (one open at a time). ── */
+  (function initWhyTouch() {
+    var words = document.querySelectorAll('.th-why__word');
+    if (!words.length) return;
+    var coarse = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (!coarse) return;
+
+    words.forEach(function (word) {
+      word.addEventListener('click', function () {
+        var wasActive = word.classList.contains('is-active');
+        words.forEach(function (w) { w.classList.remove('is-active'); });
+        if (!wasActive) word.classList.add('is-active');
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.th-why__word')) return;
+      words.forEach(function (w) { w.classList.remove('is-active'); });
+    });
+  })();
+
 })();
