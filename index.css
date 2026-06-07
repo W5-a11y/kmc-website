@@ -876,6 +876,17 @@
     display: none;
   }
 
+  /* The desktop clip is a fixed-width, overflow-hidden window on the right that
+     the list slides inside — on phones it cuts off the left side (the 01/02
+     numbers). Make it a normal full-width flow container so nothing is clipped. */
+  .services-list-clip {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
   .services-list {
     position: static;
     align-items: flex-start;

@@ -818,36 +818,29 @@
 
   /* Tapped word → drop its description(s) as a readable red card stacked right
      below the word, full-width and in flow (the desktop hover popups don't fit). */
-  .th-why__word.is-active .th-why__card {
-    display: block;
-    position: static;
-    width: 100%;
-    min-height: 0;
-    clip-path: none;
-    margin-top: 14px;
-    padding: 14px 16px;
-    border-radius: 5px;
-  }
+  .th-why__word.is-active .th-why__card,
   .th-why__word.is-active .th-why__card2 {
     display: block;
     position: static;
     width: 100%;
     max-width: none;
+    min-height: 0;
+    clip-path: none;
     opacity: 1;
     pointer-events: auto;
-    margin-top: 10px;
-    padding: 14px 16px;
-    background: var(--red-hot);
-    border-radius: 5px;
+    margin-top: 14px;
+    padding: 16px 18px;
+    /* Distinct cream box so it reads as a popup, not red-on-red blended text. */
+    background: var(--cream);
+    border-radius: 6px;
   }
-  /* Readable copy: cream on the red card (the desktop red-on-red cutout is
-     unreadable as a solid box), and no floating corner marks. */
+  .th-why__word.is-active .th-why__card2 { margin-top: 10px; }
   .th-why__word.is-active .th-why__card p,
   .th-why__word.is-active .th-why__card2 p {
     font-size: 15px;
     line-height: 1.34;
     letter-spacing: -0.01em;
-    color: var(--cream);
+    color: var(--red);
   }
   .th-why__word.is-active .th-why__card2 .th-why__mark { display: none; }
 }

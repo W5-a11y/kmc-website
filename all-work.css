@@ -1097,9 +1097,8 @@ body.page-all-work {
     letter-spacing: -0.01em;
     margin: 0 0 22px;
   }
+  /* Phones scroll naturally, so the jump arrow under the hero copy is redundant. */
   #work-hero .aw-down {
-    position: static;
-    transform: none;
-    margin: 24px auto 0;
+    display: none;
   }
 }

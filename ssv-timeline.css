@@ -714,6 +714,20 @@
   margin: 14px 0 14px;
 }
 
+.ssv-tl__event-desc--joeywong {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  transition: max-height 0.45s var(--tl-ease), opacity 0.25s ease, margin 0.3s var(--tl-ease);
+}
+
+.ssv-tl__event-desc--joeywong.is-open {
+  max-height: 260px;
+  opacity: 1;
+  margin: 14px 0 14px;
+}
+
 .ssv-tl__event-desc--back {
   overflow: hidden;
   max-height: 0;
@@ -788,6 +802,13 @@
   letter-spacing: -0.05em;
   margin: 0;
   text-transform: capitalize;
+}
+
+.ssv-tl__nowrap { white-space: nowrap; }
+
+/* Joey Wong title: smaller so "In Conversation" stays on one line */
+.ssv-tl__event-title--joey {
+  font-size: clamp(30px, 3.4vw, 46px);
 }
 
 .ssv-tl__category {

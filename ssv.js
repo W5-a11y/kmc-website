@@ -441,6 +441,72 @@
     nextgenBlock.addEventListener('mouseleave', queueNextgenHide);
   }
 
+  /* ─── Joey Wong interview: reveal on date/title hover ─ */
+  var joeywongDateTrigger = document.querySelector('.js-joeywong-date-trigger');
+  var joeywongTitleTrigger = document.querySelector('.js-joeywong-title-trigger');
+  var joeywongBlock = document.querySelector('.js-joeywong-reveal');
+  var joeywongLines = Array.from(document.querySelectorAll('.js-joeywong-reveal .line'));
+  var joeywongTween = null;
+  var joeywongHideTimer = null;
+
+  if (joeywongBlock && joeywongLines.length) {
+    function showJoeywongBlock() {
+      if (joeywongHideTimer) {
+        clearTimeout(joeywongHideTimer);
+        joeywongHideTimer = null;
+      }
+      joeywongBlock.classList.add('is-open');
+      if (window.gsap && !reduced) {
+        if (joeywongTween) joeywongTween.kill();
+        window.gsap.set(joeywongLines, { opacity: 0, y: 30 });
+        joeywongTween = window.gsap.to(joeywongLines, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power3.out'
+        });
+      } else {
+        joeywongLines.forEach(function (line) {
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        });
+      }
+    }
+
+    function hideJoeywongBlock() {
+      joeywongBlock.classList.remove('is-open');
+      if (window.gsap && !reduced) {
+        if (joeywongTween) joeywongTween.kill();
+        window.gsap.set(joeywongLines, { opacity: 0, y: 30 });
+      } else {
+        joeywongLines.forEach(function (line) {
+          line.style.opacity = '0';
+          line.style.transform = 'translateY(30px)';
+        });
+      }
+    }
+
+    function queueJoeywongHide() {
+      if (joeywongHideTimer) clearTimeout(joeywongHideTimer);
+      joeywongHideTimer = window.setTimeout(hideJoeywongBlock, 70);
+    }
+
+    [joeywongDateTrigger, joeywongTitleTrigger].forEach(function (trigger) {
+      if (!trigger) return;
+      trigger.addEventListener('mouseenter', showJoeywongBlock);
+      trigger.addEventListener('mouseleave', queueJoeywongHide);
+    });
+
+    joeywongBlock.addEventListener('mouseenter', function () {
+      if (joeywongHideTimer) {
+        clearTimeout(joeywongHideTimer);
+        joeywongHideTimer = null;
+      }
+    });
+    joeywongBlock.addEventListener('mouseleave', queueJoeywongHide);
+  }
+
   /* ─── Valkyrie description: reveal on date/title hover ─ */
   var valkyrieDateTrigger = document.querySelector('.js-valkyrie-date-trigger');
   var valkyrieTitleTrigger = document.querySelector('.js-valkyrie-title-trigger');
