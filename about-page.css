@@ -335,11 +335,11 @@
    and let the figure fill ~2/3 of the frame. */
 .ab-member:nth-child(2) .ab-member__img {
   object-position: center bottom;
-  transform: scale(1.1);
+  transform: scale(1.28);
   transform-origin: center bottom;
 }
 .ab-member:nth-child(2):hover .ab-member__img {
-  transform: scale(1.13);
+  transform: scale(1.31);
 }
 
 /* Eason portrait: seated pose, focus upper body */
@@ -498,7 +498,7 @@
   }
   .ab-member:nth-child(2) .ab-member__img,
   .ab-member:nth-child(2):hover .ab-member__img {
-    transform: scale(1.1);
+    transform: scale(1.28);
     transform-origin: center bottom;
   }
 }
